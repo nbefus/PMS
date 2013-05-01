@@ -1,0 +1,302 @@
+html,body {
+	height: 100%;
+}
+
+body, p {
+	margin: 0;
+	padding: 0;
+}
+
+#header {
+	background: url(../images/admin_layout/top_header_bg.jpg) repeat-x top left;
+	clear:both;
+	width: 100%;
+	height: 99px;
+}
+
+#header .item {
+	float: left;
+ 	background: url(../images/admin_layout/top_header_logo.jpg) no-repeat top left;
+	height: 55px;
+ 	padding-top: 38px;
+ 	padding-left: 110px;
+ 	color: #fff;
+}
+
+#header .userinfo {
+	margin-top: 20px;
+	margin-right: 20px;
+	padding: 5px;
+	float: right;
+	background: #feff82;
+	border: thin solid #000;
+}
+
+#app-title {
+	color: #fff;
+	font-weight: bold;
+}
+
+#content-wrapper {
+	width: 100%;
+}
+
+#footer {
+	color: #fff;
+	bottom: 0;
+	position: fixed;
+	width: 100%;
+	background: url( ../images/admin_layout/footer_bg.jpg ) top repeat-x;
+}
+
+#page {
+	padding: 0.3em 0.3em 0.3em 0.3em;
+	width:99%;
+}
+
+br {
+	clear:both;
+}
+
+legend {
+	font-weight: bold;
+	color: #4b86e0;
+}
+
+.buttonpanel {
+	border: medium double #c0c0c0;
+	margin: 1em 0em 0em 0em;
+	text-align: center;
+	padding: 5px 0px 5px 0px;
+	background: #fff url( ../images/site/button_bg.png ) repeat-x top left;
+}
+
+/* FORM STUFF */
+td.formlabel {
+	text-align: right;
+	font-weight: bold;
+}
+
+/* BUTTONS */
+.smallbutton {
+	font-size: 9px;
+	padding:0;
+	margin:0
+}
+
+/** INFO BOXES **/
+.info, .confirm, .error {
+	border-top: medium double #808080;
+	border-bottom: medium double #808080;
+	background-position: 5px 5px;
+	background-repeat: no-repeat;
+	padding: 0px 10px 0px 10px;
+	margin: 2px 0px 2px 0px;
+	min-height: 40px;
+	color: #fff;
+	clear: both;
+}
+
+.info p, .error p, .confirm p {
+	margin-left: 35px;
+	padding-top: 7px;
+}
+
+.info {
+	background-color: #fcfda3;
+	background-image: url( ../images/site/information.png);
+	color: #000;
+}
+
+.confirm {
+	background-color: #15c82e;
+	background-image: url( ../images/site/accept.png);
+}
+
+.error {
+	background-color: #db5252;
+	background-image: url( ../images/site/cancel.png);
+}
+
+/** HEADERS */
+h1, h2, h3, h4, h5, h6 {
+	margin-bottom: 2px; 
+	margin-top: 13px; 
+	padding: 2px;
+	/*color: #047db5;*/
+	color: #196419;
+	border-bottom: medium double #047db5;
+}
+
+/** PAGE TOOLBAR **/
+.toolbar {
+	width: 100%;
+	border-bottom: medium double #c0c0c0;
+	padding: 2px;
+	margin-bottom: 0px;
+}
+.toolbar-icon {
+	vertical-align:bottom;
+	padding-bottom: 4px;
+}
+.toolbar-title {
+	font-size:20px;
+	font-weight: bold;
+	color: #196419;
+	vertical-align:bottom;
+	width:100%;
+	padding-left: 3px;
+}
+.toolbar-buttons {
+	text-align:right;
+	white-space: nowrap;
+}
+.toolbar-button {
+	width: 42px;
+	height: 39px;
+	font-size: 9px;
+}
+
+
+/** TABLE */
+
+td * {
+	vertical-align: middle;
+}
+
+td.filter {
+	background: #e3e3e3; 
+}
+
+.default-table {
+	padding:0;
+	border: solid thin #c0c0c0;
+	margin: 1px;
+	width: 100%;
+}
+
+.default-table th {
+	background: #E8FBFF url(../images/site/table_header3.gif) repeat-x; 
+	/*background: #E8FBFF url(../images/site/table_header_green.png) repeat-x bottom left;*/ 
+	line-height: 10px;
+	color: #fff;
+	vertical-align: middle;
+	white-space:nowrap;
+	font-weight: bold;
+	/*border-bottom: thin solid #e0e0e0;*/
+}
+
+.default-table  th, .default-table td {
+	border-right: thin solid #c0c0c0;
+	text-align: left;
+	padding: 5px;
+}
+
+.default-table .nav {
+	background: #e3e3e3;
+	border-top: medium double #c0c0c0;
+}
+
+.default-table .nav-records {
+	float: left;
+}
+
+.default-table .nav-result {
+	float: right;
+}
+
+
+table.form {
+	border:none;
+}
+
+table.form th {
+	font-weight: bold;
+	text-align:right;
+	background-color: #e3e3e3;
+	padding: 2px;
+}
+
+/** CSS TABLE **/
+.css-table-row {
+	clear: both;
+	padding: 2px;
+}
+
+.css-table-row label {
+	float: left;
+	width: 100px;
+	padding: 2px;
+	white-space: nowrap;
+}
+
+.css-table-row input, .css-table-row textarea, .css-table-row select {
+	float: left;
+	margin-left: 5px;
+}
+
+
+/** Notification spans **/
+span.notice,span.attention {font-size: 14px; font-weight: bold;display: block;padding: 18px 10px 18px 46px;margin: 15px 0;}
+span.notice {color: #648434;border: 1px solid #9BCC54;background: #CDEFA6 url(../images/site/lamp_on.png) 10px 50% no-repeat;}
+span.attention {color: #B79000;border: 1px solid #E7BD72;background: #FFF3A3 url(../images/site/attention.png) 10px 50% no-repeat;}
+
+/** FONT SIZES */
+html {
+   font-size: 62.5%;
+}
+
+body, textarea {
+	font-size: 1.2em;
+	font-family: Verdana, Helvetica, sans-serif;
+}
+
+label,.default-table,input,select, textarea {
+	font-size: 0.95em;
+}
+
+.error p, .info p, .confirm p {
+	font-size: 11px;
+}
+
+button {
+	font-size: 12px;
+}
+
+#header .userinfo {
+	font-size: 11px;
+}
+
+#footer, .tip {
+	font-size: 10px;
+}
+
+#footer {
+	font-weight: bold;
+}
+
+ #app-title {
+ 	font-size: 24px;
+ }
+ 
+h1 { font-size: 1.6em; }
+h2 { font-size: 1.5em; }
+h3 { font-size: 1.4em; }
+h4 { font-size: 1.3em; }
+h5 { font-size: 1.2em; }
+h6 { font-size: 1.1em; }
+
+table.basic {
+}
+table.basic th {
+	text-align: left;
+	color: #909090;
+	border-bottom: medium double #606060;
+}
+table.basic td {
+	font-size: 16px;
+	font-weight: bold;
+	padding: 5px;
+	border-bottom: 1px solid #c0c0c0;
+}
+.ddsubmenustyle,.ddsubmenustyle ul{color: #FFF;font:bold 12px Verdana;margin:0;padding:0;position:absolute;left:0;top:0;list-style-type:none;background:white;border:1px solid black;border-bottom-width:0;visibility:hidden;z-index:100;}.ddsubmenustyle li{background:#0384a4 }.ddsubmenustyle img{vertical-align:bottom;}.ddsubmenustyle li a{display:block;width:160px;color:#FFF;text-decoration:none;padding:4px 5px;border-bottom:1px solid #000;border-top:1px solid #a0a0a0;vertical-align:middle;}* html .ddsubmenustyle li a{display:inline-block;}.ddsubmenustyle li a:hover{background-color:#00496C;color:white;}.downarrowpointer{padding-left:4px;border:0;}.rightarrowpointer{position:absolute;padding-top:3px;left:100px;border:0;}.ddiframeshim{position:absolute;z-index:500;background:transparent;border-width:0;width:0;height:0;display:block;}.markermenu{width:175px;clear:left;position:relative;}.markermenu ul{list-style-type:none;margin:5px 0;padding:0;border:1px solid #9A9A9A;}.markermenu ul li a{background:#F2F2F2 url(../images/menu/bulletlist.gif) no-repeat 3px center;font:bold 11px "Lucida Grande","Trebuchet MS",Verdana,Helvetica,sans-serif;color:#00014e;display:block;width:auto;padding:3px 0;padding-left:20px;text-decoration:none;border-bottom:1px solid #B5B5B5;}* html .markermenu ul li a{width:155px;}.markermenu ul li a:visited,.markermenu ul li a:active{color:#00014e;}.markermenu ul li a:hover,.markermenu ul li a.selected{color:white;background-color:black;}.blackwhite li a{background:white;}.blackwhite li a:hover{background:black;color:white;}.mattblackmenu ul{margin:0;padding:0;font:bold 11px Verdana;list-style-type:none;border-bottom:1px solid #000;background-image:url('../images/menu/navbar_bg.gif');overflow:hidden;width:100%;}.mattblackmenu li{display:inline;margin:0;}.mattblackmenu li a{float:left;display:block;text-decoration:none;margin:0;padding:4px 6px;border-right:1px solid white;color:white;background-image:url('../images/menu/navbar_bg.gif');}.mattblackmenu li a:visited{color:white;}.mattblackmenu li a:hover{background:#00496C;}.mattblackmenu a.selected{background:#00496C;}

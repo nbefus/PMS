@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+<meta content="IE=EmulateIE8" http-equiv="X-UA-Compatible" />
+<meta content="Hawaii Pacific University is the largest independent, accredited, coeducational, nonsectarian, postsecondary university in Honolulu, Hawaii offering undergraduate and graduate degree programs in a multicultural setting with students from more than 100 countries and all 50 United States attending." name="description" />
+<meta content="Hawaii Pacific University, HPU, colleges and universities, college, colleges, university, universities, Hawaii, Hawai`i, Hawai'i, Pacific, Honolulu, Private, Oahu, Hawaiian, School, Schools, Private School, Private Schools, Private University, Private Universities, Sea Warrior, Sea Warriors, Liberal Arts,higher education, faculty, admissions, tuition, scholarship, campus, graduate, undergraduate, MBA, nursing, Waikiki, university hawaii, hawaii university" name="keywords" />
+<title>Hawaii Pacific University</title>
+<script src="../urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_userv=0;
+urchinTracker();
+</script>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-30724307-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+<link href="../css/lightbox.css" rel="stylesheet" type="text/css" />
+<link href="../css/portal1.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="twoColFixRtHdr">
+<link HREF="../images/images_template/hpuicon.ico" REL="SHORTCUT ICON" />
+<link href="../css/HPUcss.css" rel="stylesheet" type="text/css" />
+<link href="../css/mmcss.css" rel="stylesheet" type="text/css" />   
+<!--MEGA MENU -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js" type="text/javascript" ></script>
+<script src="../js/jquery.hoverIntent.minified.js" type="text/javascript" ></script>
+<script src="../js/hover.js" type="text/javascript" ></script>
+    
+<div id="header">
+<div id="masth"><a href="http://www.hpu.edu"><img alt="Hawaii Pacific University" height="54" src="../images/images_template/hpu_mast.png" style="padding:20px 0 0 0; margin: 0 -10px 0 0; float: left;" width="508" /></a> 
+<div id="mastrt">
+<div id="mastlinks"><a href="../index.html">Home</a> | <a href="../Staff_FacultySearch/index.html">Faculty/Staff Search</a> | <a href="https://bweb.hpu.edu:4443/hpud/bwckschd.p_disp_dyn_sched" target="_blank">Course Search</a> | <a href="../downtown/index.html">Campus Map</a> | <a href="http://alumni.hpu.edu/page.aspx?pid=318">Donate</a><br /></div>
+<br />
+ 
+<div id="search"><form action="http://www.hpu.edu/search-results/" id="searchbox_016418091930216729143:qr0basv9q_y">
+ <input name="cx" type="hidden" value="016418091930216729143:qr0basv9q_y" />
+ <input name="cof" type="hidden" value="FORID:11" />
+ <input name="hq" type="hidden" value="-inurl:https" />
+ <input name="q" type="text" /> 
+ <input alt="Search" height="21" name="sa" src="../images/images_template/img_srch.png" type="image" value="Google Search" width="21" /></form></div>
+</div>
+</div>
+</div>
+<div id="topnava">
+<div id="tpnvlinks"><!-- begin #topnav megamenu links--><ul id="topnav"><!-- begin #topnav megamenu About links-->
+<li><a class="about" href="../About_HPU/index.html">About HPU</a> 
+<div class="sub">
+<ul>
+<li>
+<h4><a href="#">General Info</a></h4>
+</li>
+<li><a href="../About_HPU/1-Message_from_President.html">President Geoffrey Bannister</a></li>
+<li><a href="../HPU/diversity/index.html">HPU At A Glance</a></li>
+<li><a href="../About_HPU/University_History.html">University History</a></li>
+<li><a href="../About_HPU/Accreditations_and_Memberships.html">Accreditations &amp; Memberships</a></li>
+<li><a href="../About_HPU/Rankings_and_Achievements.html">Rankings &amp; Achievements</a></li>
+<li><a href="../About_HPU/Campuses_and_Facilities.html">Campuses &amp; Facilities</a></li>
+<li><a href="../About_HPU/hpu-security.html">Campus Security</a></li>
+<li><a href="../UniquelyHPU/employmentopps.html">Employment Opportunities</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="../About_HPU/Academic_Degrees.html">Academic Degrees Offered</a></li>
+<li><a href="../About_HPU/Tuition_and_Related_Expenses.html">Tuition &amp; Related Expenses</a></li>
+<li><a href="../About_HPU/Student_Body.html">Student Body</a></li>
+<li><a href="../About_HPU/Athletics_and_Cheer_Dance.html">Athletics &amp; Cheer/Dance</a></li>
+<li><a href="../About_HPU/Alumni.html">Alumni</a></li>
+<li><a href="../UniquelyHPU/university_trustees.html">University Trustees</a></li>
+<li><a href="../About_HPU/3-Student_Right-to-Know_Information.html">Student Right-to-Know Information</a></li>
+</ul>
+<ul>
+<li>
+<h5><a href="#">Follow HPU</a></h5>
+</li>
+<li><a href="../HPUNews/index.html">HPU News</a></li>
+<li><a href="../hpu-in-the-news/index.html">HPU In The News</a></li>
+<li><a href="../social-net/index.html">HPU's Social Network Community</a></li>
+</ul>
+<table border="0" cellpadding="3" cellspacing="0" style="margin-top: 5px; margin-left: 3px;" width="100">
+<tbody>
+<tr>
+<td><a href="http://www.facebook.com/hawaiipacific" style="background-image: none;" target="_blank"><img alt="HPU Facebook" border="0" height="30" src="../images/ftrpnl_fcbk.png" width="30" /></a></td>
+<td><a href="http://twitter.com/#!/hpu" style="background-image: none;" target="_blank"><img alt="HPU Twitter" border="0" height="30" src="../images/ftrpnl_twtr.png" width="30" /></a></td>
+<td><a href="http://www.youtube.com/user/HPU" style="background-image: none;" target="_blank"><img alt="HPU YouTube Channel" border="0" height="29" src="../images/ftrpnl_youtube.png" width="29" /></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<!-- begin #topnav megamenu Academics links-->
+<li><a class="academic" href="#">Academics</a> 
+<div class="sub">
+<ul>
+<li>
+<h6><a href="#">Departments/Schools</a></h6>
+</li>
+<li><a href="../CHSS/Arts_Humanities/index.html">Arts and Humanities</a></li>
+<li><a href="../CHSS/Communication/index.html">Communication</a></li>
+<li><a href="../CHSS/Education/index.html">Education</a></li>
+<li><a href="../CHSS/English/index.html">English</a></li>
+<li><a href="../CBA/FEIS_Department.html">Financial Economics and Information Systems</a></li>
+<li><a href="../CNHS/index.html">Health Sciences</a></li>
+<li><a href="../CHSS/History/index.html">History</a></li>
+<li><a href="../CHSS/LangLing/index.html">Languages and Applied Linguistics</a></li>
+<li><a href="../CBA/MM_Department.html">Management and Marketing</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/index.html">Mathematics and Computer Science</a></li>
+<li><a href="../CNCS/index.html">Natural Sciences</a></li>
+<li><a href="../CNHS/BSN/index.html">Nursing (Baccalaureate)</a></li>
+<li><a href="../CNHS/MSN/index.html">Nursing (Graduate and Post- Baccalaureate)</a></li>
+<li><a href="../CHSS/Psychology/index.html">Psychology</a></li>
+<li><a href="../CHSS/SocialSciences/index.html">Social Sciences<br />
+</a></li>
+<li><a href="../CHSS/SocialWork/index.html">Social Work</a></li>
+</ul>
+<ul>
+<li>
+<h4><a href="#">Academic Resources</a></h4>
+</li>
+<li><a href="../StudentServices/AcademicAdvising/index.html">Academic Advising</a></li>
+<li><a href="../AcademicCalendar/index.html">Academic Calendar</a></li>
+<li><a href="../academic_catalog/index.html">Academic Catalog</a></li>
+<li><a href="http://www3.hpu.edu/bookstore" target="_blank">Bookstore</a></li>
+<li><a href="../CareerServices/index.html">Career Services</a></li>
+<li><a href="../Computing_Services/index.html">Computer Services</a></li>
+<li><a href="../CourseSchedules/index.html">Course Schedules</a></li>
+<li><a href="../Staff_FacultySearch/index.html">Faculty/Staff Directory</a></li>
+<li><a href="../Libraries_HPU/Webpages/index.html">Libraries</a></li>
+<li><a href="../Registrar/index.html">Registrar</a></li>
+<li><a href="../CAIT/index.html">Center for Advancement in Innovative Teaching</a></li>
+<li><a href="../StudentServices/CAS/index.html">Tutoring (Center for Academic Success)</a></li>
+<li><a href="../grad/index.html">Graduate Program Admissions</a></li>
+<li><a href="../CHSS/IRB/index.html">Institutional Review Board</a></li>
+<li><a href="../OAA/Policies/NIH/index.html" target="_blank">NIH Policy on Financial Conflict of Interest</a></li>
+</ul>
+<ul>
+<li>
+<h6><a href="#">Military Campus Programs</a></h6>
+</li>
+<li><a href="../Military_Campus_Programs/index.html">Military &amp; Veteran Education</a></li>
+<li>
+<h3><a href="#">Academic Programs</a></h3>
+</li>
+<li><a href="../GeneralEducation/index.html">General Education</a></li>
+<li><a href="../summer-courses/index.html">Summer Courses</a></li>
+<li><a href="../Honors/index.html">Honors Program</a></li>
+<li><a href="../Service_Learning/index.html">Service Learning</a></li>
+<li><a href="../Study_Abroad/index.html">Study Abroad</a></li>
+<li>
+<h5><a href="#">Co-Curricular</a></h5>
+</li>
+<li><a href="../FirstYearPrograms/HPUReads/index.html">Common Book</a></li>
+<li><a href="../CHSS/Communication/Clubs/DebateSociety.html">Debate Society</a></li>
+<li><a href="../Global_Issues/index.html">Global Issues Working Group</a></li>
+<li><a href="../Honors/index.html">Honor Societies</a></li>
+<li><a href="http://www.hpulamalama.com/" target="_blank">Kalamalama</a></li>
+<li><a href="../CHSS/Communication/Viewpoint_Film_Series.html">Viewpoints Film Series</a></li>
+</ul>
+<ul>
+<li>
+<h3><a href="#">Colleges</a></h3>
+</li>
+<li><a href="../CBA/index.html">Business Administration</a></li>
+<li><a href="../CHSS/index.html">Humanities and Social Sciences</a></li>
+<li><a href="../CNCS/index.html">Natural and Computational Sciences</a></li>
+<li><a href="../CNHS/index.html">Nursing and Health Sciences</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav megamenu Majors links-->
+<li><a class="majors" href="../academic_catalog/majors_we_offer.html">Majors We Offer</a> 
+<div class="sub" style="margin-left: -150px;">
+<ul>
+<li>
+<h4><a href="../Undergraduate/index.html">Undergraduate</a></h4>
+</li>
+<li><a href="../CBA/Undergraduate/Accounting.html">Accounting</a></li>
+<li><a href="../CHSS/Communication/advertising_public_relations/index.html">Advertising/Public Relations</a></li>
+<li><a href="../CHSS/SocialSciences/ANTH/index.html">Anthropology</a></li>
+<li><a href="../CHSS/Arts_Humanities/AsianStudies/AsianStudiesHompage.html">Asian Studies</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Biochemistry/index.html">Biochemistry</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Biology/index.html">Biology-General</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Biology/index.html">Biology-Human and Health Sciences</a></li>
+<li><a href="../CBA/Undergraduate/Business_Economics.html">Business Economics</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Chemistry/index.html">Chemistry</a></li>
+<li><a href="../CHSS/Communication/BA_COM/index.html">Communication</a></li>
+<li><a href="../CBA/Bachelor/BSBACIS/index.html">Computer Information Systems</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/Computer_Science/index.html">Computer Science</a></li>
+<li><a href="../CHSS/History/UndergraduateDegree/BSDMS/BS-DMS.html">Diplomacy and Military Studies</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="../CHSS/Education/BEDEE/index.html">Elementary Education</a></li>
+<li><a href="../CHSS/Education/MEDSE/MEDSE_Concurrent/MEDSE_Concurrent.html">Secondary Education</a></li>
+<li><a href="../CBA/Bachelor/BAECON/index.html">Economics</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/dual-degree-3_2Engineering/index.html">Engineering-Dual Degree Option</a></li>
+<li><a href="../CHSS/English/BA_ENG/BAeng.html">English</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Environmental_Science_and_Studies/index.html">Entrepreneurial Studies</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Environmental_Science_and_Studies/index.html">Environmental Science</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Environmental_Studies/index.html">Environmental Studies</a></li>
+<li><a href="../CBA/Undergraduate/Finance.html">Finance</a></li>
+<li><a href="../CBA/Bachelor/BSBAGEN/index.html">General Business</a></li>
+<li><a href="../CNHS/HS/index.html">Health Science</a></li>
+<li><a href="../CHSS/History/UndergraduateDegree/BAHIST/BA-hist.html">History</a></li>
+<li><a href="../CBA/Bachelor/BAHRD/index.html">Human Resource Development</a></li>
+<li><a href="../CBA/Bachelor/BSBAHRM/index.html">Human Resource Management</a></li>
+<li><a href="../CHSS/Arts_Humanities/BA_HUM/index.html">Humanities</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="../CBA/Bachelor/BSBAINTL/index.html">International Business</a></li>
+<li><a href="../CHSS/SocialSciences/IS/index.html">International Studies</a></li>
+<li><a href="../CHSS/Communication/Journalism/index.html">Journalism</a></li>
+<li><a href="../CHSS/SocialSciences/JADM/index.html">Justice Administration</a></li>
+<li><a href="../CBA/Undergraduate/Management.html">Management</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Marine_Science/index.html">Marine Biology</a></li>
+<li><a href="../CBA/Undergraduate/Marketing.html">Marketing</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/Math_Programs/index.html">Mathematics: Applied</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/Math_Programs/index.html">Mathematics: Education</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/Math_Programs/index.html">Mathematics: Pure Math</a></li>
+<li><a href="../CNCS/Departments/Mathematics_CompSci/dual-degree-3_2Engineering/index.html">Mathematics: 3-2 Engineering</a></li>
+<li><a href="../CHSS/Communication/Multimedia/index.html">Integrated Multimedia</a></li>
+<li><a href="../CHSS/Communication/Multimedia/index.html">Multimedia Cinematic Production</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="../CNHS/BSN/index.html">Nursing</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Marine_Science/index.html">Oceanography</a></li>
+<li><a href="../CHSS/SocialSciences/PSCI/index.html">Political Science</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Pre_Health_Professions_Studies/Articulation_Agreements.html">Pre-Chiropractic</a></li>
+<li><a href="../CNCS/Departments/Natural_Sciences/Pre_Health_Professions_Studies/index.html">Pre-Medical Studies</a></li>
+<li><a href="../CHSS/Psychology/BApsy/overview.html">Psychology</a></li>
+<li><a href="../CHSS/Communication/advertising_public_relations/index.html">Public Relations</a></li>
+<li><a href="../CHSS/SocialWork/BSW/BSWmain.html">Social Work</a></li>
+<li><a href="../CHSS/SocialSciences/SOC/index.html">Sociology</a></li>
+<li><a href="../CHSS/Arts_Humanities/BAinTheatre/index.html">Theater</a></li>
+<li><a href="../CHSS/LangLing/TESOL/index.html">Teaching English to Speakers of Other Languages</a></li>
+<li><a href="../CBA/Undergraduate/Travel_Industry_Management.html">Travel Industry Management</a></li>
+</ul>
+<ul>
+<li>
+<h5><a href="../grad/index.html">Graduate</a></h5>
+</li>
+<li><a href="../CBA/Graduate/MBA/index.html">Business Administration (Master of Business Administration)</a></li>
+<li><a href="../CHSS/Psychology/MA_CHMC/index.html">Clinical Mental Health Counseling (Master of Arts)</a></li>
+<li><a href="../CHSS/Communication/MA_COM/index.html">Communication (Master of Arts)</a></li>
+<li><a href="../CHSS/History/GraduateDegree/MADMS/MADMSmain.html">Diplomacy and Military Studies (Master of Arts)</a></li>
+<li><a href="../CHSS/Education/MEDEE/MEDEE_FSCMessage/MEDEE_FSCMessage.html">Elementary Education (Master of Education)</a></li>
+<li><a href="../CBA/Graduate/MSIS.html">Information Systems (Master of Science)</a></li>
+<li><a href="../CHSS/SocialSciences/GLSD/index.html">Global Leadership and Sustainable Development (Master of Arts)</a></li>
+<li><a href="../CBA/Graduate/MAHRM.html">Human Resource Management (Master of Arts)</a></li>
+<li><a href="../CNCS/Departments/GradPrograms/MarineSci/index.html">Marine Science (Master of Science)</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="../CNHS/MSN/index.html">Nursing (Master of Science in Nursing)</a></li>
+<li><a href="../CBA/Graduate/MAOC.html">Organizational Change (Master of Arts)</a></li>
+<li><a href="../CHSS/Education/MEDSE/index.html">Secondary Education (Master of Education)</a></li>
+<li><a href="../CHSS/SocialWork/MSW/MSWmain.html">Social Work (Master of Social Work)</a></li>
+<li><a href="../CHSS/LangLing/TESOL/index.html">Teaching English to Speakers of Other Languages (Master of Arts)</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav megamenu Admissions links-->
+<li><a class="admissions" href="../admissions/index.html">Admissions</a> 
+<div class="sub">
+<ul>
+<li>
+<h6><a href="../Undergraduate/index.html">Undergraduate</a></h6>
+</li>
+<li><a href="../admissions/apply_now.html">Apply Now</a></li>
+<li><a href="../Undergraduate/index.html">Admissions Homepage</a></li>
+<li><a href="../Undergraduate/futurestudents/prospectivestudents/Freshman_Req.html">Freshman Requirements</a></li>
+<li><a href="../International_Student/Future_Student/International_admissions/How_To_Apply.html">International Requirements</a></li>
+<li><a href="../Undergraduate/futurestudents/transfer-students/index.html">Transfer Students</a></li>
+<li><a href="../Military_Campus_Programs/index.html">Military Students</a></li>
+<li><a href="../financialaid/Scholarships/index.html">Scholarships</a></li>
+<li><a href="../financialaid/index.html">Financial Aid</a></li>
+<li><a href="http://www.collegepricingestimator.com/hpu" target="_blank">Net Price Calculator</a></li>
+<li><a href="../About_HPU/Tuition_and_Related_Expenses.html">Tuition</a></li>
+<li><a href="../Undergraduate/transfercredits/AP.html">Advanced Placement</a></li>
+<li><a href="../Undergraduate/transfercredits/IB.html">International Baccalaureate</a></li>
+<li><a href="../Undergraduate/admissionscounselor/index.html">Meet Your Admissions Counselor</a></li>
+<li><a href="../Undergraduate/visitcampus/index.html">Visit Campus</a></li>
+<li><a href="../virtual-tour/index.html">Virtual Campus Tour</a></li>
+<li><a href="../academic_catalog/majors_we_offer.html">Majors We Offer</a></li>
+<li><a href="../admissions/Request_Info.html">Request Information</a></li>
+<li><a href="https://hpu.askadmissions.net/vip/">VIP Log-in/Sign-Up</a></li>
+</ul>
+<ul>
+<li>
+<h4><a href="../grad/index.html">Graduate</a></h4>
+</li>
+<li><a href="../grad/index.html">Graduate Programs</a></li>
+<li><a href="../grad/admissions_info/admissions.html">Admissions Requirements</a></li>
+<li><a href="../admissions/apply_now.html">Apply Now</a></li>
+<li><a href="../grad/advising_registration/new_student.html">Next Steps for New Students</a></li>
+<li><a href="../grad/events.html">Admissions Events</a></li>
+<li><a href="../grad/admissions_info/Intl_apps.html">International Requirements</a></li>
+<li><a href="../About_HPU/Tuition_and_Related_Expenses.html">Tuition</a></li>
+<li><a href="../financialaid/Graduate.html">Financial Aid</a></li>
+<li><a href="../financialaid/Scholarships/ScholarshipsforGraduateStudents.html">Scholarship</a></li>
+<li><a href="https://hpugrad.askadmissions.net/emtinterestpage.aspx?ip=inquiry" target="_blank">Request for Information</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav megamenu Student Life links-->
+<li><a class="stulife" href="../Studentlife/index.html">Student Life</a> 
+<div class="sub" style="margin-left: -150px;">
+<ul>
+<li>
+<h6><a href="../CHSS/Arts_Humanities/Arts_at_HPU/index.html">Arts at HPU</a></h6>
+</li>
+<li><a href="../CHSS/Arts_Humanities/Arts_at_HPU/ArtGallery/index.html" title="Art Gallery">Art Gallery</a></li>
+<li><a href="../CHSS/Arts_Humanities/Arts_at_HPU/HPU_Orchestra/Orchestra.html" title="Orchestra">HPU Orchestra</a></li>
+<li><a href="../CHSS/Arts_Humanities/Arts_at_HPU/ChoralMusic/Choral.html" title="Choral">International Chorale and Vocal Ensemble</a></li>
+<li><a href="../CHSS/Arts_Humanities/Arts_at_HPU/SeaWarriorBand/Band.html" title="Sea Warrior Band">Sea Warrior Band</a></li>
+<li><a href="../CHSS/Arts_Humanities/Arts_at_HPU/TheatreProgram/index.html" title="Theatre">Theatre</a></li>
+<li><a href="../CHSS/Arts_Humanities/Arts_at_HPU/MusicAuditions/Auditions.html" title="Music Auditions">Music Auditions</a></li>
+</ul>
+<ul>
+<li>
+<h4><a href="#">Campus Life</a></h4>
+</li>
+<li><a href="../Studentlife/index.html">Center for Student Life and First Year Programs</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?path=cheer&amp;&amp;tab=6" target="_blank" title="Cheer">Cheer Program</a></li>
+<li><a href="../Studentlife/Clubs/index.html" title="Registered Student Organizations">Clubs &amp; Student Organizations</a></li>
+<li><a href="../StudentServices/CommuterServices/index.html" title="Commuter Services">Commuter Services</a></li>
+<li><a href="../StudentServices/CommuterServices/shuttle/index.html" title="Commuter Services">Intercampus Shuttle Schedule</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?path=dance&amp;&amp;tab=6" target="_blank" title="Dance">Dance Team</a></li>
+<li><a href="../FirstYearPrograms/index.html" title="First-Year Programs">First-Year Programs</a></li>
+<li><a href="../Honors/HonorSocieties/index.html" title="Honor Societies">Honor Societies</a></li>
+<li><a href="http://www.hpulamalama.com" target="_blank" title="Kalamalama">HPU Newspaper &#8211; Kalamalama</a></li>
+<li><a href="../Studentlife/index.html" title="Student Life &amp; First-Year Programs">Involvement Opportunities</a></li>
+<li><a href="../admissions/living_in_HI.html" title="Living in Hawaii">Living in Hawaii</a></li>
+<li><a href="../FirstYearPrograms/Orientation/index.html" title="New Student Orientation">New Student Orientation</a></li>
+<li><a href="../FirstYearPrograms/Parent/ParentResources1.html" title="Parent Resources">Parent Resources</a></li>
+<li><a href="../Studentlife/Student_Activities/index.html" title="Sea Warrior Center">Sea Warrior Center</a></li>
+<li><a href="../Studentlife/Student_Activities/index.html" title="Student Activities">Student Activities</a></li>
+<li><a href="../SGA/index.html" title="SGA home page">Student Government Association</a></li>
+</ul>
+<ul>
+<li>
+<h3><a href="#">Student Services</a></h3>
+</li>
+<li><a href="../StudentServices/AcademicAdvising/index.html" title="Academic Advising">Academic Advising</a></li>
+<li><a href="../StudentServices/AcademicIntegrity/index.html" title="Academic Integrity">Academic Integrity</a></li>
+<li><a href="../bookstore/index.html" title="HPU Bookstore">Bookstore</a></li>
+<li><a href="../Business_Office/index.html">Business Office</a></li>
+<li><a href="../CareerServices/index.html" title="Career Services">Career Services</a></li>
+<li><a href="../grad/index.html">Center for Graduate and Adult Services</a></li>
+<li><a href="../StudentServices/CommuterServices/index.html">Commuter Services</a></li>
+<li><a href="../About_HPU/hpu-security.html">Campus Security</a></li>
+<li><a href="../Counseling_Behavioral_Health/index.html" title="Counseling &amp; Behavioral Health">Counseling &amp; Behavioral Health Services</a></li>
+<li><a href="../financialaid/index.html" title="Financial Aid">Financial Aid &amp; Scholarships</a></li>
+<li><a href="http://www.collegepricingestimator.com/hpu" target="_blank">Net Price Calculator</a></li>
+<li><a href="../Graduation/index.html" title="Graduation Ceremonies">Graduation Ceremonies</a></li>
+<li><a href="../StudentServices/Housing.html" title="Housing">Housing</a></li>
+<li><a href="../International_Student/Current_Student/index.html" title="International Student Services">International Students Services</a></li>
+<li><a href="../Studentlife/LeadershipDevelopment/index.html">Leadership Development Programs</a></li>
+<li><a href="../Libraries_HPU/Webpages/index.html" title="Libraries">Libraries</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="../Military_Campus_Programs/index.html">Military Campus Programs</a></li>
+<li><a href="../StudentServices/CommuterServices/Off_Campus_Meal_Plan.html" title="OCMP ">Off-Campus Meal Plan</a></li>
+<li><a href="../FirstYearPrograms/Parent/ParentResources1.html" title="Parent Resources">Parent Resources</a></li>
+<li><a href="../StudentServices/CAS/Testing/Placement_Testing.html" title="Placement Testing">Placement Testing</a></li>
+<li><a href="../Studentlife/Rave_Alert/index.html" title="Rave Alert">Rave Alert: Emergency Text Messaging</a></li>
+<li><a href="../Registrar/index.html" title="Registrar's Office">Registrar&#8217;s Office</a></li>
+<li><a href="../Studentlife/student-handbook.pdf" target="_blank" title="Dean of Students">Student Handbook</a></li>
+<li><a href="../Studentlife/Health_Care/index.html" title="Student Health Insurance">Student Health Insurance Options</a></li>
+<li><a href="../StudentServices/disability-resources-office/index.html" title="Students with Disabilities">Disability Resources Office</a></li>
+<li><a href="../StudentServices/CAS/Tutoring/index.html" title="Tutoring ">Tutoring</a></li>
+<li><a href="../Registrar/IDCard.html" title="UniCard">UniCard (Student ID Card)</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav megamenu Athletics links-->
+<li><a class="athletics" href="http://goseawarriors.com" target="_blank">Athletics</a> 
+<div class="sub">
+<ul>
+<li>
+<h6><a href="#">Women's Sports</a></h6>
+</li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=womensbasketball&amp;path=wbball" target="_blank">Basketball</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=womenscrosscountry&amp;path=wcross" target="_blank">Cross Country</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?path=wgo&amp;&amp;tab=1" target="_blank">Golf</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=womenssoccer&amp;path=wsoc" target="_blank">Soccer</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=softball&amp;path=softball" target="_blank">Softball</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=womenstennis&amp;path=wten" target="_blank">Tennis</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=womensvolleyball&amp;path=wvball" target="_blank">Volleyball</a></li>
+</ul>
+<ul>
+<li>
+<h4><a href="#">Men's Sports</a></h4>
+</li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=baseball&amp;path=baseball" target="_blank">Baseball</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=mensbasketball&amp;path=mbball" target="_blank">Basketball</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=menscrosscountry&amp;path=mcross" target="_blank">Cross Country</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=mensgolf&amp;path=mgolf" target="_blank">Golf</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=menssoccer&amp;path=msoc" target="_blank">Soccer</a></li>
+<li><a href="http://www.goseawarriors.com/index.aspx?tab=menstennis&amp;path=mten" target="_blank">Tennis</a></li>
+</ul>
+<ul>
+<li>&#160;</li>
+<li>&#160;</li>
+<li><a href="http://www.goseawarriors.com/staff.aspx?tab=athleticsstaff" target="_blank">Staff Directory</a></li>
+<li><a href="http://www.b2tv.com/partner_members.asp?id=262" target="_blank">Broadcast</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav megamenu Alumni links-->
+<li><a class="alumni" href="../alumni/index.html">Alumni</a> 
+<div class="sub">
+<div class="indent">
+<ul>
+<li>
+<h6><a href="../alumni/index.html">Alumni Home</a></h6>
+</li>
+<li><a href="../alumni/Services.html">Services</a></li>
+<li><a href="../alumni/Benefits.html">Benefits</a></li>
+<li><a href="../alumni/HPU_Campus.html">HPU campus</a></li>
+<li><a href="../alumni/GetInvolved.html">Get Involved</a></li>
+<li><a href="../alumni/NotableAlumni.html">Notable Alumni</a></li>
+<li><a href="../alumni/SupportUs.html">Support Us</a></li>
+<li><a href="../alumni/Connect.html">Connect</a></li>
+<li><a href="../alumni/HPU_Alumni_in_the_news.html">HPU Alumni in the news</a></li>
+<li><a href="../alumni/Stay_Informed.html">Stay Informed</a></li>
+<li><a href="../alumni/Recognition_Event.html">Recognition Event</a></li>
+<li><a href="../alumni/Alumni_FAQ.html">Alumni FAQ's</a></li>
+</ul>
+</div>
+</div>
+</li>
+<!-- begin #topnav megamenu Support links-->
+<li><a class="support" href="../SupportHPU/index.html">Support HPU</a> 
+<div class="sub">
+<ul>
+<li>
+<h6><a href="../SupportHPU/index.html">Support HPU Home</a></h6>
+</li>
+<li><a href="../SupportHPU/Giving_opportunities.html">Giving opportunities</a></li>
+<li><a href="../SupportHPU/annual_giving.html">Annual Giving</a></li>
+<li><a href="../SupportHPU/gifts_for_tomorrow.html">Gifts for Tomorrow</a></li>
+<li><a href="../SupportHPU/How_to_make_a_gift.html">How To Make a Gift</a></li>
+<li><a href="../SupportHPU/annual_report_of_giving.html">Annual report of Giving</a></li>
+<li><a href="../SupportHPU/donor_FAQ.html">Donor FAQ's</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav megamenu Calendar links-->
+<li><a class="calendar" href="../calendar/index.html">HPU Calendar</a> 
+<div class="sub">
+<ul>
+<li><a href="../AcademicCalendar/index.html">Academic Calendar</a></li>
+<li><a href="../calendar/index.html">Events Calendar</a></li>
+</ul>
+</div>
+</li>
+<!-- begin #topnav Campus Pipeline links-->
+<li style="margin-left: 115px;"><a class="calendar" href="http://campus.hpu.edu" target="_blank">HPU Pipeline</a> 
+<div class="sub" style="margin-left: -80px;">
+<ul>
+<li><a href="http://campus.hpu.edu" target="_blank">Log In</a></li>
+</ul>
+</div>
+</li>
+</ul><!-- end #topnav megamenu links--></div>
+</div>
+<div id="container">
+<div id="pagetitle"><h2>We're Sorry. Page Not Found.</h2></div>
+<div id="breadcrumbs">
+<div id="brcrlinks"><a href="../index.html">Home</a> &gt; We're Sorry. Page Not Found.</div>
+</div>
+<div id="mainarea">
+<div id="sidebar1"><h2>Hawaii Pacific University</h2>
+<ul>
+<li><a href="../index.html">HPU Homepage</a></li>
+<li><a href="../About_HPU/index.html">About HPU</a></li>
+<li><a href="../About_HPU/3-Student_Right-to-Know_Information.html">Student Right To Know Information</a></li>
+</ul> 
+<div id="closeups" ></div>
+</div>
+<div id="mainContent">
+
+
+<p><em><strong>E kala mai.</strong></em> <strong>We're sorry. The page you were looking for could not be found.</strong></p>
+<p>If you were coming to our site using a bookmark, we've redesigned our site and moved. If there's a page you're looking for please use the menu along the top.</p>
+
+
+<p>You can also search for your information using the Search Field below.</p>
+<table border="0" cellpadding="5" cellspacing="0" style="width: 275px;">
+<tbody>
+<tr>
+<td class="tablecellBronze">Search HPU</td>
+</tr>
+<tr>
+<td bgcolor="#CCCCCC">
+<form action="http://www.hpu.edu/search-results/" id="searchbox_006962232235240694902:1v2a3rsbqxc"><input name="cx" type="hidden" value="006962232235240694902:1v2a3rsbqxc" /> <input name="cof" type="hidden" value="FORID:11" /> <input name="hq" type="hidden" value="-inurl:https" /> <input name="q" type="text" /> <input alt="Search" height="21" name="sa" src="../images/images_template/img_srch.png" type="image" value="Search HPU" width="21" /></form>
+<form action="http://www.hpu.edu/search-results/" />
+</td>
+</tr>
+</tbody>
+</table>
+<p>We apologize for the inconvenience. <a href="mailto:webmaster@hpu.edu">Contact us</a> if there if you have any questions.</p>
+<p><strong>Mahalo.</strong></p>
+
+
+</div>
+</div>
+<!-- end #container -->
+</div>
+<div class="clearfloat" ></div>
+<div id="footer"><div id="address"><img align="left" alt="HPU" height="78" src="../images/images_template/foot_logo.png" width="78" /><strong>Hawai'i Pacific University</strong><br />
+ 1164 Bishop Street<br />
+ Honolulu, Hawai'i 96813 U.S.A. 
+<p>Telephone: (808) 544-0200<br />
+ Toll-Free Telephone: 1-866-CALL-HPU<br />
+ (1-866-225-5478 | U.S. and Canada only)</p>
+</div>
+<div id="ftfltrt">
+<div id="mission">"Hawai'i Pacific University is a not-for-profit international learning community set in the rich cultural context of Hawai'i. Students from around the world join us for an American education built on a liberal arts foundation. Our innovative undergraduate and graduate programs anticipate the changing needs of the community and prepare our graduates to live, work, and learn as active members of a global society."</div>
+<div id="ftlinks">
+<p><a href="../Welcome/contactus.html">Contact Us</a> / <a href="../UniquelyHPU/employmentopps.html">Employment</a> / <a href="../HPUNews/index.html">News</a> / <a href="../calendar/index.html">Calendar</a> / <a href="../Staff_FacultySearch/index.html">Faculty &amp; Staff Search</a> / <a href="https://bweb.hpu.edu:4443/hpud/bwckschd.p_disp_dyn_sched" target="_blank">Course Search</a> / <a href="../Welcome/HPU_privacy_policy.html">PRIVACY</a> / <a href="../Welcome/HPULegalStatement.html">Legal</a> / <a href="mailto:webmaster@hpu.edu">Webmaster</a> / <a href="../index.html">Home</a></p>
+<!--
+<ul>
+<li><a href="#"><img alt="Japanese" src="/images/images_template/btm_jp.png" width="40" border="0" height="14" /></a></li>
+<li><img alt="Japanese" src="/images/images_template/btm_kor.png" /></li>
+<li><a href="#"><img alt="Simplified Chinese" src="/images/images_template/btm_simpch.png" width="58" border="0" height="14" /></a></li>
+<li><a href="#"><img alt="Traditional Chinese" src="/images/images_template/btm_tradch.png" width="56" border="0" height="14" /></a></li>
+<li><a href="#">Espanol</a></li>
+<li><a href="#">Portuguese</a></li>
+</ul>
+-->
+</div>
+</div> 
+<div class="clearfloat" ></div>
+</div>
+
+<div id="ftpanel">
+<div id="ftplinks"><table border="0" cellpadding="0" cellspacing="0" width="934">
+<tbody>
+<tr>
+<td style="width: 180px;"><!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style"><a class="addthis_button_facebook" ></a> <a class="addthis_button_twitter" ></a> <a class="addthis_button_google" ></a> <a class="addthis_button_print" ></a></div>
+<script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
+ <script src="http://s7.addthis.com/js/250/addthis_widget.js#username=adecastro" type="text/javascript" ></script>
+ <!-- AddThis Button END -->
+</td>
+<td style="width: 40px; padding-top: 7px;" valign="middle" />
+<td width="34"><img alt="Request More Information" height="30" src="../images/images_template/ftrpnl_rqest.png" width="30" /></td>
+<td width="80"><a href="../admissions/Request_Info.html">Request More<br />
+ Information</a></td>
+<td width="34"><img alt="Apply Now" height="30" src="../images/images_template/ftrpnl_apply.png" width="30" /></td>
+<td style="width: 40px;"><a href="../admissions/apply_now.html">Apply Now</a></td>
+<td width="34"><img alt="Contact HPU" height="30" src="../images/images_template/ftrpnl_contct.png" width="30" /></td>
+<td><a href="../Welcome/contactus.html">Contact<br />
+ HPU</a>&#160;</td>
+<td width="188"><a href="../index.html"><img alt="Hawaii Pacific University" border="0" height="35" src="../images/images_template/ftrpnl_hpulogo.png" width="188" /></a></td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</body>
+</html>
