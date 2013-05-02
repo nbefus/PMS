@@ -30,15 +30,15 @@ import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class AgendaTableHelper 
 {
     private JTable table;
     
     /**
-     *
-     * @param table
+     * Helps control the agenda table properties
+     * @param table - table to be allocated for agenda
      */
     public AgendaTableHelper(JTable table)
     {
@@ -51,8 +51,8 @@ public class AgendaTableHelper
     }
     
     /**
-     *
-     * @param increase
+     * Increase the height of rows
+     * @param increase - the amount to increase
      */
     public void increaseRowHeight(int increase)
     {
@@ -62,7 +62,7 @@ public class AgendaTableHelper
     }
     
     /**
-     *
+     * Will enable scrolling on a table
      */
     public void allowScrollingOnTable()
     {
@@ -74,8 +74,8 @@ public class AgendaTableHelper
     }
     
     /**
-     *
-     * @param fastness
+     * Adjusts the scrolling sensitivity on the table
+     * @param fastness - sensitivity
      */
     public void fasterScrolling(int fastness)
     {
@@ -83,11 +83,10 @@ public class AgendaTableHelper
     }
     
     /**
-     *
-     * @param doubleClickBringsInfoUpTop
-     * @param dce
+     * Set up the renderers and editors of the table for an agenda table
+     * @param dce - default cell editor for columns which are double click sensitive to edit
      */
-    public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
+    public void setTableRendersAndEditors(DefaultCellEditor dce)
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setAutoCreateRowSorter(true);
@@ -102,8 +101,8 @@ public class AgendaTableHelper
     }
     
     /**
-     *
-     * @return
+     * Resize agenda table to average size
+     * @return table resized
      */
     public JTable autoResizeColWidth()
     {

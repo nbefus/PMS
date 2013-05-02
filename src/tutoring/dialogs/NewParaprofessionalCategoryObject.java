@@ -6,30 +6,23 @@ package tutoring.dialogs;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.text.JTextComponent;
 import tutoring.entity.Category;
-import tutoring.entity.Course;
 import tutoring.entity.Paraprofessional;
 import tutoring.entity.ParaprofessionalCategory;
-import tutoring.entity.Role;
-import tutoring.entity.Subject;
-import tutoring.entity.Teacher;
 import tutoring.helper.Data;
 import tutoring.helper.DatabaseHelper;
 import tutoring.helper.UltimateAutoComplete;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
 
@@ -39,7 +32,7 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
     private int paraprofessionalID = -1;
     private int categoryID = -1;
     /**
-     *
+     * Create a paraprofessional category in the database
      * @param parent
      * @param modal
      */
@@ -47,59 +40,37 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         
-      //  roleCombo.setEditable(true);
-       // categoryCombo.setEditable(true);
-        
-        
         this.setResizable(false);
-               
-        //roleCombo.setModel(new DefaultComboBoxModel(new ArrayList<String>(new HashSet<String>(Data.getRolelist())).toArray()));
-        //roleCombo.setSelectedIndex(0);
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getTutorslist())));
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{paraprofessionalCombo, categoryCombo});
        
-        
-        //categoryCombo.setModel(new DefaultComboBoxModel(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())).toArray()));
-        //categoryCombo.setSelectedIndex(0);
-        
         editButton.setVisible(false);
         
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param paraprofessional
-     * @param category
-     * @param categoryID
-     * @param paraprofessionalID
+     * Edit a paraprofessional category object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param paraprofessional - the paraprofessional first and last name to modify
+     * @param category - category name of the category to modify
+     * @param categoryID - category ID of the category to modify
+     * @param paraprofessionalID - ID of the paraprofessional to modify
      */
     public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal, String paraprofessional, String category, int categoryID, int paraprofessionalID) {
         super(parent, modal);
         initComponents();
-        
-       // roleCombo.setEditable(true);
-       // categoryCombo.setEditable(true);
-        
-        
+
         this.setResizable(false);
-               
-       // ArrayList<String> roles = new ArrayList<String>(new HashSet<String>(Data.getRolelist()));
-        //ArrayList<String> categories = new ArrayList<String>(new HashSet<String>(Data.getCategorieslist()));
-       // roleCombo.setModel(new DefaultComboBoxModel(roles.toArray()));
-        //roleCombo.setSelectedIndex(roles.indexOf(role));
-        
+
          ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getTutorslist())));
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{paraprofessionalCombo, categoryCombo});
-        
-        //categoryCombo.setModel(new DefaultComboBoxModel(categories.toArray()));
-        //categoryCombo.setSelectedIndex(categories.indexOf(category));
-        
+
         uac.setComboValue(paraprofessional, 0);
         uac.setComboValue(category, 1);
         
@@ -119,11 +90,9 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
     
     private void validate(boolean update)
     {
-        
         categoryCombo.setBorder(null);
         paraprofessionalCombo.setBorder(null);
         
-       
         String category = ((JTextComponent) categoryCombo.getEditor().getEditorComponent()).getText();
         String paraprofessional = ((JTextComponent) paraprofessionalCombo.getEditor().getEditorComponent()).getText();
 
@@ -152,7 +121,6 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
             
             if(goodParaprofessional  && goodCategory)
             {
-                System.out.println("CREATING CATEGORY");
                 ParaprofessionalCategory pc = new ParaprofessionalCategory(validParaprofessional.get(0), validCategory.get(0));
 
                 boolean inserted;
@@ -163,7 +131,6 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
                 else
                     inserted = DatabaseHelper.updateParaCat(ParaprofessionalCategory.getValues(pc), oldValues, ParaprofessionalCategory.ParaCatTable.getTable());
                 //Reload data and table
-                System.out.println("INSERTE: "+inserted);
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The paraprofessioanl category was successfully written to the database!");
                 else

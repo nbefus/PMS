@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -277,12 +278,14 @@ public class Paraprofessional
      */
     public static Object[] getValues(Paraprofessional p)
     {
+       
+        
         Object[] values = new Object[7];
         values[0]=p.getParaprofessionalID();
-        values[1]=p.getRoleID();
+        values[1]=p.getRoleID().getRoleID();
         values[2]=p.getlName();
         values[3]=p.getfName();
-        values[4]=p.getHireDate();
+        values[4]= p.getHireDate();
         values[5]=p.getTerminationDate();
         values[6]=p.isIsClockedIn();
         return values;

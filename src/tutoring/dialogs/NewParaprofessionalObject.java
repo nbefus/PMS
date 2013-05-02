@@ -37,68 +37,46 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
      */
     private int paraprofessionalID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a paraprofessional object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewParaprofessionalObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         
-      //  roleCombo.setEditable(true);
-       // categoryCombo.setEditable(true);
-        
-        
         this.setResizable(false);
-               
-        //roleCombo.setModel(new DefaultComboBoxModel(new ArrayList<String>(new HashSet<String>(Data.getRolelist())).toArray()));
-        //roleCombo.setSelectedIndex(0);
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
        
-        
-        //categoryCombo.setModel(new DefaultComboBoxModel(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())).toArray()));
-        //categoryCombo.setSelectedIndex(0);
-        
         editButton.setVisible(false);
         
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param role
-     * @param fname
-     * @param lname
-     * @param clockedIn
-     * @param hireDate
-     * @param terminationDate
-     * @param paraprofessionalID
+     * Edit a paraprofessional object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param role - role of the paraprofessional to modify
+     * @param fname - first name of the paraprofessional to modify
+     * @param lname - last name of the paraprofessional to modify
+     * @param clockedIn - clocked in field of the paraprofessional to modify
+     * @param hireDate - hire date of the paraprofessional to modify
+     * @param terminationDate - termination date of the paraprofessional to modify
+     * @param paraprofessionalID - ID of the paraprofessional to modify
      */
     public NewParaprofessionalObject(java.awt.Frame parent, boolean modal, String role,String fname, String lname, String clockedIn, String hireDate, String terminationDate, int paraprofessionalID) {
         super(parent, modal);
         initComponents();
         
-       // roleCombo.setEditable(true);
-       // categoryCombo.setEditable(true);
-        
-        
         this.setResizable(false);
-               
-       // ArrayList<String> roles = new ArrayList<String>(new HashSet<String>(Data.getRolelist()));
-        //ArrayList<String> categories = new ArrayList<String>(new HashSet<String>(Data.getCategorieslist()));
-       // roleCombo.setModel(new DefaultComboBoxModel(roles.toArray()));
-        //roleCombo.setSelectedIndex(roles.indexOf(role));
-        
+
          ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
-        
-        //categoryCombo.setModel(new DefaultComboBoxModel(categories.toArray()));
-        //categoryCombo.setSelectedIndex(categories.indexOf(category));
-        
+
         uac.setComboValue(role, 0);
         if(clockedIn.equalsIgnoreCase("true"))
            clockedInCombo.setSelectedIndex(0);

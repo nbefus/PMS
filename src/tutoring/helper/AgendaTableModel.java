@@ -1,25 +1,11 @@
 package tutoring.helper;
 
-
-import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JOptionPane;
 import javax.swing.table.AbstractTableModel;
 import tutoring.entity.Agenda;
-import tutoring.entity.Subject;
-import tutoring.entity.Teacher;
-import tutoring.entity.Paraprofessional;
 import tutoring.entity.ParaprofessionalSession;
-import tutoring.ui.AdminView;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -27,30 +13,30 @@ import tutoring.ui.AdminView;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class AgendaTableModel extends AbstractTableModel {
 
     
     /**
-     *
+     * Columns of the Agenda table
      */
     public enum Columns
     {
         /**
-         *
+         * Agenda ID column
          */
         ID(0, "Agenda ID", Integer.class),
         /**
-         *
+         * Date column
          */
         DATE(1, "Date", Date.class),
         /**
-         *
+         * Description column
          */
         NOTES(2,"Description", String.class),
         /**
-         *
+         * Agenda category type column
          */
         TYPE(3, "Type", String.class);
        
@@ -73,9 +59,9 @@ public class AgendaTableModel extends AbstractTableModel {
         }
         
         /**
-         *
-         * @param columnIndex
-         * @return
+         * Get column class based on the column index
+         * @param columnIndex - index of the column to retrieve the class
+         * @return class of column
          */
         public static Class<?> getColumnClass(int columnIndex)
         {
@@ -84,7 +70,7 @@ public class AgendaTableModel extends AbstractTableModel {
         
         /**
          *
-         * @return
+         * @return column class
          */
         public Class<?> getColumnClass()
         {
@@ -93,7 +79,7 @@ public class AgendaTableModel extends AbstractTableModel {
         
 	/**
          *
-         * @return
+         * @return column index
          */
         public int getColumnIndex() {
 		return columnIndex;
@@ -101,7 +87,7 @@ public class AgendaTableModel extends AbstractTableModel {
         
         /**
          *
-         * @return
+         * @return display name
          */
         public String getDisplayName() {
 		return displayName;
@@ -109,17 +95,11 @@ public class AgendaTableModel extends AbstractTableModel {
  
     }
      
-    private String[] columnNames;// = {"ID","fname","lname","phone", "email","course","level","teacher","notes","tutor","gc", "date","start","stop","min", "location","creator","walkout","category" };
-    private  ParaprofessionalSession[] data;// = {{null,null,null,null,null,null,null,null}};
+    private String[] columnNames;
     private ArrayList<Agenda> agendaItems = new ArrayList();
 
-   /* public SessionTableModel(ArrayList<ParaprofessionalSession> list, boolean isFutureSession){
-         this.tutorSessions = list;
-         columnNames=generateColumns();
-         this.isFutureSession = isFutureSession;
-    }*/
     /**
-     *
+     * Create a model for the agenda table
      */
     public AgendaTableModel(){
         columnNames=generateColumns();
@@ -140,7 +120,7 @@ public class AgendaTableModel extends AbstractTableModel {
     }
     
     /**
-     *
+     * Deletes all rows in the table
      */
     public void deleteAllRows()
     {
@@ -159,8 +139,8 @@ public class AgendaTableModel extends AbstractTableModel {
     }*/
     
     /**
-     *
-     * @param a
+     * Add row to table
+     * @param a - agenda object to add to the table
      */
     public void addRow(Agenda a)
     {
@@ -169,8 +149,8 @@ public class AgendaTableModel extends AbstractTableModel {
     }
     
     /**
-     *
-     * @param r
+     * Deletes indexes of rows
+     * @param r - array of indexes of the rows to delete in the table
      */
     public void deleteRows(int[] r)
     {
@@ -186,56 +166,11 @@ public class AgendaTableModel extends AbstractTableModel {
         
         fireTableDataChanged();
     }
-        
-    @Override
-    public void setValueAt(Object o, int r, int c)
-    {
-        /*
-         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
-        System.out.println("SetValue at :"+ r + " "+c);
-       
-        int option = JOptionPane.showConfirmDialog(null, "Are you sure you this session is a walkout?");
-        if(option == JOptionPane.YES_OPTION)
-        {
-            System.out.println("EDITED at setValueAt STM: "+o.toString());
-           // tutorSessions.get(r)
 
-            ParaprofessionalSession ts = tutorSessions.get(r);
-            switch (c) {
-            case 0: 
-                break;
-            case 1:
-                ts.getClientID().setfName((String)o);
-                HibernateTest.update(ts);
-                break;
-
-           }
-           // fireTableCellUpdated(r, c);
-            fireTableDataChanged();
-           //return null;
-
-        }
-        else
-            System.out.println("CANCELLED");*/
-    }
-    
-    /*
-    public void addRow(String fname, String lname, String subjectAbbrevName, int level, String teacherLName, String notes, Paraprofessional tutor, boolean future, boolean gc)
-    {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(ts.toString());
-        ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-        tutorSessions.add(tutorSession);
-    }*/
 
     @Override
     public boolean isCellEditable(int i, int j)
     {
-      //  System.out.println(getValueAt(i,j).getClass().toString());
-      //  System.out.println((getValueAt(i, j-1) instanceof Timestamp));
-      //  System.out.println(((Timestamp)getValueAt(i, j-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")));
-      //  if(!(getValueAt(i, j-1) instanceof Timestamp && ((Timestamp)getValueAt(i, j-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")) && j == Columns.STOP.getColumnIndex()) && !(getValueAt(i, j) instanceof Timestamp && !((Timestamp)getValueAt(i, j)).equals(Timestamp.valueOf("9999-12-31 12:00:00"))))
-      //      return true;
         return true;
     }
     
@@ -275,7 +210,6 @@ public class AgendaTableModel extends AbstractTableModel {
    public Class<?> getColumnClass(int columnIndex){
 
        return Columns.getColumnClass(columnIndex);
-          //   return null;
       }
    
    

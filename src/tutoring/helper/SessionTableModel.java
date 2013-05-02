@@ -19,7 +19,6 @@ import tutoring.entity.Subject;
 import tutoring.entity.Teacher;
 import tutoring.entity.Paraprofessional;
 import tutoring.entity.ParaprofessionalSession;
-import tutoring.ui.AdminView;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.

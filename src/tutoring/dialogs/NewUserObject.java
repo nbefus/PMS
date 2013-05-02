@@ -23,26 +23,21 @@ import tutoring.helper.UltimateAutoComplete;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class NewUserObject extends javax.swing.JDialog {
 
     /**
-     * Creates new form NewUserObject
-     * @param parent
-     * @param modal  
+     * Creates new form NewUserObject to create a user object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewUserObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-       /// roleCombo.setEditable(true);
-       // ArrayList<String> roles  = new ArrayList<String>(new HashSet<String>(Data.getRolelist()));
 
-        
         this.setResizable(false);
                
-        //roleCombo.setModel(new DefaultComboBoxModel(roles.toArray()));
-        //roleCombo.setSelectedIndex(0);
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
@@ -54,25 +49,21 @@ public class NewUserObject extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param username
-     * @param password
-     * @param lname
-     * @param fname
-     * @param role
+     * Edit a user object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param username - username of the user object to modify
+     * @param password - password of the user object to modify
+     * @param lname - last name of the user object to modify
+     * @param fname - first name of the user object to modify
+     * @param role - role of the user object to modify
      */
     public NewUserObject(java.awt.Frame parent, boolean modal, String username, String password, String lname, String fname, String role) {
         super(parent, modal);
         initComponents();
       
         this.setResizable(false);
-        //roleCombo.setEditable(true);
-        //ArrayList<String> roles = new ArrayList<String>(new HashSet<String>(Data.getRolelist()));
-        //roleCombo.setModel(new DefaultComboBoxModel(roles.toArray()));
-        //roleCombo.setSelectedIndex(roles.indexOf(role));
-            
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
@@ -85,7 +76,6 @@ public class NewUserObject extends javax.swing.JDialog {
         passwordField.setText(password);
         
         editButton.setVisible(true);
-        
     }
     
     private void close()
@@ -107,12 +97,11 @@ public class NewUserObject extends javax.swing.JDialog {
 
         String lname = lnameField.getText().trim();
         String fname = fnameField.getText().trim();
-       String username = usernameField.getText().trim();
-       String password =  passwordField.getText().trim();
+        String username = usernameField.getText().trim();
+        String password =  passwordField.getText().trim();
        
         try
         {
-            
             boolean goodRole = true;
             
             DatabaseHelper.open();
@@ -154,7 +143,6 @@ public class NewUserObject extends javax.swing.JDialog {
             
             if(goodLast && goodFirst && goodUsername && goodPassword && goodRole)
             {
-                
                 User u = new User(username, validRole.get(0), lname, fname, password);
 
                 DatabaseHelper.open();
@@ -165,16 +153,13 @@ public class NewUserObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(User.getValues(u), User.UserTable.getTable());
                 else
                     inserted = DatabaseHelper.update(User.getValues(u), User.UserTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The user was successfully written to the database!");
                 else
                     JOptionPane.showMessageDialog(null, "The user was NOT created! Please try again!");
                 close();
-                
             }
-
         }
         catch(Exception e)
         {

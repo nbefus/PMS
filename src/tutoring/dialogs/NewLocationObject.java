@@ -9,13 +9,12 @@ import java.awt.Window;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
-import tutoring.entity.Category;
 import tutoring.entity.Location;
 import tutoring.helper.DatabaseHelper;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class NewLocationObject extends javax.swing.JDialog {
 
@@ -24,9 +23,9 @@ public class NewLocationObject extends javax.swing.JDialog {
      */
    private int locationID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a location object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewLocationObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,11 +38,11 @@ public class NewLocationObject extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param location
-     * @param locationID
+     * Edit a location object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param location - location name of the location to modify
+     * @param locationID - ID of the location to modify
      */
     public NewLocationObject(java.awt.Frame parent, boolean modal, String location, int locationID) {
         super(parent, modal);
@@ -66,7 +65,6 @@ public class NewLocationObject extends javax.swing.JDialog {
     {
         locationField.setBorder(null);
         
-       
         String location = locationField.getText().trim();
         
         try
@@ -77,9 +75,7 @@ public class NewLocationObject extends javax.swing.JDialog {
                 goodLocation = false;
                 locationField.setBorder(new MatteBorder(3,3,3,3,Color.red));
             }
-            
-            
-            
+
             if(goodLocation)
             {
                 
@@ -91,7 +87,6 @@ public class NewLocationObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(Location.getValues(l), Location.LocationTable.getTable());
                 else
                     inserted = DatabaseHelper.update(Location.getValues(l), Location.LocationTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The location was successfully written to the database!");

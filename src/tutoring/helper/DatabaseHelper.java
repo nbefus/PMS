@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -31,14 +32,14 @@ import tutoring.entity.*;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class DatabaseHelper 
 {
     private static Connection connect = null;
     
     /**
-     *
+     * Open database connection
      */
     public static void open()
     {
@@ -47,33 +48,18 @@ public class DatabaseHelper
         String password = "heythere";
 
         try{
-        connect = DriverManager.getConnection(url1, user, password);
+            connect = DriverManager.getConnection(url1, user, password);
         }catch(Exception e)
         {
             
         }
     }
     
-    /**
-     *
-     * @param l
-     */
-    public static void removeDuplicates(List<Object> l) {
-    Set<Object> s = new TreeSet<Object>(new Comparator<Object>() {
-
-        @Override
-        public int compare(Object o1, Object o2) {
-            // ... compare the two object according to your requirements
-            return 0;
-        }
-    });
-            s.addAll(l);
-    List<Object> res = Arrays.asList(s.toArray());
-}
+  
     
     /**
      *
-     * @return
+     * @return connection to the database
      */
     public static Connection getConnection()
     {
@@ -81,10 +67,10 @@ public class DatabaseHelper
     }
     
     /**
-     *
-     * @param displayName
-     * @param tableName
-     * @return
+     * Gets a database name of a column based on its display name
+     * @param displayName - display name of the column to find database name
+     * @param tableName - table name of the table to select column
+     * @return database name of column
      */
     public static String getDatabaseNameFromDisplayName(String displayName, String tableName)
     {
@@ -124,7 +110,7 @@ public class DatabaseHelper
     }
     
     /**
-     *
+     * Close connection to database
      */
     public static void close()
     {
@@ -138,9 +124,9 @@ public class DatabaseHelper
     }
     
     /**
-     *
-     * @param table
-     * @return
+     * Get table columns from a specific table
+     * @param table - the table to retrieve columns from
+     * @return columns of matching table
      */
     public static ArrayList<String> getTableColumns(String table)
     {
@@ -390,10 +376,6 @@ public class DatabaseHelper
             statement.close();
           }
 
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }
@@ -434,29 +416,59 @@ public class DatabaseHelper
                 String whereString = "";
                for(int i=0; i<values.length; i++)
                {
-                   if(values[i] != null && values[i].toString().length() > 0)
+                   if(values[i] != null && values[i] instanceof String && values[i].toString().length() > 0)
                       values[i]=values[i].toString().replace("'", "''");
                    if(i == 0)
                    {
-                       
                        whereString+="where "+columns.get(i)+" = " +values[i].toString();
                    }
                    else
                    {
                        valuesString += columns.get(i)+" = ";
-                        if(values[i] instanceof Integer)
+                        if(values[i] instanceof java.lang.Integer)
                         {
                             valuesString+=values[i].toString()+", ";
                         }
-                        else if(values[i] instanceof Timestamp || values[i] instanceof String)
+                        else if((Object)values[i] instanceof java.sql.Timestamp)
                         {
+                            String timestamp = "null";
+                            try
+                            {
+                                SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                                timestamp = sdf.format(values[i]);
+                            }
+                            catch(Exception e)
+                            {
+
+                            }
+                            valuesString+="'"+timestamp+"', ";
+                        }
+                        else if(values[i] instanceof java.util.Date)
+                        {
+                            String date = "null";
+                            
+                            try
+                            {
+                                SimpleDateFormat sdf  = new SimpleDateFormat("yyyy-MM-dd");
+                                date = sdf.format(values[i]);
+                            }
+                            catch(Exception e)
+                            {
+
+                            }
+                            valuesString+="'"+date+"', ";
+                        }
+                        else if(values[i] instanceof String)
+                        {
+                           System.out.println("String");
+
                             valuesString+="'"+values[i].toString()+"', ";
                         }
-                        else if(values[i] instanceof Date)
+                        /*else if(values[i] instanceof Date)
                         {
                             Timestamp t = new Timestamp(((Date)values[i]).getTime());
                             valuesString+="'"+t.toString()+"', ";
-                        }
+                        }*/
                         else if(values[i] instanceof Boolean)
                         {
                             valuesString+=values[i].toString()+", ";

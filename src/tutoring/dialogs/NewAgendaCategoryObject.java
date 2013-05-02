@@ -20,7 +20,7 @@ import tutoring.helper.DatabaseHelper;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class NewAgendaCategoryObject extends javax.swing.JDialog {
 
@@ -29,9 +29,9 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
      */
     private int agendaCategoryID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create an agenda category object from the database in this dialog
+     * @param parent - frame parent
+     * @param modal - is a modal
      */
     public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -44,11 +44,11 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param category
-     * @param agendaCategoryID
+     * Edit an agenda category object from the database in this dialog
+     * @param parent - frame parent
+     * @param modal - is a model
+     * @param category - the category of the agenda to modify
+     * @param agendaCategoryID - the ID of the category to modify
      */
     public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal, String category, int agendaCategoryID) {
         super(parent, modal);

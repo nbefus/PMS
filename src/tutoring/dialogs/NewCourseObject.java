@@ -37,9 +37,9 @@ public class NewCourseObject extends javax.swing.JDialog {
      */
     private int courseID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a course object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewCourseObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -58,52 +58,35 @@ public class NewCourseObject extends javax.swing.JDialog {
         
         this.setResizable(false);
                
-      /*  teacherCombo.setModel(new DefaultComboBoxModel(teachers.toArray()));
-        teacherCombo.setSelectedIndex(0);
-        
-        subjectCombo.setModel(new DefaultComboBoxModel(subjects.toArray()));
-        subjectCombo.setSelectedIndex(0);*/
-        
         editButton.setVisible(false);
         
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param teacher
-     * @param subject
-     * @param level
-     * @param courseID
+     * Edit a course object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param teacher - teacher of the course to modify
+     * @param subject - subject of the course to modify
+     * @param level - level of the course to modify
+     * @param courseID - ID of the course to modify
      */
     public NewCourseObject(java.awt.Frame parent, boolean modal, String teacher, String subject, String level, int courseID) {
         super(parent, modal);
         initComponents();
-        
-       /* teacherCombo.setEditable(true);
-        subjectCombo.setEditable(true);*/
-        
-        
+
         this.setResizable(false);
                
         ArrayList<String> teachers = new ArrayList<String>(new HashSet<String>(Data.getTeacherslist()));
         ArrayList<String> subjects = new ArrayList<String>(new HashSet<String>(Data.getSubjectslist()));
-      
-       /* teacherCombo.setModel(new DefaultComboBoxModel(teachers.toArray()));
-        teacherCombo.setSelectedIndex(teachers.indexOf(teacher));
-        
-        subjectCombo.setModel(new DefaultComboBoxModel(subjects.toArray()));
-        subjectCombo.setSelectedIndex(subjects.indexOf(subject));*/
-        
+  
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(teachers);
         uacList.add(subjects);
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{teacherCombo, subjectCombo});
         uac.setComboValue(teacher, 0);
         uac.setComboValue(subject, 1);
-
-        
+ 
         editButton.setVisible(false);
         
         levelField.setText(level);
@@ -186,7 +169,6 @@ public class NewCourseObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(Course.getValues(c), Course.CourseTable.getTable());
                 else
                     inserted = DatabaseHelper.update(Course.getValues(c), Course.CourseTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The course item was successfully written to the database!");

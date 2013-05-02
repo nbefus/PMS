@@ -6,24 +6,15 @@ package tutoring.dialogs;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
-import javax.swing.text.JTextComponent;
-import tutoring.entity.Category;
-import tutoring.entity.Paraprofessional;
-import tutoring.entity.Role;
-import tutoring.entity.Subject;
 import tutoring.entity.Teacher;
 import tutoring.helper.DatabaseHelper;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class NewTeacherObject extends javax.swing.JDialog {
 
@@ -32,9 +23,9 @@ public class NewTeacherObject extends javax.swing.JDialog {
      */
    private int teacherID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a teacher object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewTeacherObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -47,12 +38,12 @@ public class NewTeacherObject extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param lname
-     * @param fname
-     * @param TeacherID
+     * Edit a teacher object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param lname - last name of the teacher to modify
+     * @param fname - first name of the teacher to modify
+     * @param TeacherID - ID of the teacher to modify
      */
     public NewTeacherObject(java.awt.Frame parent, boolean modal, String lname, String fname, int TeacherID) {
         super(parent, modal);
@@ -114,7 +105,7 @@ public class NewTeacherObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(Teacher.getValues(t), Teacher.TeacherTable.getTable());
                 else
                     inserted = DatabaseHelper.update(Teacher.getValues(t), Teacher.TeacherTable.getTable());
-                //Reload data and table
+
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The teacher was successfully written to the database!");
                 else

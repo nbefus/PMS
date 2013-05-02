@@ -68,8 +68,9 @@ import tutoring.dialogs.*;
 
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
+
 public final class AdminFinal extends javax.swing.JFrame
 {
 
@@ -78,16 +79,17 @@ public final class AdminFinal extends javax.swing.JFrame
     private RestrictionListModel restrictHelper;
     
     /**
-     *
+     * MinuteUpdater
      */
     public class MinuteUpdater extends TimerTask {
     private SessionTableModel current;
     private SessionTableModel future;
 
         /**
-         *
-         * @param current
-         * @param future
+         * Updates table models every minute
+         * 
+         * @param current - current sessions table model
+         * @param future - future sessions table model (appointments)
          */
         public MinuteUpdater(SessionTableModel current, SessionTableModel future)
    {
@@ -105,7 +107,7 @@ public final class AdminFinal extends javax.swing.JFrame
 }
     
     /**
-     *
+     * Updates create session page's comboboxes data from server
      */
     public void update() 
     {
@@ -164,9 +166,9 @@ public final class AdminFinal extends javax.swing.JFrame
 
         ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
         
-        cultimateList3.add(Data.getTutorslist());
+        cultimateList3.add(Data.getClockedInParaprofessionals());
         cultimateList3.add(Data.getLocationslist());
-        cultimateList3.add(Data.getTutorslist());
+        cultimateList3.add(Data.getClockedInParaprofessionals());
        
         uacSessions.noMore();
         uacSessions = null;
@@ -175,75 +177,64 @@ public final class AdminFinal extends javax.swing.JFrame
     }
 
     /**
-     * Creates new form SIA
+     * Comboboxes map to autocomplete for changing and updating data
      */
     public enum ComboBoxesIndexes
     {   
         /**
-         *
+         * Client first name combobox
          */
-        CFNAME(0, "First Name", "fname", 'd'),
+        CFNAME(0, "First Name", "fname"),
         /**
-         *
+         * Client last name combobox
          */
-        CLNAME(1, "Last Name", "lname", 'd'),
+        CLNAME(1, "Last Name", "lname"),
         /**
-         *
+         * Client phone combobox
          */
-        CPHONE(2,"Phone", "phone", 'd'),
+        CPHONE(2,"Phone", "phone"),
         /**
-         *
+         * Client email combobox
          */
-        CEMAIL(3, "Email", "email", 'd'),
+        CEMAIL(3, "Email", "email"),
         /**
-         *
+         * Client course combobox
          */
-        COURSE(0, "Course", "abbrevName", 's'),
+        COURSE(0, "Course", "abbrevName"),
         /**
-         *
+         * Client creator combobox
          */
-        CREATOR(0, "Creator", "", 'e'),
+        CREATOR(0, "Creator", ""),
         /**
-         *
+         * Client level combobox
          */
-        LEVEL(1, "Level", "level", 'c'),
+        LEVEL(1, "Level", "level"),
         /**
-         *
+         * Client location combobox
          */
-        LOCATION(1, "Location", "location",'l'),
+        LOCATION(1, "Location", "location"),
         /**
-         *
+         * Client tutor's combobox
          */
-        PARAPROFESSIONAL(2, "Tutor","", 'p'),
+        PARAPROFESSIONAL(2, "Tutor",""),
         /**
-         *
+         * Client teacher's combobox
          */
-        TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)", 't');
+        TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)");
         
         private int indexOfCombo;
         private String displayName;
         private String databaseName;
-        private char letter;
         
-	private ComboBoxesIndexes(int i, String displayName, String databaseName, char letter) {
+	private ComboBoxesIndexes(int i, String displayName, String databaseName) {
 		indexOfCombo = i;
                 this.displayName = displayName;
                 this.databaseName = databaseName;
-                this.letter = letter;
 	}
-        
-        /**
-         *
-         * @return
-         */
-        public char getLetter()
-        {
-            return letter;
-        }
- 
+
 	/**
-         *
-         * @return
+         * 
+         * @return the index of the combobox in the autocomplete set
          */
         public int getBoxIndex() {
 		return indexOfCombo;
@@ -251,7 +242,7 @@ public final class AdminFinal extends javax.swing.JFrame
         
         /**
          *
-         * @return
+         * @return the display name of the combobox
          */
         public String getDisplayName() {
 		return displayName;
@@ -259,7 +250,7 @@ public final class AdminFinal extends javax.swing.JFrame
         
         /**
          *
-         * @return
+         * @return the database name of the name of the combobox
          */
         public String getDatabaseName()
         {
@@ -269,7 +260,7 @@ public final class AdminFinal extends javax.swing.JFrame
         /**
          *
          * @param DisplayName 
-         * @return 
+         * @return the database name of the combobox using the display name as input
          */
         public String getDatabaseName(String DisplayName)
         {
@@ -294,7 +285,7 @@ public final class AdminFinal extends javax.swing.JFrame
     private int sessionID = -1;
   
     /**
-     *
+     * 
      */
     public AdminFinal() 
     {
@@ -335,7 +326,7 @@ public final class AdminFinal extends javax.swing.JFrame
         sessionendField.setText("mm/dd/yyyy hh:mm aa");
         editSaveButton.setVisible(false);
 
-       Data d = new Data(false);
+       Data d = new Data();
       JComboBox[] cboxes = new  JComboBox[4];
        cboxes[0]=fnameCombo;
        cboxes[1]=lnameCombo;
@@ -377,9 +368,9 @@ public final class AdminFinal extends javax.swing.JFrame
 
         ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
         
-        cultimateList3.add(Data.getTutorslist());
+        cultimateList3.add(Data.getClockedInParaprofessionals());
         cultimateList3.add(Data.getLocationslist());
-        cultimateList3.add(Data.getTutorslist());
+        cultimateList3.add(Data.getClockedInParaprofessionals());
        
         uacSessions = new UltimateAutoComplete(cultimateList3, boxes3);
             
@@ -443,7 +434,7 @@ public final class AdminFinal extends javax.swing.JFrame
         tableHelper.setTableRendersAndEditors(true, dce);
         tableHelperFuture.setTableRendersAndEditors(true, dce);
         todayTableHelper.setTableRendersAndEditors(true, dce);
-        tableHelperAgenda.setTableRendersAndEditors(true, dceAgenda);
+        tableHelperAgenda.setTableRendersAndEditors(dceAgenda);
         tableHelper.autoResizeColWidth();
         todayTableHelper.autoResizeColWidth();
         tableHelperFuture.autoResizeColWidth();
@@ -471,7 +462,7 @@ public final class AdminFinal extends javax.swing.JFrame
     
     
     /**
-     * 
+     * Update the session and agenda tables
      */
     public void updateTables()
     {
@@ -548,7 +539,7 @@ public final class AdminFinal extends javax.swing.JFrame
     
     
     /**
-     *
+     * Set up the agenda table
      */
     public void setUpAgenda()
     {
@@ -573,12 +564,11 @@ public final class AdminFinal extends javax.swing.JFrame
             agendaTable.repaint();
             
         }
-        
     }
     
     /**
-     *
-     * @return
+     * Cell editor for session tables to collect form info and put into an edit
+     * @return the cell editor for double clicking on session tables to bring data to comboboxes for editing
      */
     public DefaultCellEditor makeEditSessionCellEditor()
     {
@@ -635,8 +625,8 @@ public final class AdminFinal extends javax.swing.JFrame
     
     
     /**
-     *
-     * @return
+     * Cell editor for agenda table for double clicking on a row to edit
+     * @return the cell editor for agenda table for a double click to bring up dialog editor
      */
     public DefaultCellEditor makeEditAgendaCellEditor()
     {
@@ -672,7 +662,7 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
+     * Clear all the comboboxes on the search screen
      */
     public void clearSearchComboBoxes()
     {
@@ -683,7 +673,7 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
+     * Clear all the comboboxes on the create session screen
      */
     public void clearComboBoxes()
     {
@@ -696,7 +686,7 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
+     * Load charts on report tab without date contraints
      */
     public void loadChartsWithoutDate()
     {
@@ -760,7 +750,7 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
+     * Set up the report tab
      */
     public void setUpGeneralReportTab()
     {
@@ -3331,11 +3321,11 @@ public final class AdminFinal extends javax.swing.JFrame
     
     /**
      *
-     * @param date
-     * @param days
-     * @return
+     * @param date - date to subtract from
+     * @param days - days to subtract from the date
+     * @return the resulting date
      */
-    public static Date addDays(Date date, int days)
+    public static Date subDays(Date date, int days)
     {
         int x = -days;
         Calendar cal = GregorianCalendar.getInstance();
@@ -3456,7 +3446,7 @@ public final class AdminFinal extends javax.swing.JFrame
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date myDate = format.parse(sourceDate);
             beginDate = new Timestamp(myDate.getTime());
-            myDate = addDays(myDate, 1);
+            myDate = subDays(myDate, 1);
             endDate = new Timestamp(myDate.getTime());
             
            loadChartsWithDates(endDate, beginDate);
@@ -3482,7 +3472,7 @@ public final class AdminFinal extends javax.swing.JFrame
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date myDate = format.parse(sourceDate);
             beginDate = new Timestamp(myDate.getTime());
-            myDate = addDays(myDate, 30);
+            myDate = subDays(myDate, 30);
             endDate = new Timestamp(myDate.getTime());
             
           loadChartsWithDates(endDate, beginDate);
@@ -3506,7 +3496,7 @@ public final class AdminFinal extends javax.swing.JFrame
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date myDate = format.parse(sourceDate);
             beginDate = new Timestamp(myDate.getTime());
-            myDate = addDays(myDate, 365);
+            myDate = subDays(myDate, 365);
             endDate = new Timestamp(myDate.getTime());
             
             loadChartsWithDates(endDate, beginDate);
@@ -3534,7 +3524,7 @@ public final class AdminFinal extends javax.swing.JFrame
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date myDate = format.parse(sourceDate);
             beginDate = new Timestamp(myDate.getTime());
-            myDate = addDays(myDate, 7);
+            myDate = subDays(myDate, 7);
             endDate = new Timestamp(myDate.getTime());
             
             loadChartsWithDates(endDate, beginDate);
@@ -4658,9 +4648,7 @@ public final class AdminFinal extends javax.swing.JFrame
         setVisible(false); //you can't see me!
         dispose();
     }
-    
-    
-    
+
     private void clearForm()
     {
         clearComboBoxes();
@@ -4960,7 +4948,6 @@ public final class AdminFinal extends javax.swing.JFrame
         
     }
     
-    
     private void clearSearchForm()
     {
         clearSearchComboBoxes();
@@ -4987,7 +4974,7 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
+     * Updates the search tab comboboxes
      */
     public void updateBoxes()
     {
@@ -5050,8 +5037,8 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
-     * @return
+     * Creates the cell editor to edit search result data on search tab on double click
+     * @return the cell editor for the search tab table to create dialog to edit on double click
      */
     public DefaultCellEditor makeEditSearchCellEditor()
     {
@@ -5613,9 +5600,9 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
      /**
-     *
-     * @param table
-     * @return
+     * Resize the width of a table to fit data
+     * @param table - the table to resize
+     * @return the table resized
      */
     public static JTable autoResizeColWidth(JTable table)//, DefaultTableModel model) 
     {
@@ -5667,7 +5654,7 @@ public final class AdminFinal extends javax.swing.JFrame
     }
 
     /**
-     *
+     * Set up the search tab for the database interaction with the admin
      */
     public void setUpSearchTab()
     {
@@ -5689,7 +5676,7 @@ public final class AdminFinal extends javax.swing.JFrame
         searchcategoryPanel.setVisible(false);
         searchcreatorPanel.setVisible(false);
 
-        Data d = new Data(false);
+        Data d = new Data();
 
         JComboBox[] boxes = new JComboBox[22];
 
@@ -5753,8 +5740,8 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     /**
-     *
-     * @param table
+     * Download table data to an excel (CSV) file
+     * @param table - the table to download data from
      * @throws IOException
      */
     public void download(JTable table) throws IOException

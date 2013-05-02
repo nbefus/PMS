@@ -29,51 +29,43 @@ public class NewAgendaObject extends javax.swing.JDialog {
      */
     private int agendaID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create an agenda object in the database
+     * @param parent - parent frame
+     * @param modal - is a model
      */
     public NewAgendaObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         ArrayList<String> category = new ArrayList<String>(new HashSet<String>(Data.getAgendacategorylist()));
         
-       // agendaCategoryCombo.setEditable(true);
         this.setResizable(false);
-        
-       // agendaCategoryCombo.setModel(new DefaultComboBoxModel(category.toArray()));
-        
+                
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(category);
         new UltimateAutoComplete(uacList, new JComboBox[]{agendaCategoryCombo});
         
-        //agendaCategoryCombo.setSelectedIndex(0);
         editButton.setVisible(false);
         
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param select
-     * @param date
-     * @param description
-     * @param agendaID
+     * Edit an agenda object from the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param select - the category selected to modify
+     * @param date - date of the agenda to modify
+     * @param description - description of the agenda to modify
+     * @param agendaID - ID of the agenda to modify
      */
     public NewAgendaObject(java.awt.Frame parent, boolean modal, String select, String date, String description, int agendaID) {
         super(parent, modal);
         initComponents();
         ArrayList<String> category = new ArrayList<String>(new HashSet<String>(Data.getAgendacategorylist()));
-        //agendaCategoryCombo.setEditable(true);
-        
-       // agendaCategoryCombo.setModel(new DefaultComboBoxModel(category.toArray()));
-        
+                
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(category);
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{agendaCategoryCombo});
         uac.setComboValue(select, 0);
-       // agendaCategoryCombo.setSelectedIndex(category.indexOf(select));
         dateField.setText(date);
         noteTextArea.setText(description);
         editButton.setVisible(true);
@@ -145,7 +137,6 @@ public class NewAgendaObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(Agenda.getValues(a), Agenda.AgendaTable.getTable());
                 else
                     inserted = DatabaseHelper.update(Agenda.getValues(a), Agenda.AgendaTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The agenda item was successfully written to the database!");

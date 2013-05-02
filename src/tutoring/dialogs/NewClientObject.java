@@ -14,7 +14,7 @@ import tutoring.helper.*;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class NewClientObject extends javax.swing.JDialog {
 
@@ -24,29 +24,28 @@ public class NewClientObject extends javax.swing.JDialog {
     private boolean inserted = false;
     private int clientID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a client object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewClientObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
         
-        
         editButton.setVisible(false);
         
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param fname
-     * @param lname
-     * @param phone
-     * @param email
-     * @param clientID
+     * Edit a client in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param fname - first name of the client to modify
+     * @param lname - last name of the client to modify
+     * @param phone - phone of the client to modify
+     * @param email - email of the client to modify
+     * @param clientID - ID of the client to modify
      */
     public NewClientObject(java.awt.Frame parent, boolean modal, String fname, String lname, String phone, String email, int clientID) {
         super(parent, modal);

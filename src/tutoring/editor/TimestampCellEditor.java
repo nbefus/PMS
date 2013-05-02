@@ -22,7 +22,7 @@ import javax.swing.border.LineBorder;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class TimestampCellEditor extends DefaultCellEditor
 {
@@ -31,8 +31,8 @@ public class TimestampCellEditor extends DefaultCellEditor
     private static final Border black = new LineBorder(Color.black);
     
     /**
-     *
-     * @param jtf
+     * Cell editor to help create the start and stop time click in session tables
+     * @param jtf - text field required for super field
      */
     public TimestampCellEditor(final JTextField jtf)
     {

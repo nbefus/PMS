@@ -6,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import tutoring.ui.AdminView;
 
 /*
  * To change this template, choose Tools | Templates
@@ -555,6 +555,7 @@ public class ParaprofessionalSession {
      */
     public static Object[] getValues(ParaprofessionalSession ps)
     {
+        
         Object[] values = new Object[12];
         values[0]=ps.getParaprofessionalSessionID();
         values[1]=ps.getParaprofessionalID().getParaprofessionalID();

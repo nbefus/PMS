@@ -16,7 +16,7 @@ import tutoring.entity.*;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class Data 
 {
@@ -50,9 +50,10 @@ public class Data
     private static ArrayList<String> agendanotelist;
     private static ArrayList<String> rolelist;
     private static ArrayList<String> agendacategorylist;
+    private static ArrayList<String> clockedInParaprofessionals;
     
     /**
-     *
+     * Refreshes client data
      */
     public static void refreshClient()
     {
@@ -70,7 +71,7 @@ public class Data
     }
 
     /**
-     *
+     * Refreshes agenda data
      */
     public static void refreshAgenda()
     {
@@ -82,7 +83,7 @@ public class Data
     }
     
     /**
-     *
+     * Refreshes agenda category data
      */
     public static void refreshAgendaCategory()
     {
@@ -92,7 +93,7 @@ public class Data
     }
     
     /**
-     *
+     * Refreshes category data
      */
     public static void refreshCategory()
     {
@@ -104,7 +105,7 @@ public class Data
     }
     
     /**
-     *
+     * Refreshes course data
      */
     public static void refreshCourse()
     {
@@ -125,7 +126,7 @@ public class Data
     }
     
     /**
-     *
+     * refreshes location data
      */
     public static void refreshLocation()
     {
@@ -135,21 +136,23 @@ public class Data
     }
     
     /**
-     *
+     * refreshes paraprofessional data
      */
     public static void refreshParaprofessional()
     {
         parafirstlist = new ArrayList<String>();
         paralastlist = new ArrayList<String>();
         tutorslist = new ArrayList<String>();
+        clockedInParaprofessionals = new ArrayList<String>();
         
+        clockedInParaprofessionals = regularSQL("select "+Paraprofessional.ParaTable.FNAME.getName()+", "+Paraprofessional.ParaTable.LNAME.getName()+" from "+Paraprofessional.ParaTable.getTable()+" where "+Paraprofessional.ParaTable.ISCLOCKEDIN.getName()+"=true order by "+Paraprofessional.ParaTable.FNAME.getName());
         parafirstlist = regularSQL("select "+Paraprofessional.ParaTable.FNAME.getName()+" from "+Paraprofessional.ParaTable.getTable()+" order by "+Paraprofessional.ParaTable.FNAME.getName());
         paralastlist = regularSQL("select "+Paraprofessional.ParaTable.LNAME.getName()+" from "+Paraprofessional.ParaTable.getTable()+" order by "+Paraprofessional.ParaTable.LNAME.getName());
         tutorslist = regularSQL("select "+Paraprofessional.ParaTable.FNAME.getName()+", "+Paraprofessional.ParaTable.LNAME.getName()+" from "+Paraprofessional.ParaTable.getTable()+" order by "+Paraprofessional.ParaTable.FNAME.getName());
     }
     
     /**
-     *
+     * Refreshes role data
      */
     public static void refreshRole()
     {
@@ -160,7 +163,7 @@ public class Data
     }
     
     /**
-     *
+     * Refreshes subject data
      */
     public static void refreshSubject()
     {
@@ -172,7 +175,7 @@ public class Data
     }
     
     /**
-     *
+     * Refreshes teacher data
      */
     public static void refreshTeacher()
     {
@@ -184,7 +187,7 @@ public class Data
     }
     
     /**
-     *
+     * Refreshes user data
      */
     public static void refreshUser()
     {
@@ -201,10 +204,9 @@ public class Data
     }
     
     /**
-     *
-     * @param initializeAll
+     * Creates a data object and initializes all data
      */
-    public Data(boolean initializeAll) {
+    public Data() {
         locationslist = new ArrayList<String>();
        
         subjectslist = new ArrayList<String>();
@@ -227,6 +229,11 @@ public class Data
         clientslast = new ArrayList<String>();
         clientsphone = new ArrayList<String>();
         clientsemail = new ArrayList<String>();
+        
+        clockedInParaprofessionals = new ArrayList<String>();
+        
+        clockedInParaprofessionals = regularSQL("select "+Paraprofessional.ParaTable.FNAME.getName()+", "+Paraprofessional.ParaTable.LNAME.getName()+" from "+Paraprofessional.ParaTable.getTable()+" where "+Paraprofessional.ParaTable.ISCLOCKEDIN.getName()+"=true order by "+Paraprofessional.ParaTable.FNAME.getName());
+        
         
         fnameOrderedList = setUpList("select fname, lname, phone, email from Client order by fname", 0, separator, clientsfirst);
         lnameOrderedList = setUpList("select fname, lname, phone, email from Client order by lname", 1, separator, clientslast);
@@ -260,16 +267,15 @@ public class Data
         teacherOrderedList = setUpList("select abbrevName, level, concat_ws(' ',fName, lName) as 'teacher' from Course c join Subject s on c.subjectID=s.subjectID join Teacher t on c.teacherID=t.teacherID order by fname", 2, separator, teacherslist); 
         
         multicategorylist = createMultiCat(categorieslist.size(), null);
-       // DatabaseHelper.close();
     }
 
     /**
-     *
-     * @param query
-     * @param index
-     * @param separator
-     * @param singleton
-     * @return
+     * Sets up a list for auto auto complete
+     * @param query - MySQL query
+     * @param index - Column index of the query to put data into array
+     * @param separator - Character separator to separate object column data
+     * @param singleton - array list of the data you want to store data from the index column
+     * @return arraylist containing all data in MySQL statement separated by the separator character
      */
     public static ArrayList<String> setUpList(String query, int index, char separator, ArrayList<String> singleton) {
         List result = DatabaseHelper.selectAll(query);
@@ -295,9 +301,9 @@ public class Data
     }
     
     /**
-     *
-     * @param query
-     * @return
+     * Selects data from a regular MySQL query
+     * @param query - query to run
+     * @return - array list of the data returned from the query
      */
     public static ArrayList<String> regularSQL(String query) {
         List result = DatabaseHelper.selectAll(query);
@@ -322,10 +328,10 @@ public class Data
     }
 
     /**
-     *
-     * @param n
-     * @param ps
-     * @return
+     * Creates all combination of categories
+     * @param n - number of categories
+     * @param ps - category array
+     * @return array list of the different combinations
      */
     public static ArrayList<String> createMultiCat(int n, ArrayList<String> ps) {
         if (n < 0) {
@@ -359,7 +365,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return clients first name list
      */
     public static ArrayList<String> getClientsfirst() {
         return clientsfirst;
@@ -367,7 +373,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return clients last name list
      */
     public static ArrayList<String> getClientslast() {
         return clientslast;
@@ -375,7 +381,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return clients phone list
      */
     public static ArrayList<String> getClientsphone() {
         return clientsphone;
@@ -383,7 +389,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return clients email list
      */
     public static ArrayList<String> getClientsemail() {
         return clientsemail;
@@ -391,7 +397,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return locations list
      */
     public static ArrayList<String> getLocationslist() {
         return locationslist;
@@ -400,7 +406,7 @@ public class Data
     
     /**
      *
-     * @return
+     * @return tutors list
      */
     public static ArrayList<String> getTutorslist() {
         return tutorslist;
@@ -408,7 +414,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return teachers list
      */
     public static ArrayList<String> getTeacherslist() {
         return teacherslist;
@@ -416,15 +422,15 @@ public class Data
 
     /**
      *
-     * @return
-     */
+     * @return subjects list
+     */ 
     public static ArrayList<String> getSubjectslist() {
         return subjectslist;
     }
 
     /**
      *
-     * @return
+     * @return categories list
      */
     public static ArrayList<String> getCategorieslist() {
         return categorieslist;
@@ -432,42 +438,42 @@ public class Data
 
     /**
      *
-     * @return
+     * @return levels list
      */
     public static ArrayList<String> getLevelslist() {
         return levelslist;
     }
 
     /**
-     * @return the teacherfirstlist
+     * @return the teacher first list
      */
     public static ArrayList<String> getTeacherfirstlist() {
         return teacherfirstlist;
     }
 
     /**
-     * @return the teacherlastlist
+     * @return the teacher last list
      */
     public static ArrayList<String> getTeacherlastlist() {
         return teacherlastlist;
     }
 
     /**
-     * @return the multicategorylist
+     * @return the multi category list
      */
     public static ArrayList<String> getMulticategorylist() {
         return multicategorylist;
     }
 
     /**
-     * @return the tutorsfirstlist
+     * @return the tutors first list
      */
     public static ArrayList<String> getTutorsfirstlist() {
         return tutorsfirstlist;
     }
 
     /**
-     * @return the tutorslastlist
+     * @return the tutors last list
      */
     public static ArrayList<String> getTutorslastlist() {
         return tutorslastlist;
@@ -475,7 +481,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return the subject ordered list
      */
     public static ArrayList<String> getSubjectOrderedList() {
         return subjectOrderedList;
@@ -483,7 +489,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return the level ordered list
      */
     public static ArrayList<String> getLevelOrderedList() {
         return levelOrderedList;
@@ -491,7 +497,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return the teacher ordered list
      */
     public static ArrayList<String> getTeacherOrderedList() {
         return teacherOrderedList;
@@ -499,7 +505,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return first name ordered list
      */
     public static ArrayList<String> getFnameOrderedList() {
         return fnameOrderedList;
@@ -507,7 +513,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return last name ordered list
      */
     public static ArrayList<String> getLnameOrderedList() {
         return lnameOrderedList;
@@ -515,7 +521,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return phone ordered list
      */
     public static ArrayList<String> getPhoneOrderedList() {
         return phoneOrderedList;
@@ -531,7 +537,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return user first name list
      */
     public static ArrayList<String> getUserfirstlist() {
         return userfirstlist;
@@ -539,7 +545,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return user last name list
      */
     public static ArrayList<String> getUserlastlist() {
         return userlastlist;
@@ -547,7 +553,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return username list
      */
     public static ArrayList<String> getUsernamelist() {
         return usernamelist;
@@ -555,7 +561,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return paraprofessional first name list
      */
     public static ArrayList<String> getParafirstlist() {
         return parafirstlist;
@@ -563,7 +569,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return paraprofessional last name list
      */
     public static ArrayList<String> getParalastlist() {
         return paralastlist;
@@ -571,7 +577,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return agenda note list
      */
     public static ArrayList<String> getAgendanotelist() {
         return agendanotelist;
@@ -579,7 +585,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return role list
      */
     public static ArrayList<String> getRolelist() {
         return rolelist;
@@ -587,9 +593,16 @@ public class Data
 
     /**
      *
-     * @return
+     * @return agenda category list
      */
     public static ArrayList<String> getAgendacategorylist() {
         return agendacategorylist;
+    }
+
+    /**
+     * @return the clockedInParaprofessionals
+     */
+    public static ArrayList<String> getClockedInParaprofessionals() {
+        return clockedInParaprofessionals;
     }
 }

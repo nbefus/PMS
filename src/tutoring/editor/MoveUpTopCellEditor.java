@@ -38,8 +38,8 @@ public class MoveUpTopCellEditor extends DefaultCellEditor
     private final JTextField jf;
 
     /**
-     *
-     * @param jtf
+     * Cell editor to move table row info to comboboxes for editing
+     * @param jtf - a text field needed for superclass
      */
     public MoveUpTopCellEditor(final JTextField jtf)
     {

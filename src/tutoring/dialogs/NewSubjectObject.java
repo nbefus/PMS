@@ -35,19 +35,16 @@ public class NewSubjectObject extends javax.swing.JDialog {
      */
    private int subjectID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a new subject object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewSubjectObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-      //  categoryCombo.setEditable(true);
         
         this.setResizable(false);
-       // ArrayList<String> categories = new ArrayList<String>(new HashSet<String>(Data.getCategorieslist()));
-       /// categoryCombo.setModel(new DefaultComboBoxModel(categories.toArray()));
-       // categoryCombo.setSelectedIndex(0);
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{categoryCombo});
@@ -57,7 +54,7 @@ public class NewSubjectObject extends javax.swing.JDialog {
     }
     
     /**
-     *
+     * Edit a subject object in the database
      * @param parent
      * @param modal
      * @param subject
@@ -67,12 +64,7 @@ public class NewSubjectObject extends javax.swing.JDialog {
     public NewSubjectObject(java.awt.Frame parent, boolean modal, String subject, String category, int subjectID) {
         super(parent, modal);
         initComponents();
-      //  categoryCombo.setEditable(true);
-      //  ArrayList<String> categories = new ArrayList<String>(new HashSet<String>(Data.getCategorieslist()));
 
-       // categoryCombo.setModel(new DefaultComboBoxModel(categories.toArray()));
-        
-       // categoryCombo.setSelectedIndex(categories.indexOf(category));
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
         UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{categoryCombo});
@@ -132,7 +124,6 @@ public class NewSubjectObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(Subject.getValues(s), Subject.SubjectTable.getTable());
                 else
                     inserted = DatabaseHelper.update(Subject.getValues(s), Subject.SubjectTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The subject was successfully written to the database!");

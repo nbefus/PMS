@@ -24,9 +24,9 @@ public class NewRoleObject extends javax.swing.JDialog {
      */
     private int roleID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a role object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewRoleObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,11 +39,11 @@ public class NewRoleObject extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param role
-     * @param roleID
+     * Edit a role object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param role - role name of the role to modify
+     * @param roleID - ID of the role to modify
      */
     public NewRoleObject(java.awt.Frame parent, boolean modal, String role, int roleID) {
         super(parent, modal);

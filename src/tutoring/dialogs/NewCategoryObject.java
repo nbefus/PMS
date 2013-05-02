@@ -15,7 +15,7 @@ import tutoring.helper.DatabaseHelper;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class NewCategoryObject extends javax.swing.JDialog {
 
@@ -24,9 +24,9 @@ public class NewCategoryObject extends javax.swing.JDialog {
      */
     private int categoryID = -1;
     /**
-     *
-     * @param parent
-     * @param modal
+     * Create a category object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
      */
     public NewCategoryObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -39,11 +39,11 @@ public class NewCategoryObject extends javax.swing.JDialog {
     }
     
     /**
-     *
-     * @param parent
-     * @param modal
-     * @param category
-     * @param categoryID
+     * Edit a category object in the database
+     * @param parent - parent frame
+     * @param modal - is a modal
+     * @param category - category to modify 
+     * @param categoryID - ID of the category to modify
      */
     public NewCategoryObject(java.awt.Frame parent, boolean modal, String category, int categoryID) {
         super(parent, modal);

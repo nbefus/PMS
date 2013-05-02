@@ -4,44 +4,46 @@
  */
 package tutoring.entity;
 
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.border.MatteBorder;
 
 /**
  *
- * @author dabeefinator
+ * @author team ubuntu
  */
 public class Agenda {
     
     /**
-     *
+     * Agenda table information
      */
     public enum AgendaTable {
 
         /**
-         *
+         * AgendaID of Agenda database object
          */
         AGENDAID("Agenda ID","agendaID", true, getTableAlias()+".agendaID", true),
         /**
-         *
+         * Date of Agenda database object
          */
         DATE("Date","date", true, getTableAlias()+".date", false),
         /**
-         *
+         * Notes of Agenda database object
          */
         NOTES("Notes","notes", true, getTableAlias()+".notes", false),
         /**
-         *
+         * AgendaCategoryID of Agenda database object
          */
         AGENDACATEGORYID("Agenda Category ID","agendaCategoryID", true, getTableAlias()+".agendaCategoryID", true),
         /**
-         *
+         * Category type of Agenda Category database object
          */
         AGENDACATEGORYTYPE("Category","type", false, getAgendaCategoryAlias()+".type", false);
         
@@ -66,8 +68,8 @@ public class Agenda {
         }
 
         /**
-         *
-         * @return
+         * 
+         * @return name of the column
          */
         public String getName() {
             return name;
@@ -75,7 +77,7 @@ public class Agenda {
         
         /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -83,14 +85,14 @@ public class Agenda {
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
         }
         /**
          *
-         * @return
+         * @return whether column is part of the table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -106,7 +108,7 @@ public class Agenda {
         
         /**
          *
-         * @return
+         * @return table alias
          */
         public static String getTableAlias()
         {
@@ -115,7 +117,7 @@ public class Agenda {
         
         /**
          *
-         * @return
+         * @return table name
          */
         public static String getTable()
         {
@@ -123,8 +125,8 @@ public class Agenda {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -140,8 +142,8 @@ public class Agenda {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -157,9 +159,9 @@ public class Agenda {
         }
      
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column 
+         * @param DisplayName - display name of the column to retrieve
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -176,9 +178,9 @@ public class Agenda {
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get column name from the display name of a column
+         * @param DisplayName - display name of the column
+         * @return the column name
          */
         public static String getColumnName(String DisplayName)
         {
@@ -196,7 +198,7 @@ public class Agenda {
 
         /**
          *
-         * @return
+         * @return the alias for agenda category table
          */
         public static String getAgendaCategoryAlias()
         {
@@ -204,9 +206,9 @@ public class Agenda {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -225,9 +227,9 @@ public class Agenda {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -247,11 +249,11 @@ public class Agenda {
     private AgendaCategory agendaCategoryID;
 
     /**
-     *
-     * @param agendaID
-     * @param date
-     * @param notes
-     * @param agendaCategoryID
+     * Create an agenda object
+     * @param agendaID - ID of the agenda object for the database
+     * @param date - Date of the agenda object for the database
+     * @param notes - Notes of the agenda object for the database
+     * @param agendaCategoryID - Agenda category ID of the agenda object for the database
      */
     public Agenda(int agendaID, Date date, String notes, AgendaCategory agendaCategoryID) {
         this.agendaID = agendaID;
@@ -261,17 +263,9 @@ public class Agenda {
     }
     
     /**
-     *
-     */
-    public Agenda()
-    {
-        
-    }
-    
-    /**
-     *
-     * @param a
-     * @return
+     * Converts Agenda object to object array of values
+     * @param a - Agenda item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Agenda a)
     {
@@ -290,25 +284,14 @@ public class Agenda {
      * @return
      */
     public static ArrayList<Agenda> selectAllAgenda(String addedSQLToSelect, Connection connect) {
-       // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Agenda> agendas = new ArrayList<Agenda>();
         
         try {
-            // connect way #1
-          //  String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-          //  String user = "nbefus_me";
-         //   String password = "heythere";
-
-            
-          //  connect = DriverManager.getConnection(url1, user, password);
 
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 
                 statement = connect.createStatement();
                 String query = AgendaTable.getSelectQuery(true);
@@ -320,12 +303,10 @@ public class Agenda {
                 while (resultSet.next()) {
                     agendas.add(new Agenda(resultSet.getInt(AgendaTable.AGENDAID.getWithAlias()), resultSet.getDate(AgendaTable.DATE.getWithAlias()), resultSet.getString(AgendaTable.NOTES.getWithAlias()), new AgendaCategory(resultSet.getInt(AgendaTable.AGENDACATEGORYID.getWithAlias()), resultSet.getString(AgendaTable.AGENDACATEGORYTYPE.getWithAlias()))));
                 }
-                
                  return agendas;
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -337,9 +318,6 @@ public class Agenda {
             statement.close();
           }
 
-          /*if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
