@@ -1,21 +1,15 @@
+package tutoring.helper;
+
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import javax.swing.JOptionPane;
 import tutoring.entity.Category;
 import tutoring.entity.Course;
 import tutoring.entity.Subject;
@@ -54,27 +48,11 @@ public class RetrieveNewTerm {
     private static boolean firstTeacher = true;
     private static boolean firstSubject = true;
     private static boolean firstCourse = true;
-        
-    /**
-     *
-     * @param args
-     * @throws Exception
-     */
-    public static void main(String[] args) throws Exception {
-      
-        String[] terms = {"201320"};//,"201310","201295","201290","201280"};
-        DatabaseHelper.open();
-        subjects =(ArrayList<Subject>) Subject.selectAllSubjects("", DatabaseHelper.getConnection());
-        teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("", DatabaseHelper.getConnection());
-        courses = (ArrayList<Course>) Course.selectAllCourse("", DatabaseHelper.getConnection());
-        categories = (ArrayList<Category>) Category.selectAllCategory("", DatabaseHelper.getConnection());
-        
-        updateCourses(terms);
-        DatabaseHelper.close();
-      //  HibernateTest.select("from User");
-        
-   }
-    
+       
+    public static void main(String[] args) throws Exception
+    {
+        isValidTermCode("33");
+    }
     private static int containsTeacher(ArrayList<Teacher> teachers, Teacher t)
     {
         for(int i=0; i<teachers.size(); i++)
@@ -106,14 +84,104 @@ public class RetrieveNewTerm {
         return -1;
     }
     
+    public static ArrayList<String> getTermCodes() throws Exception
+    {
+       URL url = new URL("http://apps.hpu.edu/cis/web/index.php/search");
+      BufferedReader reader = new BufferedReader
+      (new InputStreamReader(url.openStream()));
+      String line;
+      boolean scrapping = false;
+      int dropbox = -1;
+      Object[] box = new Object[3];
+      ArrayList<String> codes = new ArrayList<String>();
+      
+      
+      while ((line = reader.readLine()) != null) {
+
+          if(line.contains("select name=\"term\""))
+          {
+              scrapping = true;
+          }
+          if(line.contains("</select>"))
+          {
+              scrapping = false;
+          }
+          if(scrapping )
+          {
+              if(line.contains("option"))
+              {
+                  String value = line.substring(line.indexOf("\"")+1,line.lastIndexOf("\""));
+                  String name = line.substring(line.indexOf(">")+1,line.lastIndexOf("<"));
+                  
+                  System.out.println(name+":"+value+":");
+                  if(value != null && !value.contains("DO NOT USE") && !value.equals("") && name != null && !name.contains("DO NOT USE") && !name.equals(""))
+                  {    
+                      codes.add(name+" - ("+value+")");
+                  }
+              }
+          }         
+      }
+      reader.close();
+      return codes;
+    }
+    
+    private static boolean isValidTermCode(String termCode) throws Exception
+    {
+       URL url = new URL("http://apps.hpu.edu/cis/web/index.php/search");
+      BufferedReader reader = new BufferedReader
+      (new InputStreamReader(url.openStream()));
+      String line;
+      boolean scrapping = false;
+      int dropbox = -1;
+      Object[] box = new Object[3];
+      
+      
+      while ((line = reader.readLine()) != null) {
+
+          if(line.contains("select name=\"term\""))
+          {
+              scrapping = true;
+          }
+          if(line.contains("</select>"))
+          {
+              scrapping = false;
+          }
+          if(scrapping )
+          {
+              if(line.contains("option"))
+              {
+                  String value = line.substring(line.indexOf("\"")+1,line.lastIndexOf("\""));
+                  System.out.println(":"+value+":");
+                  if(value != null && !value.contains("DO NOT USE") && !value.equals("") && value.trim().equals(termCode.trim()))
+                  {    
+                      reader.close();
+                      return true;
+                  }
+              }
+          }         
+      }
+      reader.close();
+      return false;
+    }
+    
     
     /**
      *
      * @param termCodes
      * @throws Exception
      */
-    public static void updateCourses(String[] termCodes) throws Exception
+    public static void updateCourses(String termCode) throws Exception
     {
+        if(isValidTermCode(termCode))
+        {
+        
+        DatabaseHelper.open();
+        
+        subjects =(ArrayList<Subject>) Subject.selectAllSubjects("", DatabaseHelper.getConnection());
+        teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("", DatabaseHelper.getConnection());
+        courses = (ArrayList<Course>) Course.selectAllCourse("", DatabaseHelper.getConnection());
+        categories = (ArrayList<Category>) Category.selectAllCategory("", DatabaseHelper.getConnection());
+        
         if(teachers.size() > 0)
         {
             autoIncValTeach = teachers.get(teachers.size()-1).getTeacherID();
@@ -131,70 +199,81 @@ public class RetrieveNewTerm {
             autoIncValCourse = courses.get(courses.size()-1).getCourseID();
         }
         
-        for(int i=0; i<termCodes.length; i++)
+
+        URL url = new URL("http://apps.hpu.edu/cis/web/index.php/search/search?term="+termCode);
+        BufferedReader reader = new BufferedReader
+        (new InputStreamReader(url.openStream()));
+
+        String line;      
+        boolean concat = false;
+        boolean read = false;
+
+
+        String content = "";
+        int count =0;
+        String lname="", fname="", abbrev="";
+        int level=0;
+
+        while ((line = reader.readLine()) != null) {
+
+            if(line.contains("<td>"))
+            {
+                concat=true;
+            }
+            if(line.contains("</td>"))
+            {
+                content+=line;
+                concat=false;
+                read = true;
+            }
+            if(concat)
+            {
+                content+=line;
+            }
+
+            if(read)
+            {
+                String value = content.substring(content.indexOf(">")+1,content.lastIndexOf("<")).trim();
+
+                read=false;
+                content="";
+                count++;
+
+                if(count %5 == 2)
+                {
+                    String[] values = value.split(" ");
+                    abbrev=values[0].trim();
+                    level = Integer.parseInt(values[1].trim());
+                }
+                else if(count%5 == 4)
+                {
+                    String[] values = value.split(" ");
+                    fname=values[0].trim();
+                    lname=values[1].trim();
+
+                    insertData(lname, fname, abbrev, level);  
+                }
+            } 
+        }
+
+        for(int s=0; s<newsubjects.size(); s++)
+            DatabaseHelper.insert(Subject.getValues(newsubjects.get(s)), Subject.SubjectTable.getTable());
+        for(int s=0; s<newteachers.size(); s++)
+            DatabaseHelper.insert(Teacher.getValues(newteachers.get(s)), Teacher.TeacherTable.getTable());
+        for(int s=0; s<newcourses.size(); s++)
+            DatabaseHelper.insert(Course.getValues(newcourses.get(s)), Course.CourseTable.getTable());
+
+        DatabaseHelper.close();
+        if(newsubjects.size() > 0 || newteachers.size() > 0 || newcourses.size() > 0)
+            JOptionPane.showMessageDialog(null, "Term successfully imported");
+        else
+            JOptionPane.showMessageDialog(null, "Term courses/teachers/subjects are already in database");
+        
+   
+        }
+        else
         {
-             URL url = new URL("http://apps.hpu.edu/cis/web/index.php/search/search?term="+termCodes[i]);
-             BufferedReader reader = new BufferedReader
-             (new InputStreamReader(url.openStream()));
-            
-             String line;      
-             boolean concat = false;
-             boolean read = false;
-             
-             
-             String content = "";
-             int count =0;
-             String lname="", fname="", abbrev="";
-             int level=0;
-             
-             while ((line = reader.readLine()) != null) {
-                 
-                 if(line.contains("<td>"))
-                 {
-                     concat=true;
-                 }
-                 if(line.contains("</td>"))
-                 {
-                     content+=line;
-                     concat=false;
-                     read = true;
-                 }
-                 if(concat)
-                 {
-                     content+=line;
-                 }
-                 
-                 if(read)
-                 {
-                     String value = content.substring(content.indexOf(">")+1,content.lastIndexOf("<")).trim();
-
-                     read=false;
-                     content="";
-                     count++;
-
-                     if(count %5 == 2)
-                     {
-                         String[] values = value.split(" ");
-                         abbrev=values[0].trim();
-                         level = Integer.parseInt(values[1].trim());
-                     }
-                     else if(count%5 == 4)
-                     {
-                         String[] values = value.split(" ");
-                         fname=values[0].trim();
-                         lname=values[1].trim();
-                                                  
-                         insertData(lname, fname, abbrev, level);  
-                     }
-                 } 
-             }
-             
-             for(int s=0; s<newsubjects.size(); s++)
-                 DatabaseHelper.insert(Subject.getValues(newsubjects.get(s)), Subject.SubjectTable.getTable());
-             for(int s=0; s<newteachers.size(); s++)
-                 DatabaseHelper.insert(Teacher.getValues(newteachers.get(s)), Teacher.TeacherTable.getTable());
-             for(int s=0; s<newcourses.size(); s++)
-                 DatabaseHelper.insert(Course.getValues(newcourses.get(s)), Course.CourseTable.getTable());
+            JOptionPane.showMessageDialog(null, "The term code entered is not valid! Or the web address has changed");
         }
     }
     

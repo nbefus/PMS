@@ -255,7 +255,7 @@ System.out.println("Done list 4");
          */
         public String getDatabaseName(String DisplayName)
         {
-            AdminFinal.ComboBoxesIndexes[] components = AdminFinal.ComboBoxesIndexes.class.getEnumConstants();
+            AdminView.ComboBoxesIndexes[] components = AdminView.ComboBoxesIndexes.class.getEnumConstants();
             for(int i=0; i< components.length; i++)
                 if(components[i].getDisplayName().equalsIgnoreCase(DisplayName))
                     return components[i].getDatabaseName();
@@ -1444,8 +1444,10 @@ System.out.println("Done list 4");
                             .add(paraprofessionalInfoPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jButton1)
-                            .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jPanel2Layout.createSequentialGroup()
+                                .add(10, 10, 10)
+                                .add(jButton1)))))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
