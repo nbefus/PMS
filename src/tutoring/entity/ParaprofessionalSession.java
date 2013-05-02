@@ -35,46 +35,166 @@ public class ParaprofessionalSession {
                +"sess.timeAndDateEntered, sess.sessionStart, sess.sessionEnd, sess.grammarCheck, sess.notes, sess.walkout "
 
      */
+    /**
+     *
+     */
     public enum ParaSessTable {
 
+        /**
+         *
+         */
         PARAPROFESSIONALSESSIONID("Session ID","paraprofessionalSessionID", true, getTableAlias()+".paraprofessionalSessionID", true),
+        /**
+         *
+         */
         PARAPROFESSIONALID("Paraprofessional ID","paraprofessionalID", true, getTableAlias()+".paraprofessionalID", true),
+        /**
+         *
+         */
         CLIENTID("Client ID","clientID", true, getTableAlias()+".clientID", true),
+        /**
+         *
+         */
         COURSEID("Course ID","courseID", true, getTableAlias()+".courseID", true),
+        /**
+         *
+         */
         LOCATIONID("Location ID","locationID", true, getTableAlias()+".locationID", true),
+        /**
+         *
+         */
         PARAPROFESSIONALCREATORID("Creator ID","paraprofessionalCreatorID", true, getTableAlias()+".paraprofessionalCreatorID", true),
+        /**
+         *
+         */
         TIMEANDDATEENTERED("Date Entered","timeAndDateEntered", true, getTableAlias()+".timeAndDateEntered", false),
+        /**
+         *
+         */
         SESSIONSTART("Session Start", "sessionStart", true, getTableAlias()+".sessionStart", false),
+        /**
+         *
+         */
         SESSIONEND("Session End","sessionEnd", true, getTableAlias()+".sessionEnd", false),
+        /**
+         *
+         */
         GRAMMARCHECK("Grammar Check","grammarCheck", true, getTableAlias()+".grammarCheck", false),
+        /**
+         *
+         */
         NOTES("Notes","notes", true, getTableAlias()+".notes", false),
+        /**
+         *
+         */
         WALKOUT("Walkout","walkout", true, getTableAlias()+".walkout", false),
+        /**
+         *
+         */
         PARAPROFESSIONALFNAME("Paraprofessional First","fName", false, getParaprofessionalAlias()+".fName", false),
+        /**
+         *
+         */
         PARAPROFESSIONALLNAME("Paraprofessional Last","lName", false, getParaprofessionalAlias()+".lName",false),
+        /**
+         *
+         */
         PARAPROFESSIONALHIREDATE("Paraprofessional Hire Date","hireDate", false, getParaprofessionalAlias()+".hireDate", false),
+        /**
+         *
+         */
         PARAPROFESSIONALTERMINATIONDATE("Paraprofessional Termination Date","terminationDate", false, getParaprofessionalAlias()+".terminationDate", false),
+        /**
+         *
+         */
         PARAPROFESSIONALISCLOCKEDIN("Paraprofessional Is In?","isClockedIn", false, getParaprofessionalAlias()+".isClockedIn", false),
+        /**
+         *
+         */
         PARAPROFESSIONALROLEID("Paraprofessional Role ID","roleID", false, getParaprofessionalAlias()+".roleID", true),
+        /**
+         *
+         */
         PARAPROFESSIONALROLETYPE("Paraprofessional Role","type", false, getParaprofessionalRoleAlias()+".type",false),
+        /**
+         *
+         */
         CREATORFNAME("Creator First","fName", false, getCreatorAlias()+".fName", false),
+        /**
+         *
+         */
         CREATORLNAME("Creator Last","lName", false, getCreatorAlias()+".lName", false),
+        /**
+         *
+         */
         CREATORHIREDATE("Creator Hire Date","hireDate", false, getCreatorAlias()+".hireDate", false),
+        /**
+         *
+         */
         CREATORTERMINATIONDATE("Creator Termination Date","terminationDate", false, getCreatorAlias()+".terminationDate", false),
+        /**
+         *
+         */
         CREATORISCLOCKEDIN("Creator Is In?","isClockedIn", false, getCreatorAlias()+".isClockedIn", false),
+        /**
+         *
+         */
         CREATORROLEID("Creator Role ID","roleID", false, getCreatorAlias()+".roleID", true),
+        /**
+         *
+         */
         CREATORROLETYPE("Creator Role","type", false, getCreatorRoleAlias()+".type", false),
+        /**
+         *
+         */
         LOCATIONNAME("Location Name","name", false, getLocationAlias()+".name", false),
+        /**
+         *
+         */
         CLIENTFNAME("Client First","fName", false, getClientAlias()+".fName", false),
+        /**
+         *
+         */
         CLIENTLNAME("Client Last","lName", false, getClientAlias()+".lName", false),
+        /**
+         *
+         */
         CLIENTPHONE("Client Phone","phone", false, getClientAlias()+".phone", false),
+        /**
+         *
+         */
         CLIENTEMAIL("Client Email","email", false, getClientAlias()+".email", false),
+        /**
+         *
+         */
         SUBJECTID("Subject ID","subjectID", false, getCourseAlias()+".subjectID", true),
+        /**
+         *
+         */
         SUBJECTABBREVNAME("Subject","abbrevName", false, getSubjectAlias()+".abbrevName", false),
+        /**
+         *
+         */
         SUBJECTCATEGORYID("Category ID","categoryID", false, getSubjectAlias()+".categoryID", true),
+        /**
+         *
+         */
         SUBJECTCATEGORYNAME("Category","name", false, getCategoryAlias()+".name", false),
+        /**
+         *
+         */
         TEACHERID("Teacher ID","teacherID", false, getCourseAlias()+".teacherID",true),
+        /**
+         *
+         */
         TEACHERFNAME("Teacher First","fName", false, getTeacherAlias()+".fName", false),
+        /**
+         *
+         */
         TEACHERLNAME("Teacher Last","lName", false, getTeacherAlias()+".lName", false),
+        /**
+         *
+         */
         COURSELEVEL("Level","level", false, getCourseAlias()+".level", false);
 
         
@@ -108,54 +228,102 @@ public class ParaprofessionalSession {
             this.isID=isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID()
         {
             return isID;
         }
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
             return displayName;
         }
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }
         
+        /**
+         *
+         * @return
+         */
         public static String getParaprofessionalAlias()
         {
             return paraprofessionalAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCreatorAlias()
         {
             return creatorAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getParaprofessionalRoleAlias()
         {
             return paraprofessionalRoleAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCreatorRoleAlias()
         {
             return creatorRoleAlias;
         }
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -169,6 +337,10 @@ public class ParaprofessionalSession {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -182,36 +354,65 @@ public class ParaprofessionalSession {
             return cols;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getClientAlias()
         {
             return clientAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getLocationAlias()
         {
             return locationAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getTeacherAlias()
         {
             return teacherAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getSubjectAlias()
         {
             return subjectAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCourseAlias()
         {
             return courseAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCategoryAlias()
         {
             return categoryAlias;
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             ParaprofessionalSession.ParaSessTable [] ps = ParaprofessionalSession.ParaSessTable.class.getEnumConstants();
@@ -225,6 +426,11 @@ public class ParaprofessionalSession {
                 return columnSetUp;
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -259,6 +465,11 @@ public class ParaprofessionalSession {
                return query;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             ParaSessTable[] components = ParaSessTable.class.getEnumConstants();
@@ -291,15 +502,36 @@ public class ParaprofessionalSession {
     
     private boolean walkout;
 
-      public ParaprofessionalSession()
+      /**
+     *
+     */
+    public ParaprofessionalSession()
     {
         
     }
       
-      public static void test()
+      /**
+     *
+     */
+    public static void test()
       {
           System.out.println(ParaSessTable.getSelectQuery(false));
       }
+    /**
+     *
+     * @param paraprofessionalSessionID
+     * @param paraprofessionalID
+     * @param client
+     * @param course
+     * @param location
+     * @param paraprofessionalCreator
+     * @param timeAndDateEntered
+     * @param sessionStart
+     * @param sessionEnd
+     * @param grammarCheck
+     * @param notes
+     * @param walkout
+     */
     public ParaprofessionalSession(int paraprofessionalSessionID, Paraprofessional paraprofessionalID, Client client, Course course, Location location, Paraprofessional paraprofessionalCreator, Timestamp timeAndDateEntered, Timestamp sessionStart, Timestamp sessionEnd, boolean grammarCheck, String notes, boolean walkout) {
         this.paraprofessionalSessionID = paraprofessionalSessionID;
         this.paraprofessionalID = paraprofessionalID;
@@ -316,6 +548,11 @@ public class ParaprofessionalSession {
         this.walkout = walkout;
     }
     
+    /**
+     *
+     * @param ps
+     * @return
+     */
     public static Object[] getValues(ParaprofessionalSession ps)
     {
         Object[] values = new Object[12];
@@ -334,7 +571,13 @@ public class ParaprofessionalSession {
         return values;
     }
  
-     public static ArrayList<ParaprofessionalSession> selectAllParaprofessionalSession(String addedSQLToSelect, Connection connect) {
+     /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<ParaprofessionalSession> selectAllParaprofessionalSession(String addedSQLToSelect, Connection connect) {
       //  Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -572,12 +815,16 @@ public class ParaprofessionalSession {
         return paraprofessionalSessionID + " " + paraprofessionalID.toString() + " " + clientID.toString() + " " + locationID.toString() + " " + paraprofessionalCreatorID.toString() + " " + timeAndDateEntered.toString() + " " + sessionStart.toGMTString() + " " + sessionEnd.toGMTString() + " " + grammarCheck + " " + notes + " " + walkout;
     }*/
     
-     public boolean isWalkout() {
+     /**
+     *
+     * @return
+     */
+    public boolean isWalkout() {
         return walkout;
     }
 
     /**
-     * @param grammarCheck the grammarCheck to set
+     * @param walkout 
      */
     public void setWalkout(boolean walkout) {
         this.walkout = walkout;

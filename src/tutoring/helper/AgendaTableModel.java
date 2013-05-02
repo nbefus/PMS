@@ -32,11 +32,26 @@ import tutoring.ui.AdminView;
 public class AgendaTableModel extends AbstractTableModel {
 
     
+    /**
+     *
+     */
     public enum Columns
     {
+        /**
+         *
+         */
         ID(0, "Agenda ID", Integer.class),
+        /**
+         *
+         */
         DATE(1, "Date", Date.class),
+        /**
+         *
+         */
         NOTES(2,"Description", String.class),
+        /**
+         *
+         */
         TYPE(3, "Type", String.class);
        
 
@@ -57,20 +72,37 @@ public class AgendaTableModel extends AbstractTableModel {
             }
         }
         
+        /**
+         *
+         * @param columnIndex
+         * @return
+         */
         public static Class<?> getColumnClass(int columnIndex)
         {
             return classMap.get(columnIndex);
         }
         
+        /**
+         *
+         * @return
+         */
         public Class<?> getColumnClass()
         {
             return columnClass;
         }
         
-	public int getColumnIndex() {
+	/**
+         *
+         * @return
+         */
+        public int getColumnIndex() {
 		return columnIndex;
 	}
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
 		return displayName;
 	}
@@ -86,6 +118,9 @@ public class AgendaTableModel extends AbstractTableModel {
          columnNames=generateColumns();
          this.isFutureSession = isFutureSession;
     }*/
+    /**
+     *
+     */
     public AgendaTableModel(){
         columnNames=generateColumns();
         
@@ -104,6 +139,9 @@ public class AgendaTableModel extends AbstractTableModel {
         return columnNames;
     }
     
+    /**
+     *
+     */
     public void deleteAllRows()
     {
         agendaItems.removeAll(agendaItems);
@@ -120,12 +158,20 @@ public class AgendaTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }*/
     
+    /**
+     *
+     * @param a
+     */
     public void addRow(Agenda a)
     {
         agendaItems.add(a);
         fireTableDataChanged();
     }
     
+    /**
+     *
+     * @param r
+     */
     public void deleteRows(int[] r)
     {
         DatabaseHelper.open();

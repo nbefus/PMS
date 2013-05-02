@@ -83,6 +83,9 @@ public class AdminView extends javax.swing.JFrame
     RestrictionListModel restrictHelper;
 
    
+    /**
+     *
+     */
     public AdminView()
     {
         initComponents();
@@ -154,6 +157,9 @@ public class AdminView extends javax.swing.JFrame
        
     }
     
+    /**
+     *
+     */
     public void updateBoxes()
     {
         JComboBox[] boxes = new JComboBox[22];
@@ -214,6 +220,10 @@ public class AdminView extends javax.swing.JFrame
         clearComboBoxes();
     }
     
+    /**
+     *
+     * @return
+     */
     public DefaultCellEditor makeEditSearchCellEditor()
     {
         DefaultCellEditor dce = new DefaultCellEditor(new JTextField())
@@ -760,6 +770,9 @@ public class AdminView extends javax.swing.JFrame
         return dce;
     }
 
+    /**
+     *
+     */
     public void setUpGeneralReportTab()
     {
         DatabaseHelper.open();
@@ -1059,6 +1072,11 @@ public class AdminView extends javax.swing.JFrame
         return chart;
     }
     
+    /**
+     *
+     * @param table
+     * @return
+     */
     public static JTable autoResizeColWidth(JTable table)//, DefaultTableModel model) 
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -1108,6 +1126,9 @@ public class AdminView extends javax.swing.JFrame
     return table;
     }
 
+    /**
+     *
+     */
     public void setUpSearchTab()
     {
         //ComboBoxesIndexes.class.getEnumConstants();
@@ -1221,6 +1242,9 @@ public class AdminView extends javax.swing.JFrame
         restrictHelper = new RestrictionListModel(dlm);//, restrictions);
     }
 
+    /**
+     *
+     */
     public void setUpSessionsTab()
     {
     }
@@ -4565,6 +4589,11 @@ System.out.println("ACTION ON COURSE RADIO");
         }      
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     *
+     * @param table
+     * @throws IOException
+     */
     public void download(JTable table) throws IOException
     {
         JFileChooser jfc = new JFileChooser();
@@ -4619,6 +4648,9 @@ System.out.println("ACTION ON COURSE RADIO");
     
     
     
+    /**
+     *
+     */
     public void clearComboBoxes()
     {
         for (int i = 0; i < uac.getBoxesLength(); i++)

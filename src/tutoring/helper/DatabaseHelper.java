@@ -37,6 +37,9 @@ public class DatabaseHelper
 {
     private static Connection connect = null;
     
+    /**
+     *
+     */
     public static void open()
     {
         String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
@@ -51,6 +54,10 @@ public class DatabaseHelper
         }
     }
     
+    /**
+     *
+     * @param l
+     */
     public static void removeDuplicates(List<Object> l) {
     Set<Object> s = new TreeSet<Object>(new Comparator<Object>() {
 
@@ -64,11 +71,21 @@ public class DatabaseHelper
     List<Object> res = Arrays.asList(s.toArray());
 }
     
+    /**
+     *
+     * @return
+     */
     public static Connection getConnection()
     {
         return connect;
     }
     
+    /**
+     *
+     * @param displayName
+     * @param tableName
+     * @return
+     */
     public static String getDatabaseNameFromDisplayName(String displayName, String tableName)
     {
         System.out.println("DISPLAY NAME: "+displayName + " Table: "+tableName +":"+ Course.CourseTable.getTable() + ":"+Course.CourseTable.getDatabaseName(displayName));
@@ -106,6 +123,9 @@ public class DatabaseHelper
         return "";
     }
     
+    /**
+     *
+     */
     public static void close()
     {
      try {
@@ -117,6 +137,11 @@ public class DatabaseHelper
         } 
     }
     
+    /**
+     *
+     * @param table
+     * @return
+     */
     public static ArrayList<String> getTableColumns(String table)
     {
         ArrayList<String> cols = new ArrayList<String>();
@@ -171,6 +196,12 @@ public class DatabaseHelper
         }
     }
      
+    /**
+     *
+     * @param values
+     * @param table
+     * @return
+     */
     public static boolean insert(Object[] values, String table) {
         //Connection connect = null;
         Statement statement = null;
@@ -299,7 +330,14 @@ public class DatabaseHelper
     
   
       
-       public static boolean updateParaCat(Object[] values, Object[] oldValues, String table) {
+       /**
+     *
+     * @param values
+     * @param oldValues
+     * @param table
+     * @return
+     */
+    public static boolean updateParaCat(Object[] values, Object[] oldValues, String table) {
         //Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -363,7 +401,13 @@ public class DatabaseHelper
         }
     }
                        
-     public static boolean update(Object[] values, String table) {
+     /**
+     *
+     * @param values
+     * @param table
+     * @return
+     */
+    public static boolean update(Object[] values, String table) {
         //Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -460,6 +504,12 @@ public class DatabaseHelper
     }
     
     
+    /**
+     *
+     * @param ID
+     * @param table
+     * @return
+     */
     public static boolean delete(String ID, String table) {
         //Connection connect = null;
         Statement statement = null;
@@ -519,6 +569,13 @@ public class DatabaseHelper
         }
     }
     
+    /**
+     *
+     * @param ID
+     * @param ID2
+     * @param table
+     * @return
+     */
     public static boolean delete(String ID, String ID2, String table) {
         //Connection connect = null;
         Statement statement = null;
@@ -578,7 +635,12 @@ public class DatabaseHelper
         }
     }
     
-      public static List selectAll(String query) {
+      /**
+     *
+     * @param query
+     * @return
+     */
+    public static List selectAll(String query) {
         //Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -638,6 +700,11 @@ public class DatabaseHelper
         }
     }
       
+    /**
+     *
+     * @param query
+     * @return
+     */
     public static String[][] getDataFromRegularQuery(String query)
     {
         System.out.println(query);
@@ -675,6 +742,11 @@ public class DatabaseHelper
          return data;
     }
     
+    /**
+     *
+     * @param query
+     * @return
+     */
     public static String[][] fillTableWithQuery(String query) {
         List l = DatabaseHelper.selectAll(query);
         //List c = HibernateTest.regularSelect("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'User'");

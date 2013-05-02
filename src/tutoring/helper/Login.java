@@ -22,6 +22,11 @@ public class Login
     private String realPassword = null;
     private Role role = null;
 
+    /**
+     *
+     * @param username
+     * @param password
+     */
     public Login(String username, String password)
     {
         this.username = username;
@@ -32,6 +37,9 @@ public class Login
         login();
     }
 
+    /**
+     *
+     */
     public Login()
     {
     }
@@ -42,17 +50,26 @@ public class Login
 
     *
 
-    */
+* @param username 
+*/
     public void setUsername(String username)
     {
         this.username = username;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password)
     {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public final boolean login()
     {
         usernameStatus = lookUpUser();
@@ -70,11 +87,19 @@ public class Login
 
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isLoggedIn()
     {
         return loginStatus;
     }
 
+    /**
+     *
+     * @return
+     */
     public Role getRole()
     {
         if (loginStatus)
@@ -116,6 +141,10 @@ public class Login
         return passwordFound;
     }
 
+    /**
+     *
+     * @return
+     */
     public String loginFeedback()
     {
         if (loginStatus == true)

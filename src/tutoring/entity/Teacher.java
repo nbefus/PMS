@@ -18,10 +18,22 @@ import java.util.ArrayList;
  */
 public class Teacher
 {
+    /**
+     *
+     */
     public enum TeacherTable {
 
+        /**
+         *
+         */
         TEACHERID("Teacher ID","teacherID", true, getTableAlias()+".teacherID", true),
+        /**
+         *
+         */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
+        /**
+         *
+         */
         FNAME("First Name","fName", true, getTableAlias()+".fName", false);
                 
         private String name;
@@ -41,36 +53,68 @@ public class Teacher
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -84,6 +128,10 @@ public class Teacher
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -97,6 +145,11 @@ public class Teacher
             return cols;
         }
      
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Teacher.TeacherTable[] columns = Teacher.TeacherTable.class.getEnumConstants();
@@ -111,6 +164,11 @@ public class Teacher
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Teacher.TeacherTable [] cols = Teacher.TeacherTable.class.getEnumConstants();
@@ -127,6 +185,11 @@ public class Teacher
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -143,12 +206,23 @@ public class Teacher
     private int teacherID;
     private String lName, fName;
 
+    /**
+     *
+     * @param id
+     * @param lName
+     * @param fName
+     */
     public Teacher(int id, String lName, String fName) {
         this.teacherID = id;
         this.lName = lName;
         this.fName = fName;
     }
 
+    /**
+     *
+     * @param t
+     * @return
+     */
     public static Object[] getValues(Teacher t)
     {
         Object[] values = new Object[3];
@@ -158,7 +232,13 @@ public class Teacher
         return values;
     }
       
-      public static ArrayList<Teacher> selectAllTeacher(String addedSQLToSelect, Connection connect) {
+      /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<Teacher> selectAllTeacher(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -213,26 +293,50 @@ public class Teacher
     
    
       
+    /**
+     *
+     * @return
+     */
     public int getTeacherID() {
         return teacherID;
     }
 
+    /**
+     *
+     * @param teacherID
+     */
     public void setTeacherID(int teacherID) {
         this.teacherID = teacherID;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getlName() {
         return lName;
     }
 
+    /**
+     *
+     * @param lName
+     */
     public void setlName(String lName) {
         this.lName = lName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getfName() {
         return fName;
     }
 
+    /**
+     *
+     * @param fName
+     */
     public void setfName(String fName) {
         this.fName = fName;
     }

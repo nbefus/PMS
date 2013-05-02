@@ -38,6 +38,11 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
      */
     private int paraprofessionalID = -1;
     private int categoryID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -63,6 +68,15 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param paraprofessional
+     * @param category
+     * @param categoryID
+     * @param paraprofessionalID
+     */
     public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal, String paraprofessional, String category, int categoryID, int paraprofessionalID) {
         super(parent, modal);
         initComponents();

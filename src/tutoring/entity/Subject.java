@@ -19,11 +19,26 @@ import tutoring.entity.Category.CategoryTable;
  */
 public class Subject {
 
+    /**
+     *
+     */
     public enum SubjectTable {
 
+        /**
+         *
+         */
         SUBJECTID("Subject ID","subjectID", true, getTableAlias()+".subjectID", true),
+        /**
+         *
+         */
         ABBREVNAME("Subject","abbrevName", true, getTableAlias()+".abbrevName", false),
+        /**
+         *
+         */
         CATEGORYID("Category ID","categoryID", true, getTableAlias()+".categoryID", true), 
+        /**
+         *
+         */
         CATEGORYNAME("Category","name", false, getCategoryAlias()+".name", false);
         
         private String name;
@@ -44,36 +59,68 @@ public class Subject {
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         } 
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -87,6 +134,10 @@ public class Subject {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -100,6 +151,11 @@ public class Subject {
             return cols;
         }
      
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Subject.SubjectTable[] columns = Subject.SubjectTable.class.getEnumConstants();
@@ -114,7 +170,12 @@ public class Subject {
             return "";
         }
         
-         public static String getSelectColumns(boolean selectIDs)
+         /**
+         *
+         * @param selectIDs
+         * @return
+         */
+        public static String getSelectColumns(boolean selectIDs)
         {
             Subject.SubjectTable[] cols = Subject.SubjectTable.class.getEnumConstants();
             
@@ -130,6 +191,11 @@ public class Subject {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -140,6 +206,10 @@ public class Subject {
             return query;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCategoryAlias()
         {
             return categoryAlias;
@@ -150,12 +220,23 @@ public class Subject {
     private String abbrevName;
     private Category categoryID;  // foreign key
 
-   public Subject(int subjectID, String abbrevName, Category category) {
+    /**
+     *
+     * @param subjectID
+     * @param abbrevName
+     * @param category
+     */
+    public Subject(int subjectID, String abbrevName, Category category) {
         this.subjectID = subjectID;
         this.abbrevName = abbrevName;
         this.categoryID = category;
     }
     
+    /**
+     *
+     * @param s
+     * @return
+     */
     public static Object[] getValues(Subject s)
     {
         Object[] values = new Object[3];
@@ -166,6 +247,12 @@ public class Subject {
     }
       
 
+    /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
     public static ArrayList<Subject> selectAllSubjects(String addedSQLToSelect, Connection connect) {
         
         Statement statement = null;

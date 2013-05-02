@@ -55,6 +55,11 @@ public class RetrieveNewTerm {
     private static boolean firstSubject = true;
     private static boolean firstCourse = true;
         
+    /**
+     *
+     * @param args
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
       
         String[] terms = {"201320"};//,"201310","201295","201290","201280"};
@@ -102,6 +107,11 @@ public class RetrieveNewTerm {
     }
     
     
+    /**
+     *
+     * @param termCodes
+     * @throws Exception
+     */
     public static void updateCourses(String[] termCodes) throws Exception
     {
         if(teachers.size() > 0)
@@ -189,6 +199,13 @@ public class RetrieveNewTerm {
     }
     
     
+    /**
+     *
+     * @param lname
+     * @param fname
+     * @param abbrev
+     * @param level
+     */
     public static void insertData(String lname, String fname, String abbrev, int level)
     {
         Teacher t = new Teacher(++autoIncValTeach, lname, fname);

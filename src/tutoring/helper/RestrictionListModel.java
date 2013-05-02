@@ -18,12 +18,22 @@ public class RestrictionListModel
     private DefaultListModel dlm;
 
 
+    /**
+     *
+     * @param dlm
+     */
     public RestrictionListModel(DefaultListModel dlm)
     {
         this.dlm = dlm;
     }
     
     
+    /**
+     *
+     * @param table
+     * @param selectQuery
+     * @return
+     */
     public String createQuery(String table, String selectQuery)
     {
         String query = selectQuery;
@@ -38,6 +48,11 @@ public class RestrictionListModel
         return query;
     }
     
+    /**
+     *
+     * @param restrictions
+     * @param displayName
+     */
     public void setListElement(ArrayList<String> restrictions, ArrayList<String> displayName)
     {
         String restriction = "";
@@ -65,6 +80,12 @@ public class RestrictionListModel
                 dlm.setElementAt(dlm.getElementAt(dlm.size()-2)+" OR", dlm.size()-2);
     }
     
+    /**
+     *
+     * @param index
+     * @param table
+     * @return
+     */
     public String getQuery(int index, String table)
     {
         String value = dlm.get(index).toString();

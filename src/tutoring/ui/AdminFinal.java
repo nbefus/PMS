@@ -77,11 +77,19 @@ public final class AdminFinal extends javax.swing.JFrame
     private DefaultListModel dlm = new DefaultListModel();
     private RestrictionListModel restrictHelper;
     
+    /**
+     *
+     */
     public class MinuteUpdater extends TimerTask {
     private SessionTableModel current;
     private SessionTableModel future;
 
-   public MinuteUpdater(SessionTableModel current, SessionTableModel future)
+        /**
+         *
+         * @param current
+         * @param future
+         */
+        public MinuteUpdater(SessionTableModel current, SessionTableModel future)
    {
         this.current = current;
         this.future = future;
@@ -96,6 +104,9 @@ public final class AdminFinal extends javax.swing.JFrame
  
 }
     
+    /**
+     *
+     */
     public void update() 
     {
             DatabaseHelper.open();
@@ -168,15 +179,45 @@ public final class AdminFinal extends javax.swing.JFrame
      */
     public enum ComboBoxesIndexes
     {   
+        /**
+         *
+         */
         CFNAME(0, "First Name", "fname", 'd'),
+        /**
+         *
+         */
         CLNAME(1, "Last Name", "lname", 'd'),
+        /**
+         *
+         */
         CPHONE(2,"Phone", "phone", 'd'),
+        /**
+         *
+         */
         CEMAIL(3, "Email", "email", 'd'),
+        /**
+         *
+         */
         COURSE(0, "Course", "abbrevName", 's'),
+        /**
+         *
+         */
         CREATOR(0, "Creator", "", 'e'),
+        /**
+         *
+         */
         LEVEL(1, "Level", "level", 'c'),
+        /**
+         *
+         */
         LOCATION(1, "Location", "location",'l'),
+        /**
+         *
+         */
         PARAPROFESSIONAL(2, "Tutor","", 'p'),
+        /**
+         *
+         */
         TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)", 't');
         
         private int indexOfCombo;
@@ -191,24 +232,45 @@ public final class AdminFinal extends javax.swing.JFrame
                 this.letter = letter;
 	}
         
+        /**
+         *
+         * @return
+         */
         public char getLetter()
         {
             return letter;
         }
  
-	public int getBoxIndex() {
+	/**
+         *
+         * @return
+         */
+        public int getBoxIndex() {
 		return indexOfCombo;
 	}
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
 		return displayName;
 	}
         
+        /**
+         *
+         * @return
+         */
         public String getDatabaseName()
         {
             return databaseName;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public String getDatabaseName(String DisplayName)
         {
             AdminFinal.ComboBoxesIndexes[] components = AdminFinal.ComboBoxesIndexes.class.getEnumConstants();
@@ -231,6 +293,9 @@ public final class AdminFinal extends javax.swing.JFrame
 
     private int sessionID = -1;
   
+    /**
+     *
+     */
     public AdminFinal() 
     {
         initComponents();
@@ -262,7 +327,7 @@ public final class AdminFinal extends javax.swing.JFrame
        
         tableHelper.increaseRowHeight(12);
        
-        DatabaseHelper.open();
+      //  DatabaseHelper.open();
         
         (new Thread(){
             public void run(){
@@ -407,6 +472,9 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     
+    /**
+     *
+     */
     public void updateTables()
     {
         DatabaseHelper.open();
@@ -480,6 +548,9 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     
+    /**
+     *
+     */
     public void setUpAgenda()
     {
         
@@ -506,6 +577,10 @@ public final class AdminFinal extends javax.swing.JFrame
         
     }
     
+    /**
+     *
+     * @return
+     */
     public DefaultCellEditor makeEditSessionCellEditor()
     {
         DefaultCellEditor dce = new DefaultCellEditor(new JTextField())
@@ -560,6 +635,10 @@ public final class AdminFinal extends javax.swing.JFrame
     }
     
     
+    /**
+     *
+     * @return
+     */
     public DefaultCellEditor makeEditAgendaCellEditor()
     {
         DefaultCellEditor dce = new DefaultCellEditor(new JTextField())
@@ -593,6 +672,9 @@ public final class AdminFinal extends javax.swing.JFrame
         return dce;
     }
     
+    /**
+     *
+     */
     public void clearSearchComboBoxes()
     {
         for (int i = 0; i < uac.getBoxesLength(); i++)
@@ -601,6 +683,9 @@ public final class AdminFinal extends javax.swing.JFrame
         }
     }
     
+    /**
+     *
+     */
     public void clearComboBoxes()
     {
          for(int i=0; i<uacSessions.getBoxesLength(); i++)
@@ -611,6 +696,9 @@ public final class AdminFinal extends javax.swing.JFrame
             uaacCourse.setComboValue(false, "", i);
     }
     
+    /**
+     *
+     */
     public void loadChartsWithoutDate()
     {
         DatabaseHelper.open();
@@ -672,6 +760,9 @@ public final class AdminFinal extends javax.swing.JFrame
         displayCharts(data, categoryData, otherValues, studentMinutes);
     }
     
+    /**
+     *
+     */
     public void setUpGeneralReportTab()
     {
         loadChartsWithoutDate();
@@ -3239,6 +3330,12 @@ public final class AdminFinal extends javax.swing.JFrame
         }
     }
     
+    /**
+     *
+     * @param date
+     * @param days
+     * @return
+     */
     public static Date addDays(Date date, int days)
     {
         int x = -days;
@@ -4890,6 +4987,9 @@ public final class AdminFinal extends javax.swing.JFrame
        
     }
     
+    /**
+     *
+     */
     public void updateBoxes()
     {
         JComboBox[] boxes = new JComboBox[22];
@@ -4950,6 +5050,10 @@ public final class AdminFinal extends javax.swing.JFrame
         clearSearchComboBoxes();
     }
     
+    /**
+     *
+     * @return
+     */
     public DefaultCellEditor makeEditSearchCellEditor()
     {
         DefaultCellEditor dce = new DefaultCellEditor(new JTextField())
@@ -5509,7 +5613,12 @@ public final class AdminFinal extends javax.swing.JFrame
         return dce;
     }
     
-     public static JTable autoResizeColWidth(JTable table)//, DefaultTableModel model) 
+     /**
+     *
+     * @param table
+     * @return
+     */
+    public static JTable autoResizeColWidth(JTable table)//, DefaultTableModel model) 
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //table.setModel(model);
@@ -5558,6 +5667,9 @@ public final class AdminFinal extends javax.swing.JFrame
     return table;
     }
 
+    /**
+     *
+     */
     public void setUpSearchTab()
     {
  
@@ -5641,6 +5753,11 @@ public final class AdminFinal extends javax.swing.JFrame
         restrictHelper = new RestrictionListModel(dlm);
     }
     
+    /**
+     *
+     * @param table
+     * @throws IOException
+     */
     public void download(JTable table) throws IOException
     {
         JFileChooser jfc = new JFileChooser();

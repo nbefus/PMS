@@ -29,6 +29,9 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class FontCellRenderer extends DefaultTableCellRenderer
 {
+    /**
+     *
+     */
     public FontCellRenderer()
     {
         

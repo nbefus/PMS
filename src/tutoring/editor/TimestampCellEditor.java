@@ -30,6 +30,10 @@ public class TimestampCellEditor extends DefaultCellEditor
     private static final Border red = new LineBorder(Color.red);
     private static final Border black = new LineBorder(Color.black);
     
+    /**
+     *
+     * @param jtf
+     */
     public TimestampCellEditor(final JTextField jtf)
     {
         super(jtf);

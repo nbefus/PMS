@@ -17,9 +17,18 @@ import java.util.ArrayList;
  */
 public class AgendaCategory 
 {
+    /**
+     *
+     */
     public enum AgendaCategoryTable {
 
+        /**
+         *
+         */
         AGENDACATEGORYID("Agenda Category ID","agendaCategoryID", true, getTableAlias()+".agendaCategoryID", true),
+        /**
+         *
+         */
         TYPE("Category","type", true, getTableAlias()+".type", false);
         private boolean isID;
         private String displayName;
@@ -39,34 +48,66 @@ public class AgendaCategory
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
-         public String getDisplayName(){
+         /**
+         *
+         * @return
+         */
+        public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         } 
+        /**
+         *
+         * @return
+         */
         public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -80,6 +121,10 @@ public class AgendaCategory
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -93,6 +138,11 @@ public class AgendaCategory
             return cols;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             AgendaCategory.AgendaCategoryTable[] columns = AgendaCategory.AgendaCategoryTable.class.getEnumConstants();
@@ -107,6 +157,11 @@ public class AgendaCategory
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             AgendaCategory.AgendaCategoryTable[] cols = AgendaCategory.AgendaCategoryTable.class.getEnumConstants();
@@ -123,6 +178,11 @@ public class AgendaCategory
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -137,11 +197,21 @@ public class AgendaCategory
     private int agendaCategoryID;
     private String type;
 
+    /**
+     *
+     * @param agendaCateogoryID
+     * @param type
+     */
     public AgendaCategory(int agendaCateogoryID, String type) {
         this.agendaCategoryID = agendaCateogoryID;
         this.type = type;
     }
     
+    /**
+     *
+     * @param c
+     * @return
+     */
     public static Object[] getValues(AgendaCategory c)
     {
         Object[] values = new Object[2];
@@ -150,7 +220,13 @@ public class AgendaCategory
         return values;
     }
     
-     public static ArrayList<AgendaCategory> selectAllAgendaCategory(String addedSQLToSelect, Connection connect) {
+     /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<AgendaCategory> selectAllAgendaCategory(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;

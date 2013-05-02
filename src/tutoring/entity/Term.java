@@ -12,11 +12,19 @@ public class Term {
     private int termID; // primary key
     private String name;
 
+    /**
+     *
+     * @param termID
+     * @param termName
+     */
     public Term(int termID, String termName) {
         this.termID = termID;
         this.name = termName;
     }
-      public Term()
+      /**
+     *
+     */
+    public Term()
     {
         
     }

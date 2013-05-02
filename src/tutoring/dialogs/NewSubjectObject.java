@@ -34,6 +34,11 @@ public class NewSubjectObject extends javax.swing.JDialog {
      * Creates new form NewSubjectObject
      */
    private int subjectID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewSubjectObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -51,6 +56,14 @@ public class NewSubjectObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param subject
+     * @param category
+     * @param subjectID
+     */
     public NewSubjectObject(java.awt.Frame parent, boolean modal, String subject, String category, int subjectID) {
         super(parent, modal);
         initComponents();

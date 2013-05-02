@@ -36,6 +36,11 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
      * Creates new form NewParaprofessionalObject
      */
     private int paraprofessionalID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewParaprofessionalObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -60,6 +65,18 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param role
+     * @param fname
+     * @param lname
+     * @param clockedIn
+     * @param hireDate
+     * @param terminationDate
+     * @param paraprofessionalID
+     */
     public NewParaprofessionalObject(java.awt.Frame parent, boolean modal, String role,String fname, String lname, String clockedIn, String hireDate, String terminationDate, int paraprofessionalID) {
         super(parent, modal);
         initComponents();

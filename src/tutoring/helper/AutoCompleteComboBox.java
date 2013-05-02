@@ -43,6 +43,12 @@ public class AutoCompleteComboBox extends JComboBox implements KeyListener, Acti
     private int lastSize=0;
     private ArrayList<String> matches = new ArrayList<String>();
     
+    /**
+     *
+     * @param jcb
+     * @param keywords
+     * @param initialText
+     */
     public AutoCompleteComboBox(JComboBox jcb, ArrayList<String> keywords, String initialText)
     {
         this.keywords = keywords;
@@ -62,7 +68,10 @@ public class AutoCompleteComboBox extends JComboBox implements KeyListener, Acti
             ((JTextComponent)jcb.getEditor().getEditorComponent()).setText("");        
     }
     
-     public void noMore()
+     /**
+     *
+     */
+    public void noMore()
     {
         jcb.getEditor().getEditorComponent().removeKeyListener(this);
         jcb.getEditor().getEditorComponent().removeMouseListener(this);
@@ -70,6 +79,9 @@ public class AutoCompleteComboBox extends JComboBox implements KeyListener, Acti
         jcb.removeActionListener(this);
     }
     
+    /**
+     *
+     */
     public void updatelist()
     {
         boolean moreChars;
@@ -117,6 +129,10 @@ public class AutoCompleteComboBox extends JComboBox implements KeyListener, Acti
             jcb.setSelectedIndex(0);
     }
 
+    /**
+     *
+     * @return
+     */
     public String getEntry()
     {
         return entry;

@@ -22,12 +22,30 @@ import tutoring.ui.AdminView;
  */
 public class Client {
 
+    /**
+     *
+     */
     public enum ClientTable {
 
+        /**
+         *
+         */
         CLIENTID("Client ID", "clientID", true, getTableAlias()+".clientID", true),
+        /**
+         *
+         */
         FNAME("First Name","fName", true, getTableAlias()+".fName", false),
+        /**
+         *
+         */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
+        /**
+         *
+         */
         PHONE("Phone","phone", true, getTableAlias()+".phone", false),
+        /**
+         *
+         */
         EMAIL("Email","email", true, getTableAlias()+".email", false);
         
         private String name;
@@ -46,37 +64,69 @@ public class Client {
             this.isID=isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
             return displayName;
         }
         
-       public boolean isID()
+        /**
+         *
+         * @return
+         */
+        public boolean isID()
        {
            return isID;
        }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -90,6 +140,10 @@ public class Client {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -103,6 +157,11 @@ public class Client {
             return cols;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             ClientTable[] components = ClientTable.class.getEnumConstants();
@@ -117,6 +176,11 @@ public class Client {
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Client.ClientTable [] cols = Client.ClientTable.class.getEnumConstants();
@@ -133,6 +197,11 @@ public class Client {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -147,6 +216,14 @@ public class Client {
     private String fName, lName, email;
     private String phone;
 
+    /**
+     *
+     * @param clientID
+     * @param fName
+     * @param lName
+     * @param email
+     * @param phone
+     */
     public Client(int clientID, String fName, String lName, String email, String phone) {
         this.clientID = clientID;
         this.fName = fName;
@@ -156,6 +233,11 @@ public class Client {
     }
 
     
+    /**
+     *
+     * @param c
+     * @return
+     */
     public static Object[] getValues(Client c)
     {
         Object[] values = new Object[5];
@@ -167,7 +249,13 @@ public class Client {
         return values;
     }
     
-     public static ArrayList<Client> selectAllClients(String addedSQLToSelect, Connection connect) {
+     /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<Client> selectAllClients(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;

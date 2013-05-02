@@ -36,6 +36,10 @@ public class TodaySessionTableHelper
 {
     private JTable table;
     
+    /**
+     *
+     * @param table
+     */
     public TodaySessionTableHelper(JTable table)
     {
         this.table = table;
@@ -46,6 +50,10 @@ public class TodaySessionTableHelper
         
     }
     
+    /**
+     *
+     * @param increase
+     */
     public void increaseRowHeight(int increase)
     {
         FontMetrics fm = table.getFontMetrics(table.getFont());
@@ -53,6 +61,9 @@ public class TodaySessionTableHelper
         table.setRowHeight(fontHeight+increase);
     }
     
+    /**
+     *
+     */
     public void allowScrollingOnTable()
     {
         JScrollPane jsp = ((JScrollPane) table.getParent().getParent());
@@ -62,11 +73,20 @@ public class TodaySessionTableHelper
         }
     }
     
+    /**
+     *
+     * @param fastness
+     */
     public void fasterScrolling(int fastness)
     {
         ((JScrollPane) table.getParent().getParent()).getVerticalScrollBar().setUnitIncrement(fastness);
     }
     
+    /**
+     *
+     * @param doubleClickBringsInfoUpTop
+     * @param dce
+     */
     public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -85,6 +105,10 @@ public class TodaySessionTableHelper
             table.getColumnModel().getColumn(SessionTableModel.Columns.STOP.getColumnIndex()).setCellEditor(new TimestampCellEditor(new JTextField()));
     }
     
+    /**
+     *
+     * @return
+     */
     public JTable autoResizeColWidth()
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

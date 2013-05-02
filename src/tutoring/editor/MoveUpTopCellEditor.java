@@ -37,6 +37,10 @@ public class MoveUpTopCellEditor extends DefaultCellEditor
 {
     private final JTextField jf;
 
+    /**
+     *
+     * @param jtf
+     */
     public MoveUpTopCellEditor(final JTextField jtf)
     {
         super(jtf);

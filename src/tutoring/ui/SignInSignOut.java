@@ -6,9 +6,16 @@ import javax.swing.DefaultComboBoxModel;
 import tutoring.entity.*;
 import tutoring.helper.*;
 
+/**
+ *
+ * @author Nathaniel
+ */
 public class SignInSignOut extends javax.swing.JFrame
 {
 
+    /**
+     *
+     */
     public SignInSignOut()
     {
         initComponents();
@@ -183,6 +190,10 @@ public class SignInSignOut extends javax.swing.JFrame
 
     }//GEN-LAST:event_signInAndOutButtonActionPerformed
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[])
     {
         /*

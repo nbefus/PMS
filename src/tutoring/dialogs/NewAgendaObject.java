@@ -28,6 +28,11 @@ public class NewAgendaObject extends javax.swing.JDialog {
      * Creates new form NewDatabaseObject
      */
     private int agendaID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewAgendaObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -47,6 +52,15 @@ public class NewAgendaObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param select
+     * @param date
+     * @param description
+     * @param agendaID
+     */
     public NewAgendaObject(java.awt.Frame parent, boolean modal, String select, String date, String description, int agendaID) {
         super(parent, modal);
         initComponents();

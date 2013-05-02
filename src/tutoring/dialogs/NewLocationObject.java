@@ -23,6 +23,11 @@ public class NewLocationObject extends javax.swing.JDialog {
      * Creates new form NewLocationObject
      */
    private int locationID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewLocationObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,6 +38,13 @@ public class NewLocationObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param location
+     * @param locationID
+     */
     public NewLocationObject(java.awt.Frame parent, boolean modal, String location, int locationID) {
         super(parent, modal);
         initComponents();

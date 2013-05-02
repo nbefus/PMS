@@ -17,9 +17,18 @@ import java.util.ArrayList;
  */
 public class Role {
     
+    /**
+     *
+     */
     public enum RoleTable {
         
+        /**
+         *
+         */
         ROLEID("Role ID", "roleID", true, getTableAlias()+".roleID", true),
+        /**
+         *
+         */
         TYPE("Role", "type", true, getTableAlias()+".type", false);
         
         
@@ -41,36 +50,68 @@ public class Role {
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }  
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -84,6 +125,10 @@ public class Role {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -97,6 +142,11 @@ public class Role {
             return cols;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Role.RoleTable[] columns = Role.RoleTable.class.getEnumConstants();
@@ -111,6 +161,11 @@ public class Role {
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Role.RoleTable [] cols = Role.RoleTable.class.getEnumConstants();
@@ -127,6 +182,11 @@ public class Role {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -141,16 +201,29 @@ public class Role {
     private int roleID; // primary key
     private String type;
 
+    /**
+     *
+     * @param roleID
+     * @param roleType
+     */
     public Role(int roleID, String roleType) {
         this.roleID = roleID;
         this.type = roleType;
     }
     
+    /**
+     *
+     */
     public Role()
     {
         
     }
     
+    /**
+     *
+     * @param r
+     * @return
+     */
     public static Object[] getValues(Role r)
     {
         Object[] values = new Object[2];
@@ -159,7 +232,13 @@ public class Role {
         return values;
     }
     
-     public static ArrayList<Role> selectAllRoles(String addedSQLToSelect, Connection connect) 
+     /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<Role> selectAllRoles(String addedSQLToSelect, Connection connect) 
      {
         // Connection connect = null;
         Statement statement = null;

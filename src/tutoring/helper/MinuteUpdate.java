@@ -13,7 +13,11 @@ import javax.swing.JTable;
  */
 public class MinuteUpdate extends TimerTask {
     private SessionTableModel stm;
-   public MinuteUpdate(SessionTableModel stm)
+    /**
+     *
+     * @param stm
+     */
+    public MinuteUpdate(SessionTableModel stm)
    {
        this.stm = stm;
    }

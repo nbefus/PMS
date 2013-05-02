@@ -19,16 +19,46 @@ import java.util.ArrayList;
 public class Course
 {
     
+    /**
+     *
+     */
     public enum CourseTable {
 
+        /**
+         *
+         */
         COURSEID("Course ID","courseId", true, getTableAlias()+".courseId", true),
+        /**
+         *
+         */
         TEACHERID("Teaher ID","teacherID", true, getTableAlias()+".teacherID", true),
+        /**
+         *
+         */
         SUBJECTID("Subject ID","subjectID", true, getTableAlias()+".subjectID", true),
+        /**
+         *
+         */
         LEVEL("Level","level", true, getTableAlias()+".level", false),
+        /**
+         *
+         */
         SUBJECTABBREVNAME("Subject","abbrevName", false, getSubjectAlias()+".abbrevName", false),
+        /**
+         *
+         */
         SUBJECTCATEGORYID("Category ID","categoryID", false, getSubjectAlias()+".categoryID", true),
+        /**
+         *
+         */
         SUBJECTCATEGORYNAME("Category","name", false, getCategoryAlias()+".name", false),
+        /**
+         *
+         */
         TEACHERLNAME("Teacher Last","lName", false, getTeacherAlias()+".lName", false),
+        /**
+         *
+         */
         TEACHERFNAME("Teacher First","fName", false, getTeacherAlias()+".fName", false);
         
         private String name;
@@ -51,37 +81,69 @@ public class Course
             this.isID = isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public boolean isID()
         {
             return isID;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -95,6 +157,10 @@ public class Course
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -108,6 +174,11 @@ public class Course
             return cols;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             CourseTable[] components = CourseTable.class.getEnumConstants();
@@ -122,6 +193,11 @@ public class Course
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Course.CourseTable [] cols = Course.CourseTable.class.getEnumConstants();
@@ -138,6 +214,11 @@ public class Course
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -149,16 +230,28 @@ public class Course
             return query;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getSubjectAlias()
         {
             return subjectAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getTeacherAlias()
         {
             return teacherAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCategoryAlias()
         {
             return categoryAlias;
@@ -171,6 +264,13 @@ public class Course
     private Subject subjectID;    // foreign key
     private int level;
 
+    /**
+     *
+     * @param course
+     * @param teacher
+     * @param subject
+     * @param level
+     */
     public Course(int course, Teacher teacher, Subject subject, int level) {
         this.courseID = course;
         this.teacherID = teacher;
@@ -178,12 +278,20 @@ public class Course
         this.level = level;
     }
     
+    /**
+     *
+     */
     public Course()
     {
         
     }
     
-   public static Object[] getValues(Course c)
+    /**
+     *
+     * @param c
+     * @return
+     */
+    public static Object[] getValues(Course c)
     {
         Object[] values = new Object[4];
         values[0]=c.getCourseID();
@@ -193,6 +301,12 @@ public class Course
         return values;
     }
    
+    /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
     public static ArrayList<Course> selectAllCourse(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;
@@ -289,10 +403,18 @@ public class Course
         this.level = level;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCourseID() {
         return courseID;
     }
 
+    /**
+     *
+     * @param courseID
+     */
     public void setCourseID(int courseID) {
         this.courseID = courseID;
     }

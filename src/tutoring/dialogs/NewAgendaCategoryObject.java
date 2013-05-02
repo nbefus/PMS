@@ -28,6 +28,11 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
      * Creates new form NewAgendaCategoryObject
      */
     private int agendaCategoryID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -38,6 +43,13 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param category
+     * @param agendaCategoryID
+     */
     public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal, String category, int agendaCategoryID) {
         super(parent, modal);
         initComponents();
@@ -84,7 +96,6 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(AgendaCategory.getValues(c), AgendaCategory.AgendaCategoryTable.getTable());
                 else
                     inserted = DatabaseHelper.update(AgendaCategory.getValues(c), AgendaCategory.AgendaCategoryTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The agenda category was successfully written to the database!");

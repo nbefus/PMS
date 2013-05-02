@@ -29,6 +29,8 @@ public class NewUserObject extends javax.swing.JDialog {
 
     /**
      * Creates new form NewUserObject
+     * @param parent
+     * @param modal  
      */
     public NewUserObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -51,6 +53,16 @@ public class NewUserObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param username
+     * @param password
+     * @param lname
+     * @param fname
+     * @param role
+     */
     public NewUserObject(java.awt.Frame parent, boolean modal, String username, String password, String lname, String fname, String role) {
         super(parent, modal);
         initComponents();

@@ -21,16 +21,43 @@ import java.util.Date;
  */
 public class Paraprofessional 
 {
-     public enum ParaTable {
+     /**
+     *
+     */
+    public enum ParaTable {
 
  
+        /**
+         *
+         */
         PARAPROFESSIONALID("Paraprofessional ID","paraprofessionalID", true, getTableAlias()+".paraprofessionalID", true),
+        /**
+         *
+         */
         ROLEID("Role ID","roleID", true, getTableAlias()+".roleID", true),
+        /**
+         *
+         */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
+        /**
+         *
+         */
         FNAME("First Name","fName", true, getTableAlias()+".fName", false),
+        /**
+         *
+         */
         HIREDATE("Hire Date","hireDate", true, getTableAlias()+".hireDate", false),
+        /**
+         *
+         */
         TERMINATIONDATE("Termination Date","terminationDate", true, getTableAlias()+".terminationDate", false),
+        /**
+         *
+         */
         ISCLOCKEDIN("Is In","isClockedIn", true, getTableAlias()+".isClockedIn", false),
+        /**
+         *
+         */
         ROLETYPE("Role","type", false, getRoleAlias()+".type", false);
         
         private boolean isID;
@@ -52,36 +79,68 @@ public class Paraprofessional
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
         
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -95,6 +154,10 @@ public class Paraprofessional
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -108,6 +171,11 @@ public class Paraprofessional
             return cols;
         }
      
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Paraprofessional.ParaTable[] columns = Paraprofessional.ParaTable.class.getEnumConstants();
@@ -122,6 +190,11 @@ public class Paraprofessional
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Paraprofessional.ParaTable[] cols = Paraprofessional.ParaTable.class.getEnumConstants();
@@ -138,6 +211,11 @@ public class Paraprofessional
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -148,6 +226,10 @@ public class Paraprofessional
             return query;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getRoleAlias()
         {
             return roleAlias;
@@ -161,10 +243,23 @@ public class Paraprofessional
     private Date terminationDate = null;
     private boolean isClockedIn;
 
-      public Paraprofessional()
+      /**
+     *
+     */
+    public Paraprofessional()
     {
         
     }
+    /**
+     *
+     * @param paraprofessionalID
+     * @param role
+     * @param lName
+     * @param fName
+     * @param hireDate
+     * @param terminationDate
+     * @param isClockedIn
+     */
     public Paraprofessional(int paraprofessionalID, Role role, String lName, String fName, Date hireDate, Date terminationDate, boolean isClockedIn) {
         this.paraprofessionalID = paraprofessionalID;
         this.roleID = role;
@@ -175,6 +270,11 @@ public class Paraprofessional
         this.isClockedIn = isClockedIn;
     }
     
+    /**
+     *
+     * @param p
+     * @return
+     */
     public static Object[] getValues(Paraprofessional p)
     {
         Object[] values = new Object[7];
@@ -189,7 +289,13 @@ public class Paraprofessional
     }
     
     
-     public static ArrayList<Paraprofessional> selectAllParaprofessional(String addedSQLToSelect, Connection connect) {
+     /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<Paraprofessional> selectAllParaprofessional(String addedSQLToSelect, Connection connect) {
         //Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -342,6 +448,10 @@ public class Paraprofessional
         this.isClockedIn = isClockedIn;
     }
     
+    /**
+     *
+     * @return
+     */
     public String hi()
     {
         return paraprofessionalID + " " + roleID.toString() + " " + lName + " " + fName + " " + hireDate.toString() + " " + terminationDate.toString() + " " + isClockedIn;

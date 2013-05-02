@@ -23,6 +23,11 @@ public class NewCategoryObject extends javax.swing.JDialog {
      * Creates new form NewCategoryObject
      */
     private int categoryID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewCategoryObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,6 +38,13 @@ public class NewCategoryObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param category
+     * @param categoryID
+     */
     public NewCategoryObject(java.awt.Frame parent, boolean modal, String category, int categoryID) {
         super(parent, modal);
         initComponents();

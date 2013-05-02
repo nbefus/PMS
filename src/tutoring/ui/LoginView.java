@@ -3,9 +3,16 @@ package tutoring.ui;
 import java.awt.event.KeyEvent;
 import tutoring.helper.Login;
 
+/**
+ *
+ * @author Nathaniel
+ */
 public class LoginView extends javax.swing.JFrame
 {
 
+    /**
+     *
+     */
     public LoginView()
     {
         initComponents();
@@ -271,6 +278,10 @@ public class LoginView extends javax.swing.JFrame
         }
     }//GEN-LAST:event_logoIconMouseClicked
 
+    /**
+     *
+     * @param args
+     */
     public static void main(String args[])
     {
         /*

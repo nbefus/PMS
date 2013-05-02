@@ -51,6 +51,9 @@ public class Data
     private static ArrayList<String> rolelist;
     private static ArrayList<String> agendacategorylist;
     
+    /**
+     *
+     */
     public static void refreshClient()
     {
         clientsfirst = new ArrayList<String>();
@@ -66,6 +69,9 @@ public class Data
         emailOrderedList = setUpList("select fname, lname, phone, email from Client order by email", 3, separator, clientsemail);
     }
 
+    /**
+     *
+     */
     public static void refreshAgenda()
     {
         agendacategorylist = new ArrayList<String>();
@@ -75,6 +81,9 @@ public class Data
         agendanotelist = regularSQL("select "+Agenda.AgendaTable.NOTES.getName()+" from "+Agenda.AgendaTable.getTable()+" order by "+Agenda.AgendaTable.NOTES.getName()); 
     }
     
+    /**
+     *
+     */
     public static void refreshAgendaCategory()
     {
         agendacategorylist = new ArrayList<String>();
@@ -82,6 +91,9 @@ public class Data
         agendacategorylist = regularSQL("select "+AgendaCategory.AgendaCategoryTable.TYPE.getName()+" from "+AgendaCategory.AgendaCategoryTable.getTable()+" order by "+AgendaCategory.AgendaCategoryTable.TYPE.getName());
     }
     
+    /**
+     *
+     */
     public static void refreshCategory()
     {
         categorieslist = new ArrayList<String>();
@@ -91,6 +103,9 @@ public class Data
         multicategorylist = createMultiCat(categorieslist.size(), null);
     }
     
+    /**
+     *
+     */
     public static void refreshCourse()
     {
         subjectOrderedList = new ArrayList<String>();
@@ -109,6 +124,9 @@ public class Data
         
     }
     
+    /**
+     *
+     */
     public static void refreshLocation()
     {
         locationslist = new ArrayList<String>();
@@ -116,6 +134,9 @@ public class Data
         locationslist = regularSQL("select "+Location.LocationTable.NAME.getName()+ " from "+Location.LocationTable.getTable()+" order by "+Location.LocationTable.NAME.getName());
     }
     
+    /**
+     *
+     */
     public static void refreshParaprofessional()
     {
         parafirstlist = new ArrayList<String>();
@@ -127,6 +148,9 @@ public class Data
         tutorslist = regularSQL("select "+Paraprofessional.ParaTable.FNAME.getName()+", "+Paraprofessional.ParaTable.LNAME.getName()+" from "+Paraprofessional.ParaTable.getTable()+" order by "+Paraprofessional.ParaTable.FNAME.getName());
     }
     
+    /**
+     *
+     */
     public static void refreshRole()
     {
         rolelist = new ArrayList<String>();
@@ -135,6 +159,9 @@ public class Data
         
     }
     
+    /**
+     *
+     */
     public static void refreshSubject()
     {
         subjectOrderedList = new ArrayList<String>();
@@ -144,6 +171,9 @@ public class Data
         
     }
     
+    /**
+     *
+     */
     public static void refreshTeacher()
     {
         teacherfirstlist = new ArrayList<String>();
@@ -153,6 +183,9 @@ public class Data
         teacherlastlist = regularSQL("select "+Teacher.TeacherTable.LNAME.getName()+" from "+Teacher.TeacherTable.getTable()+" order by "+Teacher.TeacherTable.LNAME.getName());
     }
     
+    /**
+     *
+     */
     public static void refreshUser()
     {
         userfirstlist = new ArrayList<String>();
@@ -167,6 +200,10 @@ public class Data
         DatabaseHelper.close();
     }
     
+    /**
+     *
+     * @param initializeAll
+     */
     public Data(boolean initializeAll) {
         locationslist = new ArrayList<String>();
        
@@ -223,9 +260,17 @@ public class Data
         teacherOrderedList = setUpList("select abbrevName, level, concat_ws(' ',fName, lName) as 'teacher' from Course c join Subject s on c.subjectID=s.subjectID join Teacher t on c.teacherID=t.teacherID order by fname", 2, separator, teacherslist); 
         
         multicategorylist = createMultiCat(categorieslist.size(), null);
-        DatabaseHelper.close();
+       // DatabaseHelper.close();
     }
 
+    /**
+     *
+     * @param query
+     * @param index
+     * @param separator
+     * @param singleton
+     * @return
+     */
     public static ArrayList<String> setUpList(String query, int index, char separator, ArrayList<String> singleton) {
         List result = DatabaseHelper.selectAll(query);
         ArrayList<String> arraylist = new ArrayList<String>();
@@ -249,6 +294,11 @@ public class Data
         return arraylist;
     }
     
+    /**
+     *
+     * @param query
+     * @return
+     */
     public static ArrayList<String> regularSQL(String query) {
         List result = DatabaseHelper.selectAll(query);
         ArrayList<String> arraylist = new ArrayList<String>();
@@ -271,6 +321,12 @@ public class Data
         return arraylist;
     }
 
+    /**
+     *
+     * @param n
+     * @param ps
+     * @return
+     */
     public static ArrayList<String> createMultiCat(int n, ArrayList<String> ps) {
         if (n < 0) {
             return null;
@@ -301,43 +357,83 @@ public class Data
         return ps;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getClientsfirst() {
         return clientsfirst;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getClientslast() {
         return clientslast;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getClientsphone() {
         return clientsphone;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getClientsemail() {
         return clientsemail;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getLocationslist() {
         return locationslist;
     }
 
     
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getTutorslist() {
         return tutorslist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getTeacherslist() {
         return teacherslist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getSubjectslist() {
         return subjectslist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getCategorieslist() {
         return categorieslist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getLevelslist() {
         return levelslist;
     }
@@ -377,62 +473,122 @@ public class Data
         return tutorslastlist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getSubjectOrderedList() {
         return subjectOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getLevelOrderedList() {
         return levelOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getTeacherOrderedList() {
         return teacherOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getFnameOrderedList() {
         return fnameOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getLnameOrderedList() {
         return lnameOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getPhoneOrderedList() {
         return phoneOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getEmailOrderedList() {
         return emailOrderedList;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getUserfirstlist() {
         return userfirstlist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getUserlastlist() {
         return userlastlist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getUsernamelist() {
         return usernamelist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getParafirstlist() {
         return parafirstlist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getParalastlist() {
         return paralastlist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getAgendanotelist() {
         return agendanotelist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getRolelist() {
         return rolelist;
     }
 
+    /**
+     *
+     * @return
+     */
     public static ArrayList<String> getAgendacategorylist() {
         return agendacategorylist;
     }

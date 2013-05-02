@@ -33,19 +33,36 @@ public class FutureSessionTableModel extends AbstractTableModel {
     
     private ArrayList<ParaprofessionalSession> tutorSessions = new ArrayList();
 
+    /**
+     *
+     * @param list
+     * @param s
+     */
     public FutureSessionTableModel(ArrayList<ParaprofessionalSession> list, String s){
          this.tutorSessions = list;
     }
+    /**
+     *
+     * @param s
+     */
     public FutureSessionTableModel(String s){
         
     }
     
+    /**
+     *
+     * @param ts
+     */
     public void addRow(ParaprofessionalSession ts)
     {
         tutorSessions.add(ts);
         fireTableDataChanged();
     }
     
+    /**
+     *
+     * @param r
+     */
     public void deleteRows(int[] r)
     {
         for(int i=0; i<r.length; i++)
@@ -53,6 +70,12 @@ public class FutureSessionTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     
+    /**
+     *
+     * @param one
+     * @param two
+     * @return
+     */
     public boolean areEqual(Object one, Object two)
     {
         if(one instanceof Timestamp)
@@ -187,6 +210,12 @@ public class FutureSessionTableModel extends AbstractTableModel {
            return null;
    }
     
+    /**
+     *
+     * @param eDate
+     * @param lDate
+     * @return
+     */
     public int minutesOf(Date eDate, Date lDate)
     {
         if(eDate == null || lDate == null ) 

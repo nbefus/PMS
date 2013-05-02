@@ -28,11 +28,19 @@ import tutoring.entity.Teacher;
  */
 public class Validate 
 {
+    /**
+     *
+     */
     public Validate()
     {
         
     }
  
+    /**
+     *
+     * @param t
+     * @return
+     */
     public static boolean validateTimestamp(String t)
     {
         try {

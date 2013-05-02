@@ -34,6 +34,11 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
 
     ArrayList<ArrayList<String>> matches = new ArrayList<ArrayList<String>>();
 
+    /**
+     *
+     * @param keywords
+     * @param boxes
+     */
     public UltimateAutoComplete(ArrayList<ArrayList<String>>keywords, JComboBox[] boxes) {
         this.keywords = keywords;
         this.boxes = boxes;
@@ -64,6 +69,9 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
         }
     } 
     
+    /**
+     *
+     */
     public void noMore()
     {
         for(int i=0; i<boxes.length; i++)
@@ -87,12 +95,20 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
         matches = null;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getBoxesLength()
     {
         return boxes.length;
     }
     
     
+    /**
+     *
+     * @param activeBoxIndex
+     */
     public void updatelist(int activeBoxIndex)
     {
         boolean moreChars;
@@ -286,6 +302,11 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
 
     
     
+    /**
+     *
+     * @param value
+     * @param indexOfBox
+     */
     public void setComboValue(String value, int indexOfBox)
     {
         ((JTextComponent)boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);

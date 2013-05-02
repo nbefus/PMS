@@ -36,6 +36,10 @@ public class AgendaTableHelper
 {
     private JTable table;
     
+    /**
+     *
+     * @param table
+     */
     public AgendaTableHelper(JTable table)
     {
         this.table = table;
@@ -46,6 +50,10 @@ public class AgendaTableHelper
         
     }
     
+    /**
+     *
+     * @param increase
+     */
     public void increaseRowHeight(int increase)
     {
         FontMetrics fm = table.getFontMetrics(table.getFont());
@@ -53,6 +61,9 @@ public class AgendaTableHelper
         table.setRowHeight(fontHeight+increase);
     }
     
+    /**
+     *
+     */
     public void allowScrollingOnTable()
     {
         JScrollPane jsp = ((JScrollPane) table.getParent().getParent());
@@ -62,11 +73,20 @@ public class AgendaTableHelper
         }
     }
     
+    /**
+     *
+     * @param fastness
+     */
     public void fasterScrolling(int fastness)
     {
         ((JScrollPane) table.getParent().getParent()).getVerticalScrollBar().setUnitIncrement(fastness);
     }
     
+    /**
+     *
+     * @param doubleClickBringsInfoUpTop
+     * @param dce
+     */
     public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -81,6 +101,10 @@ public class AgendaTableHelper
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public JTable autoResizeColWidth()
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

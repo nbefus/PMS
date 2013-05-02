@@ -23,6 +23,10 @@ public class TimestampCellRenderer extends DefaultTableCellRenderer
 {
     boolean isFutureSession;
     
+    /**
+     *
+     * @param isFutureSession
+     */
     public TimestampCellRenderer(boolean isFutureSession)
     {
         this.isFutureSession = isFutureSession;

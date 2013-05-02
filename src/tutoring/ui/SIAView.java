@@ -60,12 +60,20 @@ import tutoring.helper.*;
 public final class SIAView extends javax.swing.JFrame
 {
 
+    /**
+     *
+     */
     public class MinuteUpdater extends TimerTask {
     //times member represent calling times.
     private SessionTableModel current;
     private SessionTableModel future;
 
-   public MinuteUpdater(SessionTableModel current, SessionTableModel future)
+        /**
+         *
+         * @param current
+         * @param future
+         */
+        public MinuteUpdater(SessionTableModel current, SessionTableModel future)
    {
         this.current = current;
         this.future = future;
@@ -81,6 +89,9 @@ public final class SIAView extends javax.swing.JFrame
  
 }
     
+    /**
+     *
+     */
     public void update() 
     {
             DatabaseHelper.open();
@@ -162,16 +173,46 @@ System.out.println("Done list 4");
      */
     public enum ComboBoxesIndexes
     {   
+        /**
+         *
+         */
         CFNAME(0, "First Name", "fname", 'd'),
+        /**
+         *
+         */
         CLNAME(1, "Last Name", "lname", 'd'),
+        /**
+         *
+         */
         CPHONE(2,"Phone", "phone", 'd'),
+        /**
+         *
+         */
         CEMAIL(3, "Email", "email", 'd'),
         //CATEGORY(4, "Category", "name", 'a'),
+        /**
+         *
+         */
         COURSE(0, "Course", "abbrevName", 's'),
+        /**
+         *
+         */
         CREATOR(0, "Creator", "", 'e'),
+        /**
+         *
+         */
         LEVEL(1, "Level", "level", 'c'),
+        /**
+         *
+         */
         LOCATION(1, "Location", "location",'l'),
+        /**
+         *
+         */
         PARAPROFESSIONAL(2, "Tutor","", 'p'),
+        /**
+         *
+         */
         TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)", 't');
         
         private int indexOfCombo;
@@ -186,24 +227,45 @@ System.out.println("Done list 4");
                 this.letter = letter;
 	}
         
+        /**
+         *
+         * @return
+         */
         public char getLetter()
         {
             return letter;
         }
  
-	public int getBoxIndex() {
+	/**
+         *
+         * @return
+         */
+        public int getBoxIndex() {
 		return indexOfCombo;
 	}
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
 		return displayName;
 	}
         
+        /**
+         *
+         * @return
+         */
         public String getDatabaseName()
         {
             return databaseName;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public String getDatabaseName(String DisplayName)
         {
             SIAView.ComboBoxesIndexes[] components = SIAView.ComboBoxesIndexes.class.getEnumConstants();
@@ -245,6 +307,9 @@ private int sessionID = -1;
         }
     };
     
+    /**
+     *
+     */
     public SIAView() 
     {
 
@@ -509,6 +574,9 @@ System.out.println("Done list 4");
     }
     
     
+    /**
+     *
+     */
     public void updateTables()
     {
         DatabaseHelper.open();
@@ -581,6 +649,9 @@ System.out.println("Done list 4");
     }
     
     
+    /**
+     *
+     */
     public void setUpAgenda()
     {
         
@@ -629,6 +700,10 @@ System.out.println("Done list 4");
         
     }
     
+    /**
+     *
+     * @return
+     */
     public DefaultCellEditor makeEditSessionCellEditor()
     {
         DefaultCellEditor dce = new DefaultCellEditor(new JTextField())
@@ -687,6 +762,10 @@ System.out.println("Done list 4");
     }
     
     
+    /**
+     *
+     * @return
+     */
     public DefaultCellEditor makeEditAgendaCellEditor()
     {
         DefaultCellEditor dce = new DefaultCellEditor(new JTextField())
@@ -722,6 +801,9 @@ System.out.println("Done list 4");
         return dce;
     }
     
+    /**
+     *
+     */
     public void clearComboBoxes()
     {
          for(int i=0; i<uac.getBoxesLength(); i++)
@@ -732,6 +814,9 @@ System.out.println("Done list 4");
             uaacCourse.setComboValue(false, "", i);
     }
     
+    /**
+     *
+     */
     public void loadChartsWithoutDate()
     {
         DatabaseHelper.open();
@@ -793,6 +878,9 @@ System.out.println("Done list 4");
         displayCharts(data, categoryData, otherValues, studentMinutes);
     }
     
+    /**
+     *
+     */
     public void setUpGeneralReportTab()
     {
 
@@ -2331,6 +2419,12 @@ System.out.println("Done list 4");
         }
     }
     
+    /**
+     *
+     * @param date
+     * @param days
+     * @return
+     */
     public static Date addDays(Date date, int days)
     {
         System.out.println("DATE BEFORE CONVERSION: "+date.toString());

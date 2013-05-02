@@ -6,8 +6,6 @@ package tutoring.dialogs;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.util.ArrayList;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
@@ -25,6 +23,11 @@ public class NewClientObject extends javax.swing.JDialog {
      */
     private boolean inserted = false;
     private int clientID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewClientObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -35,6 +38,16 @@ public class NewClientObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param fname
+     * @param lname
+     * @param phone
+     * @param email
+     * @param clientID
+     */
     public NewClientObject(java.awt.Frame parent, boolean modal, String fname, String lname, String phone, String email, int clientID) {
         super(parent, modal);
         initComponents();
@@ -56,11 +69,19 @@ public class NewClientObject extends javax.swing.JDialog {
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean wasInserted()
     {
         return inserted;
     }
     
+    /**
+     *
+     * @param update
+     */
     public void validate(boolean update)
     {
         try

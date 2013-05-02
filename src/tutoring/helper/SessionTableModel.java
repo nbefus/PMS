@@ -32,27 +32,87 @@ import tutoring.ui.AdminView;
 public class SessionTableModel extends AbstractTableModel {
 
     
+    /**
+     *
+     */
     public enum Columns
     {
+        /**
+         *
+         */
         ID(0, "ID", Integer.class),
+        /**
+         *
+         */
         CLIENTFIRSTNAME(1, "First Name", String.class),
+        /**
+         *
+         */
         CLIENTLASTNAME(2,"Last Name", String.class),
+        /**
+         *
+         */
         CLIENTPHONE(3, "Phone", String.class),
+        /**
+         *
+         */
         CLIENTEMAIL(4, "Email", String.class),
+        /**
+         *
+         */
         COURSE(5, "Course", String.class),
+        /**
+         *
+         */
         LEVEL(6, "Level", Integer.class),
+        /**
+         *
+         */
         TEACHER(7, "Teacher", String.class),
+        /**
+         *
+         */
         CATEGORY(8, "Cat.", String.class),
+        /**
+         *
+         */
         NOTES(9, "Notes", String.class),
+        /**
+         *
+         */
         PARAPROFESSIONAL(10, "Paraprofessional", String.class),
+        /**
+         *
+         */
         GC(11, "GC", Boolean.class),
         
+        /**
+         *
+         */
         START(12, "Start", Timestamp.class),
+        /**
+         *
+         */
         STOP(13, "Stop", Timestamp.class),
+        /**
+         *
+         */
         MIN(14, "Min.", Integer.class),
+        /**
+         *
+         */
         LOCATION(15, "Location", String.class),
+        /**
+         *
+         */
         CREATOR(16, "Creator", String.class),
+        /**
+         *
+         */
         ENTEREDDATE(17, "Entered", Timestamp.class),
+        /**
+         *
+         */
         WALKOUT(18, "Walkout", Boolean.class);
 
         private int columnIndex;
@@ -72,20 +132,37 @@ public class SessionTableModel extends AbstractTableModel {
             }
         }
         
+        /**
+         *
+         * @param columnIndex
+         * @return
+         */
         public static Class<?> getColumnClass(int columnIndex)
         {
             return classMap.get(columnIndex);
         }
         
+        /**
+         *
+         * @return
+         */
         public Class<?> getColumnClass()
         {
             return columnClass;
         }
         
-	public int getColumnIndex() {
+	/**
+         *
+         * @return
+         */
+        public int getColumnIndex() {
 		return columnIndex;
 	}
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName() {
 		return displayName;
 	}
@@ -104,6 +181,11 @@ public class SessionTableModel extends AbstractTableModel {
          columnNames=generateColumns();
          this.isFutureSession = isFutureSession;
     }*/
+    /**
+     *
+     * @param isFutureSession
+     * @param todaySessionTableModel
+     */
     public SessionTableModel(boolean isFutureSession, TodaySessionTableModel todaySessionTableModel){
         this.isFutureSession = isFutureSession;
         this.todaySessionTableModel = todaySessionTableModel;
@@ -111,6 +193,11 @@ public class SessionTableModel extends AbstractTableModel {
         
     }
     
+    /**
+     *
+     * @param isFutureSession
+     * @param currentSessionModel
+     */
     public SessionTableModel(boolean isFutureSession, SessionTableModel currentSessionModel)
     {
         this.isFutureSession = isFutureSession;
@@ -152,12 +239,20 @@ public class SessionTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }*/
     
+    /**
+     *
+     * @param ts
+     */
     public void addRow(ParaprofessionalSession ts)
     {
         tutorSessions.add(ts);
         fireTableDataChanged();
     }
     
+    /**
+     *
+     * @param r
+     */
     public void deleteRows(int[] r)
     {
         DatabaseHelper.open();
@@ -172,12 +267,21 @@ public class SessionTableModel extends AbstractTableModel {
         fireTableDataChanged();
     }
     
+    /**
+     *
+     */
     public void deleteAllRows()
     {
         tutorSessions.removeAll(tutorSessions);
         fireTableDataChanged();
     }
     
+    /**
+     *
+     * @param one
+     * @param two
+     * @return
+     */
     public boolean areEqual(Object one, Object two)
     {
         System.out.println("COMPARING: "+one.getClass().toString() + "  "+two.getClass().toString());
@@ -462,6 +566,12 @@ public class SessionTableModel extends AbstractTableModel {
            return null;
    }
     
+    /**
+     *
+     * @param eDate
+     * @param lDate
+     * @return
+     */
     public int minutesOf(Date eDate, Date lDate)
     {
         if(eDate == null || lDate == null ) 

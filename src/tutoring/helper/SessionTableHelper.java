@@ -37,6 +37,13 @@ public class SessionTableHelper
     private JTable table;
     private boolean isFutureSession;
     
+    /**
+     *
+     * @param table
+     * @param isFutureSession
+     * @param currentSessionTableModel
+     * @param todaySessionTableModel
+     */
     public SessionTableHelper(JTable table, boolean isFutureSession, SessionTableModel currentSessionTableModel, TodaySessionTableModel todaySessionTableModel)
     {
         this.table = table;
@@ -51,6 +58,10 @@ public class SessionTableHelper
         
     }
     
+    /**
+     *
+     * @param increase
+     */
     public void increaseRowHeight(int increase)
     {
         FontMetrics fm = table.getFontMetrics(table.getFont());
@@ -58,6 +69,9 @@ public class SessionTableHelper
         table.setRowHeight(fontHeight+increase);
     }
     
+    /**
+     *
+     */
     public void allowScrollingOnTable()
     {
         JScrollPane jsp = ((JScrollPane) table.getParent().getParent());
@@ -67,11 +81,20 @@ public class SessionTableHelper
         }
     }
     
+    /**
+     *
+     * @param fastness
+     */
     public void fasterScrolling(int fastness)
     {
         ((JScrollPane) table.getParent().getParent()).getVerticalScrollBar().setUnitIncrement(fastness);
     }
     
+    /**
+     *
+     * @param doubleClickBringsInfoUpTop
+     * @param dce
+     */
     public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
     {
         DefaultCellEditor singleclick = new DefaultCellEditor(new JCheckBox());
@@ -124,6 +147,10 @@ public class SessionTableHelper
 
     }
     
+    /**
+     *
+     * @return
+     */
     public JTable autoResizeColWidth()//, DefaultTableModel model) 
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

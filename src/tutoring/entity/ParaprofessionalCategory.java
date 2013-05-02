@@ -19,18 +19,51 @@ import java.util.ArrayList;
 public class ParaprofessionalCategory implements Serializable{
     
     
+    /**
+     *
+     */
     public enum ParaCatTable {
 
  
+        /**
+         *
+         */
         PARAPROFESSIONALID("Paraprofessional ID","paraprofessionalID", true, getTableAlias()+".paraprofessionalID", true),
+        /**
+         *
+         */
         CATEGORYID("Category ID","categoryID", true, getTableAlias()+".categoryID", true),
+        /**
+         *
+         */
         NAME("Category","name", false, getCategoryAlias()+".name", false),
+        /**
+         *
+         */
         ROLEID("Role ID","roleID", false, getParaprofessionalAlias()+".roleID", true),
+        /**
+         *
+         */
         LNAME("Last Name","lName", false, getParaprofessionalAlias()+".lName", false),
+        /**
+         *
+         */
         FNAME("First Name","fName", false, getParaprofessionalAlias()+".fName", false),
+        /**
+         *
+         */
         HIREDATE("Hire Date","hireDate", false, getParaprofessionalAlias()+".hireDate", false),
+        /**
+         *
+         */
         TERMINATIONDATE("Termination Date","terminationDate", false, getParaprofessionalAlias()+".terminationDate", false),
+        /**
+         *
+         */
         ISCLOCKEDIN("Is In","isClockedIn", false, getParaprofessionalAlias()+".isClockedIn", false),
+        /**
+         *
+         */
         ROLETYPE("Role","type", false, getRoleAlias()+".type", false);
         
         private boolean isID;
@@ -53,36 +86,68 @@ public class ParaprofessionalCategory implements Serializable{
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
         
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -96,6 +161,10 @@ public class ParaprofessionalCategory implements Serializable{
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -109,6 +178,11 @@ public class ParaprofessionalCategory implements Serializable{
             return cols;
         }
      
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             ParaprofessionalCategory.ParaCatTable[] columns = ParaprofessionalCategory.ParaCatTable.class.getEnumConstants();
@@ -123,6 +197,11 @@ public class ParaprofessionalCategory implements Serializable{
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             ParaprofessionalCategory.ParaCatTable[] cols = ParaprofessionalCategory.ParaCatTable.class.getEnumConstants();
@@ -139,6 +218,11 @@ public class ParaprofessionalCategory implements Serializable{
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -152,15 +236,27 @@ public class ParaprofessionalCategory implements Serializable{
             return query;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getRoleAlias()
         {
             return roleAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getCategoryAlias() {
             return categoryAlias;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getParaprofessionalAlias() {
             return paraprofessionalAlias;
         }
@@ -170,12 +266,22 @@ public class ParaprofessionalCategory implements Serializable{
     private Paraprofessional paraprofessionalID;  // primary key
     private Category categoryID;                  // primary key
 
+    /**
+     *
+     * @param paraprofessional
+     * @param category
+     */
     public ParaprofessionalCategory(Paraprofessional paraprofessional, Category category) {
         this.paraprofessionalID = paraprofessional;
         this.categoryID = category;
     }
     
     
+    /**
+     *
+     * @param pc
+     * @return
+     */
     public static Object[] getValues(ParaprofessionalCategory pc)
     {
         Object[] values = new Object[2];
@@ -184,6 +290,12 @@ public class ParaprofessionalCategory implements Serializable{
         return values;
     }
     
+    /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
     public static ArrayList<ParaprofessionalCategory> selectAllParaprofessional(String addedSQLToSelect, Connection connect) {
         //Connection connect = null;
         Statement statement = null;

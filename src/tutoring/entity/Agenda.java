@@ -19,12 +19,30 @@ import java.util.Date;
  */
 public class Agenda {
     
+    /**
+     *
+     */
     public enum AgendaTable {
 
+        /**
+         *
+         */
         AGENDAID("Agenda ID","agendaID", true, getTableAlias()+".agendaID", true),
+        /**
+         *
+         */
         DATE("Date","date", true, getTableAlias()+".date", false),
+        /**
+         *
+         */
         NOTES("Notes","notes", true, getTableAlias()+".notes", false),
+        /**
+         *
+         */
         AGENDACATEGORYID("Agenda Category ID","agendaCategoryID", true, getTableAlias()+".agendaCategoryID", true),
+        /**
+         *
+         */
         AGENDACATEGORYTYPE("Category","type", false, getAgendaCategoryAlias()+".type", false);
         
         private String name;
@@ -47,35 +65,67 @@ public class Agenda {
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -89,7 +139,11 @@ public class Agenda {
             return cols;
         }
         
-       public static ArrayList<String> getTableColumnsWithoutIDs()
+        /**
+         *
+         * @return
+         */
+        public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
             Agenda.AgendaTable[] columns = Agenda.AgendaTable.class.getEnumConstants();
@@ -102,6 +156,11 @@ public class Agenda {
             return cols;
         }
      
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Agenda.AgendaTable[] columns = Agenda.AgendaTable.class.getEnumConstants();
@@ -116,6 +175,11 @@ public class Agenda {
             return "";
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getColumnName(String DisplayName)
         {
             Agenda.AgendaTable[] columns = Agenda.AgendaTable.class.getEnumConstants();
@@ -130,11 +194,20 @@ public class Agenda {
             return "";
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getAgendaCategoryAlias()
         {
             return agendaCategoryAlias;
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Agenda.AgendaTable[] cols = Agenda.AgendaTable.class.getEnumConstants();
@@ -151,6 +224,11 @@ public class Agenda {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -168,6 +246,13 @@ public class Agenda {
     private String notes;
     private AgendaCategory agendaCategoryID;
 
+    /**
+     *
+     * @param agendaID
+     * @param date
+     * @param notes
+     * @param agendaCategoryID
+     */
     public Agenda(int agendaID, Date date, String notes, AgendaCategory agendaCategoryID) {
         this.agendaID = agendaID;
         this.date = date;
@@ -175,11 +260,19 @@ public class Agenda {
         this.agendaCategoryID = agendaCategoryID;
     }
     
+    /**
+     *
+     */
     public Agenda()
     {
         
     }
     
+    /**
+     *
+     * @param a
+     * @return
+     */
     public static Object[] getValues(Agenda a)
     {
         Object[] values = new Object[4];
@@ -190,6 +283,12 @@ public class Agenda {
         return values;
     }
 
+    /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
     public static ArrayList<Agenda> selectAllAgenda(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;

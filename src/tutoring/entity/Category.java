@@ -17,8 +17,17 @@ import java.util.ArrayList;
  */
 public class Category {
     
+    /**
+     *
+     */
     public enum CategoryTable {
+        /**
+         *
+         */
         CATEGORYID("Category ID","categoryID", true, getTableAlias()+".categoryID", true),
+        /**
+         *
+         */
         NAME("Category","name", true, getTableAlias()+".name", false);
          
         private String name;
@@ -38,36 +47,68 @@ public class Category {
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
-         public String getDisplayName(){
+         /**
+         *
+         * @return
+         */
+        public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -81,6 +122,10 @@ public class Category {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -94,6 +139,11 @@ public class Category {
             return cols;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Category.CategoryTable[] columns = Category.CategoryTable.class.getEnumConstants();
@@ -108,6 +158,11 @@ public class Category {
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Category.CategoryTable[] cols = Category.CategoryTable.class.getEnumConstants();
@@ -124,6 +179,11 @@ public class Category {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -139,11 +199,21 @@ public class Category {
     private int categoryID;
     private String name;
 
+    /**
+     *
+     * @param categoryID
+     * @param name
+     */
     public Category(int categoryID, String name) {
         this.categoryID = categoryID;
         this.name = name;
     }
     
+    /**
+     *
+     * @param c
+     * @return
+     */
     public static Object[] getValues(Category c)
     {
         Object[] values = new Object[2];
@@ -152,7 +222,13 @@ public class Category {
         return values;
     }
      
-      public static ArrayList<Category> selectAllCategory(String addedSQLToSelect, Connection connect) {
+      /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<Category> selectAllCategory(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;

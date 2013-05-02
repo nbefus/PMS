@@ -48,6 +48,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     private ArrayList<Integer> activeBoxIndexes = new ArrayList<Integer>();
     private ArrayList<String> activeBoxValues = new ArrayList<String>();
     
+    /**
+     *
+     * @param keywords
+     * @param boxes
+     * @param reference
+     */
     public UltimateAutoAutoComplete(ArrayList<ArrayList<String>>keywords, JComboBox[] boxes, ArrayList<ArrayList<String>>reference)// ArrayList<Client> clientsFirst, ArrayList<Client> clientsLast, ArrayList<Client> clientsPhone, ArrayList<Client> clientsEmail ) {
     {
         this.keywords = keywords;
@@ -82,6 +88,9 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     } 
     
     
+    /**
+     *
+     */
     public void noMore()
     {
         for(int i=0; i<boxes.length; i++)
@@ -107,6 +116,11 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
     
     
+    /**
+     *
+     * @param activeBoxIndex
+     * @param updatedOtherBoxes
+     */
     public void updateList(int activeBoxIndex, boolean updatedOtherBoxes)
     {
         boolean moreChars;
@@ -189,6 +203,11 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
     
     
+    /**
+     *
+     * @param activeBoxIndex
+     * @param value
+     */
     public void setActiveValues(int activeBoxIndex, String value)
     {
         
@@ -210,12 +229,18 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
         }
     }
     
+    /**
+     *
+     */
     public void restartActiveValues()
     {
         activeBoxValues.removeAll(activeBoxValues);
         activeBoxIndexes.removeAll(activeBoxIndexes);
     }
     
+    /**
+     *
+     */
     public void updateOtherList()
     {
         for(int i=0; i<boxes.length; i++)
@@ -542,6 +567,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
         };
     }
     
+    /**
+     *
+     * @param useSpaceForEmpty
+     * @param value
+     * @param indexOfBox
+     */
     public void setComboValue(boolean useSpaceForEmpty, String value, int indexOfBox)
     {
         if(value.length() == 0 && useSpaceForEmpty)
@@ -555,6 +586,10 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
         firstClick[indexOfBox] = true;
     }
     
+    /**
+     *
+     * @return
+     */
     public int getBoxesLength()
     {
         return boxes.length;

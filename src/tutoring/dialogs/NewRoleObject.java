@@ -23,6 +23,11 @@ public class NewRoleObject extends javax.swing.JDialog {
      * Creates new form NewRoleObject
      */
     private int roleID = -1;
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
     public NewRoleObject(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,6 +38,13 @@ public class NewRoleObject extends javax.swing.JDialog {
         
     }
     
+    /**
+     *
+     * @param parent
+     * @param modal
+     * @param role
+     * @param roleID
+     */
     public NewRoleObject(java.awt.Frame parent, boolean modal, String role, int roleID) {
         super(parent, modal);
         initComponents();

@@ -18,14 +18,35 @@ import java.util.ArrayList;
  */
 public class User {
     
+    /**
+     *
+     */
     public enum UserTable {
 
  
+        /**
+         *
+         */
         USERNAME("Username","userName", true, getTableAlias()+".userName", false),
+        /**
+         *
+         */
         ROLEID("Role ID", "roleID", true, getTableAlias()+".roleID", true),
+        /**
+         *
+         */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
+        /**
+         *
+         */
         FNAME("First Name", "fName", true, getTableAlias()+".fName", false),
+        /**
+         *
+         */
         PASSWORD("Password","password", true, getTableAlias()+".password", false),
+        /**
+         *
+         */
         ROLETYPE("Role","type", false, getRoleAlias()+".type", false);
         
         
@@ -48,36 +69,68 @@ public class User {
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
         
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -91,6 +144,10 @@ public class User {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -104,6 +161,11 @@ public class User {
             return cols;
         }
      
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             User.UserTable[] columns =  User.UserTable.class.getEnumConstants();
@@ -118,6 +180,11 @@ public class User {
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             User.UserTable [] cols = User.UserTable.class.getEnumConstants();
@@ -134,6 +201,11 @@ public class User {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -144,6 +216,10 @@ public class User {
             return query;
         }
 
+        /**
+         *
+         * @return
+         */
         public static String getRoleAlias()
         {
             return roleAlias;
@@ -154,11 +230,22 @@ public class User {
     private Role roleID;
     private String lName, fName, password;
 
+    /**
+     *
+     */
     public User()
     {
         
     }
     
+    /**
+     *
+     * @param userName
+     * @param roleID
+     * @param lName
+     * @param fName
+     * @param password
+     */
     public User(String userName, Role roleID, String lName, String fName, String password) {
         this.userName = userName;
         this.roleID = roleID;
@@ -167,6 +254,11 @@ public class User {
         this.password = password;
     }
     
+    /**
+     *
+     * @param u
+     * @return
+     */
     public static Object[] getValues(User u)
     {
         Object[] values = new Object[5];
@@ -180,7 +272,13 @@ public class User {
     }
     
     
-     public static ArrayList<User> selectAllUser(String addedSQLToSelect, Connection connect) {
+     /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<User> selectAllUser(String addedSQLToSelect, Connection connect) {
         //Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
@@ -242,42 +340,82 @@ public class User {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserName() {
         return userName;
     }
 
+    /**
+     *
+     * @param userName
+     */
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
+    /**
+     *
+     * @return
+     */
     public Role getRoleID() {
         return roleID;
     }
 
+    /**
+     *
+     * @param roleID
+     */
     public void setRoleID(Role roleID) {
         this.roleID = roleID;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getlName() {
         return lName;
     }
 
+    /**
+     *
+     * @param lName
+     */
     public void setlName(String lName) {
         this.lName = lName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getfName() {
         return fName;
     }
 
+    /**
+     *
+     * @param fName
+     */
     public void setfName(String fName) {
         this.fName = fName;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }

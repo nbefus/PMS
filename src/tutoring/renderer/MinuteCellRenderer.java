@@ -20,6 +20,10 @@ import javax.swing.table.DefaultTableCellRenderer;
 public class MinuteCellRenderer extends DefaultTableCellRenderer
 {
     boolean isFutureSession;
+    /**
+     *
+     * @param isFutureSession
+     */
     public MinuteCellRenderer(boolean isFutureSession)
     {
         this.isFutureSession = isFutureSession;

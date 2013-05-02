@@ -16,9 +16,18 @@ import java.util.ArrayList;
  * @author shohe_i
  */
 public class Location {
+    /**
+     *
+     */
     public enum LocationTable {
         
+        /**
+         *
+         */
         LOCATIONID("Location ID", "locationID", true, getTableAlias()+".locationID", true),
+        /**
+         *
+         */
         NAME("Location", "name", true, getTableAlias()+".name", false);
         
         
@@ -40,36 +49,68 @@ public class Location {
             this.displayName = displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getName() {
             return name;
         }
         
+        /**
+         *
+         * @return
+         */
         public String getDisplayName(){
             return displayName;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isID(){
             return isID;
         }
 
+        /**
+         *
+         * @return
+         */
         public boolean isMainTableColumn() {
             return mainTableColumn;
         }
 
+        /**
+         *
+         * @return
+         */
         public String getWithAlias() {
             return withAlias;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static String getTableAlias()
         {
             return tableAlias;
         }  
         
-         public static String getTable()
+         /**
+         *
+         * @return
+         */
+        public static String getTable()
         {
             return table;
         } 
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getMainTableColumns()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -83,6 +124,10 @@ public class Location {
             return cols;
         }
         
+        /**
+         *
+         * @return
+         */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
             ArrayList<String> cols = new ArrayList<String>();
@@ -96,6 +141,11 @@ public class Location {
             return cols;
         }
         
+        /**
+         *
+         * @param DisplayName
+         * @return
+         */
         public static String getDatabaseName(String DisplayName)
         {
             Location.LocationTable[] columns = Location.LocationTable.class.getEnumConstants();
@@ -110,6 +160,11 @@ public class Location {
             return "";
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectColumns(boolean selectIDs)
         {
             Location.LocationTable[] cols = Location.LocationTable.class.getEnumConstants();
@@ -126,6 +181,11 @@ public class Location {
 
         }
         
+        /**
+         *
+         * @param selectIDs
+         * @return
+         */
         public static String getSelectQuery(boolean selectIDs)
         {
             
@@ -140,11 +200,21 @@ public class Location {
     private int locationID; // primary key
     private String name;
 
+    /**
+     *
+     * @param locationID
+     * @param locationName
+     */
     public Location(int locationID, String locationName) {
         this.locationID = locationID;
         this.name = locationName;
     }
 
+    /**
+     *
+     * @param l
+     * @return
+     */
     public static Object[] getValues(Location l)
     {
         Object[] values = new Object[2];
@@ -153,7 +223,13 @@ public class Location {
         return values;
     }
       
-      public static ArrayList<Location> selectAllLocation(String addedSQLToSelect, Connection connect) {
+      /**
+     *
+     * @param addedSQLToSelect
+     * @param connect
+     * @return
+     */
+    public static ArrayList<Location> selectAllLocation(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
