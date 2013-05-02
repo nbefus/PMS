@@ -268,8 +268,8 @@ public final class AdminFinal extends javax.swing.JFrame
         
         /**
          *
-         * @param DisplayName
-         * @return
+         * @param DisplayName 
+         * @return 
          */
         public String getDatabaseName(String DisplayName)
         {
@@ -306,9 +306,7 @@ public final class AdminFinal extends javax.swing.JFrame
         sessionsTable.getTableHeader().setReorderingAllowed(false);
         appointmentsTable.getTableHeader().setReorderingAllowed(false);
         agendaTable.getTableHeader().setReorderingAllowed(false);
-        
-        
-        
+
         todayTableHelper = new TodaySessionTableHelper(todaysSessionTable);
         tableHelper = new SessionTableHelper(sessionsTable, false, null, (TodaySessionTableModel)todaysSessionTable.getModel());
         tableHelperFuture = new SessionTableHelper(appointmentsTable, true, (SessionTableModel)sessionsTable.getModel(), null);
@@ -473,7 +471,7 @@ public final class AdminFinal extends javax.swing.JFrame
     
     
     /**
-     *
+     * 
      */
     public void updateTables()
     {
@@ -486,7 +484,8 @@ public final class AdminFinal extends javax.swing.JFrame
         String currentSessionsWhere = " where ("+sessStartCol+" IS NULL or ("+sessStartCol+" <= '"+now.toString()+"' and "+sessEndCol+" IS NULL)) AND "+walkoutCol+"='false'";
         ((SessionTableModel) sessionsTable.getModel()).deleteAllRows();
        ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere,DatabaseHelper.getConnection());
-        if(sessions.size() > 0)
+        
+       if(sessions.size() > 0)
         {
             for(int i=0; i<sessions.size(); i++)
             {
