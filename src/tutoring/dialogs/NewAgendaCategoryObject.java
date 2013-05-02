@@ -77,7 +77,6 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
             {
                 
                 AgendaCategory c = new AgendaCategory(agendaCategoryID, category);
-                System.out.println(c.toString());
                 DatabaseHelper.open();
                 
                 boolean inserted;
@@ -93,9 +92,7 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
                     JOptionPane.showMessageDialog(null, "The agenda category was NOT created! Please try again!");
                 
                 close();
-                
             }
-
         }
         catch(Exception e)
         {

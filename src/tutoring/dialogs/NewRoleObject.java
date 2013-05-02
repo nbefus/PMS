@@ -65,14 +65,10 @@ public class NewRoleObject extends javax.swing.JDialog {
                 goodRole = false;
                 roleField.setBorder(new MatteBorder(3,3,3,3,Color.red));
             }
-            
-            
-            
+
             if(goodRole)
             {
-                
                 Role r = new Role(roleID, role);
-                System.out.println(r.toString());
 
                 DatabaseHelper.open();
                 
@@ -81,7 +77,6 @@ public class NewRoleObject extends javax.swing.JDialog {
                     inserted = DatabaseHelper.insert(Role.getValues(r), Role.RoleTable.getTable());
                 else
                     inserted = DatabaseHelper.update(Role.getValues(r), Role.RoleTable.getTable());
-                //Reload data and table
                 
                 if(inserted)
                     JOptionPane.showMessageDialog(null, "The role was successfully written to the database!");

@@ -68,9 +68,6 @@ public class Validate
                 throw new Exception();
             if(!ampm.equalsIgnoreCase("am") && !ampm.equalsIgnoreCase("pm"))
                 throw new Exception();
-            //Calendar c = Calendar.getInstance();
-            //c.setTimeInMillis(t.getTime());
-            
         } catch (Exception e) {
             
             return false;

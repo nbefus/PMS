@@ -39,25 +39,21 @@ public class MinuteCellRenderer extends DefaultTableCellRenderer
                 {
                     setForeground(t.getSelectionForeground());
                     setBackground(Color.red);
-                    //setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(!isSelected && ((Integer)o).intValue() < 10)
                 {    
                     setForeground(t.getForeground());
                     setBackground(Color.red);
-                   // setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(isSelected && ((Integer)o).intValue() < 30)
                 {
                     setForeground(t.getSelectionForeground());
                     setBackground(Color.yellow);
-                    //setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(!isSelected && ((Integer)o).intValue() < 30)
                 {    
                     setForeground(t.getForeground());
                     setBackground(Color.yellow);
-                   // setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(isSelected)
                 {
@@ -72,10 +68,8 @@ public class MinuteCellRenderer extends DefaultTableCellRenderer
             }
             else
             {
-                System.out.println("MINUTE REN");
                if(t.getValueAt(r, c-1) != null && !((Timestamp)t.getValueAt(r, c-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")))
                 {
-                    System.out.println("MINUTE REN BAD");
                     if(isSelected)
                     {
                         setForeground(t.getSelectionForeground());
@@ -89,28 +83,23 @@ public class MinuteCellRenderer extends DefaultTableCellRenderer
                }
                if(isSelected && ((Integer)o).intValue() > 25)
                 {
-                    System.out.println("MINUTE REN RED");
                     setForeground(t.getSelectionForeground());
                     setBackground(Color.red);
-                    //setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(!isSelected && ((Integer)o).intValue() > 25)
                 {    
                     setForeground(t.getForeground());
                     setBackground(Color.red);
-                   // setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(isSelected && ((Integer)o).intValue() > 20)
                 {
                     setForeground(t.getSelectionForeground());
                     setBackground(Color.yellow);
-                    //setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(!isSelected && ((Integer)o).intValue() > 20)
                 {    
                     setForeground(t.getForeground());
                     setBackground(Color.yellow);
-                   // setBorder(new MatteBorder(3,3,3,3,Color.black));
                 }
                 else if(isSelected)
                 {
@@ -124,10 +113,6 @@ public class MinuteCellRenderer extends DefaultTableCellRenderer
                 }
             }
         }
-
         return this;
     }
-    
-    
-    
 }

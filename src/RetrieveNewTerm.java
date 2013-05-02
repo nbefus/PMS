@@ -238,8 +238,6 @@ public class RetrieveNewTerm {
               }
               else
               {
-                  System.out.println("NEW Subject: "+s.getSubjectID()+abbrev);
-
                   newsubjects.add(s);
               }
 

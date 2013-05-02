@@ -73,43 +73,21 @@ public class TodaySessionTableHelper
         table.setAutoCreateRowSorter(true);
         table.setFillsViewportHeight(true);
         
-        //table.getColumnModel().getColumn(SessionTableModel.Columns.WALKOUT.getColumnIndex()).setCellEditor(singleclick);
-        
-       // sessionsTable.getColumnModel().getColumn(10).setCellRenderer(new TimestampCellRenderer());
-
         table.setDefaultRenderer(Timestamp.class, new TimestampCellRenderer(false));
-        //table.getColumnModel().getColumn(SessionTableModel.Columns.MIN.getColumnIndex()).setCellRenderer(new MinuteCellRenderer(false));
         
-        //if(!doubleClickBringsInfoUpTop)
-       // {
-       //     table.setDefaultEditor(Timestamp.class, new TimestampCellEditor(new JTextField()));
-       //     
-       //     table.getColumnModel().getColumn(4).setCellEditor(new ComboBoxCellEditor(new JComboBox()));
-       //     table.getColumnModel().getColumn(3).setCellEditor(new ComboBoxCellEditor(new JComboBox()));
-       //     table.getColumnModel().getColumn(2).setCellEditor(new ComboBoxCellEditor(new JComboBox()));
-      //      table.getColumnModel().getColumn(1).setCellEditor(new ComboBoxCellEditor(new JComboBox()));
-      //      table.setDefaultEditor(Boolean.class, singleclick);
-      //  }
-      //  else
-      //  {
             for(int i=0; i<table.getColumnCount(); i++)
             {
                 if(i!=SessionTableModel.Columns.START.getColumnIndex() && i!=SessionTableModel.Columns.STOP.getColumnIndex() && i!=SessionTableModel.Columns.ENTEREDDATE.getColumnIndex() && i != SessionTableModel.Columns.GC.getColumnIndex() && i !=SessionTableModel.Columns.WALKOUT.getColumnIndex())
                     table.getColumnModel().getColumn(i).setCellRenderer(new FontCellRenderer());
-                //if(i !=SessionTableModel.Columns.WALKOUT.getColumnIndex())
                     table.getColumnModel().getColumn(i).setCellEditor(dce);
             }
             table.getColumnModel().getColumn(SessionTableModel.Columns.START.getColumnIndex()).setCellEditor(new TimestampCellEditor(new JTextField()));
             table.getColumnModel().getColumn(SessionTableModel.Columns.STOP.getColumnIndex()).setCellEditor(new TimestampCellEditor(new JTextField()));
-
-     //   }
-
     }
     
-    public JTable autoResizeColWidth()//, DefaultTableModel model) 
+    public JTable autoResizeColWidth()
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        //table.setModel(model);
 
     int margin = 1;
 
@@ -149,7 +127,6 @@ public class TodaySessionTableHelper
     ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(
         SwingConstants.LEFT);
 
-    // table.setAutoCreateRowSorter(true);
     table.getTableHeader().setReorderingAllowed(false);
 
     return table;

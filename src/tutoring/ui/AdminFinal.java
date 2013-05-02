@@ -2,6 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package tutoring.ui;
 
 import tutoring.dialogs.NewClientObject;
@@ -77,7 +78,6 @@ public final class AdminFinal extends javax.swing.JFrame
     private RestrictionListModel restrictHelper;
     
     public class MinuteUpdater extends TimerTask {
-    //times member represent calling times.
     private SessionTableModel current;
     private SessionTableModel future;
 
@@ -89,7 +89,6 @@ public final class AdminFinal extends javax.swing.JFrame
    
     public void run() 
     {
-        //update();
         updateTables();
         current.fireTableDataChanged();
         future.fireTableDataChanged();
@@ -131,7 +130,7 @@ public final class AdminFinal extends javax.swing.JFrame
        cboxes2[0]=courseCombo;
        cboxes2[1]=levelCombo;
        cboxes2[2]=teacherCombo;
-       //cboxes[3]=emailCombo;
+
        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
        cultimateList2.add(Data.getSubjectslist());
@@ -144,8 +143,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
         uaacCourse.noMore();
         uaacCourse = null;
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
-      
+       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
        
        JComboBox[] boxes3 = new  JComboBox[3];
         
@@ -174,7 +172,6 @@ public final class AdminFinal extends javax.swing.JFrame
         CLNAME(1, "Last Name", "lname", 'd'),
         CPHONE(2,"Phone", "phone", 'd'),
         CEMAIL(3, "Email", "email", 'd'),
-        //CATEGORY(4, "Category", "name", 'a'),
         COURSE(0, "Course", "abbrevName", 's'),
         CREATOR(0, "Creator", "", 'e'),
         LEVEL(1, "Level", "level", 'c'),
@@ -233,28 +230,9 @@ public final class AdminFinal extends javax.swing.JFrame
     private AgendaTableHelper tableHelperAgenda;
 
     private int sessionID = -1;
-   // private final int logoutSeconds = 180;
-    /*private long timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
-    Thread timeout = new Thread(){
-        public void run(){
-            while(timeoutTime - System.currentTimeMillis() > 0)
-            {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    }
-            }
-            close();
-            LoginView newlogin = new LoginView();
-            newlogin.setVisible(true);
-            //System.out.println("BOOOOOOOOMMMMM");
-        }
-    };*/
-    
+  
     public AdminFinal() 
     {
-
-       // timeout.start();
         initComponents();
         
         setUpSearchTab();
@@ -293,13 +271,8 @@ public final class AdminFinal extends javax.swing.JFrame
         sessionstartField.setText("mm/dd/yyyy hh:mm aa");
         sessionendField.setText("mm/dd/yyyy hh:mm aa");
         editSaveButton.setVisible(false);
-        
-        
-        
-        
-        
+
        Data d = new Data(false);
-       //Clients autocomplete
       JComboBox[] cboxes = new  JComboBox[4];
        cboxes[0]=fnameCombo;
        cboxes[1]=lnameCombo;
@@ -316,8 +289,7 @@ public final class AdminFinal extends javax.swing.JFrame
        cultimateList1.add(Data.getLnameOrderedList());
        cultimateList1.add(Data.getPhoneOrderedList());
        cultimateList1.add(Data.getEmailOrderedList());
-       uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
-      
+       uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
        
        JComboBox[] cboxes2 = new  JComboBox[3];
        cboxes2[0]=courseCombo;
@@ -332,8 +304,7 @@ public final class AdminFinal extends javax.swing.JFrame
        cultimateList22.add(Data.getSubjectOrderedList());
        cultimateList22.add(Data.getLevelOrderedList());
        cultimateList22.add(Data.getTeacherOrderedList());
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
-      
+       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
        
        JComboBox[] boxes3 = new  JComboBox[3];
         
@@ -608,14 +579,12 @@ public final class AdminFinal extends javax.swing.JFrame
                 {
                     
                 }
-                System.out.println("TABLETEST: "+table.getTableHeader().getColumnModel().getColumn(0).getHeaderValue().toString());
                 String notes = table.getValueAt(row, AgendaTableModel.Columns.NOTES.getColumnIndex()).toString();
                 int agendaID =((Integer) table.getValueAt(row, AgendaTableModel.Columns.ID.getColumnIndex())).intValue();
                 
                 NewAgendaObject ndo = new NewAgendaObject(new Frame(), true, type, date, notes, agendaID);
                 ndo.setLocationRelativeTo(null);
                 ndo.setVisible(true);
-                System.out.println("HOPEFULLY NOT HERE YET");
                 updateTables();
                 return null;
             }
@@ -705,21 +674,14 @@ public final class AdminFinal extends javax.swing.JFrame
     
     public void setUpGeneralReportTab()
     {
-
         loadChartsWithoutDate();
-
-        // String[] columns = new String[c.size()];
-        // for(int i=0; i<c.size(); i++)
-        //     columns[i]=(String)c.get(i);
-
-
     }
     
     private void displayCharts(String[][] generalData, String[][] categoryData, String[][] otherValues, String[][] studentMinutes)
     {
         String[] columns =
         {
-            "Subject", "Total Sessions", "30-min. Sessions", "Avg. Session/Visit"//, "Total Wait Time", "Avg. Wait Time"
+            "Subject", "Total Sessions", "30-min. Sessions", "Avg. Session/Visit"
         };
 
         DefaultTableModel dtm = new DefaultTableModel();
@@ -753,9 +715,6 @@ public final class AdminFinal extends javax.swing.JFrame
         dtm3.setDataVector(studentMinutes, columns3);
         generalReportTable4.setModel(dtm3);
 
-        System.out.println("LOADED DATA");
-
-
         DefaultCategoryDataset barDataset = new DefaultCategoryDataset();
         DefaultCategoryDataset barDataset1 = new DefaultCategoryDataset();
         DefaultCategoryDataset barDataset2 = new DefaultCategoryDataset();
@@ -766,11 +725,6 @@ public final class AdminFinal extends javax.swing.JFrame
         DefaultPieDataset pieDataset2 = new DefaultPieDataset();
 
         String series = "Category";
-
-
-        // String[] categories = new String[data.length];
-        // for(int i=0; i<data.length; i++)
-        //     categories[i] = data[i][1];
 
         for (int i = 0; i < categoryData.length; i++)
         {
@@ -791,7 +745,6 @@ public final class AdminFinal extends javax.swing.JFrame
 
         for (int i = 0; i < generalData.length; i++)
         {
-            System.out.println(Double.parseDouble(generalData[i][1]) + " + " + generalData[i][0]);
             barDataset.addValue(Double.parseDouble(generalData[i][1]), series, generalData[i][0]);
             pieDataset.setValue(generalData[i][0], Double.parseDouble(generalData[i][1]));
         }
@@ -799,7 +752,6 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart barChart = createChart(barDataset, "Total Student Sessions by Subject", "# of Student Sessions", "Subject", false, Color.green, Color.gray);
         final ChartPanel barChartPanel = new ChartPanel(barChart);
         barChartPanel.setPreferredSize(generalChartPanelLong.getSize());
-        System.out.println(barChartPanel.getPreferredSize().height + " " + barChartPanel.getPreferredSize().width);
         generalChartPanelLong.removeAll();
         generalChartPanelLong.add(barChartPanel);
         generalChartPanelLong.validate();
@@ -808,7 +760,6 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart barChart1 = createChart(barDataset1, "Total Student Sessions by Category", "# of Student Sessions", "Category", false, Color.blue, Color.gray);
         final ChartPanel barChartPanel1 = new ChartPanel(barChart1);
         barChartPanel1.setPreferredSize(generalChartPanelRight2.getSize());
-        System.out.println(barChartPanel1.getPreferredSize().height + " " + barChartPanel1.getPreferredSize().width);
         generalChartPanelRight2.removeAll();
         generalChartPanelRight2.add(barChartPanel1);
         generalChartPanelRight2.validate();
@@ -816,7 +767,6 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart barChart2 = createChart(barDataset2, "Other Information", "Total #", "Statistic", false, Color.red, Color.gray);
         final ChartPanel barChartPanel2 = new ChartPanel(barChart2);
         barChartPanel2.setPreferredSize(generalChartPanelLeft2.getSize());
-        System.out.println(barChartPanel2.getPreferredSize().height + " " + barChartPanel2.getPreferredSize().width);
         generalChartPanelLeft2.removeAll();
         generalChartPanelLeft2.add(barChartPanel2);
         generalChartPanelLeft2.validate();
@@ -824,7 +774,6 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart barChart3 = createChart(barDataset3, "Session Length Overview", "# of Sessions of Length", "Length Period", false, Color.gray, Color.white);
         final ChartPanel barChartPanel3 = new ChartPanel(barChart3);
         barChartPanel3.setPreferredSize(generalChartPanelMid2.getSize());
-        System.out.println(barChartPanel3.getPreferredSize().height + " " + barChartPanel3.getPreferredSize().width);
         generalChartPanelMid2.removeAll();
         generalChartPanelMid2.add(barChartPanel3);
         generalChartPanelMid2.validate();
@@ -833,7 +782,6 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart pieChart = createChart(pieDataset, "Total Student Sessions by Subject");
         final ChartPanel pieChartPanel = new ChartPanel(pieChart);
         pieChartPanel.setPreferredSize(generalChartPanelLeft.getSize());
-        System.out.println(pieChartPanel.getPreferredSize().height + " " + pieChartPanel.getPreferredSize().width);
         generalChartPanelLeft.removeAll();
         generalChartPanelLeft.add(pieChartPanel);
         generalChartPanelLeft.validate();
@@ -841,7 +789,6 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart pieChart1 = createChart(pieDataset1, "Total Student Sessions by Category");
         final ChartPanel pieChartPanel1 = new ChartPanel(pieChart1);
         pieChartPanel1.setPreferredSize(generalChartPanelRight.getSize());
-        System.out.println(pieChartPanel1.getPreferredSize().height + " " + pieChartPanel1.getPreferredSize().width);
         generalChartPanelRight.removeAll();
         generalChartPanelRight.add(pieChartPanel1);
         generalChartPanelRight.validate();
@@ -849,14 +796,9 @@ public final class AdminFinal extends javax.swing.JFrame
         final JFreeChart pieChart2 = createChart(pieDataset2, "Total Student Sessions by Length");
         final ChartPanel pieChartPanel2 = new ChartPanel(pieChart2);
         pieChartPanel2.setPreferredSize(generalChartPanelMid.getSize());
-        System.out.println(pieChartPanel2.getPreferredSize().height + " " + pieChartPanel2.getPreferredSize().width);
         generalChartPanelMid.removeAll();
         generalChartPanelMid.add(pieChartPanel2);
         generalChartPanelMid.validate();
-
-        // thechartPanel1.validate();
-        //  reportPanel1.validate();
-        // jScrollPane10.validate();
     }
     
     private JFreeChart createChart(PieDataset dataset, String title)
@@ -880,13 +822,11 @@ public final class AdminFinal extends javax.swing.JFrame
         LegendTitle lt = chart.getLegend();
         lt.setBackgroundPaint(this.getBackground());
         lt.setBorder(0, 0, 0, 0);
-        //lt.setBackgroundPaint(null);
         return chart;
     }
 
     private JFreeChart createChart(final CategoryDataset dataset, final String title, final String xText, final String yText, final boolean showLegend, Color start, Color end)
     {
-
         // create the chart...
         final JFreeChart chart = ChartFactory.createBarChart(
                 title, // chart title
@@ -3145,38 +3085,27 @@ public final class AdminFinal extends javax.swing.JFrame
             uaacClient.noMore();
             uaacClient = null;
             JComboBox[] cboxes = new  JComboBox[4];
-           /* fnameCombo = new JComboBox();
-            lnameCombo = new JComboBox();
-            phoneCombo = new JComboBox();
-            emailCombo = new JComboBox();*/
            cboxes[0]=fnameCombo;
            cboxes[1]=lnameCombo;
            cboxes[2]=phoneCombo;
            cboxes[3]=emailCombo;
 
            ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST1");
            cultimateList.add(Data.getClientsfirst());
            cultimateList.add(Data.getClientslast());
            cultimateList.add(Data.getClientsphone());
            cultimateList.add(Data.getClientsemail());
-           System.out.println("DONE LIST1");
            ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST 2");
            cultimateList1.add(Data.getFnameOrderedList());
            cultimateList1.add(Data.getLnameOrderedList());
            cultimateList1.add(Data.getPhoneOrderedList());
            cultimateList1.add(Data.getEmailOrderedList());
-    System.out.println("DONE LIST2");
            uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
            clearForm();
         }
     }//GEN-LAST:event_newStudentButtonActionPerformed
 
     private void addSessionbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSessionbuttonActionPerformed
-        //Paraprofessional t = new Paraprofessional(count, "TUTORFIRSTTEST", "TUTORLASTTEST", true);
-        //Teacher teach = new Teacher(count, jComboBoxTeacher.getSelectedItem().toString(), "TestFirstName");
-        //Subject sub = new Subject(count, jComboBoxCourse.getSelectedItem().toString(), "FullNameTest", new Category(count, "MABS"));
         addSessionbutton.setEnabled(false);
         getParaprofessionalSession(false);
         addSessionbutton.setEnabled(true);
@@ -3210,7 +3139,6 @@ public final class AdminFinal extends javax.swing.JFrame
         NewAgendaObject ndo = new NewAgendaObject(new Frame(), true);
         ndo.setLocationRelativeTo(null);
         ndo.setVisible(true);
-        System.out.println("HOPEFULLY NOT HERE YET");
         updateTables();
     }//GEN-LAST:event_addAgendaItemButtonActionPerformed
 
@@ -3224,10 +3152,8 @@ public final class AdminFinal extends javax.swing.JFrame
     
     private void loadChartsWithDates(Timestamp beginDate, Timestamp endDate)
     {
-        System.out.println("DATES DATES: "+ beginDate.toString() + " : "+endDate);
         try
         {
-            System.out.println("DATE BEFORE DATE: "+beginDate.before(endDate));
             if (beginDate != null && endDate != null && beginDate.before(endDate))
             {
                 DatabaseHelper.open();
@@ -3301,12 +3227,6 @@ public final class AdminFinal extends javax.swing.JFrame
                     + "between "
                     + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
                 );
-                
-                
-                
-                
-                
-              
 
                 DatabaseHelper.close();
                 displayCharts(data, categoryData, otherValues, studentMinutes);
@@ -3315,23 +3235,17 @@ public final class AdminFinal extends javax.swing.JFrame
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
     }
     
     public static Date addDays(Date date, int days)
     {
-        System.out.println("DATE BEFORE CONVERSION: "+date.toString());
-        //Date dateBefore = new Date(date.getTime() - days * 24 * 3600 * 1000 );
         int x = -days;
         Calendar cal = GregorianCalendar.getInstance();
         cal.add( Calendar.DAY_OF_YEAR, x);
         Date dateBefore = cal.getTime();
-        System.out.println("DATE AFTER CONVERSION: "+dateBefore.toString());
-        //Calendar cal = Calendar.getInstance();
-        //cal.setTime(date);
-        //cal.add(Calendar.DATE, days); //minus number would decrement the days
+
         return dateBefore;
     }
     
@@ -3360,7 +3274,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
+            
         }
     }//GEN-LAST:event_generalReportLoadButtonActionPerformed
 
@@ -3494,7 +3408,6 @@ public final class AdminFinal extends javax.swing.JFrame
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            //SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
             Date myDate = format.parse(sourceDate);
             beginDate = new Timestamp(myDate.getTime());
             myDate = addDays(myDate, 365);
@@ -3523,7 +3436,6 @@ public final class AdminFinal extends javax.swing.JFrame
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            //SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd");
             Date myDate = format.parse(sourceDate);
             beginDate = new Timestamp(myDate.getTime());
             myDate = addDays(myDate, 7);
@@ -3575,10 +3487,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
         DatabaseHelper.open();
         int[] rows = searchsearchTable.getSelectedRows();
-        /* DefaultTableModel dtm = ((DefaultTableModel)searchsearchTable.getModel());
-        for(int i=0; i<rows.length; i++)
-        dtm.removeRow(rows[i]);
-        */
+
         if (clientRadio.isSelected())
         {
             for(int i=0; i<rows.length; i++)
@@ -3624,7 +3533,6 @@ public final class AdminFinal extends javax.swing.JFrame
             for(int i=0; i<rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Teacher.TeacherTable.TEACHERID.getDisplayName());
-                //System.out.println("ID TO DELETE"+index+ " : "+searchsearchTable.getValueAt(rows[i], index).toString());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Teacher.TeacherTable.getTable());
             }
         }
@@ -3794,9 +3702,7 @@ public final class AdminFinal extends javax.swing.JFrame
         String fullQuery = null;
 
         fullQuery = restrictHelper.createQuery(table, selectQuery);
-
-        System.out.println("QUERY: " + fullQuery);
-
+        
         DatabaseHelper.open();
 
         String[][] data = DatabaseHelper.fillTableWithQuery(fullQuery);
@@ -3851,17 +3757,17 @@ public final class AdminFinal extends javax.swing.JFrame
         if (userFirst.length() > 0)
         {
             restrictions.add("'"+userFirst+"'");
-            displayNames.add(User.UserTable.FNAME.getDisplayName());//ComboBoxesIndexes.TEACHERF.getDisplayName());
+            displayNames.add(User.UserTable.FNAME.getDisplayName());
         }
         if (userLast.length() > 0)
         {
             restrictions.add("'"+userLast+"'");
-            displayNames.add(User.UserTable.LNAME.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(User.UserTable.LNAME.getDisplayName());
         }
         if (username.length() > 0)
         {
             restrictions.add("'"+username+"'");
-            displayNames.add(User.UserTable.USERNAME.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(User.UserTable.USERNAME.getDisplayName());
         }
 
         String agendaCategory = ((JTextComponent) searchagendacategoryCombo.getEditor().getEditorComponent()).getText();
@@ -3880,12 +3786,12 @@ public final class AdminFinal extends javax.swing.JFrame
         if (agendaNotes.length() > 0)
         {
             restrictions.add("'"+agendaNotes+"'");
-            displayNames.add(Agenda.AgendaTable.NOTES.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(Agenda.AgendaTable.NOTES.getDisplayName());
         }
         if (agendaDate.length() > 0 && !agendaDate.contains("yyyy"))
         {
             restrictions.add("'"+agendaDate+"'");
-            displayNames.add(Agenda.AgendaTable.DATE.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(Agenda.AgendaTable.DATE.getDisplayName());
         }
 
         String role =((JTextComponent) searchroleCombo.getEditor().getEditorComponent()).getText();
@@ -3894,7 +3800,7 @@ public final class AdminFinal extends javax.swing.JFrame
         {
             restrictions.add("'"+role+"'");
             if(roleRadio.isSelected())
-            displayNames.add(Role.RoleTable.TYPE.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(Role.RoleTable.TYPE.getDisplayName());
         else if(userRadio.isSelected())
         displayNames.add(User.UserTable.ROLETYPE.getDisplayName());
         }
@@ -3904,7 +3810,7 @@ public final class AdminFinal extends javax.swing.JFrame
         {
             restrictions.add("'"+location+"'");
             if(locationRadio.isSelected())
-            displayNames.add(Location.LocationTable.NAME.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(Location.LocationTable.NAME.getDisplayName());
         else if(paraprofessionalRadio.isSelected())
         displayNames.add(ParaprofessionalSession.ParaSessTable.LOCATIONNAME.getDisplayName());
         }
@@ -3925,7 +3831,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
             }
             restrictions.add("'"+sessStart+"'");
-            displayNames.add(ParaprofessionalSession.ParaSessTable.SESSIONSTART.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(ParaprofessionalSession.ParaSessTable.SESSIONSTART.getDisplayName());
         }
         if (sessEnd.length() > 0 && !sessEnd.contains("yyyy"))
         {
@@ -3938,12 +3844,12 @@ public final class AdminFinal extends javax.swing.JFrame
 
             }
             restrictions.add("'"+sessEnd+"'");
-            displayNames.add(ParaprofessionalSession.ParaSessTable.SESSIONEND.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(ParaprofessionalSession.ParaSessTable.SESSIONEND.getDisplayName());
         }
         if (sessNotes.length() > 0)
         {
             restrictions.add("'"+sessStart+"'");
-            displayNames.add(ParaprofessionalSession.ParaSessTable.NOTES.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(ParaprofessionalSession.ParaSessTable.NOTES.getDisplayName());
         }
         if (enteredDate.length() > 0 && !enteredDate.contains("yyyy"))
         {
@@ -3956,7 +3862,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
             }
             restrictions.add("'"+enteredDate+"'");
-            displayNames.add(ParaprofessionalSession.ParaSessTable.TIMEANDDATEENTERED.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(ParaprofessionalSession.ParaSessTable.TIMEANDDATEENTERED.getDisplayName());
         }
 
         String grammarCheck = ((JTextComponent) searchgcCombo.getEditor().getEditorComponent()).getText();
@@ -3965,12 +3871,12 @@ public final class AdminFinal extends javax.swing.JFrame
         if (grammarCheck.length() > 0 && !grammarCheck.equalsIgnoreCase("Either"))
         {
             restrictions.add(grammarCheck);
-            displayNames.add(ParaprofessionalSession.ParaSessTable.NOTES.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(ParaprofessionalSession.ParaSessTable.NOTES.getDisplayName());
         }
         if (walkout.length() > 0 && !walkout.equalsIgnoreCase("Either"))
         {
             restrictions.add(walkout);
-            displayNames.add(ParaprofessionalSession.ParaSessTable.TIMEANDDATEENTERED.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            displayNames.add(ParaprofessionalSession.ParaSessTable.TIMEANDDATEENTERED.getDisplayName());
         }
 
         String fname = ((JTextComponent) searchclientfirstCombo.getEditor().getEditorComponent()).getText();
@@ -4008,7 +3914,7 @@ public final class AdminFinal extends javax.swing.JFrame
         {
             restrictions.add("'"+teacherFirst+"'");
             if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.TEACHERFNAME.getDisplayName());//ComboBoxesIndexes.TEACHERF.getDisplayName());
+            displayNames.add(Course.CourseTable.TEACHERFNAME.getDisplayName());
         else if(teacherRadio.isSelected())
         displayNames.add(Teacher.TeacherTable.FNAME.getDisplayName());
         else if(sessionsRadio.isSelected())
@@ -4018,7 +3924,7 @@ public final class AdminFinal extends javax.swing.JFrame
         {
             restrictions.add("'"+teacherLast+"'");
             if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.TEACHERLNAME.getDisplayName());//ComboBoxesIndexes.TEACHERF.getDisplayName());
+            displayNames.add(Course.CourseTable.TEACHERLNAME.getDisplayName());
         else if(teacherRadio.isSelected())
         displayNames.add(Teacher.TeacherTable.LNAME.getDisplayName());
         else if(sessionsRadio.isSelected())
@@ -4028,7 +3934,7 @@ public final class AdminFinal extends javax.swing.JFrame
         {
             restrictions.add("'"+subject+"'");
             if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.SUBJECTABBREVNAME.getDisplayName());//ComboBoxesIndexes.TEACHERF.getDisplayName());
+            displayNames.add(Course.CourseTable.SUBJECTABBREVNAME.getDisplayName());
         else if(subjectRadio.isSelected())
         displayNames.add(Subject.SubjectTable.ABBREVNAME.getDisplayName());
         else if(sessionsRadio.isSelected())
@@ -4037,9 +3943,9 @@ public final class AdminFinal extends javax.swing.JFrame
         if (level.length() > 0)
         {
             restrictions.add(level);
-            displayNames.add(Course.CourseTable.LEVEL.getDisplayName());//ComboBoxesIndexes.LEVEL.getDisplayName());
+            displayNames.add(Course.CourseTable.LEVEL.getDisplayName());
         if(courseRadio.isSelected())
-        displayNames.add(Course.CourseTable.LEVEL.getDisplayName());//ComboBoxesIndexes.TEACHERF.getDisplayName());
+        displayNames.add(Course.CourseTable.LEVEL.getDisplayName());
         else if(sessionsRadio.isSelected())
         displayNames.add(ParaprofessionalSession.ParaSessTable.COURSELEVEL.getDisplayName());
         }
@@ -4047,7 +3953,7 @@ public final class AdminFinal extends javax.swing.JFrame
         {
             restrictions.add("'"+category+"'");
             if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.SUBJECTCATEGORYNAME.getDisplayName());//ComboBoxesIndexes.LEVEL.getDisplayName());
+            displayNames.add(Course.CourseTable.SUBJECTCATEGORYNAME.getDisplayName());
             else if(subjectRadio.isSelected())
             displayNames.add(Subject.SubjectTable.CATEGORYNAME.getDisplayName());
             else if(categoryRadio.isSelected())
@@ -4209,30 +4115,14 @@ public final class AdminFinal extends javax.swing.JFrame
             restrictions.add(creatorIsClockedIn);
             displayNames.add(ParaprofessionalSession.ParaSessTable.CREATORISCLOCKEDIN.getDisplayName());
         }
-        /*if (paraCategory.length() > 0)
-        {
-            restrictions.add(paraCategory);
-            displayNames.add(ComboBoxesIndexes.PCATEGORY.getDisplayName());
-        }*/
-        for(int i=0; i<restrictions.size(); i++)
-        {
-            System.out.println("Restriction "+i+": "+restrictions.get(i));
-        }
-        for(int i=0; i<displayNames.size(); i++)
-        {
-            System.out.println("Display Name "+i+": "+displayNames.get(i));
-        }
 
         restrictHelper.setListElement(restrictions, displayNames);
-
-        System.out.println("DONE searchaddrestriciton");
 
         clearSearchForm();
     }//GEN-LAST:event_searchAddRestrictionsButtonActionPerformed
 
     private void searchresetrestrictionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchresetrestrictionButtonActionPerformed
 
-        //dlm.set(searchList.getSelectedIndex(), restrictHelper.getRestrictionAt(searchList.getSelectedIndex()));
         if (searchList.getSelectedIndex() > 1 && dlm.size() - 1 == searchList.getSelectedIndex())
         {
             dlm.setElementAt(dlm.getElementAt(dlm.size() - 2).toString().substring(0, dlm.getElementAt(dlm.size() - 2).toString().length() - 3), dlm.size() - 2);
@@ -4244,19 +4134,12 @@ public final class AdminFinal extends javax.swing.JFrame
     }//GEN-LAST:event_searchresetrestrictionButtonActionPerformed
 
     private void searchclearrestrictionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchclearrestrictionsButtonActionPerformed
-        /*
-        String[] restrictions = restrictHelper.getRestrictions();
-
-        for(int i=0; i<restrictions.length; i++)
-        dlm.set(i, restrictions[i]);*/
-
+        
         dlm.clear();
         dlm.addElement("Search for all records");
     }//GEN-LAST:event_searchclearrestrictionsButtonActionPerformed
 
     private void clientRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientRadioActionPerformed
-
-        System.out.println("ACTION ON CLIENT RADIO");
         if (clientRadio.isSelected())
         {
             clearSearchForm();
@@ -4277,25 +4160,11 @@ public final class AdminFinal extends javax.swing.JFrame
 
             dlm.clear();
 
-            /*
-            String[] restrictions = new String[4];
-            restrictions[0]="First Name is any";
-            restrictions[1]="Last Name is any";
-            restrictions[2]="Phone is any";
-            restrictions[3]="Email is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
             dlm.addElement("Search for all records");
-            // restrictHelper.setRestrictions(restrictions);
-
         }
     }//GEN-LAST:event_clientRadioActionPerformed
 
     private void courseRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseRadioActionPerformed
-
-        System.out.println("ACTION ON COURSE RADIO");
         if (courseRadio.isSelected())
         {
             clearSearchForm();
@@ -4315,23 +4184,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_courseRadioActionPerformed
 
     private void sessionsRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sessionsRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (sessionsRadio.isSelected())
         {
             clearSearchForm();
@@ -4351,23 +4209,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(true);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_sessionsRadioActionPerformed
 
     private void teacherRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (teacherRadio.isSelected())
         {
             clearSearchForm();
@@ -4403,7 +4250,6 @@ public final class AdminFinal extends javax.swing.JFrame
     }//GEN-LAST:event_teacherRadioActionPerformed
 
     private void paraprofessionalRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraprofessionalRadioActionPerformed
-        System.out.println("ACTION ON CLIENT RADIO");
         if (paraprofessionalRadio.isSelected())
         {
             clearSearchForm();
@@ -4424,16 +4270,6 @@ public final class AdminFinal extends javax.swing.JFrame
 
             dlm.clear();
 
-            /*
-            String[] restrictions = new String[4];
-            restrictions[0]="First Name is any";
-            restrictions[1]="Last Name is any";
-            restrictions[2]="Phone is any";
-            restrictions[3]="Email is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
             dlm.addElement("Search for all records");
             // restrictHelper.setRestrictions(restrictions);
 
@@ -4444,7 +4280,6 @@ public final class AdminFinal extends javax.swing.JFrame
 
         if(clientRadio.isSelected())
         {
-            //Validate.createClient(false, searchclientfirstCombo, searchclientlastCombo, searchclientphoneCombo, searchclientemailCombo);
             NewClientObject ndo = new NewClientObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
@@ -4523,7 +4358,6 @@ public final class AdminFinal extends javax.swing.JFrame
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void roleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (roleRadio.isSelected())
         {
             clearSearchForm();
@@ -4543,24 +4377,13 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
-
+  
             dlm.addElement("Search for all records");
         }
 
     }//GEN-LAST:event_roleRadioActionPerformed
 
     private void locationRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (locationRadio.isSelected())
         {
             clearSearchForm();
@@ -4579,23 +4402,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcategoryPanel.setVisible(false);
             searchcreatorPanel.setVisible(false);
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
-
+            
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_locationRadioActionPerformed
 
     private void categoryRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_categoryRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (categoryRadio.isSelected())
         {
             clearSearchForm();
@@ -4615,23 +4427,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_categoryRadioActionPerformed
 
     private void agendaRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agendaRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (agendaRadio.isSelected())
         {
             clearSearchForm();
@@ -4651,23 +4452,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_agendaRadioActionPerformed
 
     private void agendaCategoryRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agendaCategoryRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (agendaCategoryRadio.isSelected())
         {
             clearSearchForm();
@@ -4687,23 +4477,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_agendaCategoryRadioActionPerformed
 
     private void subjectRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subjectRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (subjectRadio.isSelected())
         {
             clearSearchForm();
@@ -4723,23 +4502,12 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_subjectRadioActionPerformed
 
     private void userRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userRadioActionPerformed
-        System.out.println("ACTION ON COURSE RADIO");
         if (userRadio.isSelected())
         {
             clearSearchForm();
@@ -4759,16 +4527,6 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
@@ -4794,16 +4552,6 @@ public final class AdminFinal extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-            /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
-
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
-
-            // restrictHelper.setRestrictions(restrictions);
 
             dlm.addElement("Search for all records");
         }
@@ -4811,11 +4559,6 @@ public final class AdminFinal extends javax.swing.JFrame
 
     private void close()
     {
-        /*
-        Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
-        }*/
         setVisible(false); //you can't see me!
         dispose();
     }
@@ -4841,7 +4584,6 @@ public final class AdminFinal extends javax.swing.JFrame
             boolean paraprofessionalPanelCheck = true;
             boolean creatorPanelCheck = true;
             boolean locationPanelCheck = true;
-          //  boolean otherPanelCheck = true;
             
             courseCombo.setBorder(null);
             teacherCombo.setBorder(null);
@@ -4854,16 +4596,9 @@ public final class AdminFinal extends javax.swing.JFrame
             sessionendField.setBorder(null);
             sessionstartField.setBorder(null);
             studentInfoPanel.repaint();
-           /// otherInfoPanel.repaint();
             courseInfoPanel.repaint();
-           /// creatorInfoPanel.repaint();
             paraprofessionalInfoPanel.repaint();
-           /// locationInfoPanel.repaint();
-            
-            //courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-            //studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-           // otherInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-           
+
             String course = ((JTextComponent)courseCombo.getEditor().getEditorComponent()).getText();
             if(course.length() <= 0)
             {
@@ -4967,8 +4702,6 @@ public final class AdminFinal extends javax.swing.JFrame
  
             boolean walkout = walkoutCheck.isSelected();
 
-           // String term = jComboBoxTerm.getSelectedItem().toString();
-
             String abbrevNameString = Subject.SubjectTable.ABBREVNAME.getWithAlias();
             String teachFNameString = Teacher.TeacherTable.FNAME.getWithAlias();
             String teachLNameString = Teacher.TeacherTable.LNAME.getWithAlias();
@@ -4997,7 +4730,6 @@ public final class AdminFinal extends javax.swing.JFrame
             {
                 z.printStackTrace();
                 courses = new ArrayList<Course>();
-                //coursePanelCheck = true;
             }
             ArrayList<Paraprofessional> paraprofessionals = (ArrayList<Paraprofessional>)Paraprofessional.selectAllParaprofessional("where concat(concat("+paraFNameString+",' '),"+paraLNameString+")='"+pName.trim()+"'", DatabaseHelper.getConnection());
 
@@ -5009,52 +4741,39 @@ public final class AdminFinal extends javax.swing.JFrame
 
             courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
             studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-         ///   otherInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-         ///   creatorInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
+
             paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-         ///   locationInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
             
                
-            System.out.println("CLIENTS SIZE: "+clients.size());
             if(subjects.size() <= 0 && coursePanelCheck)
             {
-                System.out.println("Subjects less than 1");
                 courseInfoPanel.setBackground(Color.red);
             }
             if(teachers.size() <= 0 && coursePanelCheck)
             {
-                System.out.println("Teachers less than 1");
                 courseInfoPanel.setBackground(Color.red);
             }
             if(courses.size() <= 0 && coursePanelCheck)
             {
-                System.out.println("Courses less than 1");
                 courseInfoPanel.setBackground(Color.red);
             }
             if(paraprofessionals.size() <= 0 && paraprofessionalPanelCheck)
             {
-                System.out.println("Paraprofessionals less than 1");
                 paraprofessionalInfoPanel.setBackground(Color.red);
             }
             if(creators.size() <= 0 && creatorPanelCheck)
             {
-                System.out.println("Creators less than 1");
                 creatorCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
-            ///    creatorInfoPanel.setBackground(Color.red);
             }
             if(clients.size() <= 0 && clientPanelCheck)
             {
-                System.out.println("Clients less than 1");
                 studentInfoPanel.setBackground(Color.red);
             }
             if(locations.size() <= 0 && locationPanelCheck)
             {
-                System.out.println("Locations less than 1");
                 locationCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
-              ///  locationInfoPanel.setBackground(Color.red);
             }
-          //  if(terms.size() <= 0)
-          //      System.out.println("Terms less than 1");
+
             Timestamp now = new Timestamp((new Date()).getTime());
 
             String sessionStartString;
@@ -5084,23 +4803,11 @@ public final class AdminFinal extends javax.swing.JFrame
             if(!isUpdating)
             {
                 DatabaseHelper.insert(ParaprofessionalSession.getValues(ps), ParaprofessionalSession.ParaSessTable.getTable());
-               // HibernateTest.create(ps);
 
-                System.out.println("NOW: "+now.toString());
                 
                 String query =  "where "+paraIDString+"="+paraprofessionals.get(0).getParaprofessionalID()+" and "+clientIDString+"="+clients.get(0).getClientID()+" and "+courseIDString+"="+courses.get(0).getCourseID()+" and "+locationIDString+"="+locations.get(0).getLocationID()+" and "+creatorIDString+"="+creators.get(0).getParaprofessionalID()+" and "+enteredString+"='"+now.toString()+"' and "+sessStartString+""+sessionStartString+" and "+sessEndString+""+sessionEndString+" and "+gcString+"="+GC+" and "+notesString+"='"+notes+"' and "+walkoutString+"="+walkout;
-                System.out.println(query);
                 ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(query, DatabaseHelper.getConnection()); // (ArrayList<ParaprofessionalSession>)HibernateTest.select(query);
 
-                if(sessions.size() <=0)
-                {
-                    System.out.println("SESSION WAS NOT CREATED ERROR");
-                }
-                else
-                {
-
-                    System.out.println("ID: "+sessions.get(0).getParaprofessionalSessionID());
-                }
                 ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(0));
             }
             else
@@ -5110,30 +4817,9 @@ public final class AdminFinal extends javax.swing.JFrame
                     
                 DatabaseHelper.update(ParaprofessionalSession.getValues(ps), ParaprofessionalSession.ParaSessTable.getTable());
 
-                System.out.println("NOW: "+now.toString());
                 String query =  "where "+clientIDString+"="+clients.get(0).getClientID()+" and "+courseIDString+"="+courses.get(0).getCourseID()+" and "+locationIDString+"="+locations.get(0).getLocationID()+" and "+creatorIDString+"="+creators.get(0).getParaprofessionalID()+" and "+enteredString+"='"+now.toString()+"' and "+sessStartString+""+sessionStartString+" and "+sessEndString+""+sessionEndString+" and "+gcString+"="+GC+" and "+notesString+"='"+notes+"' and "+walkoutString+"="+walkout;
 
-               // String query = "where ps.clientID="+clients.get(0).getClientID()+" and ps.courseID="+courses.get(0).getCourseID()+" and ps.locationID="+locations.get(0).getLocationID()+" and ps.paraprofessionalCreatorID="+creators.get(0).getParaprofessionalID()+" and ps.timeAndDateEntered='"+now.toString()+"' and ps.sessionStart"+sessionStartString+" and ps.sessionEnd"+sessionEndString+" and ps.grammarCheck="+GC+" and ps.notes='"+notes+"' and ps.walkout="+walkout;
-
-                System.out.println(query);
                 ArrayList<ParaprofessionalSession> sessions = (ArrayList<ParaprofessionalSession>)ParaprofessionalSession.selectAllParaprofessionalSession(query,DatabaseHelper.getConnection());
-
-                if(sessions.size() <=0)
-                {
-                    System.out.println("SESSION WAS NOT CREATED ERROR");
-                }
-                else if(sessions.size() > 1)
-                {
-                    System.out.println("ID: "+sessions.get(0).getParaprofessionalSessionID());
-                }
-                else
-                {
-                    //HibernateTest.update(ps);
-                    //!!!
-                    //Call reload data
-                    //!!!
-                    //Remove when finished
-                }
             }
 
             sessionsTable.repaint();
@@ -5145,26 +4831,18 @@ public final class AdminFinal extends javax.swing.JFrame
 
                     while(colorOfGreen < 255)
                     {
-                        //sessionsAndAgendaPanel.setBackground(new Color( 0,colorOfGreen,0));
                         courseInfoPanel.setBackground(new Color( 0,colorOfGreen,0));
                         studentInfoPanel.setBackground(new Color(0,colorOfGreen,0));
-                       /// otherInfoPanel.setBackground(new Color(0,colorOfGreen,0));
-                      ///  creatorInfoPanel.setBackground(new Color(0,colorOfGreen,0));
                         paraprofessionalInfoPanel.setBackground(new Color(0,colorOfGreen,0));
-                      ///  locationInfoPanel.setBackground(new Color(0,colorOfGreen,0));
                         colorOfGreen += 2;
                         try {
                             this.sleep(13);
                         } catch (InterruptedException ex) {
                         }
                     }  
-                    //sessionsAndAgendaPanel.setBackground(sessionsTablePanel.getBackground());
                     courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-                   /// otherInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground()); 
-                   /// creatorInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-                   /// locationInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     updateTables();
                     clearForm();
                 }
@@ -5176,7 +4854,6 @@ public final class AdminFinal extends javax.swing.JFrame
         }
         catch(Exception e)
         {
-            System.out.println("ERROR ADDING SESSION"+e.getMessage() +"\n\n");
             e.printStackTrace();
             return false;
         } 
@@ -5283,7 +4960,6 @@ public final class AdminFinal extends javax.swing.JFrame
             {
                 SimpleDateFormat sdfFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 SimpleDateFormat sdfTo = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-                System.out.println("GET TABEL CELL EDITOR MAKE EDIT SEARCH CELL EDITOR");
                 
                 
                 
@@ -5293,7 +4969,6 @@ public final class AdminFinal extends javax.swing.JFrame
                     String clientEmail = "", clientFirst ="", clientLast = "", clientPhone="";
                     for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        System.out.println(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString() + "!!"+table.getValueAt(row, i).toString());
                         if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.CLIENTID.getDisplayName()))
                         {
                             try
@@ -5885,10 +5560,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
     public void setUpSearchTab()
     {
-        //ComboBoxesIndexes.class.getEnumConstants();
-        //BASED ON TABLE SEARCHING..
-
-
+ 
         searchList.setModel(dlm);
 
         searchclientPanel.setVisible(true);
@@ -5966,7 +5638,7 @@ public final class AdminFinal extends javax.swing.JFrame
 
 
         dlm.addElement("Search for all records");
-        restrictHelper = new RestrictionListModel(dlm);//, restrictions);
+        restrictHelper = new RestrictionListModel(dlm);
     }
     
     public void download(JTable table) throws IOException
@@ -5978,9 +5650,8 @@ public final class AdminFinal extends javax.swing.JFrame
         File file = jfc.getSelectedFile();
         
         try 
-        {
-            
-             BufferedWriter writer = new BufferedWriter
+        {   
+            BufferedWriter writer = new BufferedWriter
             (new FileWriter(file.getAbsoluteFile()+".csv"));
 
             String cols = "";

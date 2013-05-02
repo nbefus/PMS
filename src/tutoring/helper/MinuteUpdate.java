@@ -12,7 +12,6 @@ import javax.swing.JTable;
  * @author Nathaniel
  */
 public class MinuteUpdate extends TimerTask {
-    //times member represent calling times.
     private SessionTableModel stm;
    public MinuteUpdate(SessionTableModel stm)
    {

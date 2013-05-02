@@ -90,18 +90,12 @@ public class TodaySessionTableModel extends AbstractTableModel {
  
     }
      
-    private String[] columnNames;// = {"ID","fname","lname","phone", "email","course","level","teacher","notes","tutor","gc", "date","start","stop","min", "location","creator","walkout","category" };
-    private  ParaprofessionalSession[] data;// = {{null,null,null,null,null,null,null,null}};
+    private String[] columnNames;
+    private  ParaprofessionalSession[] data;
     private ArrayList<ParaprofessionalSession> tutorSessions = new ArrayList();
 
-   /* public SessionTableModel(ArrayList<ParaprofessionalSession> list, boolean isFutureSession){
-         this.tutorSessions = list;
-         columnNames=generateColumns();
-         this.isFutureSession = isFutureSession;
-    }*/
     public TodaySessionTableModel(){
-        columnNames=generateColumns();
-        
+        columnNames=generateColumns(); 
     }
     
     public TodaySessionTableModel(SessionTableModel currentSessionModel)
@@ -121,16 +115,6 @@ public class TodaySessionTableModel extends AbstractTableModel {
         
         return columnNames;
     }
-    
-    /*
-    public void addRow(String fname, String lname, Subject subject, int level, Teacher teacher, String notes, Paraprofessional tutor, boolean future, boolean gc)
-    {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(ts.toString());
-        ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-        tutorSessions.add(tutorSession);
-        fireTableDataChanged();
-    }*/
     
     public void addRow(ParaprofessionalSession ts)
     {
@@ -165,20 +149,15 @@ public class TodaySessionTableModel extends AbstractTableModel {
         if(one instanceof Timestamp)
         {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
+            
             try {
                 if(new Timestamp(sdf.parse(two.toString()).getTime()).toString().equals(((Timestamp)one).toString()))
                     return true;
-               // System.out.println("COMPARE: "+((Timestamp)one).compareTo((Timestamp)two));
             } catch (ParseException ex) {
-                System.out.println("EXCEPTIONS FO");
                 return false;
             }
+            
             return false;
-            /*System.out.println(((Timestamp)one).toString() + "    "+((Timestamp)two).toString());
-            if(((Timestamp)one).compareTo((Timestamp)two) == 0)
-                return true;
-            else
-                return false;*/
         }
         else if(one instanceof Boolean && two instanceof Boolean)
         {
@@ -195,31 +174,11 @@ public class TodaySessionTableModel extends AbstractTableModel {
                 return false;
         }
     }
-        
-    @Override
-    public void setValueAt(Object o, int r, int c)
-    {
-       
-    }
-    
-    /*
-    public void addRow(String fname, String lname, String subjectAbbrevName, int level, String teacherLName, String notes, Paraprofessional tutor, boolean future, boolean gc)
-    {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(ts.toString());
-        ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-        tutorSessions.add(tutorSession);
-    }*/
 
     @Override
     public boolean isCellEditable(int i, int j)
     {
-      //  System.out.println(getValueAt(i,j).getClass().toString());
-      //  System.out.println((getValueAt(i, j-1) instanceof Timestamp));
-      //  System.out.println(((Timestamp)getValueAt(i, j-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")));
-        //if(!(getValueAt(i, j-1) instanceof Timestamp && ((Timestamp)getValueAt(i, j-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")) && j == SessionTableModel.Columns.STOP.getColumnIndex()) && !(getValueAt(i, j) instanceof Timestamp && !((Timestamp)getValueAt(i, j)).equals(Timestamp.valueOf("9999-12-31 12:00:00"))))
-            return true;
-        //return false;
+        return true;
     }
     
     @Override
@@ -305,9 +264,7 @@ public class TodaySessionTableModel extends AbstractTableModel {
 
    @Override
    public Class<?> getColumnClass(int columnIndex){
-
        return SessionTableModel.Columns.getColumnClass(columnIndex);
-          //   return null;
       }
    
       
