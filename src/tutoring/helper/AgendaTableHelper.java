@@ -69,59 +69,21 @@ public class AgendaTableHelper
     
     public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
     {
-       // DefaultCellEditor singleclick = new DefaultCellEditor(new JCheckBox());
-       // singleclick.setClickCountToStart(2);
-        // DefaultCellEditor singleclickCombo = new DefaultCellEditor(new JComboBox());
-        //singleclickCombo.setClickCountToStart(2);
-        //set the editor as default on every column
-   
-       
-        
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.setAutoCreateRowSorter(true);
         table.setFillsViewportHeight(true);
-        
-        //table.getColumnModel().getColumn(SessionTableModel.Columns.WALKOUT.getColumnIndex()).setCellEditor(singleclick);
-        
-       // sessionsTable.getColumnModel().getColumn(10).setCellRenderer(new TimestampCellRenderer());
-
-        //table.setDefaultRenderer(Timestamp.class, new TimestampCellRenderer(false));
-        //table.getColumnModel().getColumn(SessionTableModel.Columns.MIN.getColumnIndex()).setCellRenderer(new MinuteCellRenderer(isFutureSession));
-        
-       
 
         for(int i=0; i<table.getColumnCount(); i++)
         {
-           // if(i != AgendaTableModel.Columns.DATE.getColumnIndex())
-                table.getColumnModel().getColumn(i).setCellRenderer(new FontCellRenderer());
+            table.getColumnModel().getColumn(i).setCellRenderer(new FontCellRenderer());
 
             table.getColumnModel().getColumn(i).setCellEditor(dce);
         }
-        
-        
-        
-        
-
-
-        //   sessionsTable.getColumnModel().getColumn(11).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //   sessionsTable.getColumnModel().getColumn(12).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //   sessionsTable.getColumnModel().getColumn(13).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //sessionsTable.getColumnModel().getColumn(11).setCellRenderer(new TimestampCellRenderer());
-        //sessionsTable.getColumnModel().getColumn(12).setCellRenderer(new TimestampCellRenderer());
-        // sessionsTable.getColumnModel().getColumn(13).setCellRenderer(new TimestampCellRenderer());
-
-        //sessionsTable.getColumnModel().getColumn(10).setCellRenderer(new ButtonCellRenderer());
-        //sessionsTable.getColumnModel().getColumn(11).setCellRenderer(new ButtonCellRenderer());
-        //sessionsTable.getColumnModel().getColumn(9).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //sessionsTable.getColumnModel().getColumn(10).setCellEditor(new ButtonCellEditor(new JCheckBox()));
-        //sessionsTable.getColumnModel().getColumn(11).setCellEditor(new ButtonCellEditor(new JCheckBox()));
-
     }
     
-    public JTable autoResizeColWidth()//, DefaultTableModel model) 
+    public JTable autoResizeColWidth()
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        //table.setModel(model);
 
     int margin = 1;
 
@@ -161,7 +123,6 @@ public class AgendaTableHelper
     ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(
         SwingConstants.LEFT);
 
-    // table.setAutoCreateRowSorter(true);
     table.getTableHeader().setReorderingAllowed(false);
 
     return table;

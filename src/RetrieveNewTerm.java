@@ -40,11 +40,12 @@ public class RetrieveNewTerm {
     
     private static int autoIncValSub = 1;
     private static int autoIncValTeach = 1;
-private static int autoIncValCourse = 1;
-    private static ArrayList<Subject> subjects;// =(ArrayList<Subject>) Subject.selectAllSubjects("", DatabaseHelper.getConnection());
-    private static ArrayList<Teacher> teachers;// = (ArrayList<Teacher>) Teacher.selectAllTeacher("", DatabaseHelper.getConnection());
-    private static ArrayList<Course> courses;// = (ArrayList<Course>) Course.selectAllCourse("", DatabaseHelper.getConnection());
-    private static ArrayList<Category> categories;// = (ArrayList<Category>) Category.selectAllCategory("", DatabaseHelper.getConnection());
+    private static int autoIncValCourse = 1;
+    
+    private static ArrayList<Subject> subjects;
+    private static ArrayList<Teacher> teachers;
+    private static ArrayList<Course> courses;
+    private static ArrayList<Category> categories;
 
     private static ArrayList<Subject> newsubjects = new ArrayList<Subject>();
     private static ArrayList<Teacher> newteachers = new ArrayList<Teacher>();
@@ -69,65 +70,6 @@ private static int autoIncValCourse = 1;
         
    }
     
-    public static void findDropDownValues() throws Exception
-    {
-        URL url = new URL("http://apps.hpu.edu/cis/web/index.php/search");
-      BufferedReader reader = new BufferedReader
-      (new InputStreamReader(url.openStream()));
-      BufferedWriter writer = new BufferedWriter
-      (new FileWriter("data.txt"));
-      String line;
-      boolean scrapping = false;
-      int dropbox = -1;
-      Object[] box = new Object[3];
-      
-      
-      while ((line = reader.readLine()) != null) {
-         // ArrayList<String> als = new ArrayList<String>();
-          if(line.contains("select name=\"")&& dropbox < 3)
-          {
-              System.out.println("Setting array list");
-              scrapping = true;
-              dropbox++;
-             // als = new ArrayList<String>();
-          }
-          if(line.contains("/select")&& dropbox < 3)
-          {
-              scrapping = false;
-            //  box[dropbox]=als;
-            //  als.clear();
-          }
-          if(scrapping && dropbox < 3)
-          {
-              if(line.contains("option"))
-              {
-                  //System.out.println(line.substring(line.indexOf(">")+1,line.lastIndexOf("<")));
-                  String value = line.substring(line.indexOf(">")+1,line.lastIndexOf("<"));
-                  System.out.println(value);
-                  if(value != null && !value.contains("DO NOT USE") && !value.equals(""))
-                  {     writer.write(value);
-                        writer.newLine();
-                  }
-              }
-          }
-         //System.out.println(line.trim());
-         
-      }
-      reader.close();
-      writer.close();
-      /*
-      for(int i=0; i<box.length; i++)
-      {
-          System.out.println("I: "+i);
-          ArrayList<String> val = ((ArrayList<String>) box[i]);
-          for(int j=0; j<val.size(); j++)
-          {
-              System.out.println("J: "+j);
-              System.out.println(val.get(j));
-          }
-      }*/
-    }
-    
     private static int containsTeacher(ArrayList<Teacher> teachers, Teacher t)
     {
         for(int i=0; i<teachers.size(); i++)
@@ -135,7 +77,6 @@ private static int autoIncValCourse = 1;
             if(teachers.get(i).equals(t))
                 return i;
         }
-        System.out.println("TEAcHER DOESN'T ALREADY EXISTS: "+t.getfName() + " "+t.getlName());
         return -1;
     }
     
@@ -163,10 +104,6 @@ private static int autoIncValCourse = 1;
     
     public static void updateCourses(String[] termCodes) throws Exception
     {
-        
-        
-        //ArrayList<Category> newcategories = (ArrayList<Category>)HibernateTest.select("from Category");
-      
         if(teachers.size() > 0)
         {
             autoIncValTeach = teachers.get(teachers.size()-1).getTeacherID();
@@ -201,18 +138,10 @@ private static int autoIncValCourse = 1;
              int level=0;
              
              while ((line = reader.readLine()) != null) {
-                // ArrayList<String> als = new ArrayList<String>();
                  
                  if(line.contains("<td>"))
                  {
                      concat=true;
-                     
-                     //content+=line;
-                     //String value = line.substring(line.indexOf(">")+1,line.lastIndexOf("<"));
-
-                     //System.out.println("Value: "+value);
-
-                    // als = new ArrayList<String>();
                  }
                  if(line.contains("</td>"))
                  {
@@ -228,12 +157,11 @@ private static int autoIncValCourse = 1;
                  if(read)
                  {
                      String value = content.substring(content.indexOf(">")+1,content.lastIndexOf("<")).trim();
-                  //   System.out.println("CONTENT: "+content);
-                  //   System.out.println("Value: "+value);
+
                      read=false;
                      content="";
                      count++;
-                     //System.out.println(count);
+
                      if(count %5 == 2)
                      {
                          String[] values = value.split(" ");
@@ -245,46 +173,28 @@ private static int autoIncValCourse = 1;
                          String[] values = value.split(" ");
                          fname=values[0].trim();
                          lname=values[1].trim();
-                         
-                         System.out.println("Count: "+count);
-                         
+                                                  
                          insertData(lname, fname, abbrev, level);  
                      }
                  } 
              }
              
-            // DatabaseHelper.open();
              for(int s=0; s<newsubjects.size(); s++)
                  DatabaseHelper.insert(Subject.getValues(newsubjects.get(s)), Subject.SubjectTable.getTable());
              for(int s=0; s<newteachers.size(); s++)
                  DatabaseHelper.insert(Teacher.getValues(newteachers.get(s)), Teacher.TeacherTable.getTable());
              for(int s=0; s<newcourses.size(); s++)
                  DatabaseHelper.insert(Course.getValues(newcourses.get(s)), Course.CourseTable.getTable());
-            // DatabaseHelper.close();
         }
-  
-      /*
-      for(int i=0; i<box.length; i++)
-      {
-          System.out.println("I: "+i);
-          ArrayList<String> val = ((ArrayList<String>) box[i]);
-          for(int j=0; j<val.size(); j++)
-          {
-              System.out.println("J: "+j);
-              System.out.println(val.get(j));
-          }
-      }*/
     }
     
     
     public static void insertData(String lname, String fname, String abbrev, int level)
     {
-       // System.out.println(autoIncValTeach+ lname +" "+fname + " "+abbrev + " "+level + " "+autoIncValSub);
-
         Teacher t = new Teacher(++autoIncValTeach, lname, fname);
-        Subject s = new Subject(++autoIncValSub, abbrev.trim(), categories.get(categories.size()-1)); //
+        Subject s = new Subject(++autoIncValSub, abbrev.trim(), categories.get(categories.size()-1)); 
 
-        Course course = new Course(++autoIncValCourse, t, s, level); //++autoIncValCourse
+       Course course = new Course(++autoIncValCourse, t, s, level); 
 
        int hasSubject = containsSubject(subjects, s);
        int hasTeacher = containsTeacher(teachers, t);
@@ -294,54 +204,37 @@ private static int autoIncValCourse = 1;
        {
           if(hasTeacher == -1)
           {
-              //HibernateTest.create(t);
-
-             // System.out.println("NEW TEACHER: "+fname+ "  "+lname);
-              if(firstTeacher)//teachers.size() < 1)
+              if(firstTeacher)
               {
                  DatabaseHelper.insert(Teacher.getValues(t), Teacher.TeacherTable.getTable());
-                  //HibernateTest.create(t);
-                 // System.out.println("AUTO INC Teachers inside before: "+autoIncValTeach);
                   autoIncValTeach = ((Teacher)(Teacher.selectAllTeacher("where "+Teacher.TeacherTable.FNAME.getWithAlias()+"='"+fname+"' and "+Teacher.TeacherTable.LNAME.getWithAlias()+"='"+lname+"'", DatabaseHelper.getConnection())).get(0)).getTeacherID();
 
                   t.setTeacherID(autoIncValTeach);
-                 // autoIncValTeach++;
                   firstTeacher = false;
-                 // System.out.println("AUTO INC Teachers inside: "+autoIncValTeach);
-
               }
               else
               {
                   newteachers.add(t);
-                  System.out.println("NEW TEACHER: "+t.getTeacherID()+fname+ "  "+lname);
               }
 
               teachers.add(t);
-              //System.out.println("Inserted teacher: "+t.getfName() + " "+t.getlName());
           }
           else
           {
               t.setTeacherID(teachers.get(hasTeacher).getTeacherID());
               autoIncValTeach--;
-              System.out.println("SAME TEACHER "+autoIncValTeach);
           }
 
           if(hasSubject == -1)
           {
-             // HibernateTest.create(s);
-
               System.out.println("NEW Subject: *"+abbrev+ "*");
-              if(firstSubject)//subjects.size() < 1)
+              if(firstSubject)
               {
-                 // HibernateTest.create(s);
                   DatabaseHelper.insert(Subject.getValues(s), Subject.SubjectTable.getTable());
 
-                 // System.out.println("AUTO INC SUBJECTS inside before: "+autoIncValSub);
                   autoIncValSub = ((Subject)(Subject.selectAllSubjects("where "+Subject.SubjectTable.ABBREVNAME.getWithAlias()+"='"+abbrev+"'", DatabaseHelper.getConnection())).get(0)).getSubjectID();
                   s.setSubjectID(autoIncValSub);
-                  //autoIncValSub++;
                   firstSubject = false;
-                  System.out.println("AUTO INC SUBJECTS inside: "+autoIncValSub);
               }
               else
               {
@@ -351,45 +244,29 @@ private static int autoIncValCourse = 1;
               }
 
               subjects.add(s);
-              //if(subjects.size() >= 1)
-              //  newsubjects.add(s);
-              //System.out.println("Inserted subject: "+s.getAbbrevName());
           }
           else
           {
               s.setSubjectID(subjects.get(hasSubject).getSubjectID());
               autoIncValSub--;
-             // System.out.println("SAME Subject "+autoIncValSub);
           }
 
           
-          if(firstCourse)//courses.size() < 1)
+          if(firstCourse)
             {
-                //HibernateTest.create(course);
                 DatabaseHelper.insert(Course.getValues(course), Course.CourseTable.getTable());
 
-                //System.out.println("AUTO INC Teachers inside before: "+autoIncValTeach);
                 autoIncValCourse = ((Course)(Course.selectAllCourse("where "+Course.CourseTable.TEACHERID.getWithAlias()+"="+t.getTeacherID()+" and "+Course.CourseTable.SUBJECTID.getWithAlias()+"="+s.getSubjectID()+" and "+Course.CourseTable.LEVEL.getWithAlias()+"="+course.getLevel(), DatabaseHelper.getConnection())).get(0)).getCourseID();
 
                 course.setCourseID(autoIncValCourse);
-                //autoIncValCourse++;
-               // System.out.println("AUTO INC Teachers inside: "+autoIncValTeach);
                 firstCourse = false;
             }
             else
             {
                 newcourses.add(course);
-                //System.out.println("NEW TEACHER: "+t.getTeacherID()+fname+ "  "+lname);
             }
 
             courses.add(course);
-            
-          //HibernateTest.create(course);
-        //  courses.add(course);
-          //newcourses.add(course);
-          
-          System.out.println("***"+t.getTeacherID()+ t.getlName() +" "+t.getfName() + " "+s.getSubjectID()+ " " + s.getAbbrevName() + " "+course.getCourseID()+" " +course.getLevel());
-          //System.out.println("Inserted course: "+course.getLevel());
        }
        else
        {

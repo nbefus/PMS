@@ -116,19 +116,15 @@ public final class AdminFinal extends javax.swing.JFrame
            cboxes[3]=emailCombo;
 
            ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST1");
            cultimateList.add(Data.getClientsfirst());
            cultimateList.add(Data.getClientslast());
            cultimateList.add(Data.getClientsphone());
            cultimateList.add(Data.getClientsemail());
-           System.out.println("DONE LIST1");
            ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST 2");
            cultimateList1.add(Data.getFnameOrderedList());
            cultimateList1.add(Data.getLnameOrderedList());
            cultimateList1.add(Data.getPhoneOrderedList());
            cultimateList1.add(Data.getEmailOrderedList());
-    System.out.println("DONE LIST2");
            uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
            
            JComboBox[] cboxes2 = new  JComboBox[3];
@@ -136,19 +132,15 @@ public final class AdminFinal extends javax.swing.JFrame
        cboxes2[1]=levelCombo;
        cboxes2[2]=teacherCombo;
        //cboxes[3]=emailCombo;
-       System.out.println("LIST 3");
        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
        cultimateList2.add(Data.getSubjectslist());
        cultimateList2.add(Data.getLevelslist());
        cultimateList2.add(Data.getTeacherslist());
-System.out.println("DONE list 3");
        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-System.out.println("LIst 4");
        cultimateList22.add(Data.getSubjectOrderedList());
        cultimateList22.add(Data.getLevelOrderedList());
        cultimateList22.add(Data.getTeacherOrderedList());
-System.out.println("Done list 4");
 
         uaacCourse.noMore();
         uaacCourse = null;
@@ -235,23 +227,21 @@ System.out.println("Done list 4");
     UltimateAutoAutoComplete uaacClient; 
 
     UltimateAutoAutoComplete uaacCourse;
-    private TodaySessionTableHelper todayTableHelper;// = new TodaySessionTableHelper(todaysSessionTable);
-    private SessionTableHelper tableHelper;// = new SessionTableHelper(sessionsTable, false, null, (TodaySessionTableModel)todaysSessionTable.getModel());
-    private SessionTableHelper tableHelperFuture;//= new SessionTableHelper(appointmentsTable, true, (SessionTableModel)sessionsTable.getModel(), null);
-    private AgendaTableHelper tableHelperAgenda;// = new AgendaTableHelper(agendaTable);
+    private TodaySessionTableHelper todayTableHelper;
+    private SessionTableHelper tableHelper;
+    private SessionTableHelper tableHelperFuture;
+    private AgendaTableHelper tableHelperAgenda;
 
-private int sessionID = -1;
-    private final int logoutSeconds = 180;
-    private long timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+    private int sessionID = -1;
+   // private final int logoutSeconds = 180;
+    /*private long timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     Thread timeout = new Thread(){
         public void run(){
             while(timeoutTime - System.currentTimeMillis() > 0)
             {
-                //System.out.println("TIME LEFT: "+timeoutTime);
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException ex) {
-                  //  System.out.println("AHHAAHAHAHA EXCEPTION IN THREAD SLEEP");
                     }
             }
             close();
@@ -259,12 +249,12 @@ private int sessionID = -1;
             newlogin.setVisible(true);
             //System.out.println("BOOOOOOOOMMMMM");
         }
-    };
+    };*/
     
     public AdminFinal() 
     {
 
-        timeout.start();
+       // timeout.start();
         initComponents();
         
         setUpSearchTab();
@@ -273,7 +263,6 @@ private int sessionID = -1;
         sessionsTable.getTableHeader().setReorderingAllowed(false);
         appointmentsTable.getTableHeader().setReorderingAllowed(false);
         agendaTable.getTableHeader().setReorderingAllowed(false);
-        //Logoff thread
         
         
         
@@ -295,8 +284,6 @@ private int sessionID = -1;
        
         tableHelper.increaseRowHeight(12);
        
-       // sessionsTable.setCellSelectionEnabled(true);
-
         DatabaseHelper.open();
         
         (new Thread(){
@@ -312,7 +299,6 @@ private int sessionID = -1;
         
         
        Data d = new Data(false);
-       System.out.println("DATA");
        //Clients autocomplete
       JComboBox[] cboxes = new  JComboBox[4];
        cboxes[0]=fnameCombo;
@@ -321,19 +307,15 @@ private int sessionID = -1;
        cboxes[3]=emailCombo;
        
        ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-System.out.println("LIST1");
        cultimateList.add(Data.getClientsfirst());
        cultimateList.add(Data.getClientslast());
        cultimateList.add(Data.getClientsphone());
        cultimateList.add(Data.getClientsemail());
-       System.out.println("DONE LIST1");
        ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-System.out.println("LIST 2");
        cultimateList1.add(Data.getFnameOrderedList());
        cultimateList1.add(Data.getLnameOrderedList());
        cultimateList1.add(Data.getPhoneOrderedList());
        cultimateList1.add(Data.getEmailOrderedList());
-System.out.println("DONE LIST2");
        uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
       
        
@@ -341,20 +323,15 @@ System.out.println("DONE LIST2");
        cboxes2[0]=courseCombo;
        cboxes2[1]=levelCombo;
        cboxes2[2]=teacherCombo;
-       //cboxes[3]=emailCombo;
-       System.out.println("LIST 3");
        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
        cultimateList2.add(Data.getSubjectslist());
        cultimateList2.add(Data.getLevelslist());
        cultimateList2.add(Data.getTeacherslist());
-System.out.println("DONE list 3");
        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-System.out.println("LIst 4");
        cultimateList22.add(Data.getSubjectOrderedList());
        cultimateList22.add(Data.getLevelOrderedList());
        cultimateList22.add(Data.getTeacherOrderedList());
-System.out.println("Done list 4");
        uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
       
        
@@ -376,56 +353,8 @@ System.out.println("Done list 4");
         clearComboBoxes();
       
         Timestamp now = new Timestamp((new Date()).getTime());
-        /*
-        Transaction trns = null;
-        ArrayList<ParaprofessionalSession> result = null;
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        //if(session == null)
-        //    session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            trns = session.beginTransaction();
-            Query query = session.createQuery("from ParaprofessionalSession as ps where (ps.sessionStart IS NULL or (ps.sessionStart <= '"+now.toString()+"' and ps.sessionEnd IS NULL)) AND walkout='false'");
-            result = (ArrayList<ParaprofessionalSession>) query.list();
-            if(result.size() > 0)
-            {
-                for(int i=0; i<result.size(); i++)
-                {
-                    ((SessionTableModel) sessionsTable.getModel()).addRow(result.get(i)); 
-                }
-
-                sessionsTable.repaint();
-            }
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }
-        trns = null;
-        result = null;
-        session = HibernateUtil.getSessionFactory().getCurrentSession();
-        try {
-            trns = session.beginTransaction();
-            Query query = session.createQuery("from ParaprofessionalSession as ps where (ps.sessionStart IS NOT NULL and ps.sessionEnd IS NULL) AND ps.sessionStart >= '"+now.toString()+"' AND walkout='false'");
-            result = (ArrayList<ParaprofessionalSession>) query.list();
-            
-             if(result.size() > 0)
-            {
-                for(int i=0; i<result.size(); i++)
-                {
-                    ((SessionTableModel) appointmentsTable.getModel()).addRow(result.get(i)); 
-                }
-
-                appointmentsTable.repaint();
-            }
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } finally {
-            session.flush();
-            session.close();
-        }*/
         
-       System.out.println("SESSIONS");
+        
        
        String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
        String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
@@ -444,7 +373,6 @@ System.out.println("Done list 4");
             sessionsTable.repaint();
         }
         
-        System.out.println("SESSIONS AGIAN");
         
         String futureSessionsWhere = " where ("+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NULL) AND "+sessStartCol+" >= '"+now.toString()+"' AND "+walkoutCol+"='false'";
 
@@ -472,20 +400,6 @@ System.out.println("Done list 4");
             todaysSessionTable.repaint();
         }
         
-        /*
-         ArrayList<ParaprofessionalSession> sessions = (ArrayList<ParaprofessionalSession>)HibernateTest.select("from ParaprofessionalSession as ps where (ps.sessionStart IS NULL or ps.sessionEnd IS NULL) AND walkout='false'");
-
-        if(sessions.size() > 0)
-        {
-            for(int i=0; i<sessions.size(); i++)
-            {
-                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i)); 
-            }
-            
-            sessionsTable.repaint();
-        }*/
-        
-        
         
         
         
@@ -496,13 +410,11 @@ System.out.println("Done list 4");
         tableHelperFuture.setTableRendersAndEditors(true, dce);
         todayTableHelper.setTableRendersAndEditors(true, dce);
         tableHelperAgenda.setTableRendersAndEditors(true, dceAgenda);
-        //tableHelperAgenda.autoResizeColWidth();
         tableHelper.autoResizeColWidth();
         todayTableHelper.autoResizeColWidth();
         tableHelperFuture.autoResizeColWidth();
-        //tableHelper.fasterScrolling(20);
             
-    reportsScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+        reportsScrollPane.getVerticalScrollBar().setUnitIncrement(20);
         
         
         
@@ -518,13 +430,9 @@ System.out.println("Done list 4");
         
         Timer timer = new Timer("Minute Update");
  
-        //2- Taking an instance of class contains your repeated method.
         MinuteUpdater min = new MinuteUpdater((SessionTableModel)sessionsTable.getModel(), (SessionTableModel)appointmentsTable.getModel());
  
-        //MinuteUpdater min2 = new MinuteUpdater((SessionTableModel)appointmentsTable.getModel());
-
         timer.schedule(min, 60000, 60000);
-        //timer.schedule(min2, 0, 60000);
     }
     
     
@@ -618,34 +526,12 @@ System.out.println("Done list 4");
                 
                 Agenda a = agenda.get(i);
                 ((AgendaTableModel) agendaTable.getModel()).addRow(a);
-                //System.out.println("AGENDA : "+a.getAgendaID()+" "+ a.getDate()+" "+ a.getNotes()+" " +a.getAgendaCategoryID().getType());
                 
             }
             
             agendaTable.repaint();
             
-            /*agendaTable = new JTable(new DefaultTableModel(null,new Object[]{"Agenda ID", "Date", "Notes", "Type"}));
-            DefaultTableModel dtm = (DefaultTableModel) agendaTable.getModel();
-            
-            for(int i=0; i<agenda.size(); i++)
-            {
-                
-                Agenda a = agenda.get(i);
-                dtm.addRow(new Object[]{a.getAgendaID(), a.getDate(), a.getNotes(), a.getAgendaCategoryID().getType()});
-                System.out.println("AGENDA : "+a.getAgendaID()+" "+ a.getDate()+" "+ a.getNotes()+" " +a.getAgendaCategoryID().getType() +" "+ dtm.getColumnCount() + " "+dtm.getRowCount());
-                
-            }
-                //model.addRow(new Object[] {""); 
-            
-            agendaTable.setModel(dtm);
-            dtm.fireTableDataChanged();
-            agendaTable.invalidate();
-            agendaTable.repaint();*/
         }
-        else
-            System.out.println("EEEMMMMMMPPPPPPTTYYYYY");
-        
-        System.out.println("AGENDA AGENDA AGENDA AGENDA AGENDA DONE DONE DONE DONE DONE");
         
     }
     
@@ -666,7 +552,6 @@ System.out.println("Done list 4");
                 uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTPHONE.getColumnIndex()).toString(), ComboBoxesIndexes.CPHONE.getBoxIndex());
                 uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTLASTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CLNAME.getBoxIndex());
                 uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTFIRSTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CFNAME.getBoxIndex());
-                //uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CATEGORY.getColumnIndex()).toString(), ComboBoxesIndexes.CATEGORY.getBoxIndex());
                 uacSessions.setComboValue(table.getValueAt(row, SessionTableModel.Columns.PARAPROFESSIONAL.getColumnIndex()).toString(), ComboBoxesIndexes.PARAPROFESSIONAL.getBoxIndex());
                 uacSessions.setComboValue(table.getValueAt(row, SessionTableModel.Columns.LOCATION.getColumnIndex()).toString(), ComboBoxesIndexes.LOCATION.getBoxIndex());
                 uacSessions.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CREATOR.getColumnIndex()).toString(), ComboBoxesIndexes.CREATOR.getBoxIndex());
@@ -674,10 +559,7 @@ System.out.println("Done list 4");
                 gcCheck.setSelected((Boolean)table.getValueAt(row, SessionTableModel.Columns.GC.getColumnIndex()));
                 
                 notesField.setText(table.getValueAt(row, SessionTableModel.Columns.NOTES.getColumnIndex()).toString());
-                
-               // System.out.println("LKJDSFLDSJLKDSJFLKSDJF DSLJDSFLKDSJ "+table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()));
-               // System.out.println("LKJDSFLDSJLKDSJFLKSDJF DSLJDSFLKDSJ "+table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()));
-                               
+              
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
                
                 boolean hasSessionStart = (table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
@@ -3257,7 +3139,7 @@ System.out.println("Done list 4");
         ndo.setLocationRelativeTo(null);
         ndo.setVisible(true);
         
-        if(true)//ndo.wasInserted())
+        if(ndo.wasInserted())
         {
             Data.refreshClient();
             uaacClient.noMore();
@@ -3484,69 +3366,69 @@ System.out.println("Done list 4");
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
         
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+      //  timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
       //  System.out.println("Set back to: "+timeout);
         
     }//GEN-LAST:event_jPanel3MouseMoved
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         
-timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+//timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_formMouseMoved
 
     private void sessionsScrollPaneMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionsScrollPaneMouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+       // timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_sessionsScrollPaneMouseMoved
 
     private void jScrollPane1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+       // timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_jScrollPane1MouseMoved
 
     private void agendaPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agendaPanelMouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_agendaPanelMouseMoved
 
     private void generalChartPanelLeftMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelLeftMouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelLeftMouseMoved
 
     private void generalChartPanelMidMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelMidMouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelMidMouseMoved
 
     private void generalChartPanelRightMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelRightMouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelRightMouseMoved
 
     private void generalChartPanelLongMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelLongMouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelLongMouseMoved
 
     private void generalChartPanelMid2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelMid2MouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelMid2MouseMoved
 
     private void generalChartPanelLeft2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelLeft2MouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelLeft2MouseMoved
 
     private void generalChartPanelRight2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generalChartPanelRight2MouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_generalChartPanelRight2MouseMoved
 
     private void jPanel2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel2MouseMoved
         // TODO add your handling code here:
-        timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_jPanel2MouseMoved
 
     private void dayRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayRadioActionPerformed
@@ -3571,7 +3453,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
         
@@ -3598,7 +3479,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
     }//GEN-LAST:event_monthRadioActionPerformed
@@ -3624,7 +3504,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
     }//GEN-LAST:event_yearRadioActionPerformed
@@ -3654,7 +3533,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
     }//GEN-LAST:event_weekRadioActionPerformed
@@ -3935,10 +3813,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
             searchsearchTable.getColumnModel().getColumn(i).setCellEditor(makeEditSearchCellEditor());
         }
         DatabaseHelper.close();
-        /*for (int i = 0; i < searchsearchTable.getColumnCount(); i++)
-        {
-            searchsearchTable.getColumnModel().getColumn(i).setCellEditor(dce);
-        }*/
     }//GEN-LAST:event_searchsearchButtonActionPerformed
 
     private void clearButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButton1MouseClicked
@@ -3970,24 +3844,10 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
         SimpleDateFormat sdfMySQLTimestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sdfMySQLDate = new SimpleDateFormat("yyyy-MM-dd");
 
-        /*String paraCat = ((JTextComponent) searchparaprofessionalcategoryCombo.getEditor().getEditorComponent()).getText();
-        String paraCatPara = ((JTextComponent) searchparaprofessionalcategoryparaprofessionalCombo.getEditor().getEditorComponent()).getText();
-        */
         String userFirst = ((JTextComponent) searchuserfirstCombo.getEditor().getEditorComponent()).getText();
         String userLast = ((JTextComponent) searchuserlastCombo.getEditor().getEditorComponent()).getText();
         String username = ((JTextComponent) searchusernameCombo.getEditor().getEditorComponent()).getText();
 
-        /*
-        if (paraCat.length() > 0)
-        {
-            restrictions.add("'"+paraCat+"'");
-            displayNames.add(ParaprofessionalCategory.ParaCatTable..getDisplayName());//ComboBoxesIndexes.TEACHERF.getDisplayName());
-        }
-        if (paraCatPara.length() > 0)
-        {
-            restrictions.add("'"+paraCatPara+"'");
-            displayNames.add(User.UserTable.LNAME.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
-        }*/
         if (userFirst.length() > 0)
         {
             restrictions.add("'"+userFirst+"'");
@@ -4143,8 +4003,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
         String paraTerminationDate = searchparaprofessionalterminationField.getText();
 
         String paraIsClockedIn = searchparaprofessionalclockedinCombo.getSelectedItem().toString();
-
-        // String paraCategory = ((JTextComponent) searchparaprofessionalcategoryCombo.getEditor().getEditorComponent()).getText();
 
         if (teacherFirst.length() > 0)
         {
@@ -5335,19 +5193,12 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
         clearSearchComboBoxes();
         searchsessionstartField.setText("mm/dd/yyyy hh:mm aa");
         searchsessionendField.setText("mm/dd/yyyy hh:mm aa");
-        //editSaveButton.setVisible(false);
-       
-        /*searchuserfirstCombo
-        searchuserlastCombo
-       searchusernameCombo
-        searchagendacategoryCombo
-        searchagendanotesCombo*/
-                
+  
         searchparaprofessionalclockedinCombo.setSelectedIndex(0);
-       searchagendadateField.setText("");
+        searchagendadateField.setText("");
         
          searchnotesField.setText("");
-        searchentereddateField.setText("mm/dd/yyyy hh:mm aa");
+         searchentereddateField.setText("mm/dd/yyyy hh:mm aa");
                  searchcreatorhireField.setText("mm/dd/yyyy");
         
 
@@ -5358,36 +5209,7 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
          searchparaprofessionalterminationField.setText("mm/dd/yyyy");
          searchgcCombo.setSelectedIndex(0);
        searchwalkoutCombo.setSelectedIndex(0);
-             /*
-            searchroleCombo
-       searchlocationCombo
-                
-         searchgcCombo
-        searchwalkoutCombo
-        searchclientfirstCombo
-         searchclientlastCombo
-         searchclientphoneCombo
-       searchclientemailCombo
-        
-        searchteacherfirstCombo
-        searchteacherlastCombo
-       searchsubjectnameCombo
-        searchlevelCombo
-        searchsubjectcategoryCombo
-
-        searchparaprofessionalfirstCombo
-        searchparaprofessionallastCombo
-       searchparaprofessionalroleCombo
-        
-        searchcreatorfirstCombo
-         searchcreatorlastCombo
-       searchcreatorroleCombo
-        
          
-        searchcreatorclockedinCombo
-      
-        
-        searchparaprofessionalclockedinCombo*/
        
     }
     
@@ -5498,17 +5320,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
                         else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.PHONE.getDisplayName()))
                         {
                             clientPhone = table.getValueAt(row, i).toString();
-                            /*if(clientPhone.trim().length() > 0)
-                            {
-                                try
-                                {
-                                    clientPhone = clientPhone.substring(0, clientPhone.length()-7)+"-"+clientPhone.substring(clientPhone.length()-7, clientPhone.length()-4)+"-"+clientPhone.substring(clientPhone.length()-4);
-                                }
-                                catch(Exception e)
-                                {
-                                    
-                                }
-                            }*/
                         }
                     }
                     
@@ -5552,9 +5363,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
                     notesField.setText(table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.NOTES.getDisplayName())).toString());
 
-                   // System.out.println("LKJDSFLDSJLKDSJFLKSDJF DSLJDSFLKDSJ "+table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()));
-                   // System.out.println("LKJDSFLDSJLKDSJFLKSDJF DSLJDSFLKDSJ "+table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()));
-
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
 
                     String start = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.SESSIONSTART.getDisplayName())).toString();
@@ -5584,40 +5392,7 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
         
       
-                    
-                    /*
-                    int clientID = -1;
-                    String clientEmail = "", clientFirst ="", clientLast = "", clientPhone="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
-                    {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalSession.ParaSessTable.CLIENTEMAIL.getDisplayName()))
-                        {
-                            clientID = ((Integer)table.getValueAt(row, i)).intValue();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalSession.ParaSessTable.CLIENTFNAME.getDisplayName()))
-                        {
-                            clientEmail = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalSession.ParaSessTable..getDisplayName()))
-                        {
-                            clientFirst  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalSession.ParaSessTable.CLIENTEMAIL.getDisplayName()))
-                        {
-                            clientLast = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalSession.ParaSessTable.CLIENTEMAIL.getDisplayName()))
-                        {
-                            clientPhone = table.getValueAt(row, i).toString();
-                        }
-                    }
-                    
-                    NewClientObject nco = new NewClientObject(new Frame(), true, clientFirst, clientLast, clientPhone, clientEmail, clientID);
-                    nco.setLocationRelativeTo(null);
-                    nco.setVisible(true);
-                    
-                    Data.refreshClient();
-                    updateBoxes();*/
+                 
                 }
                 else if (paraprofessionalRadio.isSelected())
                 {
@@ -6046,14 +5821,11 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
 
-                    
-                    //updateBoxes();
                 }   
 
                 
                 DatabaseHelper.close();
                 
-                System.out.println("HOPEFULLY NOT HERE YET");
                 return null;
             }
          
@@ -6137,25 +5909,7 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
         Data d = new Data(false);
 
         JComboBox[] boxes = new JComboBox[22];
-       // boxes[8] = searchsessionstartField;
-      //  boxes[8] = searchsessionendField;
-      //  boxes[8] = searchnotesField;
-      //  boxes[8] = searchentereddateField;
-        
-      //  boxes[8] = searchagendadateField;
-       
-      //  boxes[18] = searchclientfirstCombo;
-       // boxes[19] = searchclientlastCombo;
-       // boxes[20] = searchclientphoneCombo;
-       // boxes[21] = searchclientemailCombo;
-        
-       // boxes[22] = searchteacherfirstCombo;
-       // boxes[23] = searchteacherlastCombo;
-       // boxes[24] = searchsubjectnameCombo;
-       // boxes[25] = searchlevelCombo;
-       // boxes[26] = searchsubjectcategoryCombo;
 
-        
         boxes[0] = searchclientfirstCombo;
         boxes[1] = searchclientlastCombo;
         boxes[2] = searchclientphoneCombo;
@@ -6210,15 +5964,6 @@ timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
 
         clientRadio.setSelected(true);
 
-        //String[] restrictions = new String[4];
-
-        /*restrictions[0]="First Name is any";
-         restrictions[1]="Last Name is any";
-         restrictions[2]="Phone is any";
-         restrictions[3]="Email is any";*/
-
-        // for(int i=0; i<restrictions.length; i++)
-        // dlm.addElement(restrictions[i]);
 
         dlm.addElement("Search for all records");
         restrictHelper = new RestrictionListModel(dlm);//, restrictions);

@@ -180,17 +180,7 @@ public class DatabaseHelper
         boolean inserted = false;
         
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-           
-          //  connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 statement = connect.createStatement();
 
                 String valuesString = "";
@@ -220,8 +210,6 @@ public class DatabaseHelper
                         {
                             valuesString+="null,";
                         }
-                        else
-                            System.out.println("UNKNOWN VALUE TYPE");
 
                         if(i == values.length-1)
                             valuesString = valuesString.substring(0, valuesString.length()-1);
@@ -230,9 +218,7 @@ public class DatabaseHelper
                 else
                 {
                     for(int i=1; i<values.length; i++)
-                    {
-                        //System.out.println("VALUE: "+values[i].getClass().toString() + " "+values[i]);
-                        
+                    {                        
                         if(values[i] instanceof Integer)
                         {
                             valuesString+=values[i].toString()+",";
@@ -256,8 +242,6 @@ public class DatabaseHelper
                         {
                             valuesString+="null,";
                         }
-                        else
-                            System.out.println("UNKNOWN VALUE TYPE");
 
                         if(i == values.length-1)
                             valuesString = valuesString.substring(0, valuesString.length()-1);
@@ -283,12 +267,10 @@ public class DatabaseHelper
                
                System.out.println(query);
                 statement.executeUpdate(query);
-                System.out.println("TRUE");
                 inserted = true;
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
             
         } finally {

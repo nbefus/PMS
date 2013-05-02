@@ -40,16 +40,6 @@ public class FutureSessionTableModel extends AbstractTableModel {
         
     }
     
-    /*
-    public void addRow(String fname, String lname, Subject subject, int level, Teacher teacher, String notes, Paraprofessional tutor, boolean future, boolean gc)
-    {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(ts.toString());
-        ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-        tutorSessions.add(tutorSession);
-        fireTableDataChanged();
-    }*/
-    
     public void addRow(ParaprofessionalSession ts)
     {
         tutorSessions.add(ts);
@@ -65,24 +55,16 @@ public class FutureSessionTableModel extends AbstractTableModel {
     
     public boolean areEqual(Object one, Object two)
     {
-        System.out.println("COMPARING: "+one.getClass().toString() + "  "+two.getClass().toString());
         if(one instanceof Timestamp)
         {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
             try {
                 if(new Timestamp(sdf.parse(two.toString()).getTime()).toString().equals(((Timestamp)one).toString()))
                     return true;
-               // System.out.println("COMPARE: "+((Timestamp)one).compareTo((Timestamp)two));
             } catch (ParseException ex) {
-                System.out.println("EXCEPTIONS FO");
                 return false;
             }
             return false;
-            /*System.out.println(((Timestamp)one).toString() + "    "+((Timestamp)two).toString());
-            if(((Timestamp)one).compareTo((Timestamp)two) == 0)
-                return true;
-            else
-                return false;*/
         }
         else if(one instanceof Boolean && two instanceof Boolean)
         {
@@ -104,7 +86,6 @@ public class FutureSessionTableModel extends AbstractTableModel {
     public void setValueAt(Object o, int r, int c)
     {
          SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
-        System.out.println("SetValue at :"+ r + " "+c);
         if(!o.toString().equals("CURRENT"))
         {
             if(!areEqual(getValueAt(r,c),o))
@@ -112,94 +93,10 @@ public class FutureSessionTableModel extends AbstractTableModel {
                 int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to change value "+getValueAt(r,c)+" to "+o.toString());
                 if(option == JOptionPane.YES_OPTION)
                 {
-                    System.out.println("EDITED at setValueAt STM: "+o.toString());
-                   // tutorSessions.get(r)
-
                     ParaprofessionalSession ts = tutorSessions.get(r);
-                    /*
-                    switch (c) {
-                    case 0: 
-                        break;
-                    case 1:
-                        ts.getClientID().setfName((String)o);
-                        HibernateTest.update(ts);
-                        break;
-                    case 2:
-                        ts.getClientID().setlName((String)o);
-                        HibernateTest.update(ts);
-                        break;
-                    case 3:
-                        ts.getClientID().setPhone((String)o);
-                        HibernateTest.update(ts);
-                        break;
-                    case 4:
-                        ts.getClientID().setEmail((String)o);
-                        HibernateTest.update(ts);
-                        break;
-                    case 5:
-                        ts.getCourseID().getSubjectID().setAbbrevName((String)o);
-                        HibernateTest.update(ts);
-                        break;
-                    case 6:
-                        ts.getCourseID().setLevel(Integer.parseInt((String)o));
-                        HibernateTest.update(ts);
-                        break;
-                    case 7:
-
-                        //ts.getCourseID().getTeacherID().getfName() + " "+ts.getCourseID().getTeacherID().getlName();
-                        break;
-                    case 8:
-                        ts.setNotes((String)o);
-                        HibernateTest.update(ts);
-                        break;
-                    case 9:
-                        //ts.getParaprofessionalID().getfName() + " "+ts.getParaprofessionalID().getlName();
-                        break;
-                    case 10:
-                        ts.setGrammarCheck((Boolean)o);
-                        HibernateTest.update(ts);
-                        System.out.println("DONE");
-                        break;
-                    case 11:
-                        System.out.println("NOW ON CASE 11");
-                    try {
-                        ts.setTimeAndDateEntered(new Timestamp(sdf.parse((String)o).getTime()));
-                    } catch (ParseException ex) {
-                        System.out.println("ERROR AT CASE 11 sessiontablemodel");
-                    }
-                        HibernateTest.update(ts);
-                        break;
-                    case 12:
-                        if(ts.getSessionStart() != null)
-                            ts.getSessionStart();
-                        else
-                            Timestamp.valueOf("9999-12-31 12:00:00");
-                        break;
-                    case 13:
-                        if(ts.getSessionStart() != null)
-                            ts.getSessionEnd();
-                        else
-                            Timestamp.valueOf("9999-12-31 12:00:00");
-                        break;
-                    case 14:
-                        ts.getLocationID().getName();
-                    case 15:
-                        //ts.getParaprofessionalCreatorID().getfName() + " "+ts.getParaprofessionalCreatorID().getlName();
-                    case 16:
-                        ts.setWalkout((Boolean)o);
-                        //HibernateTest.update(ts);
-                        tutorSessions.remove(ts);
-                        break;
-                    case 17:
-                        ts.getCourseID().getSubjectID().getCategoryID().getName();
-                   }*/
-                   // fireTableCellUpdated(r, c);
+                   
                     fireTableDataChanged();
-                   //return null;
-
                 }
-                else
-                    System.out.println("CANCELLED");
             }
         }
         else
@@ -209,34 +106,17 @@ public class FutureSessionTableModel extends AbstractTableModel {
                 ts.setSessionStart(new Timestamp((new Date()).getTime()));
             else if(c == 13)
             {
-                ts.setSessionEnd(new Timestamp((new Date()).getTime()));
-                //HibernateTest.update(ts);
-                
+                ts.setSessionEnd(new Timestamp((new Date()).getTime()));                
                 tutorSessions.remove(ts);
-            }
-            
+            }        
             
             fireTableDataChanged();
-           // fireTableRowsUpdated(r, c);
-            //HibernateTest.update(ts);
         }
     }
-    
-    /*
-    public void addRow(String fname, String lname, String subjectAbbrevName, int level, String teacherLName, String notes, Paraprofessional tutor, boolean future, boolean gc)
-    {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(ts.toString());
-        ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-        tutorSessions.add(tutorSession);
-    }*/
 
     @Override
     public boolean isCellEditable(int i, int j)
     {
-      //  System.out.println(getValueAt(i,j).getClass().toString());
-      //  System.out.println((getValueAt(i, j-1) instanceof Timestamp));
-      //  System.out.println(((Timestamp)getValueAt(i, j-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")));
         if(j != 0 && !(getValueAt(i, j-1) instanceof Timestamp && ((Timestamp)getValueAt(i, j-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")) && j == 13))
             return true;
         return false;
