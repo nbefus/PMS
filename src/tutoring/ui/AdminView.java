@@ -292,7 +292,7 @@ public final class AdminView extends javax.swing.JFrame
     {
         initComponents();
         
-        setUpSearchTab();
+       
         
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         sessionsTable.getTableHeader().setReorderingAllowed(false);
@@ -322,6 +322,7 @@ public final class AdminView extends javax.swing.JFrame
         (new Thread(){
             public void run(){
                 
+        setUpSearchTab();
         ArrayList<String> termCodes = new ArrayList<String>();
         try{
             termCodes = RetrieveNewTerm.getTermCodes();
@@ -3195,9 +3196,9 @@ public final class AdminView extends javax.swing.JFrame
         NewClientObject ndo = new NewClientObject(new Frame(), true);
         ndo.setLocationRelativeTo(null);
         ndo.setVisible(true);
-        
         if(ndo.wasInserted())
         {
+            DatabaseHelper.open();
             Data.refreshClient();
             uaacClient.noMore();
             uaacClient = null;
@@ -3219,6 +3220,7 @@ public final class AdminView extends javax.swing.JFrame
            cultimateList1.add(Data.getEmailOrderedList());
            uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
            clearForm();
+           DatabaseHelper.close();
         }
     }//GEN-LAST:event_newStudentButtonActionPerformed
 
@@ -3233,7 +3235,78 @@ public final class AdminView extends javax.swing.JFrame
     }//GEN-LAST:event_addSessionbuttonMouseClicked
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-       clearForm();
+        courseCombo.setBorder(null);
+            teacherCombo.setBorder(null);
+            levelCombo.setBorder(null);
+            paraprofessionalCombo.setBorder(null);
+            creatorCombo.setBorder(null);
+            fnameCombo.setBorder(null);
+            lnameCombo.setBorder(null);
+            locationCombo.setBorder(null);
+            sessionendField.setBorder(null);
+            sessionstartField.setBorder(null);
+            studentInfoPanel.repaint();
+            courseInfoPanel.repaint();
+            paraprofessionalInfoPanel.repaint();
+            
+        uaacClient.noMore();
+            uaacClient = null;
+            JComboBox[] cboxes = new  JComboBox[4];
+           
+           cboxes[0]=fnameCombo;
+           cboxes[1]=lnameCombo;
+           cboxes[2]=phoneCombo;
+           cboxes[3]=emailCombo;
+
+           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+           cultimateList.add(Data.getClientsfirst());
+           cultimateList.add(Data.getClientslast());
+           cultimateList.add(Data.getClientsphone());
+           cultimateList.add(Data.getClientsemail());
+           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+           cultimateList1.add(Data.getFnameOrderedList());
+           cultimateList1.add(Data.getLnameOrderedList());
+           cultimateList1.add(Data.getPhoneOrderedList());
+           cultimateList1.add(Data.getEmailOrderedList());
+           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+           
+           JComboBox[] cboxes2 = new  JComboBox[3];
+       cboxes2[0]=courseCombo;
+       cboxes2[1]=levelCombo;
+       cboxes2[2]=teacherCombo;
+
+       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+       cultimateList2.add(Data.getSubjectslist());
+       cultimateList2.add(Data.getLevelslist());
+       cultimateList2.add(Data.getTeacherslist());
+       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+       cultimateList22.add(Data.getSubjectOrderedList());
+       cultimateList22.add(Data.getLevelOrderedList());
+       cultimateList22.add(Data.getTeacherOrderedList());
+
+        uaacCourse.noMore();
+        uaacCourse = null;
+       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
+       
+       JComboBox[] boxes3 = new  JComboBox[3];
+        
+        boxes3[0]=creatorCombo;
+        boxes3[1]=locationCombo;
+        boxes3[2]=paraprofessionalCombo;
+
+        ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
+        
+        cultimateList3.add(Data.getClockedInParaprofessionals());
+        cultimateList3.add(Data.getLocationslist());
+        cultimateList3.add(Data.getClockedInParaprofessionals());
+       
+        uacSessions.noMore();
+        uacSessions = null;
+        uacSessions = new UltimateAutoComplete(cultimateList3, boxes3);
+        
+        
+        clearForm();
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButtonMouseClicked
@@ -3603,6 +3676,19 @@ public final class AdminView extends javax.swing.JFrame
     }//GEN-LAST:event_deleteSessionButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        courseCombo.setBorder(null);
+        teacherCombo.setBorder(null);
+        levelCombo.setBorder(null);
+        paraprofessionalCombo.setBorder(null);
+        creatorCombo.setBorder(null);
+        fnameCombo.setBorder(null);
+        lnameCombo.setBorder(null);
+        locationCombo.setBorder(null);
+        sessionendField.setBorder(null);
+        sessionstartField.setBorder(null);
+        studentInfoPanel.repaint();
+        courseInfoPanel.repaint();
+        paraprofessionalInfoPanel.repaint();
         update();
     }//GEN-LAST:event_jButton1ActionPerformed
 

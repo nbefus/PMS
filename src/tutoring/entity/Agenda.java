@@ -100,7 +100,7 @@ public class Agenda {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -278,10 +278,10 @@ public class Agenda {
     }
 
     /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the agenda table and return agenda objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of agenda items that the query returns
      */
     public static ArrayList<Agenda> selectAllAgenda(String addedSQLToSelect, Connection connect) {
         Statement statement = null;

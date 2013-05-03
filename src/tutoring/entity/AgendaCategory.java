@@ -13,21 +13,21 @@ import java.util.ArrayList;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class AgendaCategory 
 {
     /**
-     *
+     * Agenda Category table information
      */
     public enum AgendaCategoryTable {
 
         /**
-         *
+         * Agenda Category ID of AgendaCategory table
          */
         AGENDACATEGORYID("Agenda Category ID","agendaCategoryID", true, getTableAlias()+".agendaCategoryID", true),
         /**
-         *
+         * Category type of AgendaCategory table
          */
         TYPE("Category","type", true, getTableAlias()+".type", false);
         private boolean isID;
@@ -50,14 +50,14 @@ public class AgendaCategory
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
         }
          /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -65,7 +65,7 @@ public class AgendaCategory
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -73,7 +73,7 @@ public class AgendaCategory
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -81,7 +81,7 @@ public class AgendaCategory
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -89,7 +89,7 @@ public class AgendaCategory
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -97,7 +97,7 @@ public class AgendaCategory
         } 
         /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -105,8 +105,8 @@ public class AgendaCategory
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in an list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -122,8 +122,8 @@ public class AgendaCategory
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -139,9 +139,9 @@ public class AgendaCategory
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return - database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -158,9 +158,9 @@ public class AgendaCategory
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -179,9 +179,9 @@ public class AgendaCategory
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -198,9 +198,9 @@ public class AgendaCategory
     private String type;
 
     /**
-     *
-     * @param agendaCateogoryID
-     * @param type
+     * Create an agenda category object
+     * @param agendaCateogoryID - ID of the agenda category object for the database
+     * @param type - type of the agenda category object for the database
      */
     public AgendaCategory(int agendaCateogoryID, String type) {
         this.agendaCategoryID = agendaCateogoryID;
@@ -208,9 +208,9 @@ public class AgendaCategory
     }
     
     /**
-     *
-     * @param c
-     * @return
+     * Converts agenda category object to object array of values
+     * @param c - Agenda category item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(AgendaCategory c)
     {
@@ -221,10 +221,10 @@ public class AgendaCategory
     }
     
      /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the agenda category table and return agenda category objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of agenda category items that the query returns
      */
     public static ArrayList<AgendaCategory> selectAllAgendaCategory(String addedSQLToSelect, Connection connect) {
        // Connection connect = null;

@@ -1443,11 +1443,9 @@ System.out.println("Done list 4");
                             .add(courseInfoPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(paraprofessionalInfoPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jPanel2Layout.createSequentialGroup()
-                                .add(10, 10, 10)
-                                .add(jButton1)))))
+                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                            .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(jButton1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(123, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -1462,8 +1460,8 @@ System.out.println("Done list 4");
                         .add(paraprofessionalInfoPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jButton1)
-                .add(0, 91, Short.MAX_VALUE))
+                .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 66, Short.MAX_VALUE))
         );
 
         tabsPane.addTab("Create", jPanel2);
@@ -2140,7 +2138,78 @@ System.out.println("Done list 4");
     }//GEN-LAST:event_addSessionbuttonMouseClicked
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-       clearForm();
+       courseCombo.setBorder(null);
+            teacherCombo.setBorder(null);
+            levelCombo.setBorder(null);
+            paraprofessionalCombo.setBorder(null);
+            creatorCombo.setBorder(null);
+            fnameCombo.setBorder(null);
+            lnameCombo.setBorder(null);
+            locationCombo.setBorder(null);
+            sessionendField.setBorder(null);
+            sessionstartField.setBorder(null);
+            studentInfoPanel.repaint();
+            courseInfoPanel.repaint();
+            paraprofessionalInfoPanel.repaint();
+            
+        uaacClient.noMore();
+            uaacClient = null;
+            JComboBox[] cboxes = new  JComboBox[4];
+           
+           cboxes[0]=fnameCombo;
+           cboxes[1]=lnameCombo;
+           cboxes[2]=phoneCombo;
+           cboxes[3]=emailCombo;
+
+           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+           cultimateList.add(Data.getClientsfirst());
+           cultimateList.add(Data.getClientslast());
+           cultimateList.add(Data.getClientsphone());
+           cultimateList.add(Data.getClientsemail());
+           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+           cultimateList1.add(Data.getFnameOrderedList());
+           cultimateList1.add(Data.getLnameOrderedList());
+           cultimateList1.add(Data.getPhoneOrderedList());
+           cultimateList1.add(Data.getEmailOrderedList());
+           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+           
+           JComboBox[] cboxes2 = new  JComboBox[3];
+       cboxes2[0]=courseCombo;
+       cboxes2[1]=levelCombo;
+       cboxes2[2]=teacherCombo;
+
+       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+       cultimateList2.add(Data.getSubjectslist());
+       cultimateList2.add(Data.getLevelslist());
+       cultimateList2.add(Data.getTeacherslist());
+       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+       cultimateList22.add(Data.getSubjectOrderedList());
+       cultimateList22.add(Data.getLevelOrderedList());
+       cultimateList22.add(Data.getTeacherOrderedList());
+
+        uaacCourse.noMore();
+        uaacCourse = null;
+       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
+       
+       JComboBox[] boxes3 = new  JComboBox[3];
+        
+        boxes3[0]=creatorCombo;
+        boxes3[1]=locationCombo;
+        boxes3[2]=paraprofessionalCombo;
+
+        ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
+        
+        cultimateList3.add(Data.getClockedInParaprofessionals());
+        cultimateList3.add(Data.getLocationslist());
+        cultimateList3.add(Data.getClockedInParaprofessionals());
+       
+        uac.noMore();
+        uac = null;
+        uac = new UltimateAutoComplete(cultimateList3, boxes3);
+        
+        
+        clearForm();
     }//GEN-LAST:event_clearButtonActionPerformed
 
     private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButtonMouseClicked
@@ -2505,6 +2574,20 @@ System.out.println("Done list 4");
     }//GEN-LAST:event_deleteSessionButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        courseCombo.setBorder(null);
+            teacherCombo.setBorder(null);
+            levelCombo.setBorder(null);
+            paraprofessionalCombo.setBorder(null);
+            creatorCombo.setBorder(null);
+            fnameCombo.setBorder(null);
+            lnameCombo.setBorder(null);
+            locationCombo.setBorder(null);
+            sessionendField.setBorder(null);
+            sessionstartField.setBorder(null);
+            studentInfoPanel.repaint();
+            courseInfoPanel.repaint();
+            paraprofessionalInfoPanel.repaint();
+        
         update();
     }//GEN-LAST:event_jButton1ActionPerformed
 

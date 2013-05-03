@@ -256,7 +256,7 @@ public class SessionTableModel extends AbstractTableModel {
     {
         DatabaseHelper.open();
         for(int i=0; i<r.length; i++)
-            DatabaseHelper.delete(tutorSessions.get(r[i]).getParaprofessionalSessionID()+"", Agenda.AgendaTable.getTable());
+            DatabaseHelper.delete(tutorSessions.get(r[i]).getParaprofessionalSessionID()+"", ParaprofessionalSession.ParaSessTable.getTable());
         DatabaseHelper.close();
         ArrayList<ParaprofessionalSession> a = new ArrayList<ParaprofessionalSession>();
         for(int i=0; i< r.length; i++)

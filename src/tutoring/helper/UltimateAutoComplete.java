@@ -310,7 +310,7 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     public void setComboValue(String value, int indexOfBox)
     {
         ((JTextComponent)boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);
-        updatelist(indexOfBox);
+         updatelist(indexOfBox);
         ((JTextComponent)boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);
 
         firstClick[indexOfBox] = true;
