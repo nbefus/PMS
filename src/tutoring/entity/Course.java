@@ -7,57 +7,53 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
 public class Course
 {
     
     /**
-     *
+     * Course table information
      */
     public enum CourseTable {
 
         /**
-         *
+         * Course ID of the Course table
          */
         COURSEID("Course ID","courseId", true, getTableAlias()+".courseId", true),
         /**
-         *
+         * Teacher ID of the Course table
          */
         TEACHERID("Teaher ID","teacherID", true, getTableAlias()+".teacherID", true),
-        /**
-         *
+        /** 
+         * Subject ID of the Course table
          */
         SUBJECTID("Subject ID","subjectID", true, getTableAlias()+".subjectID", true),
         /**
-         *
+         * Level field of the Course table
          */
         LEVEL("Level","level", true, getTableAlias()+".level", false),
         /**
-         *
+         * Subject abbreviated name of the Course table
          */
         SUBJECTABBREVNAME("Subject","abbrevName", false, getSubjectAlias()+".abbrevName", false),
         /**
-         *
+         * Subject category ID of the Subject table
          */
         SUBJECTCATEGORYID("Category ID","categoryID", false, getSubjectAlias()+".categoryID", true),
         /**
-         *
+         * Subject category name of the Category table
          */
         SUBJECTCATEGORYNAME("Category","name", false, getCategoryAlias()+".name", false),
         /**
-         *
+         * Teacher last name of the Teacher table
          */
         TEACHERLNAME("Teacher Last","lName", false, getTeacherAlias()+".lName", false),
         /**
-         *
+         * Teacher first name of the Teacher table
          */
         TEACHERFNAME("Teacher First","fName", false, getTeacherAlias()+".fName", false);
         
@@ -83,7 +79,7 @@ public class Course
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -91,7 +87,7 @@ public class Course
         
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID()
         {
@@ -100,7 +96,7 @@ public class Course
         
         /**
          *
-         * @return
+         * @return display name of column
          */
         public String getDisplayName() {
             return displayName;
@@ -108,7 +104,7 @@ public class Course
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -116,7 +112,7 @@ public class Course
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -124,7 +120,7 @@ public class Course
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -133,7 +129,7 @@ public class Course
         
         /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -141,8 +137,8 @@ public class Course
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -158,8 +154,8 @@ public class Course
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -175,9 +171,9 @@ public class Course
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         *Get database name based on the display name of the columns
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -194,9 +190,9 @@ public class Course
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -215,9 +211,9 @@ public class Course
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -232,7 +228,7 @@ public class Course
 
         /**
          *
-         * @return
+         * @return subject table alias
          */
         public static String getSubjectAlias()
         {
@@ -241,7 +237,7 @@ public class Course
 
         /**
          *
-         * @return
+         * @return teacher table alias
          */
         public static String getTeacherAlias()
         {
@@ -250,7 +246,7 @@ public class Course
 
         /**
          *
-         * @return
+         * @return category table alias
          */
         public static String getCategoryAlias()
         {
@@ -265,11 +261,11 @@ public class Course
     private int level;
 
     /**
-     *
-     * @param course
-     * @param teacher
-     * @param subject
-     * @param level
+     * Create course object
+     * @param course - course ID of the course object for the database
+     * @param teacher - teacher object of the course object for the database
+     * @param subject - subject object of the course object for the database
+     * @param level - level of the course object for the database
      */
     public Course(int course, Teacher teacher, Subject subject, int level) {
         this.courseID = course;
@@ -278,18 +274,11 @@ public class Course
         this.level = level;
     }
     
-    /**
-     *
-     */
-    public Course()
-    {
-        
-    }
     
     /**
-     *
-     * @param c
-     * @return
+     * Converts course object to object array of values
+     * @param c - course item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Course c)
     {
@@ -302,34 +291,23 @@ public class Course
     }
    
     /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the course table and return course objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of course items that the query returns
      */
     public static ArrayList<Course> selectAllCourse(String addedSQLToSelect, Connection connect) {
-       // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Course> courses = new ArrayList<Course>();
         
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-        //    String password = "heythere";
-
-         //   connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
 
                 statement = connect.createStatement();
                 String query = CourseTable.getSelectQuery(true);
                 query+= " "+addedSQLToSelect;
-                 System.out.println(query);
                 resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     courses.add(new Course(resultSet.getInt(CourseTable.COURSEID.getWithAlias()), new Teacher(resultSet.getInt(CourseTable.TEACHERID.getWithAlias()), resultSet.getString(CourseTable.TEACHERLNAME.getWithAlias()), resultSet.getString(CourseTable.TEACHERFNAME.getWithAlias())), new Subject(resultSet.getInt(CourseTable.SUBJECTID.getWithAlias()), resultSet.getString(CourseTable.SUBJECTABBREVNAME.getWithAlias()), new Category(resultSet.getInt(CourseTable.SUBJECTCATEGORYID.getWithAlias()),resultSet.getString(CourseTable.SUBJECTCATEGORYNAME.getWithAlias()))), resultSet.getInt(CourseTable.LEVEL.getWithAlias())));
@@ -339,7 +317,6 @@ public class Course
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -351,9 +328,6 @@ public class Course
             statement.close();
           }
 
-         /* if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
@@ -376,14 +350,14 @@ public class Course
     }
 
     /**
-     * @return the subjectID
+     * @return the subject
      */
     public Subject getSubjectID() {
         return subjectID;
     }
 
     /**
-     * @param subjectID the subjectID to set
+     * @param subjectID the subject to set
      */
     public void setSubjectID(Subject subjectID) {
         this.subjectID = subjectID;
@@ -405,7 +379,7 @@ public class Course
 
     /**
      *
-     * @return
+     * @return course
      */
     public int getCourseID() {
         return courseID;
@@ -413,7 +387,7 @@ public class Course
 
     /**
      *
-     * @param courseID
+     * @param courseID the course to set
      */
     public void setCourseID(int courseID) {
         this.courseID = courseID;

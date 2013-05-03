@@ -17,33 +17,33 @@ import java.util.ArrayList;
 
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
 public class Client {
 
     /**
-     *
+     * Client table information
      */
     public enum ClientTable {
 
         /**
-         *
+         * Client ID of the Client table
          */
         CLIENTID("Client ID", "clientID", true, getTableAlias()+".clientID", true),
         /**
-         *
+         * Client first name of the Client table
          */
         FNAME("First Name","fName", true, getTableAlias()+".fName", false),
         /**
-         *
+         * Client last name of the Client table
          */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
         /**
-         *
+         * Client phone of the Client table
          */
         PHONE("Phone","phone", true, getTableAlias()+".phone", false),
         /**
-         *
+         * Client email of the Client table
          */
         EMAIL("Email","email", true, getTableAlias()+".email", false);
         
@@ -65,7 +65,7 @@ public class Client {
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -73,7 +73,7 @@ public class Client {
         
         /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName() {
             return displayName;
@@ -81,7 +81,7 @@ public class Client {
         
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID()
        {
@@ -90,7 +90,7 @@ public class Client {
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -98,7 +98,7 @@ public class Client {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -106,7 +106,7 @@ public class Client {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -115,7 +115,7 @@ public class Client {
         
         /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -123,8 +123,8 @@ public class Client {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -140,8 +140,8 @@ public class Client {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -157,9 +157,9 @@ public class Client {
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -176,9 +176,9 @@ public class Client {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -197,9 +197,9 @@ public class Client {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -216,12 +216,12 @@ public class Client {
     private String phone;
 
     /**
-     *
-     * @param clientID
-     * @param fName
-     * @param lName
-     * @param email
-     * @param phone
+     * Create a client object 
+     * @param clientID - ID of the client object for the database
+     * @param fName - first name of the client object for the database
+     * @param lName - last name of the client object for the database
+     * @param email - email of the client object for the database
+     * @param phone - phone of the client object for the database
      */
     public Client(int clientID, String fName, String lName, String email, String phone) {
         this.clientID = clientID;
@@ -233,9 +233,9 @@ public class Client {
 
     
     /**
-     *
-     * @param c
-     * @return
+     * Converts client object to object array of values
+     * @param c - client item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Client c)
     {
@@ -249,29 +249,19 @@ public class Client {
     }
     
      /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     *Create a select statement for the client table and return client objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query 
+     * @param connect - connection to the database
+     * @return list of client items that the query returns
      */
     public static ArrayList<Client> selectAllClients(String addedSQLToSelect, Connection connect) {
-       // Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Client> clients = new ArrayList<Client>();
         
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-
-        //    connect = DriverManager.getConnection(url1, user, password);
 
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
 
                 statement = connect.createStatement();
                 String query = ClientTable.getSelectQuery(true);
@@ -286,7 +276,6 @@ public class Client {
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -298,9 +287,6 @@ public class Client {
             statement.close();
           }
 
-         /* if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    

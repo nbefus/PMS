@@ -11,53 +11,48 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class Paraprofessional 
 {
      /**
-     *
+     * Paraprofessional table information
      */
     public enum ParaTable {
 
  
         /**
-         *
+         * Paraprofessional ID of the Paraprofessional table
          */
         PARAPROFESSIONALID("Paraprofessional ID","paraprofessionalID", true, getTableAlias()+".paraprofessionalID", true),
-        /**
-         *
+        /** 
+         *  Role ID of the Paraprofessional table
          */
         ROLEID("Role ID","roleID", true, getTableAlias()+".roleID", true),
         /**
-         *
+         * Last name of the paraprofessional of the Paraprofessional table
          */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
         /**
-         *
+         * First name of the paraprofessional of the Paraprofessional table
          */
         FNAME("First Name","fName", true, getTableAlias()+".fName", false),
         /**
-         *
+         * Hire date of the paraprofessional of the Paraprofessional table
          */
         HIREDATE("Hire Date","hireDate", true, getTableAlias()+".hireDate", false),
         /**
-         *
+         * Termination date of the paraprofessional of the Paraprofessional table
          */
         TERMINATIONDATE("Termination Date","terminationDate", true, getTableAlias()+".terminationDate", false),
         /**
-         *
+         * If the paraprofessional is currently clocked in of the Paraprofessional table
          */
         ISCLOCKEDIN("Is In","isClockedIn", true, getTableAlias()+".isClockedIn", false),
         /**
-         *
+         * Role type of the paraprofessional of the Role table
          */
         ROLETYPE("Role","type", false, getRoleAlias()+".type", false);
         
@@ -82,7 +77,7 @@ public class Paraprofessional
 
         /**
          *
-         * @return
+         * @return the name of the columns
          */
         public String getName() {
             return name;
@@ -90,7 +85,7 @@ public class Paraprofessional
 
         /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -98,7 +93,7 @@ public class Paraprofessional
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -106,7 +101,7 @@ public class Paraprofessional
         
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -114,7 +109,7 @@ public class Paraprofessional
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -122,7 +117,7 @@ public class Paraprofessional
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -131,7 +126,7 @@ public class Paraprofessional
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -139,8 +134,8 @@ public class Paraprofessional
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -156,8 +151,8 @@ public class Paraprofessional
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -173,9 +168,9 @@ public class Paraprofessional
         }
      
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the columns
+         * @param DisplayName - display name of the columns to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -192,9 +187,9 @@ public class Paraprofessional
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -213,9 +208,9 @@ public class Paraprofessional
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -229,7 +224,7 @@ public class Paraprofessional
 
         /**
          *
-         * @return
+         * @return the alias of the role table
          */
         public static String getRoleAlias()
         {
@@ -244,22 +239,15 @@ public class Paraprofessional
     private Date terminationDate = null;
     private boolean isClockedIn;
 
-      /**
-     *
-     */
-    public Paraprofessional()
-    {
-        
-    }
     /**
-     *
-     * @param paraprofessionalID
-     * @param role
-     * @param lName
-     * @param fName
-     * @param hireDate
-     * @param terminationDate
-     * @param isClockedIn
+     * Create a paraprofessional object
+     * @param paraprofessionalID - ID of the paraprofessional object for the database
+     * @param role - role of the paraprofessional object for the database
+     * @param lName - last name of the paraprofessional object for the database
+     * @param fName - first name of the paraprofessional object for the database
+     * @param hireDate - hire date of the paraprofessional object for the database
+     * @param terminationDate - termination date of the paraprofessional object for the database
+     * @param isClockedIn - clocked in status of the paraprofessional object for the database
      */
     public Paraprofessional(int paraprofessionalID, Role role, String lName, String fName, Date hireDate, Date terminationDate, boolean isClockedIn) {
         this.paraprofessionalID = paraprofessionalID;
@@ -272,9 +260,9 @@ public class Paraprofessional
     }
     
     /**
-     *
-     * @param p
-     * @return
+     * Converts paraprofessional object to object array of values
+     * @param p - paraprofessional item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Paraprofessional p)
     {
@@ -293,30 +281,18 @@ public class Paraprofessional
     
     
      /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the paraprofessional table and return paraprofessional objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of paraprofessional items that the query returns
      */
     public static ArrayList<Paraprofessional> selectAllParaprofessional(String addedSQLToSelect, Connection connect) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Paraprofessional> paraprofessionals = new ArrayList<Paraprofessional>();
         
         try {
-            // connect way #1
-           // String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-           // String user = "nbefus_me";
-           // String password = "heythere";
-
-           // connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 
                 statement = connect.createStatement();
 
@@ -332,7 +308,6 @@ public class Paraprofessional
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try
@@ -368,14 +343,14 @@ public class Paraprofessional
     }
 
     /**
-     * @return the roleID
+     * @return the role
      */
     public Role getRoleID() {
         return roleID;
     }
 
     /**
-     * @param roleID the roleID to set
+     * @param roleID the role to set
      */
     public void setRoleID(Role roleID) {
         this.roleID = roleID;
@@ -450,16 +425,7 @@ public class Paraprofessional
     public void setIsClockedIn(boolean isClockedIn) {
         this.isClockedIn = isClockedIn;
     }
-    
-    /**
-     *
-     * @return
-     */
-    public String hi()
-    {
-        return paraprofessionalID + " " + roleID.toString() + " " + lName + " " + fName + " " + hireDate.toString() + " " + terminationDate.toString() + " " + isClockedIn;
-    }
-    
+   
     @Override
     public String toString()
     {

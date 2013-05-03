@@ -13,20 +13,20 @@ import java.util.ArrayList;
 
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
 public class Location {
     /**
-     *
+     *  Location table information
      */
     public enum LocationTable {
         
         /**
-         *
+         * Location ID of the Location table
          */
         LOCATIONID("Location ID", "locationID", true, getTableAlias()+".locationID", true),
         /**
-         *
+         * Name of the Location in Location table
          */
         NAME("Location", "name", true, getTableAlias()+".name", false);
         
@@ -51,7 +51,7 @@ public class Location {
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -59,7 +59,7 @@ public class Location {
         
         /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -67,7 +67,7 @@ public class Location {
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -75,7 +75,7 @@ public class Location {
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -83,7 +83,7 @@ public class Location {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -91,7 +91,7 @@ public class Location {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -100,7 +100,7 @@ public class Location {
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -108,8 +108,8 @@ public class Location {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -125,8 +125,8 @@ public class Location {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -142,9 +142,9 @@ public class Location {
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Gets database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name fro
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -161,9 +161,9 @@ public class Location {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -182,9 +182,9 @@ public class Location {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -201,9 +201,9 @@ public class Location {
     private String name;
 
     /**
-     *
-     * @param locationID
-     * @param locationName
+     * Create a Location object
+     * @param locationID - ID of the location object for database
+     * @param locationName - name of the location object for the database
      */
     public Location(int locationID, String locationName) {
         this.locationID = locationID;
@@ -211,9 +211,9 @@ public class Location {
     }
 
     /**
-     *
-     * @param l
-     * @return
+     * Converts location object to object array of values
+     * @param l - location item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Location l)
     {
@@ -224,30 +224,19 @@ public class Location {
     }
       
       /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the location table and return location objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of location items that the query returns
      */
     public static ArrayList<Location> selectAllLocation(String addedSQLToSelect, Connection connect) {
-       // Connection connect = null;
         Statement statement = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Location> locations = new ArrayList<Location>();
         
         try {
-            // connect way #1
-          //  String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-          //  String user = "nbefus_me";
-          //  String password = "heythere";
-
-           // connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                
                 statement = connect.createStatement();
                 String query = Location.LocationTable.getSelectQuery(true);
@@ -262,7 +251,6 @@ public class Location {
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -273,11 +261,6 @@ public class Location {
           if (statement != null) {
             statement.close();
           }
-
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    

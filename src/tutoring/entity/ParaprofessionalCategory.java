@@ -14,55 +14,55 @@ import java.util.ArrayList;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class ParaprofessionalCategory implements Serializable{
     
     
     /**
-     *
+     * Paraprofessional Category table information
      */
     public enum ParaCatTable {
 
  
         /**
-         *
+         * Paraprofessional ID of the Paraprofessional Category table
          */
         PARAPROFESSIONALID("Paraprofessional ID","paraprofessionalID", true, getTableAlias()+".paraprofessionalID", true),
         /**
-         *
+         * Category ID of the Paraprofessional Category table
          */
         CATEGORYID("Category ID","categoryID", true, getTableAlias()+".categoryID", true),
         /**
-         *
+         * Name of the category of the Category table
          */
         NAME("Category","name", false, getCategoryAlias()+".name", false),
         /**
-         *
+         * Role ID of the Paraprofessional table
          */
         ROLEID("Role ID","roleID", false, getParaprofessionalAlias()+".roleID", true),
         /**
-         *
+         * Last name of the Paraprofessional table
          */
         LNAME("Last Name","lName", false, getParaprofessionalAlias()+".lName", false),
         /**
-         *
+         * First name of the Paraprofessional table
          */
         FNAME("First Name","fName", false, getParaprofessionalAlias()+".fName", false),
         /**
-         *
+         * Hire data of the Paraprofessional table
          */
         HIREDATE("Hire Date","hireDate", false, getParaprofessionalAlias()+".hireDate", false),
         /**
-         *
+         * Termination date of the paraprofessional table
          */
         TERMINATIONDATE("Termination Date","terminationDate", false, getParaprofessionalAlias()+".terminationDate", false),
         /**
-         *
+         * Clocked in status of the paraprofessional table
          */
         ISCLOCKEDIN("Is In","isClockedIn", false, getParaprofessionalAlias()+".isClockedIn", false),
         /**
-         *
+         * Role type of the role table
          */
         ROLETYPE("Role","type", false, getRoleAlias()+".type", false);
         
@@ -88,7 +88,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -96,7 +96,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -104,7 +104,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -112,7 +112,7 @@ public class ParaprofessionalCategory implements Serializable{
         
         /**
          *
-         * @return
+         * @return whether column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -120,7 +120,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -128,7 +128,7 @@ public class ParaprofessionalCategory implements Serializable{
         
         /**
          *
-         * @return
+         * @return table alias
          */
         public static String getTableAlias()
         {
@@ -137,7 +137,7 @@ public class ParaprofessionalCategory implements Serializable{
         
          /**
          *
-         * @return
+         * @return table name
          */
         public static String getTable()
         {
@@ -145,8 +145,8 @@ public class ParaprofessionalCategory implements Serializable{
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -162,8 +162,8 @@ public class ParaprofessionalCategory implements Serializable{
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -179,9 +179,9 @@ public class ParaprofessionalCategory implements Serializable{
         }
      
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -198,9 +198,9 @@ public class ParaprofessionalCategory implements Serializable{
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -219,9 +219,9 @@ public class ParaprofessionalCategory implements Serializable{
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -238,7 +238,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return the role table alias
          */
         public static String getRoleAlias()
         {
@@ -247,7 +247,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return category table alias
          */
         public static String getCategoryAlias() {
             return categoryAlias;
@@ -255,7 +255,7 @@ public class ParaprofessionalCategory implements Serializable{
 
         /**
          *
-         * @return
+         * @return paraprofessional table alias
          */
         public static String getParaprofessionalAlias() {
             return paraprofessionalAlias;
@@ -267,9 +267,9 @@ public class ParaprofessionalCategory implements Serializable{
     private Category categoryID;                  // primary key
 
     /**
-     *
-     * @param paraprofessional
-     * @param category
+     * Create a paraprofessional category object 
+     * @param paraprofessional - paraprofessional of the paraprofessional category object for the database
+     * @param category - category of the paraprofessional category object for the database
      */
     public ParaprofessionalCategory(Paraprofessional paraprofessional, Category category) {
         this.paraprofessionalID = paraprofessional;
@@ -278,9 +278,9 @@ public class ParaprofessionalCategory implements Serializable{
     
     
     /**
-     *
-     * @param pc
-     * @return
+     * Converts paraprofessional category object to object array of values
+     * @param pc - Paraprofessional category item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(ParaprofessionalCategory pc)
     {
@@ -291,31 +291,18 @@ public class ParaprofessionalCategory implements Serializable{
     }
     
     /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the paraprofessional category table and return paraprofessional category objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of paraprofessional category items that the query returns
      */
     public static ArrayList<ParaprofessionalCategory> selectAllParaprofessional(String addedSQLToSelect, Connection connect) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<ParaprofessionalCategory> paraCats = new ArrayList<ParaprofessionalCategory>();
         
         try {
-            // connect way #1
-           // String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-           // String user = "nbefus_me";
-           // String password = "heythere";
-
-           // connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
-                
                 statement = connect.createStatement();
 
                 String query = ParaprofessionalCategory.ParaCatTable.getSelectQuery(true);
@@ -333,7 +320,6 @@ public class ParaprofessionalCategory implements Serializable{
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try
@@ -355,28 +341,28 @@ public class ParaprofessionalCategory implements Serializable{
     }
 
     /**
-     * @return the paraprofessionalID
+     * @return the paraprofessional
      */
     public Paraprofessional getParaprofessionalID() {
         return paraprofessionalID;
     }
 
     /**
-     * @param paraprofessionalID the paraprofessionalID to set
+     * @param paraprofessionalID the paraprofessional to set
      */
     public void setParaprofessionalID(Paraprofessional paraprofessionalID) {
         this.paraprofessionalID = paraprofessionalID;
     }
 
     /**
-     * @return the categoryID
+     * @return the category
      */
     public Category getCategoryID() {
         return categoryID;
     }
 
     /**
-     * @param categoryID the categoryID to set
+     * @param categoryID the category to set
      */
     public void setCategoryID(Category categoryID) {
         this.categoryID = categoryID;

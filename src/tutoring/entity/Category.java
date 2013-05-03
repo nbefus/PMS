@@ -13,20 +13,20 @@ import java.util.ArrayList;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class Category {
     
     /**
-     *
+     * Category table information
      */
     public enum CategoryTable {
         /**
-         *
+         * Category ID of Category table
          */
         CATEGORYID("Category ID","categoryID", true, getTableAlias()+".categoryID", true),
         /**
-         *
+         * Name of the category in the Category table
          */
         NAME("Category","name", true, getTableAlias()+".name", false);
          
@@ -49,7 +49,7 @@ public class Category {
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -57,7 +57,7 @@ public class Category {
         
          /**
          *
-         * @return
+         * @return display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -65,7 +65,7 @@ public class Category {
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -73,7 +73,7 @@ public class Category {
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -81,7 +81,7 @@ public class Category {
 
         /**
          *
-         * @return
+         * @return filed with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -89,7 +89,7 @@ public class Category {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -98,7 +98,7 @@ public class Category {
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -106,8 +106,8 @@ public class Category {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -123,8 +123,8 @@ public class Category {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -140,9 +140,9 @@ public class Category {
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -159,9 +159,9 @@ public class Category {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -180,9 +180,9 @@ public class Category {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -200,9 +200,9 @@ public class Category {
     private String name;
 
     /**
-     *
-     * @param categoryID
-     * @param name
+     * Create a category object
+     * @param categoryID - ID of the category object for the database
+     * @param name - name of the category object for the database
      */
     public Category(int categoryID, String name) {
         this.categoryID = categoryID;
@@ -210,9 +210,9 @@ public class Category {
     }
     
     /**
-     *
-     * @param c
-     * @return
+     * Converts category object to object array of values
+     * @param c - Category item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Category c)
     {
@@ -223,35 +223,22 @@ public class Category {
     }
      
       /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the category table and return category objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of category items that the query returns
      */
     public static ArrayList<Category> selectAllCategory(String addedSQLToSelect, Connection connect) {
-       // Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Category> categories = new ArrayList<Category>();
         
         try {
-            // connect way #1
-           // String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-          //  String user = "nbefus_me";
-          //  String password = "heythere";
-
-          //  connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 
                 statement = connect.createStatement();
                 String query = Category.CategoryTable.getSelectQuery(true);
                     query+=" "+ addedSQLToSelect;
-                    System.out.println("QUERY IS IN CATEGORY: "+query);
                 resultSet = statement.executeQuery(query);
 
                 while (resultSet.next()) {
@@ -262,7 +249,6 @@ public class Category {
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -274,9 +260,6 @@ public class Category {
             statement.close();
           }
 
-         /* if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    

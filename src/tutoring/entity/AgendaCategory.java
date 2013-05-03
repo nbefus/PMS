@@ -105,7 +105,7 @@ public class AgendaCategory
         } 
         
         /**
-         * Gets all the table columns in an list of strings
+         * Gets all the table columns in a list of strings
          * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
@@ -141,7 +141,7 @@ public class AgendaCategory
         /**
          * Get database name based on the display name of the column
          * @param DisplayName - display name of the column to retrieve database name for
-         * @return - database name of the column
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -227,24 +227,12 @@ public class AgendaCategory
      * @return list of agenda category items that the query returns
      */
     public static ArrayList<AgendaCategory> selectAllAgendaCategory(String addedSQLToSelect, Connection connect) {
-       // Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<AgendaCategory> cateogories = new ArrayList<AgendaCategory>();
         
         try {
-            // connect way #1
-        //    String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-        //    String user = "nbefus_me";
-        //    String password = "heythere";
-
-        //    connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 
                 statement = connect.createStatement();
 
@@ -260,7 +248,6 @@ public class AgendaCategory
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -272,9 +259,6 @@ public class AgendaCategory
             statement.close();
           }
 
-          /*if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
