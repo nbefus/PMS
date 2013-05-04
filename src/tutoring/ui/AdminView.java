@@ -331,7 +331,6 @@ public final class AdminView extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Could not load term codes. The web address may have changed.");
         }
-        System.out.println(termCodes.size()+" LKJSDLFKJDS ");
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
         
         for(int i=0; i<termCodes.size(); i++)
@@ -3811,8 +3810,9 @@ public final class AdminView extends javax.swing.JFrame
 
         try
         {
-            download(searchsearchTable);
-            JOptionPane.showMessageDialog(null, "Download was successful");
+            boolean downloaded = download(searchsearchTable);
+            if(downloaded)
+                JOptionPane.showMessageDialog(null, "Download was successful");
         }
         catch(Exception e)
         {
@@ -5901,12 +5901,12 @@ public final class AdminView extends javax.swing.JFrame
      * @param table - the table to download data from
      * @throws IOException
      */
-    public void download(JTable table) throws IOException
+    public boolean download(JTable table) throws IOException
     {
         JFileChooser jfc = new JFileChooser();
         int result = jfc.showSaveDialog(this);
         if (result == JFileChooser.CANCEL_OPTION)
-            return;
+            return false;
         File file = jfc.getSelectedFile();
         
         try 
@@ -5943,12 +5943,14 @@ public final class AdminView extends javax.swing.JFrame
                 writer.newLine();
             }
             writer.close();
+            return true;
  
         } catch (FileNotFoundException e) {
            
         } catch (IOException e) {
             
         }
+        return false;
     }
 
     /**

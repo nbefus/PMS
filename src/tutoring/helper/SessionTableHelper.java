@@ -45,7 +45,6 @@ public class SessionTableHelper
     {
         this.table = table;
         this.isFutureSession = isFutureSession;
-        System.out.println("SESSION HELPER ISFUTURESESSION : "+isFutureSession);
         if(!isFutureSession)
             table.setModel(new SessionTableModel(isFutureSession, todaySessionTableModel));
         else
@@ -148,7 +147,6 @@ public class SessionTableHelper
         // Get maximum width of column data
         for (int r = 0; r < table.getRowCount(); r++) {
             renderer = table.getCellRenderer(r, vColIndex);
-            System.out.println("COL: "+vColIndex+" and ROW: "+r+"   "+renderer.toString());
             comp     = renderer.getTableCellRendererComponent(table, table.getValueAt(r, vColIndex), false, false,
                     r, vColIndex);
             width = Math.max(width, comp.getPreferredSize().width);

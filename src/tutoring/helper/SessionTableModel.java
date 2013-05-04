@@ -208,12 +208,10 @@ public class SessionTableModel extends AbstractTableModel {
             if(columnNames[c[i].getColumnIndex()].equals(Columns.START.getDisplayName()) && isFutureSession)
             {
                 columnNames[c[i].getColumnIndex()] = "Appointment";
-                System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!HERE");
             }
             else if(columnNames[c[i].getColumnIndex()].equals(Columns.STOP.getDisplayName()) && isFutureSession)
                 columnNames[c[i].getColumnIndex()] = "Start";
                 
-          System.out.println("COLUMN NAME: *"+columnNames[c[i].getColumnIndex()] + "* *"+Columns.START.getDisplayName() + "* "+isFutureSession);
         }
         
         return columnNames;

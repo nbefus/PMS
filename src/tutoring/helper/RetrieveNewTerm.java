@@ -104,7 +104,6 @@ public class RetrieveNewTerm {
                   String value = line.substring(line.indexOf("\"")+1,line.lastIndexOf("\""));
                   String name = line.substring(line.indexOf(">")+1,line.lastIndexOf("<"));
                   
-                  System.out.println(name+":"+value+":");
                   if(value != null && !value.contains("DO NOT USE") && !value.equals("") && name != null && !name.contains("DO NOT USE") && !name.equals(""))
                   {    
                       codes.add(name+" - ("+value+")");

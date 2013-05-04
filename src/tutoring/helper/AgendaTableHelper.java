@@ -130,7 +130,6 @@ public class AgendaTableHelper
         // Get maximum width of column data
         for (int r = 0; r < table.getRowCount(); r++) {
             renderer = table.getCellRenderer(r, vColIndex);
-            System.out.println("COL: "+vColIndex+" and ROW: "+r+"   "+renderer.toString());
             comp     = renderer.getTableCellRendererComponent(table, table.getValueAt(r, vColIndex), false, false,
                     r, vColIndex);
             width = Math.max(width, comp.getPreferredSize().width);
