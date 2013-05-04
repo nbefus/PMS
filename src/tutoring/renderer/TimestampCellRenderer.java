@@ -17,15 +17,15 @@ import tutoring.helper.SessionTableModel.Columns;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class TimestampCellRenderer extends DefaultTableCellRenderer
 {
     boolean isFutureSession;
     
     /**
-     *
-     * @param isFutureSession
+     * Create timestamp cell renderer to create stop and start session buttons
+     * @param isFutureSession - if this table is appointments table
      */
     public TimestampCellRenderer(boolean isFutureSession)
     {
@@ -63,7 +63,6 @@ public class TimestampCellRenderer extends DefaultTableCellRenderer
                     this.setText("");
                     if(isSelected)
                     {
-                        String cell;// = t.getValueAt(r, c-1).toString();
                         if(((Timestamp)t.getValueAt(r, c-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")))
                         {
                             setForeground(t.getSelectionForeground());
@@ -79,7 +78,6 @@ public class TimestampCellRenderer extends DefaultTableCellRenderer
                     }
                     else
                     {
-                        String cell;// = t.getValueAt(r, c-1).toString();
                         if(((Timestamp)t.getValueAt(r, c-1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")))
                         {
                             setForeground(t.getSelectionForeground());

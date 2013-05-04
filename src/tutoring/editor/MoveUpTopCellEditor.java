@@ -1,17 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package tutoring.editor;
 
-/**
- *
- * @author Nathaniel
- */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+package tutoring.editor;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -31,7 +19,7 @@ import javax.swing.border.LineBorder;
 
 /**
  *
- * @author dabeefinator
+ * @author team ubuntu
  */
 public class MoveUpTopCellEditor extends DefaultCellEditor
 {

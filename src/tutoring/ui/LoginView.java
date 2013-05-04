@@ -5,13 +5,13 @@ import tutoring.helper.Login;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class LoginView extends javax.swing.JFrame
 {
 
     /**
-     *
+     * Create new login screen
      */
     public LoginView()
     {
@@ -276,7 +276,6 @@ public class LoginView extends javax.swing.JFrame
                 this.setVisible(false);
             }
         }
-        ///loginButton.setEnabled(true);
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void usernameFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_usernameFieldKeyPressed

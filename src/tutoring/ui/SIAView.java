@@ -249,8 +249,8 @@ System.out.println("Done list 4");
         }
         
         /**
-         *
-         * @param DisplayName 
+         * Get database name based on display name of column
+         * @param DisplayName - display name of column
          * @return the database name of the combobox using the display name as input
          */
         public String getDatabaseName(String DisplayName)
@@ -276,9 +276,7 @@ System.out.println("Done list 4");
 
 private int sessionID = -1;
    
-    /**
-     *
-     */
+
     public SIAView() 
     {
         initComponents();
@@ -321,7 +319,6 @@ private int sessionID = -1;
         
         
        Data d = new Data();
-       System.out.println("DATA");
       JComboBox[] cboxes = new  JComboBox[4];
        cboxes[0]=fnameCombo;
        cboxes[1]=lnameCombo;
@@ -329,19 +326,15 @@ private int sessionID = -1;
        cboxes[3]=emailCombo;
        
        ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-System.out.println("LIST1");
        cultimateList.add(Data.getClientsfirst());
        cultimateList.add(Data.getClientslast());
        cultimateList.add(Data.getClientsphone());
        cultimateList.add(Data.getClientsemail());
-       System.out.println("DONE LIST1");
        ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-System.out.println("LIST 2");
        cultimateList1.add(Data.getFnameOrderedList());
        cultimateList1.add(Data.getLnameOrderedList());
        cultimateList1.add(Data.getPhoneOrderedList());
        cultimateList1.add(Data.getEmailOrderedList());
-System.out.println("DONE LIST2");
        uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
       
        
@@ -349,19 +342,15 @@ System.out.println("DONE LIST2");
        cboxes2[0]=courseCombo;
        cboxes2[1]=levelCombo;
        cboxes2[2]=teacherCombo;
-       System.out.println("LIST 3");
        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
        cultimateList2.add(Data.getSubjectslist());
        cultimateList2.add(Data.getLevelslist());
        cultimateList2.add(Data.getTeacherslist());
-System.out.println("DONE list 3");
        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-System.out.println("LIst 4");
        cultimateList22.add(Data.getSubjectOrderedList());
        cultimateList22.add(Data.getLevelOrderedList());
        cultimateList22.add(Data.getTeacherOrderedList());
-System.out.println("Done list 4");
        uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
       
        
@@ -383,10 +372,7 @@ System.out.println("Done list 4");
         clearComboBoxes();
       
         Timestamp now = new Timestamp((new Date()).getTime());
-        
-        
-       System.out.println("SESSIONS");
-       
+               
        String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
        String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
        String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
@@ -403,9 +389,7 @@ System.out.println("Done list 4");
             
             sessionsTable.repaint();
         }
-        
-        System.out.println("SESSIONS AGIAN");
-        
+                
         String futureSessionsWhere = " where ("+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NULL) AND "+sessStartCol+" >= '"+now.toString()+"' AND "+walkoutCol+"='false'";
 
         ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
@@ -567,11 +551,7 @@ System.out.println("Done list 4");
             
             agendaTable.repaint();
         }
-        else
-            System.out.println("EEEMMMMMMPPPPPPTTYYYYY");
-        
-        System.out.println("AGENDA AGENDA AGENDA AGENDA AGENDA DONE DONE DONE DONE DONE");
-    }
+         }
 
     /**
      * Creates a cell editor for the session tables for handling double click to edit data
@@ -594,7 +574,6 @@ System.out.println("Done list 4");
                 uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTPHONE.getColumnIndex()).toString(), ComboBoxesIndexes.CPHONE.getBoxIndex());
                 uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTLASTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CLNAME.getBoxIndex());
                 uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTFIRSTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CFNAME.getBoxIndex());
-                //uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CATEGORY.getColumnIndex()).toString(), ComboBoxesIndexes.CATEGORY.getBoxIndex());
                 uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.PARAPROFESSIONAL.getColumnIndex()).toString(), ComboBoxesIndexes.PARAPROFESSIONAL.getBoxIndex());
                 uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.LOCATION.getColumnIndex()).toString(), ComboBoxesIndexes.LOCATION.getBoxIndex());
                 uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CREATOR.getColumnIndex()).toString(), ComboBoxesIndexes.CREATOR.getBoxIndex());
@@ -602,10 +581,7 @@ System.out.println("Done list 4");
                 gcCheck.setSelected((Boolean)table.getValueAt(row, SessionTableModel.Columns.GC.getColumnIndex()));
                 
                 notesField.setText(table.getValueAt(row, SessionTableModel.Columns.NOTES.getColumnIndex()).toString());
-                
-               // System.out.println("LKJDSFLDSJLKDSJFLKSDJF DSLJDSFLKDSJ "+table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()));
-               // System.out.println("LKJDSFLDSJLKDSJFLKSDJF DSLJDSFLKDSJ "+table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()));
-                               
+                                               
                 SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
                
                 boolean hasSessionStart = (table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
@@ -658,14 +634,12 @@ System.out.println("Done list 4");
                 {
                     
                 }
-                System.out.println("TABLETEST: "+table.getTableHeader().getColumnModel().getColumn(0).getHeaderValue().toString());
                 String notes = table.getValueAt(row, AgendaTableModel.Columns.NOTES.getColumnIndex()).toString();
                 int agendaID =((Integer) table.getValueAt(row, AgendaTableModel.Columns.ID.getColumnIndex())).intValue();
                 
                 NewAgendaObject ndo = new NewAgendaObject(new Frame(), true, type, date, notes, agendaID);
                 ndo.setLocationRelativeTo(null);
                 ndo.setVisible(true);
-                System.out.println("HOPEFULLY NOT HERE YET");
                 updateTables();
                 return null;
             }
@@ -2093,35 +2067,28 @@ System.out.println("Done list 4");
         ndo.setLocationRelativeTo(null);
         ndo.setVisible(true);
         
-        if(true)//ndo.wasInserted())
+        if(ndo.wasInserted())
         {
             Data.refreshClient();
             uaacClient.noMore();
             uaacClient = null;
             JComboBox[] cboxes = new  JComboBox[4];
-           /* fnameCombo = new JComboBox();
-            lnameCombo = new JComboBox();
-            phoneCombo = new JComboBox();
-            emailCombo = new JComboBox();*/
+  
            cboxes[0]=fnameCombo;
            cboxes[1]=lnameCombo;
            cboxes[2]=phoneCombo;
            cboxes[3]=emailCombo;
 
            ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST1");
            cultimateList.add(Data.getClientsfirst());
            cultimateList.add(Data.getClientslast());
            cultimateList.add(Data.getClientsphone());
            cultimateList.add(Data.getClientsemail());
-           System.out.println("DONE LIST1");
            ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST 2");
            cultimateList1.add(Data.getFnameOrderedList());
            cultimateList1.add(Data.getLnameOrderedList());
            cultimateList1.add(Data.getPhoneOrderedList());
            cultimateList1.add(Data.getEmailOrderedList());
-    System.out.println("DONE LIST2");
            uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
            clearForm();
         }
@@ -2463,7 +2430,6 @@ System.out.println("Done list 4");
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
     }//GEN-LAST:event_dayRadioActionPerformed
@@ -2487,7 +2453,6 @@ System.out.println("Done list 4");
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
             e.printStackTrace();
         }
     }//GEN-LAST:event_monthRadioActionPerformed

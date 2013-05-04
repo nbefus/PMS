@@ -7,7 +7,7 @@ import tutoring.entity.*;
 
 /**
  *
- * @author pres_is
+ * @author team Ubuntu
  */
 public class Login
 {
@@ -23,9 +23,9 @@ public class Login
     private Role role = null;
 
     /**
-     *
-     * @param username
-     * @param password
+     * Create a new login
+     * @param username - username to login
+     * @param password - password to login
      */
     public Login(String username, String password)
     {
@@ -38,20 +38,15 @@ public class Login
     }
 
     /**
-     *
+     * Create new login
      */
     public Login()
     {
     }
     
-    /***
-
-    * This is a sample Java Comment
-
-    *
-
-* @param username 
-*/
+    /*
+    * @param username - set username
+    */
     public void setUsername(String username)
     {
         this.username = username;
@@ -59,7 +54,7 @@ public class Login
 
     /**
      *
-     * @param password
+     * @param password - set password
      */
     public void setPassword(String password)
     {
@@ -67,8 +62,8 @@ public class Login
     }
 
     /**
-     *
-     * @return
+     * Attempt to login
+     * @return whether login was successful
      */
     public final boolean login()
     {
@@ -89,7 +84,7 @@ public class Login
 
     /**
      *
-     * @return
+     * @return whether login is logged in
      */
     public boolean isLoggedIn()
     {
@@ -98,7 +93,7 @@ public class Login
 
     /**
      *
-     * @return
+     * @return role of login
      */
     public Role getRole()
     {
@@ -143,7 +138,7 @@ public class Login
 
     /**
      *
-     * @return
+     * @return feedback of the login
      */
     public String loginFeedback()
     {

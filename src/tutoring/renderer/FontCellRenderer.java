@@ -25,12 +25,12 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class FontCellRenderer extends DefaultTableCellRenderer
 {
     /**
-     *
+     * Create font cell renderer to change the font in a table
      */
     public FontCellRenderer()
     {

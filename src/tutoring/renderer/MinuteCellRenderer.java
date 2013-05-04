@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author dabeefinator
+ * @author team Ubuntu
  */
 public class MinuteCellRenderer extends DefaultTableCellRenderer
 {
     boolean isFutureSession;
     /**
-     *
-     * @param isFutureSession
+     * Minute cell renderer to change cell background color based on minutes remaining
+     * @param isFutureSession - if this table is for appointments
      */
     public MinuteCellRenderer(boolean isFutureSession)
     {
