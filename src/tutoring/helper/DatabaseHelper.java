@@ -183,15 +183,13 @@ public class DatabaseHelper
     }
      
     /**
-     *
-     * @param values
-     * @param table
-     * @return
+     * Insert values into table
+     * @param values - values to insert
+     * @param table - table to insert into
+     * @return whether query was successful
      */
     public static boolean insert(Object[] values, String table) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List l = new ArrayList();
         boolean inserted = false;
@@ -205,7 +203,6 @@ public class DatabaseHelper
                 {
                     for(int i=0; i<values.length; i++)
                     {
-                        //System.out.println("VALUE: "+values[i].getClass().toString() + " "+values[i]);
                         if(values[i] instanceof Integer)
                         {
                             valuesString+=values[i].toString()+",";
@@ -300,12 +297,6 @@ public class DatabaseHelper
             statement.close();
           }
 
-          
-          
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
            
         }    
@@ -317,32 +308,21 @@ public class DatabaseHelper
   
       
        /**
-     *
-     * @param values
-     * @param oldValues
-     * @param table
-     * @return
+     * Update paraprofessional category table with values
+     * @param values - new values to put into the table
+     * @param oldValues - old values to use for referencing
+     * @param table - table to put values into
+     * @return whether the query was successful
      */
     public static boolean updateParaCat(Object[] values, Object[] oldValues, String table) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         boolean inserted = false;
         List l = new ArrayList();
         
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-           
-          //  connect = DriverManager.getConnection(url1, user, password);
-
+  
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 statement = connect.createStatement();
 
                 ArrayList<String> columns = getTableColumns(table);
@@ -356,15 +336,12 @@ public class DatabaseHelper
                 
                
                String query = "update "+table+" set "+valuesString+" "+whereString;
-               System.out.println(query);
                statement.executeUpdate(query);
-                System.out.println("TRUE");
                 inserted = true;
                 return inserted;
             }
 
         } catch (Exception ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -384,29 +361,19 @@ public class DatabaseHelper
     }
                        
      /**
-     *
-     * @param values
-     * @param table
-     * @return
+     * Update table with values
+     * @param values - values to update to
+     * @param table - table to insert values
+     * @return whether query was successful
      */
     public static boolean update(Object[] values, String table) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List l = new ArrayList();
         boolean inserted = false;
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-           
-          //  connect = DriverManager.getConnection(url1, user, password);
 
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
 
                 statement = connect.createStatement();
 
@@ -464,11 +431,6 @@ public class DatabaseHelper
 
                             valuesString+="'"+values[i].toString()+"', ";
                         }
-                        /*else if(values[i] instanceof Date)
-                        {
-                            Timestamp t = new Timestamp(((Date)values[i]).getTime());
-                            valuesString+="'"+t.toString()+"', ";
-                        }*/
                         else if(values[i] instanceof Boolean)
                         {
                             valuesString+=values[i].toString()+", ";
@@ -477,22 +439,18 @@ public class DatabaseHelper
                         {
                             valuesString+="null,";
                         }
-                        else
-                            System.out.println("UNKNOWN VALUE TYPE" + values[i].getClass().toString());
                    }
                    if(i == values.length-1)
                        valuesString = valuesString.substring(0, valuesString.length()-2);
                }
                
                String query = "update "+table+" set "+valuesString+" "+whereString;
-               System.out.println(query);
                statement.executeUpdate(query);
                 inserted = true;
                 return inserted;
             }
 
         } catch (Exception ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -503,11 +461,6 @@ public class DatabaseHelper
           if (statement != null) {
             statement.close();
           }
-
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
@@ -517,29 +470,18 @@ public class DatabaseHelper
     
     
     /**
-     *
-     * @param ID
-     * @param table
-     * @return
+     * Delete ID from table
+     * @param ID - ID of row to delete
+     * @param table - table to delete from
+     * @return whether query was successful
      */
     public static boolean delete(String ID, String table) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List l = new ArrayList();
         boolean deleted = false;
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-           
-          //  connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
 
                 statement = connect.createStatement();
 
@@ -551,14 +493,12 @@ public class DatabaseHelper
                    
             
                String query = "delete from "+table+" "+whereString;
-               System.out.println(query);
                 statement.executeUpdate(query);
                 deleted = true;
                 return deleted;
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -569,11 +509,6 @@ public class DatabaseHelper
           if (statement != null) {
             statement.close();
           }
-
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
@@ -582,30 +517,19 @@ public class DatabaseHelper
     }
     
     /**
-     *
-     * @param ID
-     * @param ID2
-     * @param table
-     * @return
+     * Delete from table, ID and ID2
+     * @param ID - first ID to delete
+     * @param ID2 - second ID to delete
+     * @param table - table to delete from
+     * @return whether query was successful
      */
     public static boolean delete(String ID, String ID2, String table) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List l = new ArrayList();
         boolean deleted = false;
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-           
-          //  connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
 
                 statement = connect.createStatement();
 
@@ -617,14 +541,12 @@ public class DatabaseHelper
                    
             
                String query = "delete from "+table+" "+whereString;
-               System.out.println(query);
                 statement.executeUpdate(query);
                 deleted = true;
                 return deleted;
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -635,11 +557,6 @@ public class DatabaseHelper
           if (statement != null) {
             statement.close();
           }
-
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
@@ -648,32 +565,20 @@ public class DatabaseHelper
     }
     
       /**
-     *
-     * @param query
-     * @return
+     * Select from a regular query
+     * @param query - query to execute
+     * @return List of objects returned from the query
      */
     public static List selectAll(String query) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         List l = new ArrayList();
         
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-           
-          //  connect = DriverManager.getConnection(url1, user, password);
 
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 statement = connect.createStatement();
 
-               
                resultSet = statement.executeQuery(query);
 
                 while (resultSet.next()) {
@@ -689,7 +594,6 @@ public class DatabaseHelper
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -701,10 +605,6 @@ public class DatabaseHelper
             statement.close();
           }
 
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
@@ -713,15 +613,14 @@ public class DatabaseHelper
     }
       
     /**
-     *
-     * @param query
-     * @return
+     * Regular query to execute
+     * @param query - query to execute
+     * @return string [][] of data from query
      */
     public static String[][] getDataFromRegularQuery(String query)
     {
         System.out.println(query);
         List l = DatabaseHelper.selectAll(query);
-        //List c = HibernateTest.regularSelect("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'User'");
 
         String[][] data = null;
         boolean firstTime = true;
@@ -739,14 +638,10 @@ public class DatabaseHelper
 
             for(int i=0; i<row.length; i++)
             {
-                //System.out.println(data[count][i] + ":"+row[i].getClass().toString());
                 if(row[i] == null)
                     row[i] = "NONE";
                 data[count][i] = row[i].toString();
-                System.out.print("\t\t"+row[i]+"--"+row[i].getClass().toString());
             }
-
-
 
             count++;
          }
@@ -755,13 +650,12 @@ public class DatabaseHelper
     }
     
     /**
-     *
-     * @param query
-     * @return
+     * Fills a table with a query
+     * @param query - query to fill table
+     * @return string[][] of data from query
      */
     public static String[][] fillTableWithQuery(String query) {
         List l = DatabaseHelper.selectAll(query);
-        //List c = HibernateTest.regularSelect("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'User'");
 
         String[][] data = null;
         boolean firstTime = true;
@@ -776,36 +670,18 @@ public class DatabaseHelper
                 firstTime = false;
             }
 
-            //if(showID)
-            //{
                 for (int i = 0; i < row.length; i++) {
                     if(row[i] != null)
                         data[count][i] = row[i].toString();
                     else
                         data[count][i] = "";
-                   // System.out.print("\t\t" + row[i] + "--" + row[i].getClass().toString());
                 }
-            /*}
-            else
-            {
-                for (int i = 1; i < row.length; i++) {
-                    if(row[i] != null)
-                        data[count][i-1] = row[i].toString();
-                    else
-                        data[count][i-1] = "";
-                   // System.out.print("\t\t" + row[i] + "--" + row[i].getClass().toString());
-                }
-            }
-*/
+
             count++;
         }
         
         return data;
-
-        
+   
     }
-    
-    
-    
     
 }

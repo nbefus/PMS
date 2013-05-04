@@ -9,35 +9,32 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import tutoring.entity.Category.CategoryTable;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
 public class Subject {
 
     /**
-     *
+     * Subject table information
      */
     public enum SubjectTable {
 
         /**
-         *
+         * Subject ID of the Subject table
          */
         SUBJECTID("Subject ID","subjectID", true, getTableAlias()+".subjectID", true),
         /**
-         *
+         * Abbreviated name of the Subject table
          */
         ABBREVNAME("Subject","abbrevName", true, getTableAlias()+".abbrevName", false),
         /**
-         *
+         * Category ID of the Subject table
          */
         CATEGORYID("Category ID","categoryID", true, getTableAlias()+".categoryID", true), 
         /**
-         *
+         * Name of the category of the Category table
          */
         CATEGORYNAME("Category","name", false, getCategoryAlias()+".name", false);
         
@@ -61,7 +58,7 @@ public class Subject {
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -69,7 +66,7 @@ public class Subject {
         
         /**
          *
-         * @return
+         * @return the display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -77,7 +74,7 @@ public class Subject {
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -85,7 +82,7 @@ public class Subject {
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -93,7 +90,7 @@ public class Subject {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -101,7 +98,7 @@ public class Subject {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -110,7 +107,7 @@ public class Subject {
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -118,8 +115,8 @@ public class Subject {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -134,9 +131,9 @@ public class Subject {
             return cols;
         }
         
-        /**
-         *
-         * @return
+         /**
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -152,9 +149,9 @@ public class Subject {
         }
      
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -171,9 +168,9 @@ public class Subject {
         }
         
          /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -192,9 +189,9 @@ public class Subject {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -208,7 +205,7 @@ public class Subject {
 
         /**
          *
-         * @return
+         * @return the Category table alias
          */
         public static String getCategoryAlias()
         {
@@ -221,10 +218,10 @@ public class Subject {
     private Category categoryID;  // foreign key
 
     /**
-     *
-     * @param subjectID
-     * @param abbrevName
-     * @param category
+     * Create a subject object
+     * @param subjectID - ID of the subject object for the database
+     * @param abbrevName - abbreviated name of the subject object for the database
+     * @param category - category of the subject object for the database
      */
     public Subject(int subjectID, String abbrevName, Category category) {
         this.subjectID = subjectID;
@@ -233,9 +230,9 @@ public class Subject {
     }
     
     /**
-     *
-     * @param s
-     * @return
+     * Converts subject object to object array of values
+     * @param s - subject item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Subject s)
     {
@@ -248,45 +245,33 @@ public class Subject {
       
 
     /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the subject table and return subject objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of subject items that the query returns
      */
     public static ArrayList<Subject> selectAllSubjects(String addedSQLToSelect, Connection connect) {
         
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Subject> subjects = new ArrayList<Subject>();
 
         try {
-            // connect way #1
-            
-
+           
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 
                 statement = connect.createStatement();
                 String query = Subject.SubjectTable.getSelectQuery(true);
                 query+=" "+addedSQLToSelect;
-                System.out.println(query);
                 resultSet = statement.executeQuery(query);
-                System.out.println("GOT RESULT SET");
                 while (resultSet.next()) {
-                    
-                    System.out.println("NEW SUBJECT");
                     subjects.add(new Subject(resultSet.getInt(SubjectTable.SUBJECTID.getWithAlias()), resultSet.getString(SubjectTable.ABBREVNAME.getWithAlias()), new Category(resultSet.getInt(SubjectTable.CATEGORYID.getWithAlias()), resultSet.getString(SubjectTable.CATEGORYNAME.getWithAlias()))));
                     
                 }
-                System.out.println(subjects.size());
                 return subjects;
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -298,9 +283,6 @@ public class Subject {
                     statement.close();
                 }
 
-               /* if (connect != null) {
-                    connect.close();
-                }*/
             } catch (Exception e) {
             }
             return subjects;
@@ -322,9 +304,6 @@ public class Subject {
     }
 
     /**
-     * @return the categoryID
-     */
-    /**
      * @return the abbrevName
      */
     public String getAbbrevName() {
@@ -339,14 +318,14 @@ public class Subject {
     }
 
     /**
-     * @return the categoryID
+     * @return the category
      */
     public Category getCategoryID() {
         return categoryID;
     }
 
     /**
-     * @param categoryID the categoryID to set
+     * @param categoryID the category to set
      */
     public void setCategoryID(Category categoryID) {
         this.categoryID = categoryID;

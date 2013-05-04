@@ -17,21 +17,12 @@ import tutoring.entity.Teacher;
 import tutoring.entity.User;
 import tutoring.helper.DatabaseHelper;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class RetrieveNewTerm {
 
-    /**
-     * @param args the command line arguments
-     */
-    
     private static int autoIncValSub = 1;
     private static int autoIncValTeach = 1;
     private static int autoIncValCourse = 1;
@@ -49,10 +40,6 @@ public class RetrieveNewTerm {
     private static boolean firstSubject = true;
     private static boolean firstCourse = true;
        
-    public static void main(String[] args) throws Exception
-    {
-        isValidTermCode("33");
-    }
     private static int containsTeacher(ArrayList<Teacher> teachers, Teacher t)
     {
         for(int i=0; i<teachers.size(); i++)
@@ -84,6 +71,10 @@ public class RetrieveNewTerm {
         return -1;
     }
     
+    /*
+     * Get all the term codes
+     * @return list of term codes
+     */
     public static ArrayList<String> getTermCodes() throws Exception
     {
        URL url = new URL("http://apps.hpu.edu/cis/web/index.php/search");
@@ -166,8 +157,8 @@ public class RetrieveNewTerm {
     
     
     /**
-     *
-     * @param termCodes
+     * Update course table with new information from term
+     * @param termCodes - code of term to import
      * @throws Exception
      */
     public static void updateCourses(String termCode) throws Exception
@@ -276,16 +267,8 @@ public class RetrieveNewTerm {
             JOptionPane.showMessageDialog(null, "The term code entered is not valid! Or the web address has changed");
         }
     }
-    
-    
-    /**
-     *
-     * @param lname
-     * @param fname
-     * @param abbrev
-     * @param level
-     */
-    public static void insertData(String lname, String fname, String abbrev, int level)
+
+    private static void insertData(String lname, String fname, String abbrev, int level)
     {
         Teacher t = new Teacher(++autoIncValTeach, lname, fname);
         Subject s = new Subject(++autoIncValSub, abbrev.trim(), categories.get(categories.size()-1)); 

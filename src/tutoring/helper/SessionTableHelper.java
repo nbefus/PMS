@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tutoring.helper;
 
 import tutoring.editor.TimestampCellEditor;
@@ -30,7 +27,7 @@ import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class SessionTableHelper 
 {
@@ -38,11 +35,11 @@ public class SessionTableHelper
     private boolean isFutureSession;
     
     /**
-     *
-     * @param table
-     * @param isFutureSession
-     * @param currentSessionTableModel
-     * @param todaySessionTableModel
+     * Create a new session table helper to help manage session tables
+     * @param table - session table to manage
+     * @param isFutureSession - if session table is future session table
+     * @param currentSessionTableModel - current sessions table model
+     * @param todaySessionTableModel - today's sessions table model
      */
     public SessionTableHelper(JTable table, boolean isFutureSession, SessionTableModel currentSessionTableModel, TodaySessionTableModel todaySessionTableModel)
     {
@@ -59,8 +56,8 @@ public class SessionTableHelper
     }
     
     /**
-     *
-     * @param increase
+     * Increase row height of table
+     * @param increase - amount to increase
      */
     public void increaseRowHeight(int increase)
     {
@@ -70,7 +67,7 @@ public class SessionTableHelper
     }
     
     /**
-     *
+     * Allow scrolling even when the mouse is on the table
      */
     public void allowScrollingOnTable()
     {
@@ -82,8 +79,8 @@ public class SessionTableHelper
     }
     
     /**
-     *
-     * @param fastness
+     * Increase scrolling of table
+     * @param fastness - amount of scrolling
      */
     public void fasterScrolling(int fastness)
     {
@@ -91,19 +88,13 @@ public class SessionTableHelper
     }
     
     /**
-     *
-     * @param doubleClickBringsInfoUpTop
-     * @param dce
+     * Set renderers and editors for session table
+     * @param dce - the cell editor of what to do when double clicked
      */
-    public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
+    public void setTableRendersAndEditors(DefaultCellEditor dce)
     {
         DefaultCellEditor singleclick = new DefaultCellEditor(new JCheckBox());
         singleclick.setClickCountToStart(2);
-        // DefaultCellEditor singleclickCombo = new DefaultCellEditor(new JComboBox());
-        //singleclickCombo.setClickCountToStart(2);
-        //set the editor as default on every column
-   
-       
         
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setAutoCreateRowSorter(true);
@@ -111,8 +102,6 @@ public class SessionTableHelper
         
         table.getColumnModel().getColumn(SessionTableModel.Columns.WALKOUT.getColumnIndex()).setCellEditor(singleclick);
         
-       // sessionsTable.getColumnModel().getColumn(10).setCellRenderer(new TimestampCellRenderer());
-
         table.setDefaultRenderer(Timestamp.class, new TimestampCellRenderer(isFutureSession));
         table.getColumnModel().getColumn(SessionTableModel.Columns.MIN.getColumnIndex()).setCellRenderer(new MinuteCellRenderer(isFutureSession));
         
@@ -127,34 +116,15 @@ public class SessionTableHelper
         table.getColumnModel().getColumn(SessionTableModel.Columns.START.getColumnIndex()).setCellEditor(new TimestampCellEditor(new JTextField()));
         table.getColumnModel().getColumn(SessionTableModel.Columns.STOP.getColumnIndex()).setCellEditor(new TimestampCellEditor(new JTextField()));
 
-        
-        
-        
-
-
-        //   sessionsTable.getColumnModel().getColumn(11).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //   sessionsTable.getColumnModel().getColumn(12).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //   sessionsTable.getColumnModel().getColumn(13).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //sessionsTable.getColumnModel().getColumn(11).setCellRenderer(new TimestampCellRenderer());
-        //sessionsTable.getColumnModel().getColumn(12).setCellRenderer(new TimestampCellRenderer());
-        // sessionsTable.getColumnModel().getColumn(13).setCellRenderer(new TimestampCellRenderer());
-
-        //sessionsTable.getColumnModel().getColumn(10).setCellRenderer(new ButtonCellRenderer());
-        //sessionsTable.getColumnModel().getColumn(11).setCellRenderer(new ButtonCellRenderer());
-        //sessionsTable.getColumnModel().getColumn(9).setCellEditor(new TimestampCellEditor(new JTextField()));
-        //sessionsTable.getColumnModel().getColumn(10).setCellEditor(new ButtonCellEditor(new JCheckBox()));
-        //sessionsTable.getColumnModel().getColumn(11).setCellEditor(new ButtonCellEditor(new JCheckBox()));
-
     }
     
     /**
-     *
-     * @return
+     * Resize table widths automatically to perfect widths at this time
+     * @return table resized
      */
-    public JTable autoResizeColWidth()//, DefaultTableModel model) 
+    public JTable autoResizeColWidth()
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        //table.setModel(model);
 
     int margin = 1;
 
@@ -194,7 +164,6 @@ public class SessionTableHelper
     ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(
         SwingConstants.LEFT);
 
-    // table.setAutoCreateRowSorter(true);
     table.getTableHeader().setReorderingAllowed(false);
 
     return table;

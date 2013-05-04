@@ -449,9 +449,9 @@ public final class AdminView extends javax.swing.JFrame
         DefaultCellEditor dce = makeEditSessionCellEditor();
         DefaultCellEditor dceAgenda = makeEditAgendaCellEditor();
         
-        tableHelper.setTableRendersAndEditors(true, dce);
-        tableHelperFuture.setTableRendersAndEditors(true, dce);
-        todayTableHelper.setTableRendersAndEditors(true, dce);
+        tableHelper.setTableRendersAndEditors(dce);
+        tableHelperFuture.setTableRendersAndEditors(dce);
+        todayTableHelper.setTableRendersAndEditors(dce);
         tableHelperAgenda.setTableRendersAndEditors(dceAgenda);
         tableHelper.autoResizeColWidth();
         todayTableHelper.autoResizeColWidth();

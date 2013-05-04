@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tutoring.helper;
 
 import java.sql.Timestamp;
@@ -529,7 +526,7 @@ public class Data
 
     /**
      *
-     * @return
+     * @return email ordered list
      */
     public static ArrayList<String> getEmailOrderedList() {
         return emailOrderedList;

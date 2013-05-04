@@ -24,22 +24,14 @@ import tutoring.entity.Teacher;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class Validate 
 {
     /**
-     *
-     */
-    public Validate()
-    {
-        
-    }
- 
-    /**
-     *
-     * @param t
-     * @return
+     * Validate timestamp
+     * @param t - timestamp to validate
+     * @return whether was a valid timestamp
      */
     public static boolean validateTimestamp(String t)
     {

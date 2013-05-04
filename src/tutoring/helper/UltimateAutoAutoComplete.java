@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.helper;
 
 import java.awt.event.ActionEvent;
@@ -15,23 +11,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.MutableComboBoxModel;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import javax.swing.plaf.basic.BasicComboPopup;
 import javax.swing.text.JTextComponent;
-import tutoring.entity.Client;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class UltimateAutoAutoComplete implements KeyListener, ActionListener, MouseListener, ItemListener
 {
@@ -43,16 +34,16 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     private boolean[] firstClick;
     private int[] lastSize;
     
-    ArrayList<ArrayList<String>> matches = new ArrayList<ArrayList<String>>();
+    private ArrayList<ArrayList<String>> matches = new ArrayList<ArrayList<String>>();
     
     private ArrayList<Integer> activeBoxIndexes = new ArrayList<Integer>();
     private ArrayList<String> activeBoxValues = new ArrayList<String>();
     
     /**
-     *
-     * @param keywords
-     * @param boxes
-     * @param reference
+     * Create a new auto-auto complete object
+     * @param keywords - array list of array list for list of autocomplete words that go into the comboboxes
+     * @param boxes - comboboxes array of auto-auto complete
+     * @param reference - array list of array list for lists that contain all data from all comboboxes in the order that they are in the specified combobox
      */
     public UltimateAutoAutoComplete(ArrayList<ArrayList<String>>keywords, JComboBox[] boxes, ArrayList<ArrayList<String>>reference)// ArrayList<Client> clientsFirst, ArrayList<Client> clientsLast, ArrayList<Client> clientsPhone, ArrayList<Client> clientsEmail ) {
     {
@@ -89,7 +80,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     
     
     /**
-     *
+     * Remove all listeners and try to remove all auto-auto complete setup
      */
     public void noMore()
     {
@@ -117,9 +108,9 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     
     
     /**
-     *
-     * @param activeBoxIndex
-     * @param updatedOtherBoxes
+     * Update combobox list
+     * @param activeBoxIndex - the index of the box that is being changed
+     * @param updatedOtherBoxes - whether the other boxes should be update based on the current
      */
     public void updateList(int activeBoxIndex, boolean updatedOtherBoxes)
     {
@@ -204,9 +195,9 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     
     
     /**
-     *
-     * @param activeBoxIndex
-     * @param value
+     * Set active box values based on index
+     * @param activeBoxIndex - index of active box
+     * @param value - value of the active box
      */
     public void setActiveValues(int activeBoxIndex, String value)
     {
@@ -230,7 +221,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
     
     /**
-     *
+     * Reset list of active boxes and values
      */
     public void restartActiveValues()
     {
@@ -239,7 +230,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
     
     /**
-     *
+     * Update other boxes lists based upon current box value
      */
     public void updateOtherList()
     {
@@ -568,10 +559,10 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
     
     /**
-     *
-     * @param useSpaceForEmpty
-     * @param value
-     * @param indexOfBox
+     * Set combobox value
+     * @param useSpaceForEmpty - if value is empty what to put instead of empty
+     * @param value - value to set
+     * @param indexOfBox - index of the box in the combobox array to update
      */
     public void setComboValue(boolean useSpaceForEmpty, String value, int indexOfBox)
     {
@@ -588,7 +579,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     
     /**
      *
-     * @return
+     * @return comboboxes length
      */
     public int getBoxesLength()
     {

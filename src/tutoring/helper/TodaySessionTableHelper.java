@@ -30,15 +30,15 @@ import javax.swing.table.TableColumn;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class TodaySessionTableHelper 
 {
     private JTable table;
     
     /**
-     *
-     * @param table
+     * Create today session table helper to manage today session table
+     * @param table - today session table
      */
     public TodaySessionTableHelper(JTable table)
     {
@@ -51,8 +51,8 @@ public class TodaySessionTableHelper
     }
     
     /**
-     *
-     * @param increase
+     * Increase table row height
+     * @param increase - amount to increase height
      */
     public void increaseRowHeight(int increase)
     {
@@ -62,7 +62,7 @@ public class TodaySessionTableHelper
     }
     
     /**
-     *
+     * Allow scrolling on table even when mouse is over table
      */
     public void allowScrollingOnTable()
     {
@@ -74,8 +74,8 @@ public class TodaySessionTableHelper
     }
     
     /**
-     *
-     * @param fastness
+     * Increase table scrolling fastness
+     * @param fastness - fastness amount
      */
     public void fasterScrolling(int fastness)
     {
@@ -83,11 +83,10 @@ public class TodaySessionTableHelper
     }
     
     /**
-     *
-     * @param doubleClickBringsInfoUpTop
-     * @param dce
+     * Set table renderers and editors for today's sessions
+     * @param dce - double click cell editor of what to do on double click
      */
-    public void setTableRendersAndEditors(boolean doubleClickBringsInfoUpTop, DefaultCellEditor dce)
+    public void setTableRendersAndEditors(DefaultCellEditor dce)
     {
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         table.setAutoCreateRowSorter(true);
@@ -106,8 +105,8 @@ public class TodaySessionTableHelper
     }
     
     /**
-     *
-     * @return
+     * Resize table widths to auto adjust at this moment
+     * @return table adjusted
      */
     public JTable autoResizeColWidth()
     {

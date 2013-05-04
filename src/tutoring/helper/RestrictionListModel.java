@@ -10,7 +10,7 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class RestrictionListModel 
 {
@@ -18,8 +18,8 @@ public class RestrictionListModel
 
 
     /**
-     *
-     * @param dlm
+     * Create a restriction list model to manage restrictions of a search
+     * @param dlm - list model of the restrictions
      */
     public RestrictionListModel(DefaultListModel dlm)
     {
@@ -28,10 +28,10 @@ public class RestrictionListModel
     
     
     /**
-     *
-     * @param table
-     * @param selectQuery
-     * @return
+     * Create MySQL query from restrictions
+     * @param table - table for the query
+     * @param selectQuery - select part of the query
+     * @return full MySQL query for restrictions
      */
     public String createQuery(String table, String selectQuery)
     {
@@ -48,9 +48,9 @@ public class RestrictionListModel
     }
     
     /**
-     *
-     * @param restrictions
-     * @param displayName
+     * Sets a new restriction for a database search
+     * @param restrictions - restrictions for search to add
+     * @param displayName - display name of each restriction
      */
     public void setListElement(ArrayList<String> restrictions, ArrayList<String> displayName)
     {
@@ -78,14 +78,8 @@ public class RestrictionListModel
         if(dlm.size() > 2 && !dlm.get(dlm.size()-1).toString().endsWith("OR"))
                 dlm.setElementAt(dlm.getElementAt(dlm.size()-2)+" OR", dlm.size()-2);
     }
-    
-    /**
-     *
-     * @param index
-     * @param table
-     * @return
-     */
-    public String getQuery(int index, String table)
+  
+    private String getQuery(int index, String table)
     {
         String value = dlm.get(index).toString();
         String query = "";

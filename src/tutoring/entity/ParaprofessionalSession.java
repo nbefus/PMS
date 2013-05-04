@@ -10,190 +10,172 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author shohe_i
+ * @author team ubuntu
  */
 public class ParaprofessionalSession {
-    /*
-     *  String query = "SELECT paraprofessionalSessionID," 
-               +"p.paraprofessionalID as 'pParaprofessionalID',  p.fName as 'pFName', p.lName as 'pLName', p.hireDate as 'pHireDate', p.terminationDate as 'pTerminationDate', p.isClockedIn as 'pIsClockedIn', r.roleID as 'pRoleID', r.type as 'pType',"
-
-               +"sess.paraprofessionalCreatorID, cre.fName as 'creFName', cre.lName as 'creLName', cre.hireDate as 'creHireDate', cre.terminationDate as 'creTerminationDate', cre.isClockedIn as 'creIsClockedIn', rr.roleID as 'creRoleID', rr.type as 'creType',"
-
-               +"l.locationID, l.name as 'locName', "
-
-               +"cli.clientID, cli.fName as 'cliFName', cli.lName as 'cliLName', phone, email,"
-
-               +"cour.courseID, t.teacherID, s.subjectID, cour.level, t.fName as 'tFName', t.lName as 'tLName', cat.categoryID, abbrevName, cat.name as 'catName',"
-
-               +"sess.timeAndDateEntered, sess.sessionStart, sess.sessionEnd, sess.grammarCheck, sess.notes, sess.walkout "
-
-     */
+ 
     /**
-     *
+     * ParaprofessinoalSession table information
      */
     public enum ParaSessTable {
 
         /**
-         *
+         * Paraprofessional Session ID of the ParaprofessionalSession table
          */
         PARAPROFESSIONALSESSIONID("Session ID","paraprofessionalSessionID", true, getTableAlias()+".paraprofessionalSessionID", true),
         /**
-         *
+         * Paraprofessional ID of the ParaprofessionalSession table
          */
         PARAPROFESSIONALID("Paraprofessional ID","paraprofessionalID", true, getTableAlias()+".paraprofessionalID", true),
         /**
-         *
+         * Client ID of the ParaprofessionalSession table
          */
         CLIENTID("Client ID","clientID", true, getTableAlias()+".clientID", true),
         /**
-         *
+         * Course ID of the ParaprofessionalSession table
          */
         COURSEID("Course ID","courseID", true, getTableAlias()+".courseID", true),
         /**
-         *
+         * Location ID of the ParaprofessionalSession table
          */
         LOCATIONID("Location ID","locationID", true, getTableAlias()+".locationID", true),
         /**
-         *
+         * Paraprofessional ID of the creator of the Paraprofessional Session of the ParaprofessionalSession table
          */
         PARAPROFESSIONALCREATORID("Creator ID","paraprofessionalCreatorID", true, getTableAlias()+".paraprofessionalCreatorID", true),
         /**
-         *
+         * Time and date entered of the session in the ParaprofessionalSession table
          */
         TIMEANDDATEENTERED("Date Entered","timeAndDateEntered", true, getTableAlias()+".timeAndDateEntered", false),
         /**
-         *
+         * Session start date and time of the session in the ParaprofessionalSession table
          */
         SESSIONSTART("Session Start", "sessionStart", true, getTableAlias()+".sessionStart", false),
         /**
-         *
+         * Session end date and time of the session in the ParaprofessionalSession table
          */
         SESSIONEND("Session End","sessionEnd", true, getTableAlias()+".sessionEnd", false),
         /**
-         *
+         * Grammar check field of the ParaprofessionalSession table
          */
         GRAMMARCHECK("Grammar Check","grammarCheck", true, getTableAlias()+".grammarCheck", false),
         /**
-         *
+         * Description field of the ParaprofessionalSession table
          */
         NOTES("Notes","notes", true, getTableAlias()+".notes", false),
         /**
-         *
+         * Walkout boolean field of the ParaprofessionalSession table
          */
         WALKOUT("Walkout","walkout", true, getTableAlias()+".walkout", false),
         /**
-         *
+         * First name of the Paraprofessional table
          */
         PARAPROFESSIONALFNAME("Paraprofessional First","fName", false, getParaprofessionalAlias()+".fName", false),
         /**
-         *
+         * Last name of the Paraprofessional table
          */
         PARAPROFESSIONALLNAME("Paraprofessional Last","lName", false, getParaprofessionalAlias()+".lName",false),
         /**
-         *
+         * Hire date of the Paraprofessional table
          */
         PARAPROFESSIONALHIREDATE("Paraprofessional Hire Date","hireDate", false, getParaprofessionalAlias()+".hireDate", false),
         /**
-         *
+         * Termination date of the Paraprofessional table
          */
         PARAPROFESSIONALTERMINATIONDATE("Paraprofessional Termination Date","terminationDate", false, getParaprofessionalAlias()+".terminationDate", false),
         /**
-         *
+         * Clocked in boolean of the Paraprofessional table
          */
         PARAPROFESSIONALISCLOCKEDIN("Paraprofessional Is In?","isClockedIn", false, getParaprofessionalAlias()+".isClockedIn", false),
         /**
-         *
+         * Role ID of the Paraprofessional table
          */
         PARAPROFESSIONALROLEID("Paraprofessional Role ID","roleID", false, getParaprofessionalAlias()+".roleID", true),
         /**
-         *
+         * Type of the role in the Role table
          */
         PARAPROFESSIONALROLETYPE("Paraprofessional Role","type", false, getParaprofessionalRoleAlias()+".type",false),
         /**
-         *
+         * First name of the Paraprofessional table for the creator of the Paraprofessional Session
          */
         CREATORFNAME("Creator First","fName", false, getCreatorAlias()+".fName", false),
         /**
-         *
+         * Last name of the Paraprofessional table for the creator of the Paraprofessional Session
          */
         CREATORLNAME("Creator Last","lName", false, getCreatorAlias()+".lName", false),
         /**
-         *
+         * Hire date of the Paraprofessional table for the creator of the Paraprofessional Session
          */
         CREATORHIREDATE("Creator Hire Date","hireDate", false, getCreatorAlias()+".hireDate", false),
         /**
-         *
+         * Termination date of the Paraprofessional table for the creator of the Paraprofessional Session
          */
         CREATORTERMINATIONDATE("Creator Termination Date","terminationDate", false, getCreatorAlias()+".terminationDate", false),
         /**
-         *
+         * Clocked in boolean of the Paraprofessional table for the creator of the Paraprofessional Session
          */
         CREATORISCLOCKEDIN("Creator Is In?","isClockedIn", false, getCreatorAlias()+".isClockedIn", false),
         /**
-         *
+         * Role ID of the Paraprofessional table for the creator of the Paraprofessional Session
          */
         CREATORROLEID("Creator Role ID","roleID", false, getCreatorAlias()+".roleID", true),
         /**
-         *
+         * Type of the role of the Role table for the creator of the Paraprofessional Session
          */
         CREATORROLETYPE("Creator Role","type", false, getCreatorRoleAlias()+".type", false),
         /**
-         *
+         * Location name of the Location table
          */
         LOCATIONNAME("Location Name","name", false, getLocationAlias()+".name", false),
         /**
-         *
+         * First name of the Client table
          */
         CLIENTFNAME("Client First","fName", false, getClientAlias()+".fName", false),
         /**
-         *
+         * Last name of the Client table
          */
         CLIENTLNAME("Client Last","lName", false, getClientAlias()+".lName", false),
         /**
-         *
+         * Phone of the Client table
          */
         CLIENTPHONE("Client Phone","phone", false, getClientAlias()+".phone", false),
         /**
-         *
+         * Email of the Client table
          */
         CLIENTEMAIL("Client Email","email", false, getClientAlias()+".email", false),
         /**
-         *
+         * Subject ID of the Course table
          */
         SUBJECTID("Subject ID","subjectID", false, getCourseAlias()+".subjectID", true),
         /**
-         *
+         * Abbreviated name of the Subject table
          */
         SUBJECTABBREVNAME("Subject","abbrevName", false, getSubjectAlias()+".abbrevName", false),
         /**
-         *
+         * Category ID of the Subject table
          */
         SUBJECTCATEGORYID("Category ID","categoryID", false, getSubjectAlias()+".categoryID", true),
         /**
-         *
+         * Name of the category in the Category table
          */
         SUBJECTCATEGORYNAME("Category","name", false, getCategoryAlias()+".name", false),
         /**
-         *
+         * Teacher ID of the Course table
          */
         TEACHERID("Teacher ID","teacherID", false, getCourseAlias()+".teacherID",true),
         /**
-         *
+         * First name of the Teacher table
          */
         TEACHERFNAME("Teacher First","fName", false, getTeacherAlias()+".fName", false),
         /**
-         *
+         * Last name of the Teacher table
          */
         TEACHERLNAME("Teacher Last","lName", false, getTeacherAlias()+".lName", false),
         /**
-         *
+         * Level field of the Course table
          */
         COURSELEVEL("Level","level", false, getCourseAlias()+".level", false);
 
@@ -230,7 +212,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID()
         {
@@ -238,21 +220,21 @@ public class ParaprofessionalSession {
         }
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
         }
         /**
          *
-         * @return
+         * @return the display name of the column
          */
         public String getDisplayName() {
             return displayName;
         }
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -260,7 +242,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -268,7 +250,7 @@ public class ParaprofessionalSession {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -277,7 +259,7 @@ public class ParaprofessionalSession {
         
         /**
          *
-         * @return
+         * @return Paraprofessional table alias
          */
         public static String getParaprofessionalAlias()
         {
@@ -286,7 +268,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Creator paraprofessional table alias
          */
         public static String getCreatorAlias()
         {
@@ -295,7 +277,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Role table alias for tutor paraprofessional
          */
         public static String getParaprofessionalRoleAlias()
         {
@@ -304,7 +286,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Role table alias for the creator paraprofessional
          */
         public static String getCreatorRoleAlias()
         {
@@ -313,7 +295,7 @@ public class ParaprofessionalSession {
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -321,8 +303,8 @@ public class ParaprofessionalSession {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -338,8 +320,8 @@ public class ParaprofessionalSession {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -356,7 +338,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Client table alias
          */
         public static String getClientAlias()
         {
@@ -365,7 +347,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Location table alias
          */
         public static String getLocationAlias()
         {
@@ -374,7 +356,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Teacher table alias
          */
         public static String getTeacherAlias()
         {
@@ -383,7 +365,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Subject table alias
          */
         public static String getSubjectAlias()
         {
@@ -392,7 +374,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Course table alias
          */
         public static String getCourseAlias()
         {
@@ -401,7 +383,7 @@ public class ParaprofessionalSession {
 
         /**
          *
-         * @return
+         * @return Category alias
          */
         public static String getCategoryAlias()
         {
@@ -409,9 +391,9 @@ public class ParaprofessionalSession {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -427,28 +409,16 @@ public class ParaprofessionalSession {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
             
                 String columnSetUp = getSelectColumns(selectIDs);
                 String query = "SELECT " + columnSetUp
-                    /*    + "paraprofessionalSessionID," 
-               +"p.paraprofessionalID as 'pParaprofessionalID',  p.fName as 'pFName', p.lName as 'pLName', p.hireDate as 'pHireDate', p.terminationDate as 'pTerminationDate', p.isClockedIn as 'pIsClockedIn', r.roleID as 'pRoleID', r.type as 'pType',"
-
-               +"sess.paraprofessionalCreatorID, cre.fName as 'creFName', cre.lName as 'creLName', cre.hireDate as 'creHireDate', cre.terminationDate as 'creTerminationDate', cre.isClockedIn as 'creIsClockedIn', rr.roleID as 'creRoleID', rr.type as 'creType',"
-
-               +"l.locationID, l.name as 'locName', "
-
-               +"cli.clientID, cli.fName as 'cliFName', cli.lName as 'cliLName', phone, email,"
-
-               +"cour.courseID, t.teacherID, s.subjectID, cour.level, t.fName as 'tFName', t.lName as 'tLName', cat.categoryID, abbrevName, cat.name as 'catName',"
-
-               +"sess.timeAndDateEntered, sess.sessionStart, sess.sessionEnd, sess.grammarCheck, sess.notes, sess.walkout "*/
-
+        
                +" FROM ParaprofessionalSession "+ParaSessTable.getTableAlias()+" join Paraprofessional "+ParaSessTable.getParaprofessionalAlias()+" on "+ParaSessTable.PARAPROFESSIONALID.getWithAlias()+
                         "="+ParaSessTable.getParaprofessionalAlias()+"."+ParaSessTable.PARAPROFESSIONALID.getName()+
                         " join Role "+ParaSessTable.getParaprofessionalRoleAlias()+" on "+ParaSessTable.PARAPROFESSIONALROLEID.getWithAlias()+
@@ -466,9 +436,9 @@ public class ParaprofessionalSession {
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -502,35 +472,20 @@ public class ParaprofessionalSession {
     
     private boolean walkout;
 
-      /**
-     *
-     */
-    public ParaprofessionalSession()
-    {
-        
-    }
-      
-      /**
-     *
-     */
-    public static void test()
-      {
-          System.out.println(ParaSessTable.getSelectQuery(false));
-      }
     /**
-     *
-     * @param paraprofessionalSessionID
-     * @param paraprofessionalID
-     * @param client
-     * @param course
-     * @param location
-     * @param paraprofessionalCreator
-     * @param timeAndDateEntered
-     * @param sessionStart
-     * @param sessionEnd
-     * @param grammarCheck
-     * @param notes
-     * @param walkout
+     * Create a paraprofessional session object
+     * @param paraprofessionalSessionID - ID of the paraprofessional session object for the database
+     * @param paraprofessionalID - paraprofessional of the paraprofessional session object for the database
+     * @param client - client of the paraprofessional session object for the database
+     * @param course - course of the paraprofessional session object for the database
+     * @param location - location of the paraprofessional session object for the database
+     * @param paraprofessionalCreator - creator paraprofessional of the paraprofessional session object for the database
+     * @param timeAndDateEntered - entered date and time of the paraprofessional session object for the database
+     * @param sessionStart - start time of the paraprofessional session object for the database
+     * @param sessionEnd - end time of the paraprofessional session object for the database
+     * @param grammarCheck - whether session was a grammar check of the paraprofessional session object for the database
+     * @param notes - description of the paraprofessional session object for the database
+     * @param walkout - whether session was a walkout of the paraprofessional session object for the database
      */
     public ParaprofessionalSession(int paraprofessionalSessionID, Paraprofessional paraprofessionalID, Client client, Course course, Location location, Paraprofessional paraprofessionalCreator, Timestamp timeAndDateEntered, Timestamp sessionStart, Timestamp sessionEnd, boolean grammarCheck, String notes, boolean walkout) {
         this.paraprofessionalSessionID = paraprofessionalSessionID;
@@ -549,9 +504,9 @@ public class ParaprofessionalSession {
     }
     
     /**
-     *
-     * @param ps
-     * @return
+     * Converts paraprofessional session object to object array of values
+     * @param ps - paraprofessional session object to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(ParaprofessionalSession ps)
     {
@@ -573,34 +528,22 @@ public class ParaprofessionalSession {
     }
  
      /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the paraprofessional session table and return paraprofessional session objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of paraprofessional session items that the query returns
      */
     public static ArrayList<ParaprofessionalSession> selectAllParaprofessionalSession(String addedSQLToSelect, Connection connect) {
-      //  Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<ParaprofessionalSession> paraprofessionalSessions = new ArrayList<ParaprofessionalSession>();
         
         try {
-            // connect way #1
-            //String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-            //String user = "nbefus_me";
-            //String password = "heythere";
             
-            Timestamp now = new Timestamp((new Date()).getTime());
-            //connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
 
                 statement = connect.createStatement();
 
-               // ParaprofessionalSession.ParaSessTable ps = ParaprofessionalSession.ParaSessTable.;
                 String query = ParaprofessionalSession.ParaSessTable.getSelectQuery(true);
                query += " "+addedSQLToSelect;
                
@@ -621,7 +564,6 @@ public class ParaprofessionalSession {
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid " +ex.getMessage());
             ex.printStackTrace();
         } finally {
             try {
@@ -632,11 +574,6 @@ public class ParaprofessionalSession {
           if (statement != null) {
             statement.close();
           }
-
-          /*
-          if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    
@@ -659,42 +596,42 @@ public class ParaprofessionalSession {
     }
 
     /**
-     * @return the paraprofessionalID
+     * @return the paraprofessional
      */
     public Paraprofessional getParaprofessionalID() {
         return paraprofessionalID;
     }
 
     /**
-     * @param paraprofessionalID the paraprofessionalID to set
+     * @param paraprofessionalID the paraprofessional to set
      */
     public void setParaprofessionalID(Paraprofessional paraprofessionalID) {
         this.paraprofessionalID = paraprofessionalID;
     }
 
     /**
-     * @return the clientID
+     * @return the client
      */
     public Client getClientID() {
         return clientID;
     }
 
     /**
-     * @param clientID the clientID to set
+     * @param clientID the client to set
      */
     public void setClientID(Client clientID) {
         this.clientID = clientID;
     }
 
     /**
-     * @return the courseID
+     * @return the course
      */
     public Course getCourseID() {
         return courseID;
     }
 
     /**
-     * @param courseID the courseID to set
+     * @param courseID the course to set
      */
     public void setCourseID(Course courseID) {
         this.courseID = courseID;
@@ -712,28 +649,28 @@ public class ParaprofessionalSession {
     }*/
 
     /**
-     * @return the locationID
+     * @return the location
      */
     public Location getLocationID() {
         return locationID;
     }
 
     /**
-     * @param locationID the locationID to set
+     * @param locationID the location to set
      */
     public void setLocationID(Location locationID) {
         this.locationID = locationID;
     }
 
     /**
-     * @return the paraprofessionalCreatorID
+     * @return the paraprofessionalCreator
      */
     public Paraprofessional getParaprofessionalCreatorID() {
         return paraprofessionalCreatorID;
     }
 
     /**
-     * @param paraprofessionalCreatorID the paraprofessionalCreatorID to set
+     * @param paraprofessionalCreatorID the paraprofessionalCreator to set
      */
     public void setParaprofessionalCreatorID(Paraprofessional paraprofessionalCreatorID) {
         this.paraprofessionalCreatorID = paraprofessionalCreatorID;
@@ -818,14 +755,14 @@ public class ParaprofessionalSession {
     
      /**
      *
-     * @return
+     * @return if was walkout
      */
     public boolean isWalkout() {
         return walkout;
     }
 
     /**
-     * @param walkout 
+     * @param walkout - walkout field
      */
     public void setWalkout(boolean walkout) {
         this.walkout = walkout;

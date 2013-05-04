@@ -7,45 +7,40 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
 public class User {
     
     /**
-     *
+     * User table information 
      */
     public enum UserTable {
 
  
         /**
-         *
+         * Username of the User table
          */
         USERNAME("Username","userName", true, getTableAlias()+".userName", false),
         /**
-         *
+         * Role ID of the User table
          */
         ROLEID("Role ID", "roleID", true, getTableAlias()+".roleID", true),
         /**
-         *
+         * Last name of the User table
          */
         LNAME("Last Name","lName", true, getTableAlias()+".lName", false),
         /**
-         *
+         * First name of the User table
          */
         FNAME("First Name", "fName", true, getTableAlias()+".fName", false),
-        /**
-         *
+        /** 
+         * Password of the User table
          */
         PASSWORD("Password","password", true, getTableAlias()+".password", false),
         /**
-         *
+         * Type of role of the Role table
          */
         ROLETYPE("Role","type", false, getRoleAlias()+".type", false);
         
@@ -71,7 +66,7 @@ public class User {
 
         /**
          *
-         * @return
+         * @return the column name
          */
         public String getName() {
             return name;
@@ -79,7 +74,7 @@ public class User {
 
         /**
          *
-         * @return
+         * @return display name of column
          */
         public String getDisplayName(){
             return displayName;
@@ -87,7 +82,7 @@ public class User {
 
         /**
          *
-         * @return
+         * @return whether column is an ID field
          */
         public boolean isID(){
             return isID;
@@ -95,7 +90,7 @@ public class User {
         
         /**
          *
-         * @return
+         * @return whether column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -103,7 +98,7 @@ public class User {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -111,7 +106,7 @@ public class User {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -120,7 +115,7 @@ public class User {
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -128,8 +123,8 @@ public class User {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -145,8 +140,8 @@ public class User {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -162,9 +157,9 @@ public class User {
         }
      
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -181,9 +176,9 @@ public class User {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -202,9 +197,9 @@ public class User {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -218,7 +213,7 @@ public class User {
 
         /**
          *
-         * @return
+         * @return the alias of the Role table
          */
         public static String getRoleAlias()
         {
@@ -229,22 +224,14 @@ public class User {
     private String userName;    // primary key
     private Role roleID;
     private String lName, fName, password;
-
-    /**
-     *
-     */
-    public User()
-    {
-        
-    }
     
     /**
-     *
-     * @param userName
-     * @param roleID
-     * @param lName
-     * @param fName
-     * @param password
+     * Create a user object
+     * @param userName - username of the user object for the database
+     * @param roleID - role of the user object for the database
+     * @param lName - last name of the user object for the database
+     * @param fName - first name of the user object for the database
+     * @param password - password of the user object for the database
      */
     public User(String userName, Role roleID, String lName, String fName, String password) {
         this.userName = userName;
@@ -255,9 +242,9 @@ public class User {
     }
     
     /**
-     *
-     * @param u
-     * @return
+     * Converts user object to object array of values
+     * @param u - user item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(User u)
     {
@@ -273,41 +260,21 @@ public class User {
     
     
      /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the user table and return user objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of user items that the query returns
      */
     public static ArrayList<User> selectAllUser(String addedSQLToSelect, Connection connect) {
-        //Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<User> users = new ArrayList<User>();
         
         try {
-            // connect way #1
-           // String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-           // String user = "nbefus_me";
-           // String password = "heythere";
-
-           // connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
-                UserTable [] cols = UserTable.class.getEnumConstants();
-                String columnSetUp = "";
-                for(int i=0; i<cols.length; i++)
-                {
-                    columnSetUp += cols[i].getWithAlias() + " as '"+cols[i].getWithAlias()+"', ";
-                }
-                columnSetUp = columnSetUp.substring(0, columnSetUp.length()-2);
-                
                 statement = connect.createStatement();
 
-                String query = "SELECT "+columnSetUp+" FROM User "+UserTable.getTableAlias()+" join Role "+UserTable.getRoleAlias()+" on "+UserTable.ROLEID.getWithAlias()+" = "+UserTable.getRoleAlias()+"."+UserTable.ROLEID.getName();
+                String query = User.UserTable.getSelectQuery(true);
                 query += " "+addedSQLToSelect;
                 resultSet = statement.executeQuery(query);
 
@@ -319,7 +286,6 @@ public class User {
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try
@@ -342,7 +308,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return username of user
      */
     public String getUserName() {
         return userName;
@@ -350,7 +316,7 @@ public class User {
 
     /**
      *
-     * @param userName
+     * @param userName - set username of user
      */
     public void setUserName(String userName) {
         this.userName = userName;
@@ -358,7 +324,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return role of the user
      */
     public Role getRoleID() {
         return roleID;
@@ -366,7 +332,7 @@ public class User {
 
     /**
      *
-     * @param roleID
+     * @param roleID - set role of the user
      */
     public void setRoleID(Role roleID) {
         this.roleID = roleID;
@@ -374,7 +340,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return last name of user
      */
     public String getlName() {
         return lName;
@@ -382,7 +348,7 @@ public class User {
 
     /**
      *
-     * @param lName
+     * @param lName set last name of user
      */
     public void setlName(String lName) {
         this.lName = lName;
@@ -390,7 +356,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return first name of user
      */
     public String getfName() {
         return fName;
@@ -398,7 +364,7 @@ public class User {
 
     /**
      *
-     * @param fName
+     * @param fName set first name of user
      */
     public void setfName(String fName) {
         this.fName = fName;
@@ -406,7 +372,7 @@ public class User {
 
     /**
      *
-     * @return
+     * @return password of user
      */
     public String getPassword() {
         return password;
@@ -414,7 +380,7 @@ public class User {
 
     /**
      *
-     * @param password
+     * @param password set password of user
      */
     public void setPassword(String password) {
         this.password = password;

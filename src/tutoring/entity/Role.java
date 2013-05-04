@@ -13,21 +13,21 @@ import java.util.ArrayList;
 
 /**
  *
- * @author shohe_i
+ * @author team Ubuntu
  */
 public class Role {
     
     /**
-     *
+     * Role table information
      */
     public enum RoleTable {
         
         /**
-         *
+         * Role ID of the Role table
          */
         ROLEID("Role ID", "roleID", true, getTableAlias()+".roleID", true),
         /**
-         *
+         * Type of role of the Role table
          */
         TYPE("Role", "type", true, getTableAlias()+".type", false);
         
@@ -52,7 +52,7 @@ public class Role {
 
         /**
          *
-         * @return
+         * @return the name of the column
          */
         public String getName() {
             return name;
@@ -60,7 +60,7 @@ public class Role {
         
         /**
          *
-         * @return
+         * @return the display name of the column
          */
         public String getDisplayName(){
             return displayName;
@@ -68,7 +68,7 @@ public class Role {
 
         /**
          *
-         * @return
+         * @return whether column is ID column
          */
         public boolean isID(){
             return isID;
@@ -76,7 +76,7 @@ public class Role {
 
         /**
          *
-         * @return
+         * @return whether the column is part of the main table
          */
         public boolean isMainTableColumn() {
             return mainTableColumn;
@@ -84,7 +84,7 @@ public class Role {
 
         /**
          *
-         * @return
+         * @return field with alias name in front Ex. alias.column
          */
         public String getWithAlias() {
             return withAlias;
@@ -92,7 +92,7 @@ public class Role {
         
         /**
          *
-         * @return
+         * @return the table alias
          */
         public static String getTableAlias()
         {
@@ -101,7 +101,7 @@ public class Role {
         
          /**
          *
-         * @return
+         * @return the table name
          */
         public static String getTable()
         {
@@ -109,8 +109,8 @@ public class Role {
         } 
         
         /**
-         *
-         * @return
+         * Gets all the table columns in a list of strings
+         * @return array list of all the main table columns
          */
         public static ArrayList<String> getMainTableColumns()
         {
@@ -126,8 +126,8 @@ public class Role {
         }
         
         /**
-         *
-         * @return
+         * Gets all table columns which are not ID columns
+         * @return table columns without ID columns
          */
         public static ArrayList<String> getTableColumnsWithoutIDs()
         {
@@ -143,9 +143,9 @@ public class Role {
         }
         
         /**
-         *
-         * @param DisplayName
-         * @return
+         * Get database name based on the display name of the column
+         * @param DisplayName - display name of the column to retrieve database name for
+         * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
         {
@@ -162,9 +162,9 @@ public class Role {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get columns part of a MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
         {
@@ -183,9 +183,9 @@ public class Role {
         }
         
         /**
-         *
-         * @param selectIDs
-         * @return
+         * Get the MySQL select statement
+         * @param selectIDs - include ID columns in the select statement
+         * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
         {
@@ -202,9 +202,9 @@ public class Role {
     private String type;
 
     /**
-     *
-     * @param roleID
-     * @param roleType
+     * Create a role object
+     * @param roleID - ID of the role object for the database
+     * @param roleType - trye of the role object for the database
      */
     public Role(int roleID, String roleType) {
         this.roleID = roleID;
@@ -212,17 +212,9 @@ public class Role {
     }
     
     /**
-     *
-     */
-    public Role()
-    {
-        
-    }
-    
-    /**
-     *
-     * @param r
-     * @return
+     * Converts role object to object array of values
+     * @param r - role item to put into value array
+     * @return object array of fields
      */
     public static Object[] getValues(Role r)
     {
@@ -233,31 +225,19 @@ public class Role {
     }
     
      /**
-     *
-     * @param addedSQLToSelect
-     * @param connect
-     * @return
+     * Create a select statement for the role table and return role objects
+     * @param addedSQLToSelect - any clause after the select statement to add to the query
+     * @param connect - connection to the database
+     * @return list of role items that the query returns
      */
     public static ArrayList<Role> selectAllRoles(String addedSQLToSelect, Connection connect) 
      {
-        // Connection connect = null;
         Statement statement = null;
-        PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         ArrayList<Role> roles = new ArrayList<Role>();
         
         try {
-            // connect way #1
-         //   String url1 = "jdbc:mysql://gator1757.hostgator.com:3306/nbefus_tms";
-         //   String user = "nbefus_me";
-         //   String password = "heythere";
-
-        //    connect = DriverManager.getConnection(url1, user, password);
-
             if (connect != null) {
-
-                System.out.println("Connected to the database test1");
-
                 statement = connect.createStatement();
                 String query = Role.RoleTable.getSelectQuery(true);
                 query += " "+addedSQLToSelect;
@@ -271,7 +251,6 @@ public class Role {
             }
 
         } catch (SQLException ex) {
-            System.out.println("An error occurred. Maybe user/password is invalid");
             ex.printStackTrace();
         } finally {
             try {
@@ -282,10 +261,6 @@ public class Role {
           if (statement != null) {
             statement.close();
           }
-
-         /* if (connect != null) {
-            connect.close();
-          }*/
         } catch (Exception e) {
 
         }    

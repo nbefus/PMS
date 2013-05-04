@@ -21,7 +21,7 @@ import javax.swing.text.JTextComponent;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class UltimateAutoComplete implements KeyListener, ActionListener, MouseListener
 {
@@ -35,9 +35,9 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     ArrayList<ArrayList<String>> matches = new ArrayList<ArrayList<String>>();
 
     /**
-     *
-     * @param keywords
-     * @param boxes
+     * Create a new auto complete manager for a set of comboboxes
+     * @param keywords - array list of array list for list of autocomplete words that go into the comboboxes
+     * @param boxes - comboboxes array of auto-auto complete
      */
     public UltimateAutoComplete(ArrayList<ArrayList<String>>keywords, JComboBox[] boxes) {
         this.keywords = keywords;
@@ -70,7 +70,7 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     } 
     
     /**
-     *
+     * Remove all listeners and try to remove all auto-auto complete setup
      */
     public void noMore()
     {
@@ -97,7 +97,7 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     
     /**
      *
-     * @return
+     * @return comboboxes length
      */
     public int getBoxesLength()
     {
@@ -105,9 +105,9 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     }
     
     
-    /**
-     *
-     * @param activeBoxIndex
+     /**
+     * Update combobox list
+     * @param activeBoxIndex - the index of the box that is being changed
      */
     public void updatelist(int activeBoxIndex)
     {
@@ -303,9 +303,9 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     
     
     /**
-     *
-     * @param value
-     * @param indexOfBox
+     * Set combobox value
+     * @param value - value to set
+     * @param indexOfBox - index of the box in the combobox array to update
      */
     public void setComboValue(String value, int indexOfBox)
     {

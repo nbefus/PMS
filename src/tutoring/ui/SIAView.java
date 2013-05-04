@@ -438,9 +438,9 @@ System.out.println("Done list 4");
         DefaultCellEditor dce = makeEditSessionCellEditor();
         DefaultCellEditor dceAgenda = makeEditAgendaCellEditor();
         
-        tableHelper.setTableRendersAndEditors(true, dce);
-        tableHelperFuture.setTableRendersAndEditors(true, dce);
-        todayTableHelper.setTableRendersAndEditors(true, dce);
+        tableHelper.setTableRendersAndEditors(dce);
+        tableHelperFuture.setTableRendersAndEditors(dce);
+        todayTableHelper.setTableRendersAndEditors(dce);
         tableHelperAgenda.setTableRendersAndEditors( dceAgenda);
         tableHelper.autoResizeColWidth();
         todayTableHelper.autoResizeColWidth();

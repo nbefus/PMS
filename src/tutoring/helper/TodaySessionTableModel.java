@@ -26,90 +26,90 @@ import tutoring.entity.ParaprofessionalSession;
 
 /**
  *
- * @author Nathaniel
+ * @author team Ubuntu
  */
 public class TodaySessionTableModel extends AbstractTableModel {
 
      /**
-     *
+     * Table columns
      */
     public enum Columns
     {
         /**
-         *
+         * ID column
          */
         ID(0, "ID", Integer.class),
         /**
-         *
-         */
+         * First name column
+         */ 
         CLIENTFIRSTNAME(1, "First Name", String.class),
         /**
-         *
+         * Last name column
          */
         CLIENTLASTNAME(2,"Last Name", String.class),
         /**
-         *
+         * Phone column
          */
         CLIENTPHONE(3, "Phone", String.class),
         /**
-         *
+         * Email column
          */
         CLIENTEMAIL(4, "Email", String.class),
         /**
-         *
+         * Course column
          */
         COURSE(5, "Course", String.class),
         /**
-         *
+         * Level column
          */
         LEVEL(6, "Level", Integer.class),
         /**
-         *
+         * Teacher column
          */
         TEACHER(7, "Teacher", String.class),
         /**
-         *
+         * Category column
          */
         CATEGORY(8, "Cat.", String.class),
         /**
-         *
+         * Description column
          */
         NOTES(9, "Notes", String.class),
-        /**
-         *
+        /** 
+         * Paraprofessional column
          */
         PARAPROFESSIONAL(10, "Paraprofessional", String.class),
         /**
-         *
+         * Grammar check column
          */
         GC(11, "GC", Boolean.class),
         
         /**
-         *
+         * Start session column
          */
         START(12, "Start", Timestamp.class),
         /**
-         *
+         * Stop session column
          */
         STOP(13, "Stop", Timestamp.class),
         /**
-         *
+         * Minute column
          */
         MIN(14, "Min.", Integer.class),
         /**
-         *
+         * Location column
          */
         LOCATION(15, "Location", String.class),
         /**
-         *
+         * Creator paraprofessional column
          */
         CREATOR(16, "Creator", String.class),
         /**
-         *
+         * Entered date/time column
          */
         ENTEREDDATE(17, "Entered", Timestamp.class),
         /**
-         *
+         * Walkout column
          */
         WALKOUT(18, "Walkout", Boolean.class);
 
@@ -131,9 +131,9 @@ public class TodaySessionTableModel extends AbstractTableModel {
         }
         
         /**
-         *
-         * @param columnIndex
-         * @return
+         * Get the column class from column index
+         * @param columnIndex - column index of column class to get
+         * @return column class of columnIndex
          */
         public static Class<?> getColumnClass(int columnIndex)
         {
@@ -142,7 +142,7 @@ public class TodaySessionTableModel extends AbstractTableModel {
         
         /**
          *
-         * @return
+         * @return column class
          */
         public Class<?> getColumnClass()
         {
@@ -151,7 +151,7 @@ public class TodaySessionTableModel extends AbstractTableModel {
         
 	/**
          *
-         * @return
+         * @return column index
          */
         public int getColumnIndex() {
 		return columnIndex;
@@ -159,7 +159,7 @@ public class TodaySessionTableModel extends AbstractTableModel {
         
         /**
          *
-         * @return
+         * @return column display name
          */
         public String getDisplayName() {
 		return displayName;
@@ -168,19 +168,18 @@ public class TodaySessionTableModel extends AbstractTableModel {
     }
      
     private String[] columnNames;
-    private  ParaprofessionalSession[] data;
     private ArrayList<ParaprofessionalSession> tutorSessions = new ArrayList();
 
     /**
-     *
+     * Create new today session table model
      */
     public TodaySessionTableModel(){
         columnNames=generateColumns(); 
     }
     
     /**
-     *
-     * @param currentSessionModel
+     * Create new today session table model
+     * @param currentSessionModel - current session model to update
      */
     public TodaySessionTableModel(SessionTableModel currentSessionModel)
     {
@@ -201,8 +200,8 @@ public class TodaySessionTableModel extends AbstractTableModel {
     }
     
     /**
-     *
-     * @param ts
+     * Add row to table
+     * @param ts - row to add
      */
     public void addRow(ParaprofessionalSession ts)
     {
@@ -211,8 +210,8 @@ public class TodaySessionTableModel extends AbstractTableModel {
     }
     
     /**
-     *
-     * @param r
+     * Delete indexes of table
+     * @param r - indexes of rows to delete from table
      */
     public void deleteRows(int[] r)
     {
@@ -230,7 +229,7 @@ public class TodaySessionTableModel extends AbstractTableModel {
     }
     
     /**
-     *
+     * Delete all rows from table
      */
     public void deleteAllRows()
     {
@@ -239,14 +238,13 @@ public class TodaySessionTableModel extends AbstractTableModel {
     }
     
     /**
-     *
-     * @param one
-     * @param two
-     * @return
+     * Checks if two objects are equal
+     * @param one - first object
+     * @param two - second object
+     * @return whether they are equal
      */
     public boolean areEqual(Object one, Object two)
     {
-        System.out.println("COMPARING: "+one.getClass().toString() + "  "+two.getClass().toString());
         if(one instanceof Timestamp)
         {
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
@@ -356,10 +354,10 @@ public class TodaySessionTableModel extends AbstractTableModel {
    }
     
     /**
-     *
-     * @param eDate
-     * @param lDate
-     * @return
+     * Difference of two dates in minutes
+     * @param eDate - first date
+     * @param lDate - second date
+     * @return difference in minutes
      */
     public int minutesOf(Date eDate, Date lDate)
     {
