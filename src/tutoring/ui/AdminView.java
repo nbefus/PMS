@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.ui;
 
 import java.awt.Color;
@@ -62,7 +58,7 @@ import tutoring.helper.*;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public final class AdminView extends javax.swing.JFrame
 {
@@ -72,7 +68,7 @@ public final class AdminView extends javax.swing.JFrame
     private RestrictionListModel restrictHelper;
 
     /**
-     * MinuteUpdater
+     * Updates table models every minute
      */
     public class MinuteUpdater extends TimerTask
     {
@@ -92,6 +88,7 @@ public final class AdminView extends javax.swing.JFrame
             this.future = future;
         }
 
+        @Override
         public void run()
         {
             updateTables();
@@ -101,7 +98,7 @@ public final class AdminView extends javax.swing.JFrame
     }
 
     /**
-     * Updates create session page's comboboxes data from server
+     * Updates create session page's combo-boxes data from server
      */
     public void update()
     {
@@ -171,49 +168,49 @@ public final class AdminView extends javax.swing.JFrame
     }
 
     /**
-     * Comboboxes map to autocomplete for changing and updating data
+     * Combo-boxes map to auto-complete for changing and updating data
      */
     public enum ComboBoxesIndexes
     {
 
         /**
-         * Client first name combobox
+         * Client first name combo-box
          */
         CFNAME(0, "First Name", "fname"),
         /**
-         * Client last name combobox
+         * Client last name combo-box
          */
         CLNAME(1, "Last Name", "lname"),
         /**
-         * Client phone combobox
+         * Client phone combo-box
          */
         CPHONE(2, "Phone", "phone"),
         /**
-         * Client email combobox
+         * Client email combo-box
          */
         CEMAIL(3, "Email", "email"),
         /**
-         * Client course combobox
+         * Client course combo-box
          */
         COURSE(0, "Course", "abbrevName"),
         /**
-         * Client creator combobox
+         * Client creator combo-box
          */
         CREATOR(0, "Creator", ""),
         /**
-         * Client level combobox
+         * Client level combo-box
          */
         LEVEL(1, "Level", "level"),
         /**
-         * Client location combobox
+         * Client location combo-box
          */
         LOCATION(1, "Location", "location"),
         /**
-         * Client tutor's combobox
+         * Client tutor combo-box
          */
         PARAPROFESSIONAL(2, "Tutor", ""),
         /**
-         * Client teacher's combobox
+         * Client teacher's combo-box
          */
         TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)");
         private int indexOfCombo;
@@ -229,7 +226,7 @@ public final class AdminView extends javax.swing.JFrame
 
         /**
          *
-         * @return the index of the combobox in the autocomplete set
+         * @return the index of the combo-box in the auto-complete set
          */
         public int getBoxIndex()
         {
@@ -238,7 +235,7 @@ public final class AdminView extends javax.swing.JFrame
 
         /**
          *
-         * @return the display name of the combobox
+         * @return the display name of the combo-box
          */
         public String getDisplayName()
         {
@@ -247,7 +244,7 @@ public final class AdminView extends javax.swing.JFrame
 
         /**
          *
-         * @return the database name of the name of the combobox
+         * @return the database name of the name of the combo-box
          */
         public String getDatabaseName()
         {
@@ -257,7 +254,7 @@ public final class AdminView extends javax.swing.JFrame
         /**
          *
          * @param DisplayName
-         * @return the database name of the combobox using the display name as
+         * @return the database name of the combo-box using the display name as
          * input
          */
         public String getDatabaseName(String DisplayName)
@@ -284,7 +281,7 @@ public final class AdminView extends javax.swing.JFrame
     private int sessionID = -1;
 
     /**
-     *
+     *AdminView
      */
     public AdminView()
     {
@@ -588,7 +585,7 @@ public final class AdminView extends javax.swing.JFrame
      * Cell editor for session tables to collect form info and put into an edit
      *
      * @return the cell editor for double clicking on session tables to bring
-     * data to comboboxes for editing
+     * data to combo-boxes for editing
      */
     public DefaultCellEditor makeEditSessionCellEditor()
     {
@@ -688,7 +685,7 @@ public final class AdminView extends javax.swing.JFrame
     }
 
     /**
-     * Clear all the comboboxes on the search screen
+     * Clear all the combo-boxes on the search screen
      */
     public void clearSearchComboBoxes()
     {
@@ -699,7 +696,7 @@ public final class AdminView extends javax.swing.JFrame
     }
 
     /**
-     * Clear all the comboboxes on the create session screen
+     * Clear all the combo-boxes on the create session screen
      */
     public void clearComboBoxes()
     {
@@ -1003,7 +1000,8 @@ public final class AdminView extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -1222,16 +1220,20 @@ public final class AdminView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1150, 750));
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 formMouseMoved(evt);
             }
         });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 jPanel3MouseMoved(evt);
             }
         });
@@ -1239,8 +1241,10 @@ public final class AdminView extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Create"));
         jPanel2.setMinimumSize(new java.awt.Dimension(234, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(1111, 449));
-        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 jPanel2MouseMoved(evt);
             }
         });
@@ -1289,25 +1293,10 @@ public final class AdminView extends javax.swing.JFrame
         jScrollPane2.setViewportView(notesField);
 
         paraprofessionalCombo.setNextFocusableComponent(creatorCombo);
-        paraprofessionalCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paraprofessionalComboActionPerformed(evt);
-            }
-        });
 
         creatorCombo.setNextFocusableComponent(locationCombo);
-        creatorCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creatorComboActionPerformed(evt);
-            }
-        });
 
         locationCombo.setNextFocusableComponent(notesField);
-        locationCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                locationComboActionPerformed(evt);
-            }
-        });
 
         org.jdesktop.layout.GroupLayout paraprofessionalInfoPanelLayout = new org.jdesktop.layout.GroupLayout(paraprofessionalInfoPanel);
         paraprofessionalInfoPanel.setLayout(paraprofessionalInfoPanelLayout);
@@ -1385,13 +1374,10 @@ public final class AdminView extends javax.swing.JFrame
         clearButton.setMaximumSize(new java.awt.Dimension(121, 50));
         clearButton.setMinimumSize(new java.awt.Dimension(121, 50));
         clearButton.setPreferredSize(new java.awt.Dimension(121, 50));
-        clearButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearButtonMouseClicked(evt);
-            }
-        });
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clearButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 clearButtonActionPerformed(evt);
             }
         });
@@ -1407,13 +1393,10 @@ public final class AdminView extends javax.swing.JFrame
         addSessionbutton.setMaximumSize(new java.awt.Dimension(121, 50));
         addSessionbutton.setMinimumSize(new java.awt.Dimension(121, 50));
         addSessionbutton.setPreferredSize(new java.awt.Dimension(121, 50));
-        addSessionbutton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addSessionbuttonMouseClicked(evt);
-            }
-        });
-        addSessionbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addSessionbutton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addSessionbuttonActionPerformed(evt);
             }
         });
@@ -1428,8 +1411,10 @@ public final class AdminView extends javax.swing.JFrame
         editSaveButton.setMaximumSize(new java.awt.Dimension(121, 44));
         editSaveButton.setMinimumSize(new java.awt.Dimension(121, 44));
         editSaveButton.setPreferredSize(new java.awt.Dimension(121, 44));
-        editSaveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        editSaveButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editSaveButtonActionPerformed(evt);
             }
         });
@@ -1444,8 +1429,10 @@ public final class AdminView extends javax.swing.JFrame
         newStudentButton.setMaximumSize(new java.awt.Dimension(121, 44));
         newStudentButton.setMinimumSize(new java.awt.Dimension(121, 44));
         newStudentButton.setPreferredSize(new java.awt.Dimension(121, 44));
-        newStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        newStudentButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 newStudentButtonActionPerformed(evt);
             }
         });
@@ -1459,12 +1446,6 @@ public final class AdminView extends javax.swing.JFrame
         studentInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Student Information"));
 
         fnameLabel.setText("First Name*");
-
-        fnameCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fnameComboActionPerformed(evt);
-            }
-        });
 
         lnameLabel.setText("Last Name*");
 
@@ -1515,12 +1496,6 @@ public final class AdminView extends javax.swing.JFrame
 
         courseLabel.setText("Course*");
 
-        courseCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courseComboActionPerformed(evt);
-            }
-        });
-
         levelLabel.setText("Course#*");
 
         teacherLabel.setText("Teacher*");
@@ -1561,8 +1536,10 @@ public final class AdminView extends javax.swing.JFrame
         );
 
         jButton1.setText("Refresh Lists");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -1570,8 +1547,10 @@ public final class AdminView extends javax.swing.JFrame
         jLabel10.setText("Term Code:");
 
         importTermButton.setText("Import Term");
-        importTermButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        importTermButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 importTermButtonActionPerformed(evt);
             }
         });
@@ -1581,7 +1560,7 @@ public final class AdminView extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(109, Short.MAX_VALUE)
+                .addContainerGap(70, Short.MAX_VALUE)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                     .add(studentInfoPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jPanel2Layout.createSequentialGroup()
@@ -1603,7 +1582,7 @@ public final class AdminView extends javax.swing.JFrame
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 139, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(6, 6, 6)))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1625,41 +1604,49 @@ public final class AdminView extends javax.swing.JFrame
                             .add(jLabel10))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                         .add(importTermButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabsPane.addTab("Create", jPanel2);
 
         agendaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Today's Agenda"));
-        agendaPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        agendaPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 agendaPanelMouseMoved(evt);
             }
         });
 
         agendaTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         agendaTableScrollPanel.setViewportView(agendaTable);
 
         addAgendaItemButton.setText("Add Item");
-        addAgendaItemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addAgendaItemButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addAgendaItemButtonActionPerformed(evt);
             }
         });
 
         deleteAgendaButton.setText("Delete Item");
-        deleteAgendaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteAgendaButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteAgendaButtonActionPerformed(evt);
             }
         });
@@ -1669,20 +1656,20 @@ public final class AdminView extends javax.swing.JFrame
         agendaPanelLayout.setHorizontalGroup(
             agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(agendaPanelLayout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addContainerGap(162, Short.MAX_VALUE)
                 .add(agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(agendaTableScrollPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 892, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(agendaPanelLayout.createSequentialGroup()
                         .add(addAgendaItemButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(deleteAgendaButton)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         agendaPanelLayout.setVerticalGroup(
             agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(agendaPanelLayout.createSequentialGroup()
                 .add(16, 16, 16)
-                .add(agendaTableScrollPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .add(agendaTableScrollPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(deleteAgendaButton)
@@ -1711,18 +1698,22 @@ public final class AdminView extends javax.swing.JFrame
 
         sessionsTablePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Current Sessions"));
 
-        sessionsScrollPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        sessionsScrollPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 sessionsScrollPaneMouseMoved(evt);
             }
         });
 
         sessionsTable.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         sessionsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -1731,8 +1722,10 @@ public final class AdminView extends javax.swing.JFrame
         sessionsScrollPane.setViewportView(sessionsTable);
 
         deleteSessionButton.setText("Delete Session");
-        deleteSessionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButtonActionPerformed(evt);
             }
         });
@@ -1746,13 +1739,13 @@ public final class AdminView extends javax.swing.JFrame
                 .add(deleteSessionButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(sessionsTablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1199, Short.MAX_VALUE)
+                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sessionsTablePanelLayout.setVerticalGroup(
             sessionsTablePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(sessionsTablePanelLayout.createSequentialGroup()
-                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(deleteSessionButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1762,26 +1755,32 @@ public final class AdminView extends javax.swing.JFrame
         futureSessionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Future Sessions"));
 
         jScrollPane1.setPreferredSize(sessionsScrollPane.getMinimumSize());
-        jScrollPane1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        jScrollPane1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 jScrollPane1MouseMoved(evt);
             }
         });
 
         appointmentsTable.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
         jScrollPane1.setViewportView(appointmentsTable);
 
         deleteSessionButton1.setText("Delete Session");
-        deleteSessionButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButton1ActionPerformed(evt);
             }
         });
@@ -1791,7 +1790,7 @@ public final class AdminView extends javax.swing.JFrame
         futureSessionsPanelLayout.setHorizontalGroup(
             futureSessionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, futureSessionsPanelLayout.createSequentialGroup()
-                .add(0, 1083, Short.MAX_VALUE)
+                .add(0, 1059, Short.MAX_VALUE)
                 .add(deleteSessionButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(futureSessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
@@ -1801,7 +1800,7 @@ public final class AdminView extends javax.swing.JFrame
         futureSessionsPanelLayout.setVerticalGroup(
             futureSessionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, futureSessionsPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(deleteSessionButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1810,18 +1809,14 @@ public final class AdminView extends javax.swing.JFrame
 
         todaySessionsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Today's Sessions"));
 
-        todaySessionsScrollPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                todaySessionsScrollPaneMouseMoved(evt);
-            }
-        });
-
         todaysSessionTable.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         todaysSessionTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -1830,8 +1825,10 @@ public final class AdminView extends javax.swing.JFrame
         todaySessionsScrollPane.setViewportView(todaysSessionTable);
 
         deleteSessionButton2.setText("Delete Session");
-        deleteSessionButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButton2ActionPerformed(evt);
             }
         });
@@ -1845,13 +1842,13 @@ public final class AdminView extends javax.swing.JFrame
                 .add(deleteSessionButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(todaySessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1199, Short.MAX_VALUE)
+                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1183, Short.MAX_VALUE)
                 .addContainerGap())
         );
         todaySessionsPanelLayout.setVerticalGroup(
             todaySessionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(todaySessionsPanelLayout.createSequentialGroup()
-                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(deleteSessionButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1882,13 +1879,15 @@ public final class AdminView extends javax.swing.JFrame
         tablePane.setPreferredSize(new java.awt.Dimension(1300, 258));
 
         generalReportTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -1903,46 +1902,54 @@ public final class AdminView extends javax.swing.JFrame
         generalReportEndField.setText("mm/dd/yyyy hh:mm aa");
 
         generalReportLoadButton.setText("Load");
-        generalReportLoadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        generalReportLoadButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 generalReportLoadButtonActionPerformed(evt);
             }
         });
 
         generalReportTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane11.setViewportView(generalReportTable);
 
         generalReportTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane12.setViewportView(generalReportTable3);
 
         generalReportTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -1950,40 +1957,50 @@ public final class AdminView extends javax.swing.JFrame
 
         buttonGroup1.add(monthRadio);
         monthRadio.setText("Past Month");
-        monthRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monthRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 monthRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(alltimeRadio);
         alltimeRadio.setText("All time");
-        alltimeRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        alltimeRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 alltimeRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(dayRadio);
         dayRadio.setText("Past Day");
-        dayRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dayRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dayRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(yearRadio);
         yearRadio.setText("Past Year");
-        yearRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        yearRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 yearRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(weekRadio);
         weekRadio.setText("Past Week");
-        weekRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        weekRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 weekRadioActionPerformed(evt);
             }
         });
@@ -2000,7 +2017,7 @@ public final class AdminView extends javax.swing.JFrame
                     .add(weekRadio)
                     .add(monthRadio)
                     .add(yearRadio))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(tablePaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(tablePaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, tablePaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -2056,7 +2073,7 @@ public final class AdminView extends javax.swing.JFrame
                             .add(jScrollPane12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 102, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(48, 48, 48)
                             .add(jScrollPane8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -2069,50 +2086,64 @@ public final class AdminView extends javax.swing.JFrame
 
         graphPane.setPreferredSize(new java.awt.Dimension(1300, 800));
 
-        generalChartPanelLeft.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelLeft.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelLeftMouseMoved(evt);
             }
         });
         generalChartPanelLeft.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelMid.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelMid.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelMidMouseMoved(evt);
             }
         });
         generalChartPanelMid.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelRight.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelRight.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelRightMouseMoved(evt);
             }
         });
         generalChartPanelRight.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelLong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelLong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelLongMouseMoved(evt);
             }
         });
         generalChartPanelLong.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelMid2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelMid2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelMid2MouseMoved(evt);
             }
         });
         generalChartPanelMid2.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelLeft2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelLeft2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelLeft2MouseMoved(evt);
             }
         });
         generalChartPanelLeft2.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelRight2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelRight2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelRight2MouseMoved(evt);
             }
         });
@@ -2167,15 +2198,15 @@ public final class AdminView extends javax.swing.JFrame
         reportsPane.setLayout(reportsPaneLayout);
         reportsPaneLayout.setHorizontalGroup(
             reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 1256, Short.MAX_VALUE)
+            .add(0, 1240, Short.MAX_VALUE)
             .add(reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1256, Short.MAX_VALUE))
+                .add(reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1240, Short.MAX_VALUE))
         );
         reportsPaneLayout.setVerticalGroup(
             reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 429, Short.MAX_VALUE)
+            .add(0, 411, Short.MAX_VALUE)
             .add(reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(org.jdesktop.layout.GroupLayout.TRAILING, reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))
         );
 
         tabsPane.addTab("Reports", reportsPane);
@@ -2184,28 +2215,34 @@ public final class AdminView extends javax.swing.JFrame
         currentSessionsPanel1.setPreferredSize(new java.awt.Dimension(1000, 273));
 
         searchsearchTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "First", "Last", "Email", "Phone"
             }
         ));
         jScrollPane6.setViewportView(searchsearchTable);
 
         deleteSessionButton3.setText("Delete");
-        deleteSessionButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButton3ActionPerformed(evt);
             }
         });
 
         jButton2.setText("Download");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton2ActionPerformed(evt);
             }
         });
@@ -2220,7 +2257,7 @@ public final class AdminView extends javax.swing.JFrame
                         .add(34, 34, 34)
                         .add(jScrollPane6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1328, Short.MAX_VALUE))
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, currentSessionsPanel1Layout.createSequentialGroup()
-                        .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(558, Short.MAX_VALUE)
                         .add(jButton2)
                         .add(565, 565, 565)
                         .add(deleteSessionButton3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
@@ -2240,26 +2277,20 @@ public final class AdminView extends javax.swing.JFrame
 
         searchsearchButton.setForeground(new java.awt.Color(51, 102, 255));
         searchsearchButton.setText("Search");
-        searchsearchButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchsearchButtonMouseClicked(evt);
-            }
-        });
-        searchsearchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchsearchButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchsearchButtonActionPerformed(evt);
             }
         });
 
         clearButton1.setForeground(new java.awt.Color(153, 0, 0));
         clearButton1.setText("Clear");
-        clearButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearButton1MouseClicked(evt);
-            }
-        });
-        clearButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clearButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 clearButton1ActionPerformed(evt);
             }
         });
@@ -2271,11 +2302,6 @@ public final class AdminView extends javax.swing.JFrame
         sessionstartLabel1.setText("Session Start:");
 
         searchsessionstartField.setText("mm/dd/yyyy hh:mm aa");
-        searchsessionstartField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchsessionstartFieldActionPerformed(evt);
-            }
-        });
 
         sessionendLabel1.setText("Session End:");
 
@@ -2358,20 +2384,10 @@ public final class AdminView extends javax.swing.JFrame
         teacherLabel1.setText("First Name:");
 
         searchuserfirstCombo.setEditable(true);
-        searchuserfirstCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchuserfirstComboActionPerformed(evt);
-            }
-        });
 
         teacherLabel6.setText("Last Name:");
 
         searchuserlastCombo.setEditable(true);
-        searchuserlastCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchuserlastComboActionPerformed(evt);
-            }
-        });
 
         org.jdesktop.layout.GroupLayout searchuserPanelLayout = new org.jdesktop.layout.GroupLayout(searchuserPanel);
         searchuserPanel.setLayout(searchuserPanelLayout);
@@ -2464,22 +2480,28 @@ public final class AdminView extends javax.swing.JFrame
         jScrollPane7.setViewportView(searchList);
 
         searchAddRestrictionsButton.setText("Add Restrictions");
-        searchAddRestrictionsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchAddRestrictionsButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchAddRestrictionsButtonActionPerformed(evt);
             }
         });
 
         searchresetrestrictionButton.setText("Reset Restriction");
-        searchresetrestrictionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchresetrestrictionButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchresetrestrictionButtonActionPerformed(evt);
             }
         });
 
         searchclearrestrictionsButton.setText("Clear Restrictions");
-        searchclearrestrictionsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        searchclearrestrictionsButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 searchclearrestrictionsButtonActionPerformed(evt);
             }
         });
@@ -2660,47 +2682,59 @@ public final class AdminView extends javax.swing.JFrame
 
         buttonGroup1.add(clientRadio);
         clientRadio.setText("Client");
-        clientRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clientRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 clientRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(courseRadio);
         courseRadio.setText("Course");
-        courseRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        courseRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 courseRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(sessionsRadio);
         sessionsRadio.setText("Sessions");
-        sessionsRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        sessionsRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 sessionsRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(teacherRadio);
         teacherRadio.setText("Teacher");
-        teacherRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        teacherRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 teacherRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(paraprofessionalRadio);
         paraprofessionalRadio.setText("Paraprofessional");
-        paraprofessionalRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        paraprofessionalRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 paraprofessionalRadioActionPerformed(evt);
             }
         });
 
         jButton3.setText("Create");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton3ActionPerformed(evt);
             }
         });
@@ -2871,48 +2905,60 @@ public final class AdminView extends javax.swing.JFrame
 
         buttonGroup1.add(roleRadio);
         roleRadio.setText("Role");
-        roleRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        roleRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 roleRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(locationRadio);
         locationRadio.setText("Location");
-        locationRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        locationRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 locationRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(categoryRadio);
         categoryRadio.setText("Category");
-        categoryRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        categoryRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 categoryRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(agendaRadio);
         agendaRadio.setText("Agenda");
-        agendaRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        agendaRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 agendaRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(agendaCategoryRadio);
         agendaCategoryRadio.setText("Agenda Category");
-        agendaCategoryRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        agendaCategoryRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 agendaCategoryRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(subjectRadio);
         subjectRadio.setText("Subject");
-        subjectRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        subjectRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 subjectRadioActionPerformed(evt);
             }
         });
@@ -2995,16 +3041,20 @@ public final class AdminView extends javax.swing.JFrame
 
         buttonGroup1.add(userRadio);
         userRadio.setText("User");
-        userRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        userRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 userRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(paraprofessionalCategoryRadio);
         paraprofessionalCategoryRadio.setText("Paraprofessional Category");
-        paraprofessionalCategoryRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        paraprofessionalCategoryRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 paraprofessionalCategoryRadioActionPerformed(evt);
             }
         });
@@ -3243,10 +3293,6 @@ public final class AdminView extends javax.swing.JFrame
         addSessionbutton.setEnabled(true);
     }//GEN-LAST:event_addSessionbuttonActionPerformed
 
-    private void addSessionbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSessionbuttonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addSessionbuttonMouseClicked
-
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         courseCombo.setBorder(null);
         teacherCombo.setBorder(null);
@@ -3321,10 +3367,6 @@ public final class AdminView extends javax.swing.JFrame
 
         clearForm();
     }//GEN-LAST:event_clearButtonActionPerformed
-
-    private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearButtonMouseClicked
 
     private void editSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSaveButtonActionPerformed
 
@@ -3651,30 +3693,6 @@ public final class AdminView extends javax.swing.JFrame
         }
     }//GEN-LAST:event_weekRadioActionPerformed
 
-    private void fnameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fnameComboActionPerformed
-
-    private void courseComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_courseComboActionPerformed
-
-    private void paraprofessionalComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraprofessionalComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_paraprofessionalComboActionPerformed
-
-    private void creatorComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatorComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_creatorComboActionPerformed
-
-    private void locationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_locationComboActionPerformed
-
-    private void todaySessionsScrollPaneMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todaySessionsScrollPaneMouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_todaySessionsScrollPaneMouseMoved
-
     private void deleteSessionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSessionButton2ActionPerformed
         int[] selectedRows = todaysSessionTable.getSelectedRows();
 
@@ -3816,10 +3834,6 @@ public final class AdminView extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void searchsearchButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchsearchButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchsearchButtonMouseClicked
-
     private void searchsearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchsearchButtonActionPerformed
 
         String selectQuery = Client.ClientTable.getSelectQuery(false);
@@ -3914,25 +3928,9 @@ public final class AdminView extends javax.swing.JFrame
         DatabaseHelper.close();
     }//GEN-LAST:event_searchsearchButtonActionPerformed
 
-    private void clearButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButton1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearButton1MouseClicked
-
     private void clearButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButton1ActionPerformed
         clearSearchForm();
     }//GEN-LAST:event_clearButton1ActionPerformed
-
-    private void searchsessionstartFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchsessionstartFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchsessionstartFieldActionPerformed
-
-    private void searchuserfirstComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchuserfirstComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchuserfirstComboActionPerformed
-
-    private void searchuserlastComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchuserlastComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchuserlastComboActionPerformed
 
     private void searchAddRestrictionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchAddRestrictionsButtonActionPerformed
         ArrayList<String> restrictions = new ArrayList<String>();
@@ -5165,7 +5163,7 @@ public final class AdminView extends javax.swing.JFrame
     }
 
     /**
-     * Updates the search tab comboboxes
+     * Updates the search tab combo-boxes
      */
     public void updateBoxes()
     {

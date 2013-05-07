@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.ui;
 
 import java.awt.Color;
@@ -48,13 +44,14 @@ import tutoring.helper.*;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public final class SIAView extends javax.swing.JFrame
 {
 
     /**
-     *
+     * Updates tables every minute
+     * 
      */
     public class MinuteUpdater extends TimerTask
     {
@@ -75,6 +72,7 @@ public final class SIAView extends javax.swing.JFrame
             this.future = future;
         }
 
+        @Override
         public void run()
         {
             updateTables();
@@ -106,39 +104,31 @@ public final class SIAView extends javax.swing.JFrame
         cboxes[3] = emailCombo;
 
         ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-        System.out.println("LIST1");
         cultimateList.add(Data.getClientsfirst());
         cultimateList.add(Data.getClientslast());
         cultimateList.add(Data.getClientsphone());
         cultimateList.add(Data.getClientsemail());
-        System.out.println("DONE LIST1");
         ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-        System.out.println("LIST 2");
         cultimateList1.add(Data.getFnameOrderedList());
         cultimateList1.add(Data.getLnameOrderedList());
         cultimateList1.add(Data.getPhoneOrderedList());
         cultimateList1.add(Data.getEmailOrderedList());
-        System.out.println("DONE LIST2");
         uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
 
         JComboBox[] cboxes2 = new JComboBox[3];
         cboxes2[0] = courseCombo;
         cboxes2[1] = levelCombo;
         cboxes2[2] = teacherCombo;
-        //cboxes[3]=emailCombo;
-        System.out.println("LIST 3");
+        
         ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
         cultimateList2.add(Data.getSubjectslist());
         cultimateList2.add(Data.getLevelslist());
         cultimateList2.add(Data.getTeacherslist());
-        System.out.println("DONE list 3");
         ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-        System.out.println("LIst 4");
         cultimateList22.add(Data.getSubjectOrderedList());
         cultimateList22.add(Data.getLevelOrderedList());
         cultimateList22.add(Data.getTeacherOrderedList());
-        System.out.println("Done list 4");
 
         uaacCourse.noMore();
         uaacCourse = null;
@@ -202,7 +192,7 @@ public final class SIAView extends javax.swing.JFrame
          */
         LOCATION(1, "Location", "location"),
         /**
-         * Client tutor's combo-box
+         * Client tutor combo-box
          */
         PARAPROFESSIONAL(2, "Tutor", ""),
         /**
@@ -277,6 +267,10 @@ public final class SIAView extends javax.swing.JFrame
     private AgendaTableHelper tableHelperAgenda;
     private int sessionID = -1;
 
+    /**
+     * SIAView constructor
+     *
+     */
     public SIAView()
     {
         initComponents();
@@ -817,7 +811,6 @@ public final class SIAView extends javax.swing.JFrame
 
         for (int i = 0; i < generalData.length; i++)
         {
-            System.out.println(Double.parseDouble(generalData[i][1]) + " + " + generalData[i][0]);
             barDataset.addValue(Double.parseDouble(generalData[i][1]), series, generalData[i][0]);
             pieDataset.setValue(generalData[i][0], Double.parseDouble(generalData[i][1]));
         }
@@ -825,7 +818,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart barChart = createChart(barDataset, "Total Student Sessions by Subject", "# of Student Sessions", "Subject", false, Color.green, Color.gray);
         final ChartPanel barChartPanel = new ChartPanel(barChart);
         barChartPanel.setPreferredSize(generalChartPanelLong.getSize());
-        System.out.println(barChartPanel.getPreferredSize().height + " " + barChartPanel.getPreferredSize().width);
         generalChartPanelLong.removeAll();
         generalChartPanelLong.add(barChartPanel);
         generalChartPanelLong.validate();
@@ -834,7 +826,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart barChart1 = createChart(barDataset1, "Total Student Sessions by Category", "# of Student Sessions", "Category", false, Color.blue, Color.gray);
         final ChartPanel barChartPanel1 = new ChartPanel(barChart1);
         barChartPanel1.setPreferredSize(generalChartPanelRight2.getSize());
-        System.out.println(barChartPanel1.getPreferredSize().height + " " + barChartPanel1.getPreferredSize().width);
         generalChartPanelRight2.removeAll();
         generalChartPanelRight2.add(barChartPanel1);
         generalChartPanelRight2.validate();
@@ -842,7 +833,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart barChart2 = createChart(barDataset2, "Other Information", "Total #", "Statistic", false, Color.red, Color.gray);
         final ChartPanel barChartPanel2 = new ChartPanel(barChart2);
         barChartPanel2.setPreferredSize(generalChartPanelLeft2.getSize());
-        System.out.println(barChartPanel2.getPreferredSize().height + " " + barChartPanel2.getPreferredSize().width);
         generalChartPanelLeft2.removeAll();
         generalChartPanelLeft2.add(barChartPanel2);
         generalChartPanelLeft2.validate();
@@ -850,7 +840,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart barChart3 = createChart(barDataset3, "Session Length Overview", "# of Sessions of Length", "Length Period", false, Color.gray, Color.white);
         final ChartPanel barChartPanel3 = new ChartPanel(barChart3);
         barChartPanel3.setPreferredSize(generalChartPanelMid2.getSize());
-        System.out.println(barChartPanel3.getPreferredSize().height + " " + barChartPanel3.getPreferredSize().width);
         generalChartPanelMid2.removeAll();
         generalChartPanelMid2.add(barChartPanel3);
         generalChartPanelMid2.validate();
@@ -859,7 +848,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart pieChart = createChart(pieDataset, "Total Student Sessions by Subject");
         final ChartPanel pieChartPanel = new ChartPanel(pieChart);
         pieChartPanel.setPreferredSize(generalChartPanelLeft.getSize());
-        System.out.println(pieChartPanel.getPreferredSize().height + " " + pieChartPanel.getPreferredSize().width);
         generalChartPanelLeft.removeAll();
         generalChartPanelLeft.add(pieChartPanel);
         generalChartPanelLeft.validate();
@@ -867,7 +855,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart pieChart1 = createChart(pieDataset1, "Total Student Sessions by Category");
         final ChartPanel pieChartPanel1 = new ChartPanel(pieChart1);
         pieChartPanel1.setPreferredSize(generalChartPanelRight.getSize());
-        System.out.println(pieChartPanel1.getPreferredSize().height + " " + pieChartPanel1.getPreferredSize().width);
         generalChartPanelRight.removeAll();
         generalChartPanelRight.add(pieChartPanel1);
         generalChartPanelRight.validate();
@@ -875,7 +862,6 @@ public final class SIAView extends javax.swing.JFrame
         final JFreeChart pieChart2 = createChart(pieDataset2, "Total Student Sessions by Length");
         final ChartPanel pieChartPanel2 = new ChartPanel(pieChart2);
         pieChartPanel2.setPreferredSize(generalChartPanelMid.getSize());
-        System.out.println(pieChartPanel2.getPreferredSize().height + " " + pieChartPanel2.getPreferredSize().width);
         generalChartPanelMid.removeAll();
         generalChartPanelMid.add(pieChartPanel2);
         generalChartPanelMid.validate();
@@ -974,7 +960,8 @@ public final class SIAView extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonGroup1 = new javax.swing.ButtonGroup();
@@ -1074,16 +1061,20 @@ public final class SIAView extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1150, 750));
-        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 formMouseMoved(evt);
             }
         });
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 jPanel3MouseMoved(evt);
             }
         });
@@ -1091,8 +1082,10 @@ public final class SIAView extends javax.swing.JFrame
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Create"));
         jPanel2.setMinimumSize(new java.awt.Dimension(234, 0));
         jPanel2.setPreferredSize(new java.awt.Dimension(1111, 449));
-        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        jPanel2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 jPanel2MouseMoved(evt);
             }
         });
@@ -1141,25 +1134,10 @@ public final class SIAView extends javax.swing.JFrame
         jScrollPane2.setViewportView(notesField);
 
         paraprofessionalCombo.setNextFocusableComponent(creatorCombo);
-        paraprofessionalCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paraprofessionalComboActionPerformed(evt);
-            }
-        });
 
         creatorCombo.setNextFocusableComponent(locationCombo);
-        creatorCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creatorComboActionPerformed(evt);
-            }
-        });
 
         locationCombo.setNextFocusableComponent(notesField);
-        locationCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                locationComboActionPerformed(evt);
-            }
-        });
 
         org.jdesktop.layout.GroupLayout paraprofessionalInfoPanelLayout = new org.jdesktop.layout.GroupLayout(paraprofessionalInfoPanel);
         paraprofessionalInfoPanel.setLayout(paraprofessionalInfoPanelLayout);
@@ -1237,13 +1215,10 @@ public final class SIAView extends javax.swing.JFrame
         clearButton.setMaximumSize(new java.awt.Dimension(121, 50));
         clearButton.setMinimumSize(new java.awt.Dimension(121, 50));
         clearButton.setPreferredSize(new java.awt.Dimension(121, 50));
-        clearButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearButtonMouseClicked(evt);
-            }
-        });
-        clearButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        clearButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 clearButtonActionPerformed(evt);
             }
         });
@@ -1259,13 +1234,10 @@ public final class SIAView extends javax.swing.JFrame
         addSessionbutton.setMaximumSize(new java.awt.Dimension(121, 50));
         addSessionbutton.setMinimumSize(new java.awt.Dimension(121, 50));
         addSessionbutton.setPreferredSize(new java.awt.Dimension(121, 50));
-        addSessionbutton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addSessionbuttonMouseClicked(evt);
-            }
-        });
-        addSessionbutton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addSessionbutton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addSessionbuttonActionPerformed(evt);
             }
         });
@@ -1280,8 +1252,10 @@ public final class SIAView extends javax.swing.JFrame
         editSaveButton.setMaximumSize(new java.awt.Dimension(121, 44));
         editSaveButton.setMinimumSize(new java.awt.Dimension(121, 44));
         editSaveButton.setPreferredSize(new java.awt.Dimension(121, 44));
-        editSaveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        editSaveButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editSaveButtonActionPerformed(evt);
             }
         });
@@ -1296,8 +1270,10 @@ public final class SIAView extends javax.swing.JFrame
         newStudentButton.setMaximumSize(new java.awt.Dimension(121, 44));
         newStudentButton.setMinimumSize(new java.awt.Dimension(121, 44));
         newStudentButton.setPreferredSize(new java.awt.Dimension(121, 44));
-        newStudentButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        newStudentButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 newStudentButtonActionPerformed(evt);
             }
         });
@@ -1311,12 +1287,6 @@ public final class SIAView extends javax.swing.JFrame
         studentInfoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Student Information"));
 
         fnameLabel.setText("First Name*");
-
-        fnameCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fnameComboActionPerformed(evt);
-            }
-        });
 
         lnameLabel.setText("Last Name*");
 
@@ -1367,12 +1337,6 @@ public final class SIAView extends javax.swing.JFrame
 
         courseLabel.setText("Course*");
 
-        courseCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                courseComboActionPerformed(evt);
-            }
-        });
-
         levelLabel.setText("Course#*");
 
         teacherLabel.setText("Teacher*");
@@ -1413,8 +1377,10 @@ public final class SIAView extends javax.swing.JFrame
         );
 
         jButton1.setText("Refresh Lists");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButton1ActionPerformed(evt);
             }
         });
@@ -1424,7 +1390,7 @@ public final class SIAView extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(112, Short.MAX_VALUE)
+                .addContainerGap(85, Short.MAX_VALUE)
                 .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                     .add(studentInfoPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(jPanel2Layout.createSequentialGroup()
@@ -1435,7 +1401,7 @@ public final class SIAView extends javax.swing.JFrame
                         .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
                             .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jButton1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1450,41 +1416,49 @@ public final class SIAView extends javax.swing.JFrame
                     .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 66, Short.MAX_VALUE))
+                .add(0, 29, Short.MAX_VALUE))
         );
 
         tabsPane.addTab("Create", jPanel2);
 
         agendaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Today's Agenda"));
-        agendaPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        agendaPanel.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 agendaPanelMouseMoved(evt);
             }
         });
 
         agendaTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         agendaTableScrollPanel.setViewportView(agendaTable);
 
         addAgendaItemButton.setText("Add Item");
-        addAgendaItemButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        addAgendaItemButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 addAgendaItemButtonActionPerformed(evt);
             }
         });
 
         deleteAgendaButton.setText("Delete Item");
-        deleteAgendaButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteAgendaButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteAgendaButtonActionPerformed(evt);
             }
         });
@@ -1494,20 +1468,20 @@ public final class SIAView extends javax.swing.JFrame
         agendaPanelLayout.setHorizontalGroup(
             agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(agendaPanelLayout.createSequentialGroup()
-                .addContainerGap(166, Short.MAX_VALUE)
+                .addContainerGap(174, Short.MAX_VALUE)
                 .add(agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(agendaTableScrollPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 892, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(agendaPanelLayout.createSequentialGroup()
                         .add(addAgendaItemButton)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(deleteAgendaButton)))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         agendaPanelLayout.setVerticalGroup(
             agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(agendaPanelLayout.createSequentialGroup()
                 .add(16, 16, 16)
-                .add(agendaTableScrollPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                .add(agendaTableScrollPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(agendaPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(deleteAgendaButton)
@@ -1538,18 +1512,22 @@ public final class SIAView extends javax.swing.JFrame
 
         sessionsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         sessionsScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        sessionsScrollPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        sessionsScrollPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 sessionsScrollPaneMouseMoved(evt);
             }
         });
 
         sessionsTable.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         sessionsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -1558,8 +1536,10 @@ public final class SIAView extends javax.swing.JFrame
         sessionsScrollPane.setViewportView(sessionsTable);
 
         deleteSessionButton.setText("Delete Session");
-        deleteSessionButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButtonActionPerformed(evt);
             }
         });
@@ -1573,13 +1553,13 @@ public final class SIAView extends javax.swing.JFrame
                 .add(deleteSessionButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(sessionsTablePanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1199, Short.MAX_VALUE)
+                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1207, Short.MAX_VALUE)
                 .addContainerGap())
         );
         sessionsTablePanelLayout.setVerticalGroup(
             sessionsTablePanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(sessionsTablePanelLayout.createSequentialGroup()
-                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .add(sessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(deleteSessionButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1591,26 +1571,32 @@ public final class SIAView extends javax.swing.JFrame
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane1.setPreferredSize(sessionsScrollPane.getMinimumSize());
-        jScrollPane1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        jScrollPane1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 jScrollPane1MouseMoved(evt);
             }
         });
 
         appointmentsTable.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         appointmentsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
         jScrollPane1.setViewportView(appointmentsTable);
 
         deleteSessionButton1.setText("Delete Session");
-        deleteSessionButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButton1ActionPerformed(evt);
             }
         });
@@ -1630,7 +1616,7 @@ public final class SIAView extends javax.swing.JFrame
         futureSessionsPanelLayout.setVerticalGroup(
             futureSessionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, futureSessionsPanelLayout.createSequentialGroup()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(deleteSessionButton1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1641,18 +1627,15 @@ public final class SIAView extends javax.swing.JFrame
 
         todaySessionsScrollPane.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
         todaySessionsScrollPane.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        todaySessionsScrollPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                todaySessionsScrollPaneMouseMoved(evt);
-            }
-        });
 
         todaysSessionTable.setFont(new java.awt.Font("Lucida Grande", 0, 10)); // NOI18N
         todaysSessionTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
@@ -1661,8 +1644,10 @@ public final class SIAView extends javax.swing.JFrame
         todaySessionsScrollPane.setViewportView(todaysSessionTable);
 
         deleteSessionButton2.setText("Delete Session");
-        deleteSessionButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        deleteSessionButton2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 deleteSessionButton2ActionPerformed(evt);
             }
         });
@@ -1676,13 +1661,13 @@ public final class SIAView extends javax.swing.JFrame
                 .add(deleteSessionButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 136, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
             .add(todaySessionsPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1199, Short.MAX_VALUE)
+                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1207, Short.MAX_VALUE)
                 .addContainerGap())
         );
         todaySessionsPanelLayout.setVerticalGroup(
             todaySessionsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(todaySessionsPanelLayout.createSequentialGroup()
-                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .add(todaySessionsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(deleteSessionButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 29, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
@@ -1716,13 +1701,15 @@ public final class SIAView extends javax.swing.JFrame
         tablePane.setPreferredSize(new java.awt.Dimension(1300, 258));
 
         generalReportTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -1737,46 +1724,54 @@ public final class SIAView extends javax.swing.JFrame
         generalReportEndField.setText("mm/dd/yyyy hh:mm aa");
 
         generalReportLoadButton.setText("Load");
-        generalReportLoadButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        generalReportLoadButton.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 generalReportLoadButtonActionPerformed(evt);
             }
         });
 
         generalReportTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane11.setViewportView(generalReportTable);
 
         generalReportTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane12.setViewportView(generalReportTable3);
 
         generalReportTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
@@ -1784,40 +1779,50 @@ public final class SIAView extends javax.swing.JFrame
 
         buttonGroup1.add(monthRadio);
         monthRadio.setText("Past Month");
-        monthRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        monthRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 monthRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(alltimeRadio);
         alltimeRadio.setText("All time");
-        alltimeRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        alltimeRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 alltimeRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(dayRadio);
         dayRadio.setText("Past Day");
-        dayRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        dayRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 dayRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(yearRadio);
         yearRadio.setText("Past Year");
-        yearRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        yearRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 yearRadioActionPerformed(evt);
             }
         });
 
         buttonGroup1.add(weekRadio);
         weekRadio.setText("Past Week");
-        weekRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        weekRadio.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 weekRadioActionPerformed(evt);
             }
         });
@@ -1834,7 +1839,7 @@ public final class SIAView extends javax.swing.JFrame
                     .add(weekRadio)
                     .add(monthRadio)
                     .add(yearRadio))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(tablePaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(tablePaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(org.jdesktop.layout.GroupLayout.TRAILING, tablePaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -1890,7 +1895,7 @@ public final class SIAView extends javax.swing.JFrame
                             .add(jScrollPane12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 102, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(48, 48, 48)
                             .add(jScrollPane8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 47, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1903,50 +1908,64 @@ public final class SIAView extends javax.swing.JFrame
 
         graphPane.setPreferredSize(new java.awt.Dimension(1300, 800));
 
-        generalChartPanelLeft.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelLeft.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelLeftMouseMoved(evt);
             }
         });
         generalChartPanelLeft.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelMid.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelMid.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelMidMouseMoved(evt);
             }
         });
         generalChartPanelMid.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelRight.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelRight.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelRightMouseMoved(evt);
             }
         });
         generalChartPanelRight.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelLong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelLong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelLongMouseMoved(evt);
             }
         });
         generalChartPanelLong.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelMid2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelMid2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelMid2MouseMoved(evt);
             }
         });
         generalChartPanelMid2.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelLeft2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelLeft2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelLeft2MouseMoved(evt);
             }
         });
         generalChartPanelLeft2.setLayout(new java.awt.GridBagLayout());
 
-        generalChartPanelRight2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+        generalChartPanelRight2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter()
+        {
+            public void mouseMoved(java.awt.event.MouseEvent evt)
+            {
                 generalChartPanelRight2MouseMoved(evt);
             }
         });
@@ -2001,15 +2020,15 @@ public final class SIAView extends javax.swing.JFrame
         reportsPane.setLayout(reportsPaneLayout);
         reportsPaneLayout.setHorizontalGroup(
             reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 1256, Short.MAX_VALUE)
+            .add(0, 1264, Short.MAX_VALUE)
             .add(reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1256, Short.MAX_VALUE))
+                .add(reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE))
         );
         reportsPaneLayout.setVerticalGroup(
             reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 429, Short.MAX_VALUE)
+            .add(0, 411, Short.MAX_VALUE)
             .add(reportsPaneLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                .add(org.jdesktop.layout.GroupLayout.TRAILING, reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE))
+                .add(org.jdesktop.layout.GroupLayout.TRAILING, reportsScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 411, Short.MAX_VALUE))
         );
 
         tabsPane.addTab("Reports", reportsPane);
@@ -2115,10 +2134,6 @@ public final class SIAView extends javax.swing.JFrame
         addSessionbutton.setEnabled(true);
     }//GEN-LAST:event_addSessionbuttonActionPerformed
 
-    private void addSessionbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSessionbuttonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addSessionbuttonMouseClicked
-
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         courseCombo.setBorder(null);
         teacherCombo.setBorder(null);
@@ -2193,10 +2208,6 @@ public final class SIAView extends javax.swing.JFrame
 
         clearForm();
     }//GEN-LAST:event_clearButtonActionPerformed
-
-    private void clearButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearButtonMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clearButtonMouseClicked
 
     private void editSaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editSaveButtonActionPerformed
 
@@ -2352,7 +2363,7 @@ public final class SIAView extends javax.swing.JFrame
 
         } catch (Exception e)
         {
-            System.out.println("EXCEPTION on load");
+            e.printStackTrace();
         }
     }//GEN-LAST:event_generalReportLoadButtonActionPerformed
 
@@ -2517,30 +2528,6 @@ public final class SIAView extends javax.swing.JFrame
             e.printStackTrace();
         }
     }//GEN-LAST:event_weekRadioActionPerformed
-
-    private void fnameComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fnameComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fnameComboActionPerformed
-
-    private void courseComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_courseComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_courseComboActionPerformed
-
-    private void paraprofessionalComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paraprofessionalComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_paraprofessionalComboActionPerformed
-
-    private void creatorComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creatorComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_creatorComboActionPerformed
-
-    private void locationComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locationComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_locationComboActionPerformed
-
-    private void todaySessionsScrollPaneMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todaySessionsScrollPaneMouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_todaySessionsScrollPaneMouseMoved
 
     private void deleteSessionButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSessionButton2ActionPerformed
         int[] selectedRows = todaysSessionTable.getSelectedRows();
@@ -2723,7 +2710,7 @@ public final class SIAView extends javax.swing.JFrame
             ArrayList<Subject> subjects = (ArrayList<Subject>) Subject.selectAllSubjects("where " + abbrevNameString + "='" + course + "'", DatabaseHelper.getConnection());
 
             ArrayList<Teacher> teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("where concat(concat(" + teachFNameString + ",' ')," + teachLNameString + ")='" + tname.trim() + "'", DatabaseHelper.getConnection());
-            ArrayList<Course> courses = null;
+            ArrayList<Course> courses;
             try
             {
                 String query = "where " + subjectIDString + "=" + subjects.get(0).getSubjectID() + " and " + teachIDString + "=" + teachers.get(0).getTeacherID() + " and " + levelString + "=" + intLevel.intValue();
@@ -2833,6 +2820,7 @@ public final class SIAView extends javax.swing.JFrame
 
             Thread thread = new Thread()
             {
+                @Override
                 public void run()
                 {
                     int colorOfGreen = 160;
@@ -2917,6 +2905,7 @@ public final class SIAView extends javax.swing.JFrame
          */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
+            @Override
             public void run()
             {
                 new SIAView().setVisible(true);

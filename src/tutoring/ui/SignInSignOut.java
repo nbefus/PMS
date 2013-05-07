@@ -8,7 +8,7 @@ import tutoring.helper.*;
 
 /**
  *
- * @author Nathaniel
+ * @author Team Ubuntu
  */
 public class SignInSignOut extends javax.swing.JFrame
 {

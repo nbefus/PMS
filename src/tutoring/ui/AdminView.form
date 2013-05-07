@@ -408,9 +408,6 @@
                           <ComponentRef name="creatorCombo"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paraprofessionalComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="creatorCombo">
                       <Properties>
@@ -421,9 +418,6 @@
                           <ComponentRef name="locationCombo"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creatorComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="locationCombo">
                       <Properties>
@@ -434,9 +428,6 @@
                           <ComponentRef name="notesField"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="locationComboActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -469,7 +460,6 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearButtonMouseClicked"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
                       </Events>
                       <Constraints>
@@ -495,7 +485,6 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSessionbuttonMouseClicked"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSessionbuttonActionPerformed"/>
                       </Events>
                       <Constraints>
@@ -614,9 +603,6 @@
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fnameComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lnameLabel">
                       <Properties>
@@ -714,9 +700,6 @@
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="courseComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="levelLabel">
                       <Properties>
@@ -907,7 +890,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" pref="1228" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -916,7 +899,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTabbedPane1" pref="399" max="32767" attributes="0"/>
+                          <Component id="jTabbedPane1" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -1128,9 +1111,6 @@
                       </Layout>
                       <SubComponents>
                         <Container class="javax.swing.JScrollPane" name="todaySessionsScrollPane">
-                          <Events>
-                            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="todaySessionsScrollPaneMouseMoved"/>
-                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
@@ -1847,7 +1827,6 @@
                         <Property name="text" type="java.lang.String" value="Search"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="searchsearchButtonMouseClicked"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchsearchButtonActionPerformed"/>
                       </Events>
                     </Component>
@@ -1859,7 +1838,6 @@
                         <Property name="text" type="java.lang.String" value="Clear"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearButton1MouseClicked"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButton1ActionPerformed"/>
                       </Events>
                     </Component>
@@ -1955,9 +1933,6 @@
                           <Properties>
                             <Property name="text" type="java.lang.String" value="mm/dd/yyyy hh:mm aa"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchsessionstartFieldActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="sessionendLabel1">
                           <Properties>
@@ -2084,9 +2059,6 @@
                               <StringArray count="0"/>
                             </Property>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchuserfirstComboActionPerformed"/>
-                          </Events>
                         </Component>
                         <Component class="javax.swing.JLabel" name="teacherLabel6">
                           <Properties>
@@ -2100,9 +2072,6 @@
                               <StringArray count="0"/>
                             </Property>
                           </Properties>
-                          <Events>
-                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchuserlastComboActionPerformed"/>
-                          </Events>
                         </Component>
                       </SubComponents>
                     </Container>

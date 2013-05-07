@@ -5,7 +5,7 @@ import tutoring.helper.Login;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class LoginView extends javax.swing.JFrame
 {

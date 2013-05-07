@@ -382,9 +382,6 @@
                           <ComponentRef name="creatorCombo"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="paraprofessionalComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="creatorCombo">
                       <Properties>
@@ -395,9 +392,6 @@
                           <ComponentRef name="locationCombo"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creatorComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="locationCombo">
                       <Properties>
@@ -408,9 +402,6 @@
                           <ComponentRef name="notesField"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="locationComboActionPerformed"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -443,7 +434,6 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="clearButtonMouseClicked"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearButtonActionPerformed"/>
                       </Events>
                       <Constraints>
@@ -469,7 +459,6 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addSessionbuttonMouseClicked"/>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addSessionbuttonActionPerformed"/>
                       </Events>
                       <Constraints>
@@ -588,9 +577,6 @@
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fnameComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lnameLabel">
                       <Properties>
@@ -688,9 +674,6 @@
                           <StringArray count="0"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="courseComboActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="levelLabel">
                       <Properties>
@@ -1092,9 +1075,6 @@
                             <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
                             <Property name="verticalScrollBarPolicy" type="int" value="22"/>
                           </Properties>
-                          <Events>
-                            <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="todaySessionsScrollPaneMouseMoved"/>
-                          </Events>
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                           <SubComponents>
