@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.dialogs;
 
 import java.awt.Color;
@@ -14,7 +10,7 @@ import tutoring.helper.*;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class NewClientObject extends javax.swing.JDialog
 {
@@ -402,6 +398,7 @@ public class NewClientObject extends javax.swing.JDialog
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
+            @Override
             public void run()
             {
                 NewClientObject dialog = new NewClientObject(new javax.swing.JFrame(), true);

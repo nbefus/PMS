@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class User
 {

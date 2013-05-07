@@ -22,7 +22,7 @@ import javax.swing.text.JTextComponent;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class UltimateAutoAutoComplete implements KeyListener, ActionListener, MouseListener, ItemListener
 {
@@ -41,12 +41,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     /**
      * Create a new auto-auto complete object
      *
-     * @param keywords - array list of array list for list of autocomplete words
-     * that go into the comboboxes
-     * @param boxes - comboboxes array of auto-auto complete
+     * @param keywords - array list of array list for list of auto-complete words
+     * that go into the combo-boxes
+     * @param boxes - combo-boxes array of auto-auto complete
      * @param reference - array list of array list for lists that contain all
-     * data from all comboboxes in the order that they are in the specified
-     * combobox
+     * data from all combo-boxes in the order that they are in the specified
+     * combo-box
      */
     public UltimateAutoAutoComplete(ArrayList<ArrayList<String>> keywords, JComboBox[] boxes, ArrayList<ArrayList<String>> reference)// ArrayList<Client> clientsFirst, ArrayList<Client> clientsLast, ArrayList<Client> clientsPhone, ArrayList<Client> clientsEmail ) {
     {
@@ -112,7 +112,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
 
     /**
-     * Update combobox list
+     * Update combo-box list
      *
      * @param activeBoxIndex - the index of the box that is being changed
      * @param updatedOtherBoxes - whether the other boxes should be update based
@@ -541,14 +541,17 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     {
         return new MouseAdapter()
         {
+            @Override
             public void mouseClicked(MouseEvent mouseEvent)
             {
             }
 
+            @Override
             public void mousePressed(MouseEvent mouseEvent)
             {
             }
 
+            @Override
             public void mouseReleased(MouseEvent mouseEvent)
             {
                 int activeBoxIndex = -1;
@@ -584,10 +587,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                 }
             }
 
+            @Override
             public void mouseEntered(MouseEvent mouseEvent)
             {
             }
 
+            @Override
             public void mouseExited(MouseEvent mouseEvent)
             {
             }
@@ -595,11 +600,11 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     }
 
     /**
-     * Set combobox value
+     * Set combo-box value
      *
      * @param useSpaceForEmpty - if value is empty what to put instead of empty
      * @param value - value to set
-     * @param indexOfBox - index of the box in the combobox array to update
+     * @param indexOfBox - index of the box in the combo-box array to update
      */
     public void setComboValue(boolean useSpaceForEmpty, String value, int indexOfBox)
     {
@@ -618,7 +623,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
 
     /**
      *
-     * @return comboboxes length
+     * @return combo-boxes length
      */
     public int getBoxesLength()
     {

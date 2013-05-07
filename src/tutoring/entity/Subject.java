@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class Subject
 {
@@ -374,6 +374,16 @@ public class Subject
             return true;
         }
         return false;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 89 * hash + this.subjectID;
+        hash = 89 * hash + (this.abbrevName != null ? this.abbrevName.hashCode() : 0);
+        hash = 89 * hash + (this.categoryID != null ? this.categoryID.hashCode() : 0);
+        return hash;
     }
 
     @Override

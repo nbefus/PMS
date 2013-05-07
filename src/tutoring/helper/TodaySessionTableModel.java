@@ -9,14 +9,10 @@ import java.util.HashMap;
 import java.util.Locale;
 import javax.swing.table.AbstractTableModel;
 import tutoring.entity.ParaprofessionalSession;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class TodaySessionTableModel extends AbstractTableModel
 {
@@ -382,8 +378,8 @@ public class TodaySessionTableModel extends AbstractTableModel
     /**
      * Difference of two dates in minutes
      *
-     * @param eDate - first date
-     * @param lDate - second date
+     * @param eDate - first Date
+     * @param lDate - second Date
      * @return difference in minutes
      */
     public int minutesOf(Date eDate, Date lDate)

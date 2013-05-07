@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.helper;
 
 import java.text.SimpleDateFormat;
@@ -10,7 +6,7 @@ import java.util.Locale;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class Validate
 {

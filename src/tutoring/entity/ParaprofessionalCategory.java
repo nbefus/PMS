@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.entity;
 
 import java.io.Serializable;
@@ -13,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class ParaprofessionalCategory implements Serializable
 {

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.renderer;
 
 import java.awt.Color;
@@ -17,7 +13,7 @@ import tutoring.helper.SessionTableModel.Columns;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class TimestampCellRenderer extends DefaultTableCellRenderer
 {

@@ -12,7 +12,7 @@ import tutoring.entity.Teacher;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class RetrieveNewTerm
 {

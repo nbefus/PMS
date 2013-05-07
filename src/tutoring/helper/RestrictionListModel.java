@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.helper;
 
 import java.util.ArrayList;
@@ -9,7 +5,7 @@ import javax.swing.DefaultListModel;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class RestrictionListModel
 {

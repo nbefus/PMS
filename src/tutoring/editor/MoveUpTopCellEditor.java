@@ -7,7 +7,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author team ubuntu
+ * @author Team ubuntu
  */
 public class MoveUpTopCellEditor extends DefaultCellEditor
 {
@@ -15,7 +15,7 @@ public class MoveUpTopCellEditor extends DefaultCellEditor
     private final JTextField jf;
 
     /**
-     * Cell editor to move table row info to comboboxes for editing
+     * Cell editor to move table row info to combo-boxes for editing
      *
      * @param jtf - a text field needed for superclass
      */

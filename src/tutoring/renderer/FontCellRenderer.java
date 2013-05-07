@@ -1,17 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.renderer;
 
-/**
- *
- * @author Nathaniel
- */
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.JTable;
@@ -19,7 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class FontCellRenderer extends DefaultTableCellRenderer
 {

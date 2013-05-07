@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class Course
 {
@@ -437,6 +437,17 @@ public class Course
         {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 71 * hash + this.courseID;
+        hash = 71 * hash + (this.teacherID != null ? this.teacherID.hashCode() : 0);
+        hash = 71 * hash + (this.subjectID != null ? this.subjectID.hashCode() : 0);
+        hash = 71 * hash + this.level;
+        return hash;
     }
 
     @Override

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.dialogs;
 
 import java.awt.Color;
@@ -19,7 +15,7 @@ import tutoring.helper.*;
 
 /**
  *
- * @author dabeefinator
+ * @author Team Ubuntu 
  */
 public class NewAgendaObject extends javax.swing.JDialog
 {

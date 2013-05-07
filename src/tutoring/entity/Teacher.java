@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class Teacher
 {
@@ -365,6 +365,16 @@ public class Teacher
         {
             return false;
         }
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int hash = 7;
+        hash = 89 * hash + this.teacherID;
+        hash = 89 * hash + (this.lName != null ? this.lName.hashCode() : 0);
+        hash = 89 * hash + (this.fName != null ? this.fName.hashCode() : 0);
+        return hash;
     }
 
     @Override

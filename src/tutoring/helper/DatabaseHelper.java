@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.helper;
 
 import java.sql.Connection;
@@ -19,7 +15,7 @@ import tutoring.entity.*;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class DatabaseHelper
 {
@@ -45,7 +41,7 @@ public class DatabaseHelper
 
     /**
      *
-     * @return connection to the database
+     * @return Connection to the database
      */
     public static Connection getConnection()
     {

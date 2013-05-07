@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.entity;
 
 import java.sql.Connection;
@@ -14,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author team ubuntu
+ * @author Team ubuntu
  */
 public class Agenda
 {

@@ -5,14 +5,10 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.table.AbstractTableModel;
 import tutoring.entity.Agenda;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class AgendaTableModel extends AbstractTableModel
 {
@@ -131,15 +127,6 @@ public class AgendaTableModel extends AbstractTableModel
         fireTableDataChanged();
     }
 
-    /*
-     public void addRow(String fname, String lname, Subject subject, int level, Teacher teacher, String notes, Paraprofessional tutor, boolean future, boolean gc)
-     {
-     Timestamp ts = new Timestamp(System.currentTimeMillis());
-     System.out.println(ts.toString());
-     ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-     tutorSessions.add(tutorSession);
-     fireTableDataChanged();
-     }*/
     /**
      * Add row to table
      *

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.dialogs;
 
 import java.awt.Color;
@@ -21,7 +17,7 @@ import tutoring.helper.UltimateAutoComplete;
 
 /**
  *
- * @author Nathaniel
+ * @author Team Ubuntuxs
  */
 public class NewSubjectObject extends javax.swing.JDialog
 {

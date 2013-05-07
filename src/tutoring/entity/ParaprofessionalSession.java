@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author team ubuntu
+ * @author Team ubuntu
  */
 public class ParaprofessionalSession
 {

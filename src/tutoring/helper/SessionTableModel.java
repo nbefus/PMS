@@ -13,7 +13,7 @@ import tutoring.entity.ParaprofessionalSession;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class SessionTableModel extends AbstractTableModel
 {

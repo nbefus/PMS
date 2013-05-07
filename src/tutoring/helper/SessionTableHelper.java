@@ -23,7 +23,7 @@ import tutoring.renderer.TimestampCellRenderer;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class SessionTableHelper
 {
@@ -90,7 +90,7 @@ public class SessionTableHelper
     }
 
     /**
-     * Set renderers and editors for session table
+     * Set renderer and editors for session table
      *
      * @param dce - the cell editor of what to do when double clicked
      */

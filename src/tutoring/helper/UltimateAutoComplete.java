@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.helper;
 
 import java.awt.event.ActionEvent;
@@ -19,7 +15,7 @@ import javax.swing.text.JTextComponent;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class UltimateAutoComplete implements KeyListener, ActionListener, MouseListener
 {
@@ -33,11 +29,11 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     ArrayList<ArrayList<String>> matches = new ArrayList<ArrayList<String>>();
 
     /**
-     * Create a new auto complete manager for a set of comboboxes
+     * Create a new auto complete manager for a set of combo-boxes
      *
-     * @param keywords - array list of array list for list of autocomplete words
-     * that go into the comboboxes
-     * @param boxes - comboboxes array of auto-auto complete
+     * @param keywords - array list of array list for list of auto-complete words
+     * that go into the combo-boxes
+     * @param boxes - combo-boxes array of auto-auto complete
      */
     public UltimateAutoComplete(ArrayList<ArrayList<String>> keywords, JComboBox[] boxes)
     {
@@ -99,7 +95,7 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
 
     /**
      *
-     * @return comboboxes length
+     * @return combo-boxes length
      */
     public int getBoxesLength()
     {
@@ -107,7 +103,7 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     }
 
     /**
-     * Update combobox list
+     * Update combo-box list
      *
      * @param activeBoxIndex - the index of the box that is being changed
      */
@@ -319,10 +315,10 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     }
 
     /**
-     * Set combobox value
+     * Set combo-box value
      *
      * @param value - value to set
-     * @param indexOfBox - index of the box in the combobox array to update
+     * @param indexOfBox - index of the box in the combo-box array to update
      */
     public void setComboValue(String value, int indexOfBox)
     {

@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class Paraprofessional
 {

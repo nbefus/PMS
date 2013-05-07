@@ -5,7 +5,7 @@ import tutoring.entity.*;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class Login
 {

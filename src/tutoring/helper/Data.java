@@ -7,8 +7,9 @@ import tutoring.entity.*;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
+
 public class Data
 {
 
@@ -270,7 +271,7 @@ public class Data
      * @param separator - Character separator to separate object column data
      * @param singleton - array list of the data you want to store data from the
      * index column
-     * @return arraylist containing all data in MySQL statement separated by the
+     * @return ArrayList containing all data in MySQL statement separated by the
      * separator character
      */
     public static ArrayList<String> setUpList(String query, int index, char separator, ArrayList<String> singleton)

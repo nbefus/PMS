@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.helper;
 
 import java.awt.Component;
@@ -25,7 +21,7 @@ import tutoring.renderer.TimestampCellRenderer;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class TodaySessionTableHelper
 {

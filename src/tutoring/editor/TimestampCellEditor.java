@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tutoring.editor;
 
 import java.awt.Color;
@@ -18,7 +14,7 @@ import javax.swing.border.LineBorder;
 
 /**
  *
- * @author team Ubuntu
+ * @author Team Ubuntu
  */
 public class TimestampCellEditor extends DefaultCellEditor
 {
