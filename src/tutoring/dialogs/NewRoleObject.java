@@ -9,7 +9,6 @@ import java.awt.Window;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
-import tutoring.entity.Category;
 import tutoring.entity.Role;
 import tutoring.helper.DatabaseHelper;
 
@@ -17,94 +16,105 @@ import tutoring.helper.DatabaseHelper;
  *
  * @author Nathaniel
  */
-public class NewRoleObject extends javax.swing.JDialog {
+public class NewRoleObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewRoleObject
      */
     private int roleID = -1;
+
     /**
      * Create a role object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewRoleObject(java.awt.Frame parent, boolean modal) {
+    public NewRoleObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
-      
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a role object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param role - role name of the role to modify
      * @param roleID - ID of the role to modify
      */
-    public NewRoleObject(java.awt.Frame parent, boolean modal, String role, int roleID) {
+    public NewRoleObject(java.awt.Frame parent, boolean modal, String role, int roleID)
+    {
         super(parent, modal);
         initComponents();
-        
+
         roleField.setText(role);
         editButton.setVisible(true);
-        this.roleID=roleID;
+        this.roleID = roleID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         roleField.setBorder(null);
-        
-       
+
+
         String role = roleField.getText().trim();
-        
+
         try
         {
             boolean goodRole = true;
-            if(role.length() < 1)
+            if (role.length() < 1)
             {
                 goodRole = false;
-                roleField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                roleField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
-            if(goodRole)
+            if (goodRole)
             {
                 Role r = new Role(roleID, role);
 
                 DatabaseHelper.open();
-                
+
                 boolean inserted;
-                if(!update)
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(Role.getValues(r), Role.RoleTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(Role.getValues(r), Role.RoleTable.getTable());
-                
-                if(inserted)
+                }
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The role was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The role was NOT created! Please try again!");
-                
+                }
+
                 close();
-                
+
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The role was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
@@ -226,37 +236,49 @@ public class NewRoleObject extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(NewRoleObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(NewRoleObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(NewRoleObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(NewRoleObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 NewRoleObject dialog = new NewRoleObject(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing(java.awt.event.WindowEvent e)
+                    {
                         System.exit(0);
                     }
                 });

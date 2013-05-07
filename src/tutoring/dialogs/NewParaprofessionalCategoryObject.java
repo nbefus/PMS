@@ -24,132 +24,154 @@ import tutoring.helper.UltimateAutoComplete;
  *
  * @author team Ubuntu
  */
-public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
+public class NewParaprofessionalCategoryObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewParaprofessionalObject
      */
     private int paraprofessionalID = -1;
     private int categoryID = -1;
+
     /**
      * Create a paraprofessional category in the database
+     *
      * @param parent
      * @param modal
      */
-    public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal) {
+    public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
 
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getTutorslist())));
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{paraprofessionalCombo, categoryCombo});
-       
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    paraprofessionalCombo, categoryCombo
+                });
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a paraprofessional category object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
-     * @param paraprofessional - the paraprofessional first and last name to modify
+     * @param paraprofessional - the paraprofessional first and last name to
+     * modify
      * @param category - category name of the category to modify
      * @param categoryID - category ID of the category to modify
      * @param paraprofessionalID - ID of the paraprofessional to modify
      */
-    public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal, String paraprofessional, String category, int categoryID, int paraprofessionalID) {
+    public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal, String paraprofessional, String category, int categoryID, int paraprofessionalID)
+    {
         super(parent, modal);
         initComponents();
 
         this.setResizable(false);
 
-         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getTutorslist())));
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{paraprofessionalCombo, categoryCombo});
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    paraprofessionalCombo, categoryCombo
+                });
 
         uac.setComboValue(paraprofessional, 0);
         uac.setComboValue(category, 1);
-        
+
         editButton.setVisible(true);
-               
-        this.paraprofessionalID=paraprofessionalID;
-        this.categoryID=categoryID;
+
+        this.paraprofessionalID = paraprofessionalID;
+        this.categoryID = categoryID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         categoryCombo.setBorder(null);
         paraprofessionalCombo.setBorder(null);
-        
+
         String category = ((JTextComponent) categoryCombo.getEditor().getEditorComponent()).getText();
         String paraprofessional = ((JTextComponent) paraprofessionalCombo.getEditor().getEditorComponent()).getText();
 
         try
         {
             boolean goodParaprofessional = true;
-            
+
             DatabaseHelper.open();
-            ArrayList<Paraprofessional> validParaprofessional = (ArrayList<Paraprofessional>)Paraprofessional.selectAllParaprofessional("where concat(concat("+Paraprofessional.ParaTable.FNAME.getWithAlias()+", ' '),"+Paraprofessional.ParaTable.LNAME.getWithAlias()+")='"+paraprofessional+"'", DatabaseHelper.getConnection());
-            
-            if(validParaprofessional.size() != 1)
+            ArrayList<Paraprofessional> validParaprofessional = (ArrayList<Paraprofessional>) Paraprofessional.selectAllParaprofessional("where concat(concat(" + Paraprofessional.ParaTable.FNAME.getWithAlias() + ", ' ')," + Paraprofessional.ParaTable.LNAME.getWithAlias() + ")='" + paraprofessional + "'", DatabaseHelper.getConnection());
+
+            if (validParaprofessional.size() != 1)
             {
                 goodParaprofessional = false;
-                categoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                categoryCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodCategory = true;
 
-            ArrayList<Category> validCategory = (ArrayList<Category>)Category.selectAllCategory("where "+Category.CategoryTable.NAME.getWithAlias()+"='"+category+"'", DatabaseHelper.getConnection());
-            
-            if(validCategory.size() != 1)
+            ArrayList<Category> validCategory = (ArrayList<Category>) Category.selectAllCategory("where " + Category.CategoryTable.NAME.getWithAlias() + "='" + category + "'", DatabaseHelper.getConnection());
+
+            if (validCategory.size() != 1)
             {
                 goodCategory = false;
-                categoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                categoryCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
-            if(goodParaprofessional  && goodCategory)
+
+            if (goodParaprofessional && goodCategory)
             {
                 ParaprofessionalCategory pc = new ParaprofessionalCategory(validParaprofessional.get(0), validCategory.get(0));
 
                 boolean inserted;
-                
-                Object[] oldValues = {paraprofessionalID, categoryID};
-                if(!update)
+
+                Object[] oldValues =
+                {
+                    paraprofessionalID, categoryID
+                };
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(ParaprofessionalCategory.getValues(pc), ParaprofessionalCategory.ParaCatTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.updateParaCat(ParaprofessionalCategory.getValues(pc), oldValues, ParaprofessionalCategory.ParaCatTable.getTable());
+                }
                 //Reload data and table
-                if(inserted)
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The paraprofessioanl category was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The paraprofessional category was NOT created! Please try again!");
-                
+                }
+
                 close();
-                
+
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The paraprofessional category was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -284,7 +306,6 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         close();
     }//GEN-LAST:event_cancelButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox categoryCombo;

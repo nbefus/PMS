@@ -255,8 +255,8 @@ public class LoginView extends javax.swing.JFrame
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
 
-        
-        
+
+
         login = new Login(usernameField.getText(), passwordField.getText());
         errorLabel.setText(login.loginFeedback());
 

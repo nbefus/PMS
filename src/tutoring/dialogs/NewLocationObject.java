@@ -16,96 +16,108 @@ import tutoring.helper.DatabaseHelper;
  *
  * @author team Ubuntu
  */
-public class NewLocationObject extends javax.swing.JDialog {
+public class NewLocationObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewLocationObject
      */
-   private int locationID = -1;
+    private int locationID = -1;
+
     /**
      * Create a location object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewLocationObject(java.awt.Frame parent, boolean modal) {
+    public NewLocationObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
-      
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a location object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param location - location name of the location to modify
      * @param locationID - ID of the location to modify
      */
-    public NewLocationObject(java.awt.Frame parent, boolean modal, String location, int locationID) {
+    public NewLocationObject(java.awt.Frame parent, boolean modal, String location, int locationID)
+    {
         super(parent, modal);
         initComponents();
-        
+
         locationField.setText(location);
         editButton.setVisible(true);
-        this.locationID=locationID;
+        this.locationID = locationID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         locationField.setBorder(null);
-        
+
         String location = locationField.getText().trim();
-        
+
         try
         {
             boolean goodLocation = true;
-            if(location.length() < 1)
+            if (location.length() < 1)
             {
                 goodLocation = false;
-                locationField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                locationField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
-            if(goodLocation)
+            if (goodLocation)
             {
-                
+
                 Location l = new Location(locationID, location);
                 System.out.println(l.toString());
                 boolean inserted = false;
                 DatabaseHelper.open();
-                if(!update)
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(Location.getValues(l), Location.LocationTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(Location.getValues(l), Location.LocationTable.getTable());
-                
-                if(inserted)
+                }
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The location was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The location was NOT created! Please try again!");
+                }
                 close();
-                
+
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The location was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -219,7 +231,6 @@ public class NewLocationObject extends javax.swing.JDialog {
 
         validate(true);
     }//GEN-LAST:event_editButtonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JButton editButton;

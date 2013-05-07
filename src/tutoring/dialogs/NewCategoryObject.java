@@ -9,7 +9,6 @@ import java.awt.Window;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
-import tutoring.entity.AgendaCategory;
 import tutoring.entity.Category;
 import tutoring.helper.DatabaseHelper;
 
@@ -17,101 +16,113 @@ import tutoring.helper.DatabaseHelper;
  *
  * @author team Ubuntu
  */
-public class NewCategoryObject extends javax.swing.JDialog {
+public class NewCategoryObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewCategoryObject
      */
     private int categoryID = -1;
+
     /**
      * Create a category object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewCategoryObject(java.awt.Frame parent, boolean modal) {
+    public NewCategoryObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
-      
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a category object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
-     * @param category - category to modify 
+     * @param category - category to modify
      * @param categoryID - ID of the category to modify
      */
-    public NewCategoryObject(java.awt.Frame parent, boolean modal, String category, int categoryID) {
+    public NewCategoryObject(java.awt.Frame parent, boolean modal, String category, int categoryID)
+    {
         super(parent, modal);
         initComponents();
-        
+
         categoryField.setText(category);
         editButton.setVisible(true);
-        this.categoryID=categoryID;
+        this.categoryID = categoryID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         categoryField.setBorder(null);
-        
-       
+
+
         String category = categoryField.getText().trim();
-        
+
         try
         {
             boolean goodCategory = true;
-            if(category.length() < 1)
+            if (category.length() < 1)
             {
                 goodCategory = false;
-                categoryField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                categoryField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
-            
-            
-            if(goodCategory)
+
+
+
+            if (goodCategory)
             {
-                
+
                 Category c = new Category(categoryID, category);
                 System.out.println(c.toString());
                 DatabaseHelper.open();
                 boolean inserted;
-                if(!update)
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(Category.getValues(c), Category.CategoryTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(Category.getValues(c), Category.CategoryTable.getTable());
+                }
                 //Reload data and table
-                
-                if(inserted)
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The category was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The category was NOT created! Please try again!");
-                
+                }
+
                 close();
-                
+
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The category was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,37 +241,49 @@ public class NewCategoryObject extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(NewCategoryObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(NewCategoryObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(NewCategoryObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(NewCategoryObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 NewCategoryObject dialog = new NewCategoryObject(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing(java.awt.event.WindowEvent e)
+                    {
                         System.exit(0);
                     }
                 });

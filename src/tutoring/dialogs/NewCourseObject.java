@@ -6,19 +6,14 @@ package tutoring.dialogs;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.text.JTextComponent;
-import tutoring.entity.Agenda;
-import tutoring.entity.AgendaCategory;
 import tutoring.entity.Course;
 import tutoring.entity.Subject;
 import tutoring.entity.Teacher;
@@ -30,40 +25,48 @@ import tutoring.helper.UltimateAutoComplete;
  *
  * @author Nathaniel
  */
-public class NewCourseObject extends javax.swing.JDialog {
+public class NewCourseObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewCourseObject
      */
     private int courseID = -1;
+
     /**
      * Create a course object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewCourseObject(java.awt.Frame parent, boolean modal) {
+    public NewCourseObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         teacherCombo.setEditable(true);
         subjectCombo.setEditable(true);
-        
-         ArrayList<String> teachers = new ArrayList<String>(new HashSet<String>(Data.getTeacherslist()));
+
+        ArrayList<String> teachers = new ArrayList<String>(new HashSet<String>(Data.getTeacherslist()));
         ArrayList<String> subjects = new ArrayList<String>(new HashSet<String>(Data.getSubjectslist()));
-        
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(teachers);
         uacList.add(subjects);
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{teacherCombo, subjectCombo});
-        
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    teacherCombo, subjectCombo
+                });
+
         this.setResizable(false);
-               
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a course object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param teacher - teacher of the course to modify
@@ -71,125 +74,133 @@ public class NewCourseObject extends javax.swing.JDialog {
      * @param level - level of the course to modify
      * @param courseID - ID of the course to modify
      */
-    public NewCourseObject(java.awt.Frame parent, boolean modal, String teacher, String subject, String level, int courseID) {
+    public NewCourseObject(java.awt.Frame parent, boolean modal, String teacher, String subject, String level, int courseID)
+    {
         super(parent, modal);
         initComponents();
 
         this.setResizable(false);
-               
+
         ArrayList<String> teachers = new ArrayList<String>(new HashSet<String>(Data.getTeacherslist()));
         ArrayList<String> subjects = new ArrayList<String>(new HashSet<String>(Data.getSubjectslist()));
-  
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(teachers);
         uacList.add(subjects);
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{teacherCombo, subjectCombo});
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    teacherCombo, subjectCombo
+                });
         uac.setComboValue(teacher, 0);
         uac.setComboValue(subject, 1);
- 
+
         editButton.setVisible(false);
-        
+
         levelField.setText(level);
-        
+
         editButton.setVisible(true);
-        
-        this.courseID=courseID;
+
+        this.courseID = courseID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         levelField.setBorder(null);
         teacherCombo.setBorder(null);
         subjectCombo.setBorder(null);
-        
+
         String level = levelField.getText().trim();
         String teacher = ((JTextComponent) teacherCombo.getEditor().getEditorComponent()).getText();
         String subject = ((JTextComponent) subjectCombo.getEditor().getEditorComponent()).getText();
-        
+
         Date d = null;
         try
         {
             boolean goodLevel = true;
             int lev = -1;
-            if(level.length() > 0)
+            if (level.length() > 0)
             {
                 try
                 {
                     lev = Integer.parseInt(level);
-                }
-                catch(Exception e)
+                } catch (Exception e)
                 {
                     goodLevel = false;
-                    levelField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                    levelField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
-            }
-            else
+            } else
             {
                 goodLevel = false;
-                levelField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                levelField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-                
-            
+
+
             boolean goodTeacher = true;
-            
+
             DatabaseHelper.open();
-            ArrayList<Teacher> validTeacher = (ArrayList<Teacher>)Teacher.selectAllTeacher("where concat(concat("+Teacher.TeacherTable.FNAME.getWithAlias()+", ' '),"+Teacher.TeacherTable.LNAME.getWithAlias()+")='"+teacher+"'", DatabaseHelper.getConnection());
-            
-            if(validTeacher.size() != 1)
+            ArrayList<Teacher> validTeacher = (ArrayList<Teacher>) Teacher.selectAllTeacher("where concat(concat(" + Teacher.TeacherTable.FNAME.getWithAlias() + ", ' ')," + Teacher.TeacherTable.LNAME.getWithAlias() + ")='" + teacher + "'", DatabaseHelper.getConnection());
+
+            if (validTeacher.size() != 1)
             {
                 goodTeacher = false;
-                teacherCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                teacherCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodSubject = true;
-            ArrayList<Subject> validSubject = (ArrayList<Subject>)Subject.selectAllSubjects("where "+Subject.SubjectTable.ABBREVNAME.getWithAlias()+"='"+subject+"'", DatabaseHelper.getConnection());
-            
-            if(validSubject.size() != 1)
+            ArrayList<Subject> validSubject = (ArrayList<Subject>) Subject.selectAllSubjects("where " + Subject.SubjectTable.ABBREVNAME.getWithAlias() + "='" + subject + "'", DatabaseHelper.getConnection());
+
+            if (validSubject.size() != 1)
             {
                 goodSubject = false;
-                subjectCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
-            }  
-            
-            if(goodLevel && goodTeacher && goodSubject)
+                subjectCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
+            }
+
+            if (goodLevel && goodTeacher && goodSubject)
             {
-                
+
                 Course c = new Course(courseID, validTeacher.get(0), validSubject.get(0), lev);
 
                 boolean inserted;
-                
-                if(!update)
-                    inserted = DatabaseHelper.insert(Course.getValues(c), Course.CourseTable.getTable());
-                else
-                    inserted = DatabaseHelper.update(Course.getValues(c), Course.CourseTable.getTable());
-                
-                if(inserted)
-                    JOptionPane.showMessageDialog(null, "The course item was successfully written to the database!");
-                else
-                    JOptionPane.showMessageDialog(null, "The course item was NOT created! Please try again!");
-                
-                close();
-                
-            }
-            
 
-        }
-        catch(Exception e)
+                if (!update)
+                {
+                    inserted = DatabaseHelper.insert(Course.getValues(c), Course.CourseTable.getTable());
+                } else
+                {
+                    inserted = DatabaseHelper.update(Course.getValues(c), Course.CourseTable.getTable());
+                }
+
+                if (inserted)
+                {
+                    JOptionPane.showMessageDialog(null, "The course item was successfully written to the database!");
+                } else
+                {
+                    JOptionPane.showMessageDialog(null, "The course item was NOT created! Please try again!");
+                }
+
+                close();
+
+            }
+
+
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The course item was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -328,8 +339,6 @@ public class NewCourseObject extends javax.swing.JDialog {
 
         validate(false);
     }//GEN-LAST:event_submitbuttonActionPerformed
-
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel courseLabel4;

@@ -10,8 +10,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Frame;
 import java.awt.GradientPaint;
-import java.awt.Window;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,14 +20,10 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.JTextComponent;
@@ -52,7 +46,6 @@ import org.jfree.util.Rotation;
 import tutoring.entity.*;
 import tutoring.helper.*;
 
-
 /**
  *
  * @author team Ubuntu
@@ -63,115 +56,119 @@ public final class SIAView extends javax.swing.JFrame
     /**
      *
      */
-    public class MinuteUpdater extends TimerTask {
-    //times member represent calling times.
-    private SessionTableModel current;
-    private SessionTableModel future;
+    public class MinuteUpdater extends TimerTask
+    {
+        //times member represent calling times.
+
+        private SessionTableModel current;
+        private SessionTableModel future;
 
         /**
          * Updates tables every minute
+         *
          * @param current - current sessions table model to update
          * @param future - future sesions table model to update
          */
         public MinuteUpdater(SessionTableModel current, SessionTableModel future)
-   {
-        this.current = current;
-        this.future = future;
-   }
-   
-    public void run() 
-    {
-        updateTables();
-        current.fireTableDataChanged();
-        future.fireTableDataChanged();
+        {
+            this.current = current;
+            this.future = future;
+        }
+
+        public void run()
+        {
+            updateTables();
+            current.fireTableDataChanged();
+            future.fireTableDataChanged();
+        }
     }
- 
-}
-    
+
     /**
-     * Update create sessions tab comboboxes from database to retrieve updated information
+     * Update create sessions tab comboboxes from database to retrieve updated
+     * information
      */
-    public void update() 
+    public void update()
     {
-            DatabaseHelper.open();
-            Data.refreshClient();
-            Data.refreshCourse();
-            Data.refreshLocation();
-            Data.refreshParaprofessional();
-            DatabaseHelper.close();
-            
-            uaacClient.noMore();
-            uaacClient = null;
-            JComboBox[] cboxes = new  JComboBox[4];
-           
-           cboxes[0]=fnameCombo;
-           cboxes[1]=lnameCombo;
-           cboxes[2]=phoneCombo;
-           cboxes[3]=emailCombo;
+        DatabaseHelper.open();
+        Data.refreshClient();
+        Data.refreshCourse();
+        Data.refreshLocation();
+        Data.refreshParaprofessional();
+        DatabaseHelper.close();
 
-           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST1");
-           cultimateList.add(Data.getClientsfirst());
-           cultimateList.add(Data.getClientslast());
-           cultimateList.add(Data.getClientsphone());
-           cultimateList.add(Data.getClientsemail());
-           System.out.println("DONE LIST1");
-           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-    System.out.println("LIST 2");
-           cultimateList1.add(Data.getFnameOrderedList());
-           cultimateList1.add(Data.getLnameOrderedList());
-           cultimateList1.add(Data.getPhoneOrderedList());
-           cultimateList1.add(Data.getEmailOrderedList());
-    System.out.println("DONE LIST2");
-           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-           
-           JComboBox[] cboxes2 = new  JComboBox[3];
-       cboxes2[0]=courseCombo;
-       cboxes2[1]=levelCombo;
-       cboxes2[2]=teacherCombo;
-       //cboxes[3]=emailCombo;
-       System.out.println("LIST 3");
-       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+        uaacClient.noMore();
+        uaacClient = null;
+        JComboBox[] cboxes = new JComboBox[4];
 
-       cultimateList2.add(Data.getSubjectslist());
-       cultimateList2.add(Data.getLevelslist());
-       cultimateList2.add(Data.getTeacherslist());
-System.out.println("DONE list 3");
-       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-System.out.println("LIst 4");
-       cultimateList22.add(Data.getSubjectOrderedList());
-       cultimateList22.add(Data.getLevelOrderedList());
-       cultimateList22.add(Data.getTeacherOrderedList());
-System.out.println("Done list 4");
+        cboxes[0] = fnameCombo;
+        cboxes[1] = lnameCombo;
+        cboxes[2] = phoneCombo;
+        cboxes[3] = emailCombo;
+
+        ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+        System.out.println("LIST1");
+        cultimateList.add(Data.getClientsfirst());
+        cultimateList.add(Data.getClientslast());
+        cultimateList.add(Data.getClientsphone());
+        cultimateList.add(Data.getClientsemail());
+        System.out.println("DONE LIST1");
+        ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+        System.out.println("LIST 2");
+        cultimateList1.add(Data.getFnameOrderedList());
+        cultimateList1.add(Data.getLnameOrderedList());
+        cultimateList1.add(Data.getPhoneOrderedList());
+        cultimateList1.add(Data.getEmailOrderedList());
+        System.out.println("DONE LIST2");
+        uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+
+        JComboBox[] cboxes2 = new JComboBox[3];
+        cboxes2[0] = courseCombo;
+        cboxes2[1] = levelCombo;
+        cboxes2[2] = teacherCombo;
+        //cboxes[3]=emailCombo;
+        System.out.println("LIST 3");
+        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+        cultimateList2.add(Data.getSubjectslist());
+        cultimateList2.add(Data.getLevelslist());
+        cultimateList2.add(Data.getTeacherslist());
+        System.out.println("DONE list 3");
+        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+        System.out.println("LIst 4");
+        cultimateList22.add(Data.getSubjectOrderedList());
+        cultimateList22.add(Data.getLevelOrderedList());
+        cultimateList22.add(Data.getTeacherOrderedList());
+        System.out.println("Done list 4");
 
         uaacCourse.noMore();
         uaacCourse = null;
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
-      
-       
-       JComboBox[] boxes3 = new  JComboBox[3];
-        
-        boxes3[0]=creatorCombo;
-        boxes3[1]=locationCombo;
-        boxes3[2]=paraprofessionalCombo;
+        uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
+
+
+        JComboBox[] boxes3 = new JComboBox[3];
+
+        boxes3[0] = creatorCombo;
+        boxes3[1] = locationCombo;
+        boxes3[2] = paraprofessionalCombo;
 
         ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
-        
+
         cultimateList3.add(Data.getClockedInParaprofessionals());
         cultimateList3.add(Data.getLocationslist());
         cultimateList3.add(Data.getClockedInParaprofessionals());
-       
+
         uac.noMore();
         uac = null;
         uac = new UltimateAutoComplete(cultimateList3, boxes3);
-           clearForm();
+        clearForm();
     }
 
     /**
      * Comboboxes map to autocomplete for changing and updating data
      */
     public enum ComboBoxesIndexes
-    {   
+    {
+
         /**
          * Client first name combobox
          */
@@ -183,7 +180,7 @@ System.out.println("Done list 4");
         /**
          * Client phone combobox
          */
-        CPHONE(2,"Phone", "phone"),
+        CPHONE(2, "Phone", "phone"),
         /**
          * Client email combobox
          */
@@ -207,38 +204,40 @@ System.out.println("Done list 4");
         /**
          * Client tutor's combobox
          */
-        PARAPROFESSIONAL(2, "Tutor",""),
+        PARAPROFESSIONAL(2, "Tutor", ""),
         /**
          * Client teacher's combobox
          */
         TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)");
-        
         private int indexOfCombo;
         private String displayName;
         private String databaseName;
-        
-	private ComboBoxesIndexes(int i, String displayName, String databaseName) {
-		indexOfCombo = i;
-                this.displayName = displayName;
-                this.databaseName = databaseName;
-	}
 
-	/**
-         * 
+        private ComboBoxesIndexes(int i, String displayName, String databaseName)
+        {
+            indexOfCombo = i;
+            this.displayName = displayName;
+            this.databaseName = databaseName;
+        }
+
+        /**
+         *
          * @return the index of the combobox in the autocomplete set
          */
-        public int getBoxIndex() {
-		return indexOfCombo;
-	}
-        
+        public int getBoxIndex()
+        {
+            return indexOfCombo;
+        }
+
         /**
          *
          * @return the display name of the combobox
          */
-        public String getDisplayName() {
-		return displayName;
-	}
-        
+        public String getDisplayName()
+        {
+            return displayName;
+        }
+
         /**
          *
          * @return the database name of the name of the combobox
@@ -247,212 +246,215 @@ System.out.println("Done list 4");
         {
             return databaseName;
         }
-        
+
         /**
          * Get database name based on display name of column
+         *
          * @param DisplayName - display name of column
-         * @return the database name of the combobox using the display name as input
+         * @return the database name of the combobox using the display name as
+         * input
          */
         public String getDatabaseName(String DisplayName)
         {
             AdminView.ComboBoxesIndexes[] components = AdminView.ComboBoxesIndexes.class.getEnumConstants();
-            for(int i=0; i< components.length; i++)
-                if(components[i].getDisplayName().equalsIgnoreCase(DisplayName))
+            for (int i = 0; i < components.length; i++)
+            {
+                if (components[i].getDisplayName().equalsIgnoreCase(DisplayName))
+                {
                     return components[i].getDatabaseName();
-            
+                }
+            }
+
             return "";
         }
     }
-    
     private UltimateAutoComplete uac;
-    
-    private UltimateAutoAutoComplete uaacClient; 
-
+    private UltimateAutoAutoComplete uaacClient;
     private UltimateAutoAutoComplete uaacCourse;
     private TodaySessionTableHelper todayTableHelper;
     private SessionTableHelper tableHelper;
     private SessionTableHelper tableHelperFuture;
     private AgendaTableHelper tableHelperAgenda;
+    private int sessionID = -1;
 
-private int sessionID = -1;
-   
-
-    public SIAView() 
+    public SIAView()
     {
         initComponents();
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         sessionsTable.getTableHeader().setReorderingAllowed(false);
         appointmentsTable.getTableHeader().setReorderingAllowed(false);
-        agendaTable.getTableHeader().setReorderingAllowed(false);        
-        
-        
+        agendaTable.getTableHeader().setReorderingAllowed(false);
+
+
         todayTableHelper = new TodaySessionTableHelper(todaysSessionTable);
-        tableHelper = new SessionTableHelper(sessionsTable, false, null, (TodaySessionTableModel)todaysSessionTable.getModel());
-        tableHelperFuture = new SessionTableHelper(appointmentsTable, true, (SessionTableModel)sessionsTable.getModel(), null);
+        tableHelper = new SessionTableHelper(sessionsTable, false, null, (TodaySessionTableModel) todaysSessionTable.getModel());
+        tableHelperFuture = new SessionTableHelper(appointmentsTable, true, (SessionTableModel) sessionsTable.getModel(), null);
         tableHelperAgenda = new AgendaTableHelper(agendaTable);
-        
-        
+
+
         todayTableHelper.increaseRowHeight(12);
         tableHelperAgenda.allowScrollingOnTable();
-       
+
         tableHelperAgenda.increaseRowHeight(12);
-        
+
         tableHelperFuture.allowScrollingOnTable();
         tableHelperFuture.increaseRowHeight(12);
-        
+
         tableHelper.allowScrollingOnTable();
-       
+
         tableHelper.increaseRowHeight(12);
-       
+
         DatabaseHelper.open();
-        
-        (new Thread(){
-            public void run(){
-                
-        notesField.setLineWrap(true);
-        sessionstartField.setText("mm/dd/yyyy hh:mm aa");
-        sessionendField.setText("mm/dd/yyyy hh:mm aa");
-        editSaveButton.setVisible(false);
-        
-        
-        
-        
-        
-       Data d = new Data();
-      JComboBox[] cboxes = new  JComboBox[4];
-       cboxes[0]=fnameCombo;
-       cboxes[1]=lnameCombo;
-       cboxes[2]=phoneCombo;
-       cboxes[3]=emailCombo;
-       
-       ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-       cultimateList.add(Data.getClientsfirst());
-       cultimateList.add(Data.getClientslast());
-       cultimateList.add(Data.getClientsphone());
-       cultimateList.add(Data.getClientsemail());
-       ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-       cultimateList1.add(Data.getFnameOrderedList());
-       cultimateList1.add(Data.getLnameOrderedList());
-       cultimateList1.add(Data.getPhoneOrderedList());
-       cultimateList1.add(Data.getEmailOrderedList());
-       uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
-      
-       
-       JComboBox[] cboxes2 = new  JComboBox[3];
-       cboxes2[0]=courseCombo;
-       cboxes2[1]=levelCombo;
-       cboxes2[2]=teacherCombo;
-       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
-       cultimateList2.add(Data.getSubjectslist());
-       cultimateList2.add(Data.getLevelslist());
-       cultimateList2.add(Data.getTeacherslist());
-       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-       cultimateList22.add(Data.getSubjectOrderedList());
-       cultimateList22.add(Data.getLevelOrderedList());
-       cultimateList22.add(Data.getTeacherOrderedList());
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
-      
-       
-       JComboBox[] boxes3 = new  JComboBox[3];
-        
-        boxes3[0]=creatorCombo;
-        boxes3[1]=locationCombo;
-        boxes3[2]=paraprofessionalCombo;
-
-        ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
-        
-        cultimateList3.add(Data.getClockedInParaprofessionals());
-        cultimateList3.add(Data.getLocationslist());
-        cultimateList3.add(Data.getClockedInParaprofessionals());
-       
-        uac = new UltimateAutoComplete(cultimateList3, boxes3);
-            
-            
-        clearComboBoxes();
-      
-        Timestamp now = new Timestamp((new Date()).getTime());
-               
-       String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
-       String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
-       String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
-       
-      String currentSessionsWhere = " where ("+sessStartCol+" IS NULL or ("+sessStartCol+" <= '"+now.toString()+"' and "+sessEndCol+" IS NULL)) AND "+walkoutCol+"='false'";
-
-       ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere,DatabaseHelper.getConnection());
-        if(sessions.size() > 0)
+        (new Thread()
         {
-            for(int i=0; i<sessions.size(); i++)
+            public void run()
             {
-                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i)); 
-            }
-            
-            sessionsTable.repaint();
-        }
-                
-        String futureSessionsWhere = " where ("+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NULL) AND "+sessStartCol+" >= '"+now.toString()+"' AND "+walkoutCol+"='false'";
 
-        ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
-        if(futureSessions.size() > 0)
-        {
-            for(int i=0; i<futureSessions.size(); i++)
-            {
-                ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i)); 
-            }
-            
-            appointmentsTable.repaint();
-        }
-        
-        
-         String todaySessionsWhere = " where "+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NOT NULL and DATE("+sessStartCol +") = CURDATE() and DATE("+sessEndCol+") = CURDATE()";
-       ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere,DatabaseHelper.getConnection());
-        if(todaySessions.size() > 0)
-        {
-            for(int i=0; i<todaySessions.size(); i++)
-            {
-                ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i)); 
-            }
-            
-            todaysSessionTable.repaint();
-        }
-        
+                notesField.setLineWrap(true);
+                sessionstartField.setText("mm/dd/yyyy hh:mm aa");
+                sessionendField.setText("mm/dd/yyyy hh:mm aa");
+                editSaveButton.setVisible(false);
 
-        
-        
-        DefaultCellEditor dce = makeEditSessionCellEditor();
-        DefaultCellEditor dceAgenda = makeEditAgendaCellEditor();
-        
-        tableHelper.setTableRendersAndEditors(dce);
-        tableHelperFuture.setTableRendersAndEditors(dce);
-        todayTableHelper.setTableRendersAndEditors(dce);
-        tableHelperAgenda.setTableRendersAndEditors( dceAgenda);
-        tableHelper.autoResizeColWidth();
-        todayTableHelper.autoResizeColWidth();
-        tableHelperFuture.autoResizeColWidth();
-            
-    reportsScrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        
-        
-        
-        setUpAgenda();
-        
-       
-        setUpGeneralReportTab();
-            } }).start();
-        
-        
-    DatabaseHelper.close();
-     
-        
+
+
+
+
+                Data d = new Data();
+                JComboBox[] cboxes = new JComboBox[4];
+                cboxes[0] = fnameCombo;
+                cboxes[1] = lnameCombo;
+                cboxes[2] = phoneCombo;
+                cboxes[3] = emailCombo;
+
+                ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+                cultimateList.add(Data.getClientsfirst());
+                cultimateList.add(Data.getClientslast());
+                cultimateList.add(Data.getClientsphone());
+                cultimateList.add(Data.getClientsemail());
+                ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+                cultimateList1.add(Data.getFnameOrderedList());
+                cultimateList1.add(Data.getLnameOrderedList());
+                cultimateList1.add(Data.getPhoneOrderedList());
+                cultimateList1.add(Data.getEmailOrderedList());
+                uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
+
+
+                JComboBox[] cboxes2 = new JComboBox[3];
+                cboxes2[0] = courseCombo;
+                cboxes2[1] = levelCombo;
+                cboxes2[2] = teacherCombo;
+                ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+                cultimateList2.add(Data.getSubjectslist());
+                cultimateList2.add(Data.getLevelslist());
+                cultimateList2.add(Data.getTeacherslist());
+                ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+                cultimateList22.add(Data.getSubjectOrderedList());
+                cultimateList22.add(Data.getLevelOrderedList());
+                cultimateList22.add(Data.getTeacherOrderedList());
+                uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);//Data.getClientFirst(), Data.getClientLast(), Data.getClientPhone(), Data.getClientEmail());
+
+
+                JComboBox[] boxes3 = new JComboBox[3];
+
+                boxes3[0] = creatorCombo;
+                boxes3[1] = locationCombo;
+                boxes3[2] = paraprofessionalCombo;
+
+                ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
+
+                cultimateList3.add(Data.getClockedInParaprofessionals());
+                cultimateList3.add(Data.getLocationslist());
+                cultimateList3.add(Data.getClockedInParaprofessionals());
+
+                uac = new UltimateAutoComplete(cultimateList3, boxes3);
+
+
+                clearComboBoxes();
+
+                Timestamp now = new Timestamp((new Date()).getTime());
+
+                String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
+                String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
+                String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
+
+                String currentSessionsWhere = " where (" + sessStartCol + " IS NULL or (" + sessStartCol + " <= '" + now.toString() + "' and " + sessEndCol + " IS NULL)) AND " + walkoutCol + "='false'";
+
+                ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere, DatabaseHelper.getConnection());
+                if (sessions.size() > 0)
+                {
+                    for (int i = 0; i < sessions.size(); i++)
+                    {
+                        ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i));
+                    }
+
+                    sessionsTable.repaint();
+                }
+
+                String futureSessionsWhere = " where (" + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NULL) AND " + sessStartCol + " >= '" + now.toString() + "' AND " + walkoutCol + "='false'";
+
+                ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
+                if (futureSessions.size() > 0)
+                {
+                    for (int i = 0; i < futureSessions.size(); i++)
+                    {
+                        ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i));
+                    }
+
+                    appointmentsTable.repaint();
+                }
+
+
+                String todaySessionsWhere = " where " + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NOT NULL and DATE(" + sessStartCol + ") = CURDATE() and DATE(" + sessEndCol + ") = CURDATE()";
+                ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere, DatabaseHelper.getConnection());
+                if (todaySessions.size() > 0)
+                {
+                    for (int i = 0; i < todaySessions.size(); i++)
+                    {
+                        ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i));
+                    }
+
+                    todaysSessionTable.repaint();
+                }
+
+
+
+
+                DefaultCellEditor dce = makeEditSessionCellEditor();
+                DefaultCellEditor dceAgenda = makeEditAgendaCellEditor();
+
+                tableHelper.setTableRendersAndEditors(dce);
+                tableHelperFuture.setTableRendersAndEditors(dce);
+                todayTableHelper.setTableRendersAndEditors(dce);
+                tableHelperAgenda.setTableRendersAndEditors(dceAgenda);
+                tableHelper.autoResizeColWidth();
+                todayTableHelper.autoResizeColWidth();
+                tableHelperFuture.autoResizeColWidth();
+
+                reportsScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+
+
+
+                setUpAgenda();
+
+
+                setUpGeneralReportTab();
+            }
+        }).start();
+
+
+        DatabaseHelper.close();
+
+
         Timer timer = new Timer("Minute Update");
- 
-        MinuteUpdater min = new MinuteUpdater((SessionTableModel)sessionsTable.getModel(), (SessionTableModel)appointmentsTable.getModel());
- 
+
+        MinuteUpdater min = new MinuteUpdater((SessionTableModel) sessionsTable.getModel(), (SessionTableModel) appointmentsTable.getModel());
+
 
         timer.schedule(min, 60000, 60000);
     }
-    
-    
+
     /**
      * Update tables in the application to get current data from the database
      */
@@ -463,98 +465,99 @@ private int sessionID = -1;
         String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
         String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
         String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
-       
-        String currentSessionsWhere = " where ("+sessStartCol+" IS NULL or ("+sessStartCol+" <= '"+now.toString()+"' and "+sessEndCol+" IS NULL)) AND "+walkoutCol+"='false'";
+
+        String currentSessionsWhere = " where (" + sessStartCol + " IS NULL or (" + sessStartCol + " <= '" + now.toString() + "' and " + sessEndCol + " IS NULL)) AND " + walkoutCol + "='false'";
         ((SessionTableModel) sessionsTable.getModel()).deleteAllRows();
-       ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere,DatabaseHelper.getConnection());
-        if(sessions.size() > 0)
+        ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere, DatabaseHelper.getConnection());
+        if (sessions.size() > 0)
         {
-            for(int i=0; i<sessions.size(); i++)
+            for (int i = 0; i < sessions.size(); i++)
             {
-                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i)); 
+                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i));
             }
-            
+
             sessionsTable.repaint();
         }
-        
-        
-        String futureSessionsWhere = " where ("+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NULL) AND "+sessStartCol+" >= '"+now.toString()+"' AND "+walkoutCol+"='false'";
+
+
+        String futureSessionsWhere = " where (" + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NULL) AND " + sessStartCol + " >= '" + now.toString() + "' AND " + walkoutCol + "='false'";
 
         SessionTableModel stm = ((SessionTableModel) appointmentsTable.getModel());
         stm.deleteAllRows();
         ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
-        if(futureSessions.size() > 0)
+        if (futureSessions.size() > 0)
         {
-            for(int i=0; i<futureSessions.size(); i++)
+            for (int i = 0; i < futureSessions.size(); i++)
             {
-                ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i)); 
+                ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i));
             }
-            
+
             appointmentsTable.repaint();
         }
-        
-        String fromCurrentDateWhere = " where "+Agenda.AgendaTable.DATE.getWithAlias()+" >= CURDATE()";
+
+        String fromCurrentDateWhere = " where " + Agenda.AgendaTable.DATE.getWithAlias() + " >= CURDATE()";
 
         ArrayList<Agenda> agenda = Agenda.selectAllAgenda(fromCurrentDateWhere, DatabaseHelper.getConnection());
         ((AgendaTableModel) agendaTable.getModel()).deleteAllRows();
-        if(agenda.size() > 0)
-        {          
-            
-            for(int i=0; i<agenda.size(); i++)
+        if (agenda.size() > 0)
+        {
+
+            for (int i = 0; i < agenda.size(); i++)
             {
-                
+
                 Agenda a = agenda.get(i);
                 ((AgendaTableModel) agendaTable.getModel()).addRow(a);
-                
+
             }
-           
-        agendaTable.repaint();
-        
+
+            agendaTable.repaint();
+
         }
-        
-        String todaySessionsWhere = " where "+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NOT NULL and DATE("+sessStartCol +") = CURDATE() and DATE("+sessEndCol+") = CURDATE()";
-       ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere,DatabaseHelper.getConnection());
+
+        String todaySessionsWhere = " where " + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NOT NULL and DATE(" + sessStartCol + ") = CURDATE() and DATE(" + sessEndCol + ") = CURDATE()";
+        ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere, DatabaseHelper.getConnection());
         ((TodaySessionTableModel) todaysSessionTable.getModel()).deleteAllRows();
-       if(todaySessions.size() > 0)
+        if (todaySessions.size() > 0)
         {
-            for(int i=0; i<todaySessions.size(); i++)
+            for (int i = 0; i < todaySessions.size(); i++)
             {
-                ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i)); 
+                ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i));
             }
-            
+
             todaysSessionTable.repaint();
         }
         DatabaseHelper.close();
     }
-    
-    
+
     /**
      * Set up the agenda tab
      */
     public void setUpAgenda()
     {
-        
+
         Timestamp now = new Timestamp((new Date()).getTime());
-        
-        String fromCurrentDateWhere = " where "+Agenda.AgendaTable.DATE.getWithAlias()+" >= CURDATE()";
+
+        String fromCurrentDateWhere = " where " + Agenda.AgendaTable.DATE.getWithAlias() + " >= CURDATE()";
 
         ArrayList<Agenda> agenda = Agenda.selectAllAgenda(fromCurrentDateWhere, DatabaseHelper.getConnection());
 
-        if(agenda.size() > 0)
-        {          
-            
-            for(int i=0; i<agenda.size(); i++)
+        if (agenda.size() > 0)
+        {
+
+            for (int i = 0; i < agenda.size(); i++)
             {
                 Agenda a = agenda.get(i);
-                ((AgendaTableModel) agendaTable.getModel()).addRow(a);                
+                ((AgendaTableModel) agendaTable.getModel()).addRow(a);
             }
-            
+
             agendaTable.repaint();
         }
-         }
+    }
 
     /**
-     * Creates a cell editor for the session tables for handling double click to edit data
+     * Creates a cell editor for the session tables for handling double click to
+     * edit data
+     *
      * @return the cell editor for session tables
      */
     public DefaultCellEditor makeEditSessionCellEditor()
@@ -563,56 +566,63 @@ private int sessionID = -1;
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                        boolean isSelected, int row, int column) 
+                    boolean isSelected, int row, int column)
             {
-                sessionID = ((Integer)table.getValueAt(row, SessionTableModel.Columns.ID.getColumnIndex())).intValue();
-                
+                sessionID = ((Integer) table.getValueAt(row, SessionTableModel.Columns.ID.getColumnIndex())).intValue();
+
                 uaacCourse.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.TEACHER.getColumnIndex()).toString(), ComboBoxesIndexes.TEACHER.getBoxIndex());
                 uaacCourse.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.LEVEL.getColumnIndex()).toString(), ComboBoxesIndexes.LEVEL.getBoxIndex());
-                uaacCourse.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.COURSE.getColumnIndex()).toString(), ComboBoxesIndexes.COURSE.getBoxIndex());
-                uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTEMAIL.getColumnIndex()).toString(), ComboBoxesIndexes.CEMAIL.getBoxIndex());
-                uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTPHONE.getColumnIndex()).toString(), ComboBoxesIndexes.CPHONE.getBoxIndex());
-                uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTLASTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CLNAME.getBoxIndex());
-                uaacClient.setComboValue(true,table.getValueAt(row, SessionTableModel.Columns.CLIENTFIRSTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CFNAME.getBoxIndex());
+                uaacCourse.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.COURSE.getColumnIndex()).toString(), ComboBoxesIndexes.COURSE.getBoxIndex());
+                uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTEMAIL.getColumnIndex()).toString(), ComboBoxesIndexes.CEMAIL.getBoxIndex());
+                uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTPHONE.getColumnIndex()).toString(), ComboBoxesIndexes.CPHONE.getBoxIndex());
+                uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTLASTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CLNAME.getBoxIndex());
+                uaacClient.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.CLIENTFIRSTNAME.getColumnIndex()).toString(), ComboBoxesIndexes.CFNAME.getBoxIndex());
                 uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.PARAPROFESSIONAL.getColumnIndex()).toString(), ComboBoxesIndexes.PARAPROFESSIONAL.getBoxIndex());
                 uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.LOCATION.getColumnIndex()).toString(), ComboBoxesIndexes.LOCATION.getBoxIndex());
                 uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CREATOR.getColumnIndex()).toString(), ComboBoxesIndexes.CREATOR.getBoxIndex());
-                
-                gcCheck.setSelected((Boolean)table.getValueAt(row, SessionTableModel.Columns.GC.getColumnIndex()));
-                
-                notesField.setText(table.getValueAt(row, SessionTableModel.Columns.NOTES.getColumnIndex()).toString());
-                                               
-                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
-               
-                boolean hasSessionStart = (table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
-                boolean hasSessionEnd = (table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())))  && !sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
-                
-                
-                if(hasSessionStart)
-                    sessionstartField.setText(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())));
-                else
-                    sessionstartField.setText("mm/dd/yyyy hh:mm aa");
 
-                if(hasSessionEnd)
-                    sessionendField.setText(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())));
-                else
+                gcCheck.setSelected((Boolean) table.getValueAt(row, SessionTableModel.Columns.GC.getColumnIndex()));
+
+                notesField.setText(table.getValueAt(row, SessionTableModel.Columns.NOTES.getColumnIndex()).toString());
+
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
+
+                boolean hasSessionStart = (table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
+                boolean hasSessionEnd = (table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
+
+
+                if (hasSessionStart)
+                {
+                    sessionstartField.setText(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())));
+                } else
+                {
+                    sessionstartField.setText("mm/dd/yyyy hh:mm aa");
+                }
+
+                if (hasSessionEnd)
+                {
+                    sessionendField.setText(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())));
+                } else
+                {
                     sessionendField.setText("mm/dd/yyyy hh:mm aa");
-                
-                walkoutCheck.setSelected((Boolean)table.getValueAt(row, SessionTableModel.Columns.WALKOUT.getColumnIndex()));
-                
+                }
+
+                walkoutCheck.setSelected((Boolean) table.getValueAt(row, SessionTableModel.Columns.WALKOUT.getColumnIndex()));
+
                 editSaveButton.setVisible(true);
-               
+
                 tabsPane.setSelectedIndex(0);
                 return null;
             }
         };
-        
+
         return dce;
     }
-    
-    
+
     /**
-     * Creates the agenda cell editor which handles double click to edit the data
+     * Creates the agenda cell editor which handles double click to edit the
+     * data
+     *
      * @return the cell editor for the agenda table
      */
     public DefaultCellEditor makeEditAgendaCellEditor()
@@ -621,22 +631,21 @@ private int sessionID = -1;
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                        boolean isSelected, int row, int column) 
+                    boolean isSelected, int row, int column)
             {
                 SimpleDateFormat sdfFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 SimpleDateFormat sdfTo = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
                 String type = table.getValueAt(row, AgendaTableModel.Columns.TYPE.getColumnIndex()).toString();
                 String date = "";
-                try{
-                    date= sdfTo.format(sdfFrom.parse(table.getValueAt(row, AgendaTableModel.Columns.DATE.getColumnIndex()).toString()));
-                }
-                catch(Exception e)
+                try
                 {
-                    
+                    date = sdfTo.format(sdfFrom.parse(table.getValueAt(row, AgendaTableModel.Columns.DATE.getColumnIndex()).toString()));
+                } catch (Exception e)
+                {
                 }
                 String notes = table.getValueAt(row, AgendaTableModel.Columns.NOTES.getColumnIndex()).toString();
-                int agendaID =((Integer) table.getValueAt(row, AgendaTableModel.Columns.ID.getColumnIndex())).intValue();
-                
+                int agendaID = ((Integer) table.getValueAt(row, AgendaTableModel.Columns.ID.getColumnIndex())).intValue();
+
                 NewAgendaObject ndo = new NewAgendaObject(new Frame(), true, type, date, notes, agendaID);
                 ndo.setLocationRelativeTo(null);
                 ndo.setVisible(true);
@@ -644,23 +653,29 @@ private int sessionID = -1;
                 return null;
             }
         };
-        
+
         return dce;
     }
-    
+
     /**
      * Clear create session tab comboboxes
      */
     public void clearComboBoxes()
     {
-         for(int i=0; i<uac.getBoxesLength(); i++)
+        for (int i = 0; i < uac.getBoxesLength(); i++)
+        {
             uac.setComboValue("", i);
-         for(int i=0; i<uaacClient.getBoxesLength(); i++)
+        }
+        for (int i = 0; i < uaacClient.getBoxesLength(); i++)
+        {
             uaacClient.setComboValue(false, "", i);
-         for(int i=0; i<uaacCourse.getBoxesLength(); i++)
+        }
+        for (int i = 0; i < uaacCourse.getBoxesLength(); i++)
+        {
             uaacCourse.setComboValue(false, "", i);
+        }
     }
-    
+
     /**
      * Load chart data on reports tab without a date restriction
      */
@@ -724,7 +739,7 @@ private int sessionID = -1;
         DatabaseHelper.close();
         displayCharts(data, categoryData, otherValues, studentMinutes);
     }
-    
+
     /**
      * Set up the report tab for chart data
      */
@@ -732,7 +747,7 @@ private int sessionID = -1;
     {
         loadChartsWithoutDate();
     }
-    
+
     private void displayCharts(String[][] generalData, String[][] categoryData, String[][] otherValues, String[][] studentMinutes)
     {
         String[] columns =
@@ -865,7 +880,7 @@ private int sessionID = -1;
         generalChartPanelMid.validate();
 
     }
-    
+
     private JFreeChart createChart(PieDataset dataset, String title)
     {
 
@@ -950,7 +965,6 @@ private int sessionID = -1;
 
         return chart;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -2050,7 +2064,7 @@ private int sessionID = -1;
 
     private void deleteSessionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSessionButton1ActionPerformed
 
-        int[] selectedRows =appointmentsTable.getSelectedRows();
+        int[] selectedRows = appointmentsTable.getSelectedRows();
 
         ((SessionTableModel) appointmentsTable.getModel()).deleteRows(selectedRows);
     }//GEN-LAST:event_deleteSessionButton1ActionPerformed
@@ -2066,31 +2080,31 @@ private int sessionID = -1;
         NewClientObject ndo = new NewClientObject(new Frame(), true);
         ndo.setLocationRelativeTo(null);
         ndo.setVisible(true);
-        
-        if(ndo.wasInserted())
+
+        if (ndo.wasInserted())
         {
             Data.refreshClient();
             uaacClient.noMore();
             uaacClient = null;
-            JComboBox[] cboxes = new  JComboBox[4];
-  
-           cboxes[0]=fnameCombo;
-           cboxes[1]=lnameCombo;
-           cboxes[2]=phoneCombo;
-           cboxes[3]=emailCombo;
+            JComboBox[] cboxes = new JComboBox[4];
 
-           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-           cultimateList.add(Data.getClientsfirst());
-           cultimateList.add(Data.getClientslast());
-           cultimateList.add(Data.getClientsphone());
-           cultimateList.add(Data.getClientsemail());
-           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-           cultimateList1.add(Data.getFnameOrderedList());
-           cultimateList1.add(Data.getLnameOrderedList());
-           cultimateList1.add(Data.getPhoneOrderedList());
-           cultimateList1.add(Data.getEmailOrderedList());
-           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-           clearForm();
+            cboxes[0] = fnameCombo;
+            cboxes[1] = lnameCombo;
+            cboxes[2] = phoneCombo;
+            cboxes[3] = emailCombo;
+
+            ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+            cultimateList.add(Data.getClientsfirst());
+            cultimateList.add(Data.getClientslast());
+            cultimateList.add(Data.getClientsphone());
+            cultimateList.add(Data.getClientsemail());
+            ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+            cultimateList1.add(Data.getFnameOrderedList());
+            cultimateList1.add(Data.getLnameOrderedList());
+            cultimateList1.add(Data.getPhoneOrderedList());
+            cultimateList1.add(Data.getEmailOrderedList());
+            uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+            clearForm();
         }
     }//GEN-LAST:event_newStudentButtonActionPerformed
 
@@ -2105,77 +2119,77 @@ private int sessionID = -1;
     }//GEN-LAST:event_addSessionbuttonMouseClicked
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
-       courseCombo.setBorder(null);
-            teacherCombo.setBorder(null);
-            levelCombo.setBorder(null);
-            paraprofessionalCombo.setBorder(null);
-            creatorCombo.setBorder(null);
-            fnameCombo.setBorder(null);
-            lnameCombo.setBorder(null);
-            locationCombo.setBorder(null);
-            sessionendField.setBorder(null);
-            sessionstartField.setBorder(null);
-            studentInfoPanel.repaint();
-            courseInfoPanel.repaint();
-            paraprofessionalInfoPanel.repaint();
-            
+        courseCombo.setBorder(null);
+        teacherCombo.setBorder(null);
+        levelCombo.setBorder(null);
+        paraprofessionalCombo.setBorder(null);
+        creatorCombo.setBorder(null);
+        fnameCombo.setBorder(null);
+        lnameCombo.setBorder(null);
+        locationCombo.setBorder(null);
+        sessionendField.setBorder(null);
+        sessionstartField.setBorder(null);
+        studentInfoPanel.repaint();
+        courseInfoPanel.repaint();
+        paraprofessionalInfoPanel.repaint();
+
         uaacClient.noMore();
-            uaacClient = null;
-            JComboBox[] cboxes = new  JComboBox[4];
-           
-           cboxes[0]=fnameCombo;
-           cboxes[1]=lnameCombo;
-           cboxes[2]=phoneCombo;
-           cboxes[3]=emailCombo;
+        uaacClient = null;
+        JComboBox[] cboxes = new JComboBox[4];
 
-           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-           cultimateList.add(Data.getClientsfirst());
-           cultimateList.add(Data.getClientslast());
-           cultimateList.add(Data.getClientsphone());
-           cultimateList.add(Data.getClientsemail());
-           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-           cultimateList1.add(Data.getFnameOrderedList());
-           cultimateList1.add(Data.getLnameOrderedList());
-           cultimateList1.add(Data.getPhoneOrderedList());
-           cultimateList1.add(Data.getEmailOrderedList());
-           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-           
-           JComboBox[] cboxes2 = new  JComboBox[3];
-       cboxes2[0]=courseCombo;
-       cboxes2[1]=levelCombo;
-       cboxes2[2]=teacherCombo;
+        cboxes[0] = fnameCombo;
+        cboxes[1] = lnameCombo;
+        cboxes[2] = phoneCombo;
+        cboxes[3] = emailCombo;
 
-       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+        cultimateList.add(Data.getClientsfirst());
+        cultimateList.add(Data.getClientslast());
+        cultimateList.add(Data.getClientsphone());
+        cultimateList.add(Data.getClientsemail());
+        ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+        cultimateList1.add(Data.getFnameOrderedList());
+        cultimateList1.add(Data.getLnameOrderedList());
+        cultimateList1.add(Data.getPhoneOrderedList());
+        cultimateList1.add(Data.getEmailOrderedList());
+        uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
 
-       cultimateList2.add(Data.getSubjectslist());
-       cultimateList2.add(Data.getLevelslist());
-       cultimateList2.add(Data.getTeacherslist());
-       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-       cultimateList22.add(Data.getSubjectOrderedList());
-       cultimateList22.add(Data.getLevelOrderedList());
-       cultimateList22.add(Data.getTeacherOrderedList());
+        JComboBox[] cboxes2 = new JComboBox[3];
+        cboxes2[0] = courseCombo;
+        cboxes2[1] = levelCombo;
+        cboxes2[2] = teacherCombo;
+
+        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+        cultimateList2.add(Data.getSubjectslist());
+        cultimateList2.add(Data.getLevelslist());
+        cultimateList2.add(Data.getTeacherslist());
+        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+        cultimateList22.add(Data.getSubjectOrderedList());
+        cultimateList22.add(Data.getLevelOrderedList());
+        cultimateList22.add(Data.getTeacherOrderedList());
 
         uaacCourse.noMore();
         uaacCourse = null;
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
-       
-       JComboBox[] boxes3 = new  JComboBox[3];
-        
-        boxes3[0]=creatorCombo;
-        boxes3[1]=locationCombo;
-        boxes3[2]=paraprofessionalCombo;
+        uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
+
+        JComboBox[] boxes3 = new JComboBox[3];
+
+        boxes3[0] = creatorCombo;
+        boxes3[1] = locationCombo;
+        boxes3[2] = paraprofessionalCombo;
 
         ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
-        
+
         cultimateList3.add(Data.getClockedInParaprofessionals());
         cultimateList3.add(Data.getLocationslist());
         cultimateList3.add(Data.getClockedInParaprofessionals());
-       
+
         uac.noMore();
         uac = null;
         uac = new UltimateAutoComplete(cultimateList3, boxes3);
-        
-        
+
+
         clearForm();
     }//GEN-LAST:event_clearButtonActionPerformed
 
@@ -2209,7 +2223,6 @@ private int sessionID = -1;
         ((AgendaTableModel) agendaTable.getModel()).deleteRows(selectedRows);
     }//GEN-LAST:event_deleteAgendaButtonActionPerformed
 
-    
     private void loadChartsWithDates(Timestamp beginDate, Timestamp endDate)
     {
         try
@@ -2218,75 +2231,73 @@ private int sessionID = -1;
             {
                 DatabaseHelper.open();
                 String[][] data = DatabaseHelper.getDataFromRegularQuery(
-                    "SELECT "
-                    + "abbrevName,"
-                    + "COUNT(paraprofessionalSessionID) as 'Total Sessions',"
-                    + "Sum(IF( TIMESTAMPDIFF("
-                    + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS '30-min. Sessions', "
-                    + "Sum(IF( TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) /30, 1))/count(paraprofessionalSessionID) as 'Avg. Session/Visit', "
-                    + "SUM(walkout) as 'Walkouts', "
-                    + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart)) as 'Total Wait Time', "
-                    + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart))/COUNT(paraprofessionalSessionID) as 'Avg. Wait Time' "
-                    + "FROM ParaprofessionalSession ps "
-                    + "join Course c on ps.courseID=c.courseID "
-                    + "join Subject s on c.subjectID=s.subjectID "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                    + "group by abbrevName");
+                        "SELECT "
+                        + "abbrevName,"
+                        + "COUNT(paraprofessionalSessionID) as 'Total Sessions',"
+                        + "Sum(IF( TIMESTAMPDIFF("
+                        + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS '30-min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) /30, 1))/count(paraprofessionalSessionID) as 'Avg. Session/Visit', "
+                        + "SUM(walkout) as 'Walkouts', "
+                        + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart)) as 'Total Wait Time', "
+                        + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart))/COUNT(paraprofessionalSessionID) as 'Avg. Wait Time' "
+                        + "FROM ParaprofessionalSession ps "
+                        + "join Course c on ps.courseID=c.courseID "
+                        + "join Subject s on c.subjectID=s.subjectID "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
+                        + "group by abbrevName");
 
                 String[][] categoryData = DatabaseHelper.getDataFromRegularQuery(
-                    "select c.name, count(paraprofessionalSessionID) as '# of Sessions'"
-                    + " from ParaprofessionalSession ps"
-                    + " join Course course on course.courseID=ps.courseID"
-                    + " join Subject s on course.subjectID=s.subjectID"
-                    + " join Category c on s.categoryID=c.categoryID "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                    + " group by c.name");
+                        "select c.name, count(paraprofessionalSessionID) as '# of Sessions'"
+                        + " from ParaprofessionalSession ps"
+                        + " join Course course on course.courseID=ps.courseID"
+                        + " join Subject s on course.subjectID=s.subjectID"
+                        + " join Category c on s.categoryID=c.categoryID "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
+                        + " group by c.name");
 
                 String[][] otherValues = DatabaseHelper.getDataFromRegularQuery(
-                    "SELECT "
-                    + "SUM(walkout) as 'Walkouts', "
-                    + "COUNT(paraprofessionalID) as 'Total Students', "
-                    + "Sum(IF( TIMESTAMPDIFF("
-                    + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS 'Total Sessions' "+ "FROM ParaprofessionalSession "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                );
+                        "SELECT "
+                        + "SUM(walkout) as 'Walkouts', "
+                        + "COUNT(paraprofessionalID) as 'Total Students', "
+                        + "Sum(IF( TIMESTAMPDIFF("
+                        + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS 'Total Sessions' " + "FROM ParaprofessionalSession "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'");
 
                 String[][] studentMinutes = DatabaseHelper.getDataFromRegularQuery(
-                    "SELECT "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) < 10"
-                + " and TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) > 0, 1, 0))"
-                + " AS '<10 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 10"
-                + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) < 25, 1, 0))"
-                + " AS '10-24 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 25"
-                + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 35, 1, 0))"
-                + " AS '25-35 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 35"
-                + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 60, 1, 0))"
-                + " AS '36-60 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 60"
-                + ", 1, 0))"
-                + " AS '>60 Min. Sessions' "
-                + "FROM ParaprofessionalSession ps "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                );
+                        "SELECT "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) < 10"
+                        + " and TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) > 0, 1, 0))"
+                        + " AS '<10 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 10"
+                        + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) < 25, 1, 0))"
+                        + " AS '10-24 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 25"
+                        + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 35, 1, 0))"
+                        + " AS '25-35 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 35"
+                        + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 60, 1, 0))"
+                        + " AS '36-60 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 60"
+                        + ", 1, 0))"
+                        + " AS '>60 Min. Sessions' "
+                        + "FROM ParaprofessionalSession ps "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'");
 
                 DatabaseHelper.close();
                 displayCharts(data, categoryData, otherValues, studentMinutes);
@@ -2298,9 +2309,10 @@ private int sessionID = -1;
             e.printStackTrace();
         }
     }
-    
+
     /**
      * Subtract days from a date
+     *
      * @param date - date to subtract from
      * @param days - x amount of days to subtract
      * @return the resulting date
@@ -2309,11 +2321,11 @@ private int sessionID = -1;
     {
         int x = -days;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.add( Calendar.DAY_OF_YEAR, x);
+        cal.add(Calendar.DAY_OF_YEAR, x);
         Date dateBefore = cal.getTime();
         return dateBefore;
     }
-    
+
     private void generalReportLoadButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_generalReportLoadButtonActionPerformed
     {//GEN-HEADEREND:event_generalReportLoadButtonActionPerformed
         try
@@ -2344,14 +2356,11 @@ private int sessionID = -1;
     }//GEN-LAST:event_generalReportLoadButtonActionPerformed
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-        
-      //  timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
-      //  System.out.println("Set back to: "+timeout);
-        
+        //  timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //  System.out.println("Set back to: "+timeout);
     }//GEN-LAST:event_jPanel3MouseMoved
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        
 //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_formMouseMoved
 
@@ -2411,13 +2420,13 @@ private int sessionID = -1;
     }//GEN-LAST:event_jPanel2MouseMoved
 
     private void dayRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayRadioActionPerformed
-       try
+        try
         {
             Date d = new Date();
-            
-             Timestamp beginDate = new Timestamp(d.getTime());
+
+            Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
-          
+
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -2425,8 +2434,8 @@ private int sessionID = -1;
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 1);
             endDate = new Timestamp(myDate.getTime());
-            
-           loadChartsWithDates(endDate, beginDate);
+
+            loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
         {
@@ -2438,7 +2447,7 @@ private int sessionID = -1;
         try
         {
             Date d = new Date();
-            
+
             Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
 
@@ -2448,8 +2457,8 @@ private int sessionID = -1;
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 30);
             endDate = new Timestamp(myDate.getTime());
-            
-          loadChartsWithDates(endDate, beginDate);
+
+            loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
         {
@@ -2461,10 +2470,10 @@ private int sessionID = -1;
         try
         {
             Date d = new Date();
-            
+
             Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
-          
+
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -2472,7 +2481,7 @@ private int sessionID = -1;
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 365);
             endDate = new Timestamp(myDate.getTime());
-            
+
             loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
@@ -2489,7 +2498,7 @@ private int sessionID = -1;
         try
         {
             Date d = new Date();
-            
+
             Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
 
@@ -2499,7 +2508,7 @@ private int sessionID = -1;
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 7);
             endDate = new Timestamp(myDate.getTime());
-            
+
             loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
@@ -2540,19 +2549,19 @@ private int sessionID = -1;
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         courseCombo.setBorder(null);
-            teacherCombo.setBorder(null);
-            levelCombo.setBorder(null);
-            paraprofessionalCombo.setBorder(null);
-            creatorCombo.setBorder(null);
-            fnameCombo.setBorder(null);
-            lnameCombo.setBorder(null);
-            locationCombo.setBorder(null);
-            sessionendField.setBorder(null);
-            sessionstartField.setBorder(null);
-            studentInfoPanel.repaint();
-            courseInfoPanel.repaint();
-            paraprofessionalInfoPanel.repaint();
-        
+        teacherCombo.setBorder(null);
+        levelCombo.setBorder(null);
+        paraprofessionalCombo.setBorder(null);
+        creatorCombo.setBorder(null);
+        fnameCombo.setBorder(null);
+        lnameCombo.setBorder(null);
+        locationCombo.setBorder(null);
+        sessionendField.setBorder(null);
+        sessionstartField.setBorder(null);
+        studentInfoPanel.repaint();
+        courseInfoPanel.repaint();
+        paraprofessionalInfoPanel.repaint();
+
         update();
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -2566,6 +2575,7 @@ private int sessionID = -1;
         gcCheck.setSelected(false);
         walkoutCheck.setSelected(false);
     }
+
     private boolean getParaprofessionalSession(boolean isUpdating)
     {
         try
@@ -2575,7 +2585,7 @@ private int sessionID = -1;
             boolean paraprofessionalPanelCheck = true;
             boolean creatorPanelCheck = true;
             boolean locationPanelCheck = true;
-            
+
             courseCombo.setBorder(null);
             teacherCombo.setBorder(null);
             levelCombo.setBorder(null);
@@ -2589,108 +2599,111 @@ private int sessionID = -1;
             studentInfoPanel.repaint();
             courseInfoPanel.repaint();
             paraprofessionalInfoPanel.repaint();
-            
-            String course = ((JTextComponent)courseCombo.getEditor().getEditorComponent()).getText();
-            if(course.length() <= 0)
+
+            String course = ((JTextComponent) courseCombo.getEditor().getEditorComponent()).getText();
+            if (course.length() <= 0)
             {
-                courseCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                courseCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
             }
-             String tname = ((JTextComponent)teacherCombo.getEditor().getEditorComponent()).getText();
-            if(tname.length() <= 0)
+            String tname = ((JTextComponent) teacherCombo.getEditor().getEditorComponent()).getText();
+            if (tname.length() <= 0)
             {
-                teacherCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                teacherCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
             }
-            
-                
-            
-            String level = ((JTextComponent)levelCombo.getEditor().getEditorComponent()).getText();
+
+
+
+            String level = ((JTextComponent) levelCombo.getEditor().getEditorComponent()).getText();
             Integer intLevel = null;
             try
             {
                 intLevel = Integer.parseInt(level);
-                
-            }
-            catch(Exception z)
+
+            } catch (Exception z)
             {
-                levelCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                levelCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
             }
-            
-            String pName = ((JTextComponent)paraprofessionalCombo.getEditor().getEditorComponent()).getText();
-            if(pName.length() <= 0)
+
+            String pName = ((JTextComponent) paraprofessionalCombo.getEditor().getEditorComponent()).getText();
+            if (pName.length() <= 0)
             {
-                paraprofessionalCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                paraprofessionalCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 paraprofessionalPanelCheck = false;
             }
-            
-            String cName = ((JTextComponent)creatorCombo.getEditor().getEditorComponent()).getText();
-            if(cName.length() <= 0)
+
+            String cName = ((JTextComponent) creatorCombo.getEditor().getEditorComponent()).getText();
+            if (cName.length() <= 0)
             {
-                creatorCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                creatorCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 creatorPanelCheck = false;
             }
-            
-            String clientFName = ((JTextComponent)fnameCombo.getEditor().getEditorComponent()).getText();
-            if(clientFName.length() <= 0)
+
+            String clientFName = ((JTextComponent) fnameCombo.getEditor().getEditorComponent()).getText();
+            if (clientFName.length() <= 0)
             {
-                fnameCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                fnameCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 clientPanelCheck = false;
             }
-            String clientLName = ((JTextComponent)lnameCombo.getEditor().getEditorComponent()).getText();
-            if(clientLName.length() <= 0)
+            String clientLName = ((JTextComponent) lnameCombo.getEditor().getEditorComponent()).getText();
+            if (clientLName.length() <= 0)
             {
-                lnameCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                lnameCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 clientPanelCheck = false;
             }
 
-            
+
             boolean GC = gcCheck.isSelected();
             String notes = notesField.getText().toString();
-            
-            String location = ((JTextComponent)locationCombo.getEditor().getEditorComponent()).getText();
-            if(location.length() <= 0)
+
+            String location = ((JTextComponent) locationCombo.getEditor().getEditorComponent()).getText();
+            if (location.length() <= 0)
             {
-                locationCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                locationCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 locationPanelCheck = false;
             }
-            
-            
+
+
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
             Timestamp sessionStart = null;
             Timestamp sessionEnd = null;
             boolean hasSessionStart = true;
-            
-            if(sessionstartField.getText().trim().length() > 0 && !sessionstartField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
+
+            if (sessionstartField.getText().trim().length() > 0 && !sessionstartField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
             {
-                hasSessionStart= Validate.validateTimestamp(sessionstartField.getText().trim());
- 
-                if(hasSessionStart)
-                    sessionStart = new Timestamp(sdf.parse(sessionstartField.getText().trim()).getTime());
-                else
+                hasSessionStart = Validate.validateTimestamp(sessionstartField.getText().trim());
+
+                if (hasSessionStart)
                 {
-                    sessionstartField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                    sessionStart = new Timestamp(sdf.parse(sessionstartField.getText().trim()).getTime());
+                } else
+                {
+                    sessionstartField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
             }
-         
+
             boolean hasSessionEnd = true;
-            if(sessionendField.getText().trim().length() > 0 && !sessionendField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
+            if (sessionendField.getText().trim().length() > 0 && !sessionendField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
             {
                 hasSessionEnd = Validate.validateTimestamp(sessionendField.getText().trim());
-                if(!hasSessionEnd)
+                if (!hasSessionEnd)
                 {
-                    sessionendField.setBorder(new MatteBorder(3,3,3,3,Color.red));
-                    
-                }    
-                else
+                    sessionendField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
+
+                } else
+                {
                     sessionEnd = new Timestamp(sdf.parse(sessionendField.getText().trim()).getTime());
+                }
             }
-            
-            if((!hasSessionStart || !hasSessionEnd) || (!hasSessionStart && hasSessionEnd))
+
+            if ((!hasSessionStart || !hasSessionEnd) || (!hasSessionStart && hasSessionEnd))
+            {
                 throw new ParseException("parse exception with timestamp", 0);
-                
- 
+            }
+
+
             boolean walkout = walkoutCheck.isSelected();
 
             String abbrevNameString = Subject.SubjectTable.ABBREVNAME.getWithAlias();
@@ -2703,79 +2716,84 @@ private int sessionID = -1;
             String levelString = Course.CourseTable.LEVEL.getWithAlias();
             String clientFNameString = Client.ClientTable.FNAME.getWithAlias();
             String clientLNameString = Client.ClientTable.LNAME.getWithAlias();
-            
+
             DatabaseHelper.open();
 
-            ArrayList<Subject> subjects =(ArrayList<Subject>) Subject.selectAllSubjects("where "+abbrevNameString+"='"+course+"'", DatabaseHelper.getConnection());
-            
-            ArrayList<Teacher> teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("where concat(concat("+teachFNameString+",' '),"+teachLNameString+")='"+tname.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Subject> subjects = (ArrayList<Subject>) Subject.selectAllSubjects("where " + abbrevNameString + "='" + course + "'", DatabaseHelper.getConnection());
+
+            ArrayList<Teacher> teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("where concat(concat(" + teachFNameString + ",' ')," + teachLNameString + ")='" + tname.trim() + "'", DatabaseHelper.getConnection());
             ArrayList<Course> courses = null;
             try
             {
-                String query = "where "+subjectIDString+"="+subjects.get(0).getSubjectID()+" and "+teachIDString+"="+teachers.get(0).getTeacherID() + " and "+levelString+"="+intLevel.intValue();
-                courses = (ArrayList<Course>)Course.selectAllCourse(query, DatabaseHelper.getConnection());
-                
-            }
-            catch(Exception z)
+                String query = "where " + subjectIDString + "=" + subjects.get(0).getSubjectID() + " and " + teachIDString + "=" + teachers.get(0).getTeacherID() + " and " + levelString + "=" + intLevel.intValue();
+                courses = (ArrayList<Course>) Course.selectAllCourse(query, DatabaseHelper.getConnection());
+
+            } catch (Exception z)
             {
                 z.printStackTrace();
                 courses = new ArrayList<Course>();
             }
-            ArrayList<Paraprofessional> paraprofessionals = (ArrayList<Paraprofessional>)Paraprofessional.selectAllParaprofessional("where concat(concat("+paraFNameString+",' '),"+paraLNameString+")='"+pName.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Paraprofessional> paraprofessionals = (ArrayList<Paraprofessional>) Paraprofessional.selectAllParaprofessional("where concat(concat(" + paraFNameString + ",' ')," + paraLNameString + ")='" + pName.trim() + "'", DatabaseHelper.getConnection());
 
-            ArrayList<Paraprofessional> creators = (ArrayList<Paraprofessional>)Paraprofessional.selectAllParaprofessional("where concat(concat("+paraFNameString+",' '),"+paraLNameString+")='"+cName.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Paraprofessional> creators = (ArrayList<Paraprofessional>) Paraprofessional.selectAllParaprofessional("where concat(concat(" + paraFNameString + ",' ')," + paraLNameString + ")='" + cName.trim() + "'", DatabaseHelper.getConnection());
 
-            ArrayList<Client> clients = (ArrayList<Client>)Client.selectAllClients("where "+clientFNameString+"='"+clientFName.trim()+"' and "+clientLNameString+"='"+clientLName.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Client> clients = (ArrayList<Client>) Client.selectAllClients("where " + clientFNameString + "='" + clientFName.trim() + "' and " + clientLNameString + "='" + clientLName.trim() + "'", DatabaseHelper.getConnection());
 
-            ArrayList<Location> locations = (ArrayList<Location>)Location.selectAllLocation("where "+Location.LocationTable.NAME.getWithAlias()+"='"+location.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Location> locations = (ArrayList<Location>) Location.selectAllLocation("where " + Location.LocationTable.NAME.getWithAlias() + "='" + location.trim() + "'", DatabaseHelper.getConnection());
 
             courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
             studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-            paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());            
-               
-            if(subjects.size() <= 0 && coursePanelCheck)
+            paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
+
+            if (subjects.size() <= 0 && coursePanelCheck)
             {
                 courseInfoPanel.setBackground(Color.red);
             }
-            if(teachers.size() <= 0 && coursePanelCheck)
+            if (teachers.size() <= 0 && coursePanelCheck)
             {
                 courseInfoPanel.setBackground(Color.red);
             }
-            if(courses.size() <= 0 && coursePanelCheck)
+            if (courses.size() <= 0 && coursePanelCheck)
             {
                 courseInfoPanel.setBackground(Color.red);
             }
-            if(paraprofessionals.size() <= 0 && paraprofessionalPanelCheck)
+            if (paraprofessionals.size() <= 0 && paraprofessionalPanelCheck)
             {
                 paraprofessionalInfoPanel.setBackground(Color.red);
             }
-            if(creators.size() <= 0 && creatorPanelCheck)
+            if (creators.size() <= 0 && creatorPanelCheck)
             {
-                creatorCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                creatorCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            if(clients.size() <= 0 && clientPanelCheck)
+            if (clients.size() <= 0 && clientPanelCheck)
             {
                 studentInfoPanel.setBackground(Color.red);
             }
-            if(locations.size() <= 0 && locationPanelCheck)
+            if (locations.size() <= 0 && locationPanelCheck)
             {
-                locationCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                locationCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
             Timestamp now = new Timestamp((new Date()).getTime());
 
             String sessionStartString;
-            if(sessionStart != null)
-                sessionStartString = "='"+sessionStart+"'";
-            else
+            if (sessionStart != null)
+            {
+                sessionStartString = "='" + sessionStart + "'";
+            } else
+            {
                 sessionStartString = " is null";
-            
+            }
+
             String sessionEndString;
-            if(sessionEnd != null)
-                sessionEndString = "='"+sessionEnd+"'";
-            else
+            if (sessionEnd != null)
+            {
+                sessionEndString = "='" + sessionEnd + "'";
+            } else
+            {
                 sessionEndString = " is null";
-            
+            }
+
             ParaprofessionalSession ps = new ParaprofessionalSession(-1, paraprofessionals.get(0), clients.get(0), courses.get(0), locations.get(0), creators.get(0), now, sessionStart, sessionEnd, GC, notes, walkout);
             String paraIDString = ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALID.getWithAlias();
             String courseIDString = ParaprofessionalSession.ParaSessTable.COURSEID.getWithAlias();
@@ -2788,46 +2806,49 @@ private int sessionID = -1;
             String walkoutString = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
             String notesString = ParaprofessionalSession.ParaSessTable.NOTES.getWithAlias();
             String clientIDString = ParaprofessionalSession.ParaSessTable.CLIENTID.getWithAlias();
-            if(!isUpdating)
+            if (!isUpdating)
             {
                 DatabaseHelper.insert(ParaprofessionalSession.getValues(ps), ParaprofessionalSession.ParaSessTable.getTable());
 
-                String query =  "where "+paraIDString+"="+paraprofessionals.get(0).getParaprofessionalID()+" and "+clientIDString+"="+clients.get(0).getClientID()+" and "+courseIDString+"="+courses.get(0).getCourseID()+" and "+locationIDString+"="+locations.get(0).getLocationID()+" and "+creatorIDString+"="+creators.get(0).getParaprofessionalID()+" and "+enteredString+"='"+now.toString()+"' and "+sessStartString+""+sessionStartString+" and "+sessEndString+""+sessionEndString+" and "+gcString+"="+GC+" and "+notesString+"='"+notes+"' and "+walkoutString+"="+walkout;
+                String query = "where " + paraIDString + "=" + paraprofessionals.get(0).getParaprofessionalID() + " and " + clientIDString + "=" + clients.get(0).getClientID() + " and " + courseIDString + "=" + courses.get(0).getCourseID() + " and " + locationIDString + "=" + locations.get(0).getLocationID() + " and " + creatorIDString + "=" + creators.get(0).getParaprofessionalID() + " and " + enteredString + "='" + now.toString() + "' and " + sessStartString + "" + sessionStartString + " and " + sessEndString + "" + sessionEndString + " and " + gcString + "=" + GC + " and " + notesString + "='" + notes + "' and " + walkoutString + "=" + walkout;
                 ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(query, DatabaseHelper.getConnection()); // (ArrayList<ParaprofessionalSession>)HibernateTest.select(query);
 
                 ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(0));
-            }
-            else
+            } else
             {
                 ps.setParaprofessionalSessionID(sessionID);
                 sessionID = -1;
-                    
+
                 DatabaseHelper.update(ParaprofessionalSession.getValues(ps), ParaprofessionalSession.ParaSessTable.getTable());
 
-                String query =  "where "+clientIDString+"="+clients.get(0).getClientID()+" and "+courseIDString+"="+courses.get(0).getCourseID()+" and "+locationIDString+"="+locations.get(0).getLocationID()+" and "+creatorIDString+"="+creators.get(0).getParaprofessionalID()+" and "+enteredString+"='"+now.toString()+"' and "+sessStartString+""+sessionStartString+" and "+sessEndString+""+sessionEndString+" and "+gcString+"="+GC+" and "+notesString+"='"+notes+"' and "+walkoutString+"="+walkout;
+                String query = "where " + clientIDString + "=" + clients.get(0).getClientID() + " and " + courseIDString + "=" + courses.get(0).getCourseID() + " and " + locationIDString + "=" + locations.get(0).getLocationID() + " and " + creatorIDString + "=" + creators.get(0).getParaprofessionalID() + " and " + enteredString + "='" + now.toString() + "' and " + sessStartString + "" + sessionStartString + " and " + sessEndString + "" + sessionEndString + " and " + gcString + "=" + GC + " and " + notesString + "='" + notes + "' and " + walkoutString + "=" + walkout;
 
-                ArrayList<ParaprofessionalSession> sessions = (ArrayList<ParaprofessionalSession>)ParaprofessionalSession.selectAllParaprofessionalSession(query,DatabaseHelper.getConnection());
+                ArrayList<ParaprofessionalSession> sessions = (ArrayList<ParaprofessionalSession>) ParaprofessionalSession.selectAllParaprofessionalSession(query, DatabaseHelper.getConnection());
 
             }
 
             sessionsTable.repaint();
-            
-            
-            Thread thread = new Thread(){
-                public void run(){
-                     int colorOfGreen = 160;
 
-                    while(colorOfGreen < 255)
+
+            Thread thread = new Thread()
+            {
+                public void run()
+                {
+                    int colorOfGreen = 160;
+
+                    while (colorOfGreen < 255)
                     {
-                        courseInfoPanel.setBackground(new Color( 0,colorOfGreen,0));
-                        studentInfoPanel.setBackground(new Color(0,colorOfGreen,0));
-                        paraprofessionalInfoPanel.setBackground(new Color(0,colorOfGreen,0));
+                        courseInfoPanel.setBackground(new Color(0, colorOfGreen, 0));
+                        studentInfoPanel.setBackground(new Color(0, colorOfGreen, 0));
+                        paraprofessionalInfoPanel.setBackground(new Color(0, colorOfGreen, 0));
                         colorOfGreen += 2;
-                        try {
+                        try
+                        {
                             this.sleep(13);
-                        } catch (InterruptedException ex) {
+                        } catch (InterruptedException ex)
+                        {
                         }
-                    }  
+                    }
                     courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
@@ -2838,19 +2859,17 @@ private int sessionID = -1;
             };
 
             thread.start();
-            
+
             return true;
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
             return false;
-        } 
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
-        
+
     }
 
     /**

@@ -2,16 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tutoring.ui;
 
-import tutoring.dialogs.NewClientObject;
-import tutoring.dialogs.NewAgendaObject;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Frame;
 import java.awt.GradientPaint;
-import java.awt.Window;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,8 +24,6 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -39,7 +33,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
@@ -63,125 +56,126 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+import tutoring.dialogs.*;
 import tutoring.entity.*;
 import tutoring.helper.*;
-import tutoring.dialogs.*;
 
 /**
  *
  * @author team Ubuntu
  */
-
 public final class AdminView extends javax.swing.JFrame
 {
 
-     private UltimateAutoComplete uac;
+    private UltimateAutoComplete uac;
     private DefaultListModel dlm = new DefaultListModel();
     private RestrictionListModel restrictHelper;
-    
+
     /**
      * MinuteUpdater
      */
-    public class MinuteUpdater extends TimerTask {
-    private SessionTableModel current;
-    private SessionTableModel future;
+    public class MinuteUpdater extends TimerTask
+    {
+
+        private SessionTableModel current;
+        private SessionTableModel future;
 
         /**
          * Updates table models every minute
-         * 
+         *
          * @param current - current sessions table model
          * @param future - future sessions table model (appointments)
          */
         public MinuteUpdater(SessionTableModel current, SessionTableModel future)
-   {
-        this.current = current;
-        this.future = future;
-   }
-   
-    public void run() 
-    {
-        updateTables();
-        current.fireTableDataChanged();
-        future.fireTableDataChanged();
+        {
+            this.current = current;
+            this.future = future;
+        }
+
+        public void run()
+        {
+            updateTables();
+            current.fireTableDataChanged();
+            future.fireTableDataChanged();
+        }
     }
- 
-}
-    
+
     /**
      * Updates create session page's comboboxes data from server
      */
-    public void update() 
+    public void update()
     {
-            DatabaseHelper.open();
-            Data.refreshClient();
-            Data.refreshCourse();
-            Data.refreshLocation();
-            Data.refreshParaprofessional();
-            DatabaseHelper.close();
-            
-            uaacClient.noMore();
-            uaacClient = null;
-            JComboBox[] cboxes = new  JComboBox[4];
-           
-           cboxes[0]=fnameCombo;
-           cboxes[1]=lnameCombo;
-           cboxes[2]=phoneCombo;
-           cboxes[3]=emailCombo;
+        DatabaseHelper.open();
+        Data.refreshClient();
+        Data.refreshCourse();
+        Data.refreshLocation();
+        Data.refreshParaprofessional();
+        DatabaseHelper.close();
 
-           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-           cultimateList.add(Data.getClientsfirst());
-           cultimateList.add(Data.getClientslast());
-           cultimateList.add(Data.getClientsphone());
-           cultimateList.add(Data.getClientsemail());
-           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-           cultimateList1.add(Data.getFnameOrderedList());
-           cultimateList1.add(Data.getLnameOrderedList());
-           cultimateList1.add(Data.getPhoneOrderedList());
-           cultimateList1.add(Data.getEmailOrderedList());
-           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-           
-           JComboBox[] cboxes2 = new  JComboBox[3];
-       cboxes2[0]=courseCombo;
-       cboxes2[1]=levelCombo;
-       cboxes2[2]=teacherCombo;
+        uaacClient.noMore();
+        uaacClient = null;
+        JComboBox[] cboxes = new JComboBox[4];
 
-       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+        cboxes[0] = fnameCombo;
+        cboxes[1] = lnameCombo;
+        cboxes[2] = phoneCombo;
+        cboxes[3] = emailCombo;
 
-       cultimateList2.add(Data.getSubjectslist());
-       cultimateList2.add(Data.getLevelslist());
-       cultimateList2.add(Data.getTeacherslist());
-       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-       cultimateList22.add(Data.getSubjectOrderedList());
-       cultimateList22.add(Data.getLevelOrderedList());
-       cultimateList22.add(Data.getTeacherOrderedList());
+        ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+        cultimateList.add(Data.getClientsfirst());
+        cultimateList.add(Data.getClientslast());
+        cultimateList.add(Data.getClientsphone());
+        cultimateList.add(Data.getClientsemail());
+        ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+        cultimateList1.add(Data.getFnameOrderedList());
+        cultimateList1.add(Data.getLnameOrderedList());
+        cultimateList1.add(Data.getPhoneOrderedList());
+        cultimateList1.add(Data.getEmailOrderedList());
+        uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+
+        JComboBox[] cboxes2 = new JComboBox[3];
+        cboxes2[0] = courseCombo;
+        cboxes2[1] = levelCombo;
+        cboxes2[2] = teacherCombo;
+
+        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+        cultimateList2.add(Data.getSubjectslist());
+        cultimateList2.add(Data.getLevelslist());
+        cultimateList2.add(Data.getTeacherslist());
+        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+        cultimateList22.add(Data.getSubjectOrderedList());
+        cultimateList22.add(Data.getLevelOrderedList());
+        cultimateList22.add(Data.getTeacherOrderedList());
 
         uaacCourse.noMore();
         uaacCourse = null;
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
-       
-       JComboBox[] boxes3 = new  JComboBox[3];
-        
-        boxes3[0]=creatorCombo;
-        boxes3[1]=locationCombo;
-        boxes3[2]=paraprofessionalCombo;
+        uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
+
+        JComboBox[] boxes3 = new JComboBox[3];
+
+        boxes3[0] = creatorCombo;
+        boxes3[1] = locationCombo;
+        boxes3[2] = paraprofessionalCombo;
 
         ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
-        
+
         cultimateList3.add(Data.getClockedInParaprofessionals());
         cultimateList3.add(Data.getLocationslist());
         cultimateList3.add(Data.getClockedInParaprofessionals());
-       
+
         uacSessions.noMore();
         uacSessions = null;
         uacSessions = new UltimateAutoComplete(cultimateList3, boxes3);
-           clearForm();
+        clearForm();
     }
 
     /**
      * Comboboxes map to autocomplete for changing and updating data
      */
     public enum ComboBoxesIndexes
-    {   
+    {
+
         /**
          * Client first name combobox
          */
@@ -193,7 +187,7 @@ public final class AdminView extends javax.swing.JFrame
         /**
          * Client phone combobox
          */
-        CPHONE(2,"Phone", "phone"),
+        CPHONE(2, "Phone", "phone"),
         /**
          * Client email combobox
          */
@@ -217,38 +211,40 @@ public final class AdminView extends javax.swing.JFrame
         /**
          * Client tutor's combobox
          */
-        PARAPROFESSIONAL(2, "Tutor",""),
+        PARAPROFESSIONAL(2, "Tutor", ""),
         /**
          * Client teacher's combobox
          */
         TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)");
-        
         private int indexOfCombo;
         private String displayName;
         private String databaseName;
-        
-	private ComboBoxesIndexes(int i, String displayName, String databaseName) {
-		indexOfCombo = i;
-                this.displayName = displayName;
-                this.databaseName = databaseName;
-	}
 
-	/**
-         * 
+        private ComboBoxesIndexes(int i, String displayName, String databaseName)
+        {
+            indexOfCombo = i;
+            this.displayName = displayName;
+            this.databaseName = databaseName;
+        }
+
+        /**
+         *
          * @return the index of the combobox in the autocomplete set
          */
-        public int getBoxIndex() {
-		return indexOfCombo;
-	}
-        
+        public int getBoxIndex()
+        {
+            return indexOfCombo;
+        }
+
         /**
          *
          * @return the display name of the combobox
          */
-        public String getDisplayName() {
-		return displayName;
-	}
-        
+        public String getDisplayName()
+        {
+            return displayName;
+        }
+
         /**
          *
          * @return the database name of the name of the combobox
@@ -257,227 +253,233 @@ public final class AdminView extends javax.swing.JFrame
         {
             return databaseName;
         }
-        
+
         /**
          *
-         * @param DisplayName 
-         * @return the database name of the combobox using the display name as input
+         * @param DisplayName
+         * @return the database name of the combobox using the display name as
+         * input
          */
         public String getDatabaseName(String DisplayName)
         {
             AdminView.ComboBoxesIndexes[] components = AdminView.ComboBoxesIndexes.class.getEnumConstants();
-            for(int i=0; i< components.length; i++)
-                if(components[i].getDisplayName().equalsIgnoreCase(DisplayName))
+            for (int i = 0; i < components.length; i++)
+            {
+                if (components[i].getDisplayName().equalsIgnoreCase(DisplayName))
+                {
                     return components[i].getDatabaseName();
-            
+                }
+            }
+
             return "";
         }
     }
     private UltimateAutoComplete uacSessions;
-    
-    UltimateAutoAutoComplete uaacClient; 
-
+    UltimateAutoAutoComplete uaacClient;
     UltimateAutoAutoComplete uaacCourse;
     private TodaySessionTableHelper todayTableHelper;
     private SessionTableHelper tableHelper;
     private SessionTableHelper tableHelperFuture;
     private AgendaTableHelper tableHelperAgenda;
-
     private int sessionID = -1;
-  
+
     /**
-     * 
+     *
      */
-    public AdminView() 
+    public AdminView()
     {
         initComponents();
-        
-       
-        
+
+
+
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         sessionsTable.getTableHeader().setReorderingAllowed(false);
         appointmentsTable.getTableHeader().setReorderingAllowed(false);
         agendaTable.getTableHeader().setReorderingAllowed(false);
 
         todayTableHelper = new TodaySessionTableHelper(todaysSessionTable);
-        tableHelper = new SessionTableHelper(sessionsTable, false, null, (TodaySessionTableModel)todaysSessionTable.getModel());
-        tableHelperFuture = new SessionTableHelper(appointmentsTable, true, (SessionTableModel)sessionsTable.getModel(), null);
+        tableHelper = new SessionTableHelper(sessionsTable, false, null, (TodaySessionTableModel) todaysSessionTable.getModel());
+        tableHelperFuture = new SessionTableHelper(appointmentsTable, true, (SessionTableModel) sessionsTable.getModel(), null);
         tableHelperAgenda = new AgendaTableHelper(agendaTable);
-        
-        
+
+
         todayTableHelper.increaseRowHeight(12);
         tableHelperAgenda.allowScrollingOnTable();
-       
+
         tableHelperAgenda.increaseRowHeight(12);
-        
+
         tableHelperFuture.allowScrollingOnTable();
         tableHelperFuture.increaseRowHeight(12);
-        
+
         tableHelper.allowScrollingOnTable();
-       
+
         tableHelper.increaseRowHeight(12);
-       
-      //  DatabaseHelper.open();
-        
-        (new Thread(){
-            public void run(){
-                
-        setUpSearchTab();
-        ArrayList<String> termCodes = new ArrayList<String>();
-        try{
-            termCodes = RetrieveNewTerm.getTermCodes();
-        }
-        catch(Exception e)
+
+        //  DatabaseHelper.open();
+
+        (new Thread()
         {
-            JOptionPane.showMessageDialog(null, "Could not load term codes. The web address may have changed.");
-        }
-        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        
-        for(int i=0; i<termCodes.size(); i++)
-            dcbm.addElement(termCodes.get(i));
-        
-        termCodeCombo.setModel(dcbm);
-        
-        notesField.setLineWrap(true);
-        sessionstartField.setText("mm/dd/yyyy hh:mm aa");
-        sessionendField.setText("mm/dd/yyyy hh:mm aa");
-        editSaveButton.setVisible(false);
-
-       Data d = new Data();
-      JComboBox[] cboxes = new  JComboBox[4];
-       cboxes[0]=fnameCombo;
-       cboxes[1]=lnameCombo;
-       cboxes[2]=phoneCombo;
-       cboxes[3]=emailCombo;
-       
-       ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-       cultimateList.add(Data.getClientsfirst());
-       cultimateList.add(Data.getClientslast());
-       cultimateList.add(Data.getClientsphone());
-       cultimateList.add(Data.getClientsemail());
-       ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-       cultimateList1.add(Data.getFnameOrderedList());
-       cultimateList1.add(Data.getLnameOrderedList());
-       cultimateList1.add(Data.getPhoneOrderedList());
-       cultimateList1.add(Data.getEmailOrderedList());
-       uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-       
-       JComboBox[] cboxes2 = new  JComboBox[3];
-       cboxes2[0]=courseCombo;
-       cboxes2[1]=levelCombo;
-       cboxes2[2]=teacherCombo;
-       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
-
-       cultimateList2.add(Data.getSubjectslist());
-       cultimateList2.add(Data.getLevelslist());
-       cultimateList2.add(Data.getTeacherslist());
-       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-       cultimateList22.add(Data.getSubjectOrderedList());
-       cultimateList22.add(Data.getLevelOrderedList());
-       cultimateList22.add(Data.getTeacherOrderedList());
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
-       
-       JComboBox[] boxes3 = new  JComboBox[3];
-        
-        boxes3[0]=creatorCombo;
-        boxes3[1]=locationCombo;
-        boxes3[2]=paraprofessionalCombo;
-
-        ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
-        
-        cultimateList3.add(Data.getClockedInParaprofessionals());
-        cultimateList3.add(Data.getLocationslist());
-        cultimateList3.add(Data.getClockedInParaprofessionals());
-       
-        uacSessions = new UltimateAutoComplete(cultimateList3, boxes3);
-            
-            
-        clearComboBoxes();
-      
-        Timestamp now = new Timestamp((new Date()).getTime());
-        
-        
-       
-       String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
-       String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
-       String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
-       
-      String currentSessionsWhere = " where ("+sessStartCol+" IS NULL or ("+sessStartCol+" <= '"+now.toString()+"' and "+sessEndCol+" IS NULL)) AND "+walkoutCol+"='false'";
-
-       ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere,DatabaseHelper.getConnection());
-        if(sessions.size() > 0)
-        {
-            for(int i=0; i<sessions.size(); i++)
+            public void run()
             {
-                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i)); 
-            }
-            
-            sessionsTable.repaint();
-        }
-        
-        
-        String futureSessionsWhere = " where ("+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NULL) AND "+sessStartCol+" >= '"+now.toString()+"' AND "+walkoutCol+"='false'";
 
-        ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
-        if(futureSessions.size() > 0)
-        {
-            for(int i=0; i<futureSessions.size(); i++)
-            {
-                ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i)); 
+                setUpSearchTab();
+                ArrayList<String> termCodes = new ArrayList<String>();
+                try
+                {
+                    termCodes = RetrieveNewTerm.getTermCodes();
+                } catch (Exception e)
+                {
+                    JOptionPane.showMessageDialog(null, "Could not load term codes. The web address may have changed.");
+                }
+                DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+
+                for (int i = 0; i < termCodes.size(); i++)
+                {
+                    dcbm.addElement(termCodes.get(i));
+                }
+
+                termCodeCombo.setModel(dcbm);
+
+                notesField.setLineWrap(true);
+                sessionstartField.setText("mm/dd/yyyy hh:mm aa");
+                sessionendField.setText("mm/dd/yyyy hh:mm aa");
+                editSaveButton.setVisible(false);
+
+                Data d = new Data();
+                JComboBox[] cboxes = new JComboBox[4];
+                cboxes[0] = fnameCombo;
+                cboxes[1] = lnameCombo;
+                cboxes[2] = phoneCombo;
+                cboxes[3] = emailCombo;
+
+                ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+                cultimateList.add(Data.getClientsfirst());
+                cultimateList.add(Data.getClientslast());
+                cultimateList.add(Data.getClientsphone());
+                cultimateList.add(Data.getClientsemail());
+                ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+                cultimateList1.add(Data.getFnameOrderedList());
+                cultimateList1.add(Data.getLnameOrderedList());
+                cultimateList1.add(Data.getPhoneOrderedList());
+                cultimateList1.add(Data.getEmailOrderedList());
+                uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+
+                JComboBox[] cboxes2 = new JComboBox[3];
+                cboxes2[0] = courseCombo;
+                cboxes2[1] = levelCombo;
+                cboxes2[2] = teacherCombo;
+                ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+                cultimateList2.add(Data.getSubjectslist());
+                cultimateList2.add(Data.getLevelslist());
+                cultimateList2.add(Data.getTeacherslist());
+                ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+                cultimateList22.add(Data.getSubjectOrderedList());
+                cultimateList22.add(Data.getLevelOrderedList());
+                cultimateList22.add(Data.getTeacherOrderedList());
+                uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
+
+                JComboBox[] boxes3 = new JComboBox[3];
+
+                boxes3[0] = creatorCombo;
+                boxes3[1] = locationCombo;
+                boxes3[2] = paraprofessionalCombo;
+
+                ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
+
+                cultimateList3.add(Data.getClockedInParaprofessionals());
+                cultimateList3.add(Data.getLocationslist());
+                cultimateList3.add(Data.getClockedInParaprofessionals());
+
+                uacSessions = new UltimateAutoComplete(cultimateList3, boxes3);
+
+
+                clearComboBoxes();
+
+                Timestamp now = new Timestamp((new Date()).getTime());
+
+
+
+                String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
+                String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
+                String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
+
+                String currentSessionsWhere = " where (" + sessStartCol + " IS NULL or (" + sessStartCol + " <= '" + now.toString() + "' and " + sessEndCol + " IS NULL)) AND " + walkoutCol + "='false'";
+
+                ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere, DatabaseHelper.getConnection());
+                if (sessions.size() > 0)
+                {
+                    for (int i = 0; i < sessions.size(); i++)
+                    {
+                        ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i));
+                    }
+
+                    sessionsTable.repaint();
+                }
+
+
+                String futureSessionsWhere = " where (" + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NULL) AND " + sessStartCol + " >= '" + now.toString() + "' AND " + walkoutCol + "='false'";
+
+                ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
+                if (futureSessions.size() > 0)
+                {
+                    for (int i = 0; i < futureSessions.size(); i++)
+                    {
+                        ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i));
+                    }
+
+                    appointmentsTable.repaint();
+                }
+
+
+                String todaySessionsWhere = " where " + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NOT NULL and DATE(" + sessStartCol + ") = DATE('" + now.toString() + "') and DATE(" + sessEndCol + ") = DATE('" + now.toString() + "')";
+                ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere, DatabaseHelper.getConnection());
+                if (todaySessions.size() > 0)
+                {
+                    for (int i = 0; i < todaySessions.size(); i++)
+                    {
+                        ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i));
+                    }
+
+                    todaysSessionTable.repaint();
+                }
+
+
+
+
+                DefaultCellEditor dce = makeEditSessionCellEditor();
+                DefaultCellEditor dceAgenda = makeEditAgendaCellEditor();
+
+                tableHelper.setTableRendersAndEditors(dce);
+                tableHelperFuture.setTableRendersAndEditors(dce);
+                todayTableHelper.setTableRendersAndEditors(dce);
+                tableHelperAgenda.setTableRendersAndEditors(dceAgenda);
+                tableHelper.autoResizeColWidth();
+                todayTableHelper.autoResizeColWidth();
+                tableHelperFuture.autoResizeColWidth();
+
+                reportsScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+                searchScrollPane.getVerticalScrollBar().setUnitIncrement(20);
+
+
+                setUpAgenda();
+
+
+                setUpGeneralReportTab();
             }
-            
-            appointmentsTable.repaint();
-        }
-        
-        
-        String todaySessionsWhere = " where "+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NOT NULL and DATE("+sessStartCol +") = DATE('"+now.toString()+"') and DATE("+sessEndCol+") = DATE('"+now.toString()+"')";
-       ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere,DatabaseHelper.getConnection());
-        if(todaySessions.size() > 0)
-        {
-            for(int i=0; i<todaySessions.size(); i++)
-            {
-                ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i)); 
-            }
-            
-            todaysSessionTable.repaint();
-        }
-        
-        
-        
-        
-        DefaultCellEditor dce = makeEditSessionCellEditor();
-        DefaultCellEditor dceAgenda = makeEditAgendaCellEditor();
-        
-        tableHelper.setTableRendersAndEditors(dce);
-        tableHelperFuture.setTableRendersAndEditors(dce);
-        todayTableHelper.setTableRendersAndEditors(dce);
-        tableHelperAgenda.setTableRendersAndEditors(dceAgenda);
-        tableHelper.autoResizeColWidth();
-        todayTableHelper.autoResizeColWidth();
-        tableHelperFuture.autoResizeColWidth();
-            
-        reportsScrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        searchScrollPane.getVerticalScrollBar().setUnitIncrement(20);
-        
-        
-        setUpAgenda();
-        
-       
-        setUpGeneralReportTab();
-            } }).start();
-        
-        
-    DatabaseHelper.close();
-     
-        
+        }).start();
+
+
+        DatabaseHelper.close();
+
+
         Timer timer = new Timer("Minute Update");
- 
-        MinuteUpdater min = new MinuteUpdater((SessionTableModel)sessionsTable.getModel(), (SessionTableModel)appointmentsTable.getModel());
- 
+
+        MinuteUpdater min = new MinuteUpdater((SessionTableModel) sessionsTable.getModel(), (SessionTableModel) appointmentsTable.getModel());
+
         timer.schedule(min, 60000, 60000);
     }
-    
-    
+
     /**
      * Update the session and agenda tables
      */
@@ -488,104 +490,105 @@ public final class AdminView extends javax.swing.JFrame
         String sessStartCol = ParaprofessionalSession.ParaSessTable.SESSIONSTART.getWithAlias();
         String sessEndCol = ParaprofessionalSession.ParaSessTable.SESSIONEND.getWithAlias();
         String walkoutCol = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
-       
-        String currentSessionsWhere = " where ("+sessStartCol+" IS NULL or ("+sessStartCol+" <= '"+now.toString()+"' and "+sessEndCol+" IS NULL)) AND "+walkoutCol+"='false'";
+
+        String currentSessionsWhere = " where (" + sessStartCol + " IS NULL or (" + sessStartCol + " <= '" + now.toString() + "' and " + sessEndCol + " IS NULL)) AND " + walkoutCol + "='false'";
         ((SessionTableModel) sessionsTable.getModel()).deleteAllRows();
-       ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere,DatabaseHelper.getConnection());
-        
-       if(sessions.size() > 0)
+        ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(currentSessionsWhere, DatabaseHelper.getConnection());
+
+        if (sessions.size() > 0)
         {
-            for(int i=0; i<sessions.size(); i++)
+            for (int i = 0; i < sessions.size(); i++)
             {
-                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i)); 
+                ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(i));
             }
-            
+
             sessionsTable.repaint();
         }
-        
-        
-        String futureSessionsWhere = " where ("+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NULL) AND "+sessStartCol+" >= '"+now.toString()+"' AND "+walkoutCol+"='false'";
+
+
+        String futureSessionsWhere = " where (" + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NULL) AND " + sessStartCol + " >= '" + now.toString() + "' AND " + walkoutCol + "='false'";
 
         SessionTableModel stm = ((SessionTableModel) appointmentsTable.getModel());
         stm.deleteAllRows();
         ArrayList<ParaprofessionalSession> futureSessions = ParaprofessionalSession.selectAllParaprofessionalSession(futureSessionsWhere, DatabaseHelper.getConnection());
-        if(futureSessions.size() > 0)
+        if (futureSessions.size() > 0)
         {
-            for(int i=0; i<futureSessions.size(); i++)
+            for (int i = 0; i < futureSessions.size(); i++)
             {
-                ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i)); 
+                ((SessionTableModel) appointmentsTable.getModel()).addRow(futureSessions.get(i));
             }
-            
+
             appointmentsTable.repaint();
         }
-        
-        String fromCurrentDateWhere = " where "+Agenda.AgendaTable.DATE.getWithAlias()+" >= CURDATE()";
+
+        String fromCurrentDateWhere = " where " + Agenda.AgendaTable.DATE.getWithAlias() + " >= CURDATE()";
 
         ArrayList<Agenda> agenda = Agenda.selectAllAgenda(fromCurrentDateWhere, DatabaseHelper.getConnection());
         ((AgendaTableModel) agendaTable.getModel()).deleteAllRows();
-        if(agenda.size() > 0)
-        {          
-            
-            for(int i=0; i<agenda.size(); i++)
+        if (agenda.size() > 0)
+        {
+
+            for (int i = 0; i < agenda.size(); i++)
             {
-                
+
                 Agenda a = agenda.get(i);
                 ((AgendaTableModel) agendaTable.getModel()).addRow(a);
-                
+
             }
-           
-        agendaTable.repaint();
-        
+
+            agendaTable.repaint();
+
         }
-        
-        
-        String todaySessionsWhere = " where "+sessStartCol+" IS NOT NULL and "+sessEndCol+" IS NOT NULL and DATE("+sessStartCol +") = DATE('"+now.toString()+"') and DATE("+sessEndCol+") = DATE('"+now.toString()+"')";
-       ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere,DatabaseHelper.getConnection());
+
+
+        String todaySessionsWhere = " where " + sessStartCol + " IS NOT NULL and " + sessEndCol + " IS NOT NULL and DATE(" + sessStartCol + ") = DATE('" + now.toString() + "') and DATE(" + sessEndCol + ") = DATE('" + now.toString() + "')";
+        ArrayList<ParaprofessionalSession> todaySessions = ParaprofessionalSession.selectAllParaprofessionalSession(todaySessionsWhere, DatabaseHelper.getConnection());
         ((TodaySessionTableModel) todaysSessionTable.getModel()).deleteAllRows();
-       if(todaySessions.size() > 0)
+        if (todaySessions.size() > 0)
         {
-            for(int i=0; i<todaySessions.size(); i++)
+            for (int i = 0; i < todaySessions.size(); i++)
             {
-                ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i)); 
+                ((TodaySessionTableModel) todaysSessionTable.getModel()).addRow(todaySessions.get(i));
             }
-            
+
             todaysSessionTable.repaint();
         }
         DatabaseHelper.close();
     }
-    
-    
+
     /**
      * Set up the agenda table
      */
     public void setUpAgenda()
     {
-        
+
         Timestamp now = new Timestamp((new Date()).getTime());
-        
-        String fromCurrentDateWhere = " where "+Agenda.AgendaTable.DATE.getWithAlias()+" >= CURDATE()";
+
+        String fromCurrentDateWhere = " where " + Agenda.AgendaTable.DATE.getWithAlias() + " >= CURDATE()";
 
         ArrayList<Agenda> agenda = Agenda.selectAllAgenda(fromCurrentDateWhere, DatabaseHelper.getConnection());
 
-        if(agenda.size() > 0)
-        {          
-            
-            for(int i=0; i<agenda.size(); i++)
+        if (agenda.size() > 0)
+        {
+
+            for (int i = 0; i < agenda.size(); i++)
             {
-                
+
                 Agenda a = agenda.get(i);
                 ((AgendaTableModel) agendaTable.getModel()).addRow(a);
-                
+
             }
-            
+
             agendaTable.repaint();
-            
+
         }
     }
-    
+
     /**
      * Cell editor for session tables to collect form info and put into an edit
-     * @return the cell editor for double clicking on session tables to bring data to comboboxes for editing
+     *
+     * @return the cell editor for double clicking on session tables to bring
+     * data to comboboxes for editing
      */
     public DefaultCellEditor makeEditSessionCellEditor()
     {
@@ -593,10 +596,10 @@ public final class AdminView extends javax.swing.JFrame
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                        boolean isSelected, int row, int column) 
+                    boolean isSelected, int row, int column)
             {
-                sessionID = ((Integer)table.getValueAt(row, SessionTableModel.Columns.ID.getColumnIndex())).intValue();
-                
+                sessionID = ((Integer) table.getValueAt(row, SessionTableModel.Columns.ID.getColumnIndex())).intValue();
+
                 uaacCourse.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.TEACHER.getColumnIndex()).toString(), ComboBoxesIndexes.TEACHER.getBoxIndex());
                 uaacCourse.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.LEVEL.getColumnIndex()).toString(), ComboBoxesIndexes.LEVEL.getBoxIndex());
                 uaacCourse.setComboValue(true, table.getValueAt(row, SessionTableModel.Columns.COURSE.getColumnIndex()).toString(), ComboBoxesIndexes.COURSE.getBoxIndex());
@@ -607,43 +610,50 @@ public final class AdminView extends javax.swing.JFrame
                 uacSessions.setComboValue(table.getValueAt(row, SessionTableModel.Columns.PARAPROFESSIONAL.getColumnIndex()).toString(), ComboBoxesIndexes.PARAPROFESSIONAL.getBoxIndex());
                 uacSessions.setComboValue(table.getValueAt(row, SessionTableModel.Columns.LOCATION.getColumnIndex()).toString(), ComboBoxesIndexes.LOCATION.getBoxIndex());
                 uacSessions.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CREATOR.getColumnIndex()).toString(), ComboBoxesIndexes.CREATOR.getBoxIndex());
-                
-                gcCheck.setSelected((Boolean)table.getValueAt(row, SessionTableModel.Columns.GC.getColumnIndex()));
-                
-                notesField.setText(table.getValueAt(row, SessionTableModel.Columns.NOTES.getColumnIndex()).toString());
-              
-                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
-               
-                boolean hasSessionStart = (table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
-                boolean hasSessionEnd = (table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())))  && !sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
-                
-                
-                if(hasSessionStart)
-                    sessionstartField.setText(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())));
-                else
-                    sessionstartField.setText("mm/dd/yyyy hh:mm aa");
 
-                if(hasSessionEnd)
-                    sessionendField.setText(sdf.format(new Date(((Timestamp)table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())));
-                else
+                gcCheck.setSelected((Boolean) table.getValueAt(row, SessionTableModel.Columns.GC.getColumnIndex()));
+
+                notesField.setText(table.getValueAt(row, SessionTableModel.Columns.NOTES.getColumnIndex()).toString());
+
+                SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
+
+                boolean hasSessionStart = (table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
+                boolean hasSessionEnd = (table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex()) != null && Validate.validateTimestamp(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime()))) && !sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())).equals("12/31/9999 12:00 PM"));
+
+
+                if (hasSessionStart)
+                {
+                    sessionstartField.setText(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())));
+                } else
+                {
+                    sessionstartField.setText("mm/dd/yyyy hh:mm aa");
+                }
+
+                if (hasSessionEnd)
+                {
+                    sessionendField.setText(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())));
+                } else
+                {
                     sessionendField.setText("mm/dd/yyyy hh:mm aa");
-                
-                walkoutCheck.setSelected((Boolean)table.getValueAt(row, SessionTableModel.Columns.WALKOUT.getColumnIndex()));
-                
+                }
+
+                walkoutCheck.setSelected((Boolean) table.getValueAt(row, SessionTableModel.Columns.WALKOUT.getColumnIndex()));
+
                 editSaveButton.setVisible(true);
-               
+
                 tabsPane.setSelectedIndex(0);
                 return null;
             }
         };
-        
+
         return dce;
     }
-    
-    
+
     /**
      * Cell editor for agenda table for double clicking on a row to edit
-     * @return the cell editor for agenda table for a double click to bring up dialog editor
+     *
+     * @return the cell editor for agenda table for a double click to bring up
+     * dialog editor
      */
     public DefaultCellEditor makeEditAgendaCellEditor()
     {
@@ -651,22 +661,21 @@ public final class AdminView extends javax.swing.JFrame
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                        boolean isSelected, int row, int column) 
+                    boolean isSelected, int row, int column)
             {
                 SimpleDateFormat sdfFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 SimpleDateFormat sdfTo = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
                 String type = table.getValueAt(row, AgendaTableModel.Columns.TYPE.getColumnIndex()).toString();
                 String date = "";
-                try{
-                    date= sdfTo.format(sdfFrom.parse(table.getValueAt(row, AgendaTableModel.Columns.DATE.getColumnIndex()).toString()));
-                }
-                catch(Exception e)
+                try
                 {
-                    
+                    date = sdfTo.format(sdfFrom.parse(table.getValueAt(row, AgendaTableModel.Columns.DATE.getColumnIndex()).toString()));
+                } catch (Exception e)
+                {
                 }
                 String notes = table.getValueAt(row, AgendaTableModel.Columns.NOTES.getColumnIndex()).toString();
-                int agendaID =((Integer) table.getValueAt(row, AgendaTableModel.Columns.ID.getColumnIndex())).intValue();
-                
+                int agendaID = ((Integer) table.getValueAt(row, AgendaTableModel.Columns.ID.getColumnIndex())).intValue();
+
                 NewAgendaObject ndo = new NewAgendaObject(new Frame(), true, type, date, notes, agendaID);
                 ndo.setLocationRelativeTo(null);
                 ndo.setVisible(true);
@@ -674,10 +683,10 @@ public final class AdminView extends javax.swing.JFrame
                 return null;
             }
         };
-        
+
         return dce;
     }
-    
+
     /**
      * Clear all the comboboxes on the search screen
      */
@@ -688,20 +697,26 @@ public final class AdminView extends javax.swing.JFrame
             uac.setComboValue("", i);
         }
     }
-    
+
     /**
      * Clear all the comboboxes on the create session screen
      */
     public void clearComboBoxes()
     {
-         for(int i=0; i<uacSessions.getBoxesLength(); i++)
+        for (int i = 0; i < uacSessions.getBoxesLength(); i++)
+        {
             uacSessions.setComboValue("", i);
-         for(int i=0; i<uaacClient.getBoxesLength(); i++)
+        }
+        for (int i = 0; i < uaacClient.getBoxesLength(); i++)
+        {
             uaacClient.setComboValue(false, "", i);
-         for(int i=0; i<uaacCourse.getBoxesLength(); i++)
+        }
+        for (int i = 0; i < uaacCourse.getBoxesLength(); i++)
+        {
             uaacCourse.setComboValue(false, "", i);
+        }
     }
-    
+
     /**
      * Load charts on report tab without date contraints
      */
@@ -765,7 +780,7 @@ public final class AdminView extends javax.swing.JFrame
         DatabaseHelper.close();
         displayCharts(data, categoryData, otherValues, studentMinutes);
     }
-    
+
     /**
      * Set up the report tab
      */
@@ -773,7 +788,7 @@ public final class AdminView extends javax.swing.JFrame
     {
         loadChartsWithoutDate();
     }
-    
+
     private void displayCharts(String[][] generalData, String[][] categoryData, String[][] otherValues, String[][] studentMinutes)
     {
         String[] columns =
@@ -897,7 +912,7 @@ public final class AdminView extends javax.swing.JFrame
         generalChartPanelMid.add(pieChartPanel2);
         generalChartPanelMid.validate();
     }
-    
+
     private JFreeChart createChart(PieDataset dataset, String title)
     {
 
@@ -980,7 +995,6 @@ public final class AdminView extends javax.swing.JFrame
 
         return chart;
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -3179,7 +3193,7 @@ public final class AdminView extends javax.swing.JFrame
 
     private void deleteSessionButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteSessionButton1ActionPerformed
 
-        int[] selectedRows =appointmentsTable.getSelectedRows();
+        int[] selectedRows = appointmentsTable.getSelectedRows();
 
         ((SessionTableModel) appointmentsTable.getModel()).deleteRows(selectedRows);
     }//GEN-LAST:event_deleteSessionButton1ActionPerformed
@@ -3195,31 +3209,31 @@ public final class AdminView extends javax.swing.JFrame
         NewClientObject ndo = new NewClientObject(new Frame(), true);
         ndo.setLocationRelativeTo(null);
         ndo.setVisible(true);
-        if(ndo.wasInserted())
+        if (ndo.wasInserted())
         {
             DatabaseHelper.open();
             Data.refreshClient();
             uaacClient.noMore();
             uaacClient = null;
-            JComboBox[] cboxes = new  JComboBox[4];
-           cboxes[0]=fnameCombo;
-           cboxes[1]=lnameCombo;
-           cboxes[2]=phoneCombo;
-           cboxes[3]=emailCombo;
+            JComboBox[] cboxes = new JComboBox[4];
+            cboxes[0] = fnameCombo;
+            cboxes[1] = lnameCombo;
+            cboxes[2] = phoneCombo;
+            cboxes[3] = emailCombo;
 
-           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-           cultimateList.add(Data.getClientsfirst());
-           cultimateList.add(Data.getClientslast());
-           cultimateList.add(Data.getClientsphone());
-           cultimateList.add(Data.getClientsemail());
-           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-           cultimateList1.add(Data.getFnameOrderedList());
-           cultimateList1.add(Data.getLnameOrderedList());
-           cultimateList1.add(Data.getPhoneOrderedList());
-           cultimateList1.add(Data.getEmailOrderedList());
-           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-           clearForm();
-           DatabaseHelper.close();
+            ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+            cultimateList.add(Data.getClientsfirst());
+            cultimateList.add(Data.getClientslast());
+            cultimateList.add(Data.getClientsphone());
+            cultimateList.add(Data.getClientsemail());
+            ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+            cultimateList1.add(Data.getFnameOrderedList());
+            cultimateList1.add(Data.getLnameOrderedList());
+            cultimateList1.add(Data.getPhoneOrderedList());
+            cultimateList1.add(Data.getEmailOrderedList());
+            uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
+            clearForm();
+            DatabaseHelper.close();
         }
     }//GEN-LAST:event_newStudentButtonActionPerformed
 
@@ -3235,76 +3249,76 @@ public final class AdminView extends javax.swing.JFrame
 
     private void clearButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearButtonActionPerformed
         courseCombo.setBorder(null);
-            teacherCombo.setBorder(null);
-            levelCombo.setBorder(null);
-            paraprofessionalCombo.setBorder(null);
-            creatorCombo.setBorder(null);
-            fnameCombo.setBorder(null);
-            lnameCombo.setBorder(null);
-            locationCombo.setBorder(null);
-            sessionendField.setBorder(null);
-            sessionstartField.setBorder(null);
-            studentInfoPanel.repaint();
-            courseInfoPanel.repaint();
-            paraprofessionalInfoPanel.repaint();
-            
+        teacherCombo.setBorder(null);
+        levelCombo.setBorder(null);
+        paraprofessionalCombo.setBorder(null);
+        creatorCombo.setBorder(null);
+        fnameCombo.setBorder(null);
+        lnameCombo.setBorder(null);
+        locationCombo.setBorder(null);
+        sessionendField.setBorder(null);
+        sessionstartField.setBorder(null);
+        studentInfoPanel.repaint();
+        courseInfoPanel.repaint();
+        paraprofessionalInfoPanel.repaint();
+
         uaacClient.noMore();
-            uaacClient = null;
-            JComboBox[] cboxes = new  JComboBox[4];
-           
-           cboxes[0]=fnameCombo;
-           cboxes[1]=lnameCombo;
-           cboxes[2]=phoneCombo;
-           cboxes[3]=emailCombo;
+        uaacClient = null;
+        JComboBox[] cboxes = new JComboBox[4];
 
-           ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
-           cultimateList.add(Data.getClientsfirst());
-           cultimateList.add(Data.getClientslast());
-           cultimateList.add(Data.getClientsphone());
-           cultimateList.add(Data.getClientsemail());
-           ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
-           cultimateList1.add(Data.getFnameOrderedList());
-           cultimateList1.add(Data.getLnameOrderedList());
-           cultimateList1.add(Data.getPhoneOrderedList());
-           cultimateList1.add(Data.getEmailOrderedList());
-           uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
-           
-           JComboBox[] cboxes2 = new  JComboBox[3];
-       cboxes2[0]=courseCombo;
-       cboxes2[1]=levelCombo;
-       cboxes2[2]=teacherCombo;
+        cboxes[0] = fnameCombo;
+        cboxes[1] = lnameCombo;
+        cboxes[2] = phoneCombo;
+        cboxes[3] = emailCombo;
 
-       ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
+        cultimateList.add(Data.getClientsfirst());
+        cultimateList.add(Data.getClientslast());
+        cultimateList.add(Data.getClientsphone());
+        cultimateList.add(Data.getClientsemail());
+        ArrayList<ArrayList<String>> cultimateList1 = new ArrayList<ArrayList<String>>();
+        cultimateList1.add(Data.getFnameOrderedList());
+        cultimateList1.add(Data.getLnameOrderedList());
+        cultimateList1.add(Data.getPhoneOrderedList());
+        cultimateList1.add(Data.getEmailOrderedList());
+        uaacClient = new UltimateAutoAutoComplete(cultimateList, cboxes, cultimateList1);
 
-       cultimateList2.add(Data.getSubjectslist());
-       cultimateList2.add(Data.getLevelslist());
-       cultimateList2.add(Data.getTeacherslist());
-       ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
-       cultimateList22.add(Data.getSubjectOrderedList());
-       cultimateList22.add(Data.getLevelOrderedList());
-       cultimateList22.add(Data.getTeacherOrderedList());
+        JComboBox[] cboxes2 = new JComboBox[3];
+        cboxes2[0] = courseCombo;
+        cboxes2[1] = levelCombo;
+        cboxes2[2] = teacherCombo;
+
+        ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
+
+        cultimateList2.add(Data.getSubjectslist());
+        cultimateList2.add(Data.getLevelslist());
+        cultimateList2.add(Data.getTeacherslist());
+        ArrayList<ArrayList<String>> cultimateList22 = new ArrayList<ArrayList<String>>();
+        cultimateList22.add(Data.getSubjectOrderedList());
+        cultimateList22.add(Data.getLevelOrderedList());
+        cultimateList22.add(Data.getTeacherOrderedList());
 
         uaacCourse.noMore();
         uaacCourse = null;
-       uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
-       
-       JComboBox[] boxes3 = new  JComboBox[3];
-        
-        boxes3[0]=creatorCombo;
-        boxes3[1]=locationCombo;
-        boxes3[2]=paraprofessionalCombo;
+        uaacCourse = new UltimateAutoAutoComplete(cultimateList2, cboxes2, cultimateList22);
+
+        JComboBox[] boxes3 = new JComboBox[3];
+
+        boxes3[0] = creatorCombo;
+        boxes3[1] = locationCombo;
+        boxes3[2] = paraprofessionalCombo;
 
         ArrayList<ArrayList<String>> cultimateList3 = new ArrayList<ArrayList<String>>();
-        
+
         cultimateList3.add(Data.getClockedInParaprofessionals());
         cultimateList3.add(Data.getLocationslist());
         cultimateList3.add(Data.getClockedInParaprofessionals());
-       
+
         uacSessions.noMore();
         uacSessions = null;
         uacSessions = new UltimateAutoComplete(cultimateList3, boxes3);
-        
-        
+
+
         clearForm();
     }//GEN-LAST:event_clearButtonActionPerformed
 
@@ -3338,7 +3352,6 @@ public final class AdminView extends javax.swing.JFrame
         ((AgendaTableModel) agendaTable.getModel()).deleteRows(selectedRows);
     }//GEN-LAST:event_deleteAgendaButtonActionPerformed
 
-    
     private void loadChartsWithDates(Timestamp beginDate, Timestamp endDate)
     {
         try
@@ -3347,75 +3360,73 @@ public final class AdminView extends javax.swing.JFrame
             {
                 DatabaseHelper.open();
                 String[][] data = DatabaseHelper.getDataFromRegularQuery(
-                    "SELECT "
-                    + "abbrevName,"
-                    + "COUNT(paraprofessionalSessionID) as 'Total Sessions',"
-                    + "Sum(IF( TIMESTAMPDIFF("
-                    + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS '30-min. Sessions', "
-                    + "Sum(IF( TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) /30, 1))/count(paraprofessionalSessionID) as 'Avg. Session/Visit', "
-                    + "SUM(walkout) as 'Walkouts', "
-                    + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart)) as 'Total Wait Time', "
-                    + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart))/COUNT(paraprofessionalSessionID) as 'Avg. Wait Time' "
-                    + "FROM ParaprofessionalSession ps "
-                    + "join Course c on ps.courseID=c.courseID "
-                    + "join Subject s on c.subjectID=s.subjectID "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                    + "group by abbrevName");
+                        "SELECT "
+                        + "abbrevName,"
+                        + "COUNT(paraprofessionalSessionID) as 'Total Sessions',"
+                        + "Sum(IF( TIMESTAMPDIFF("
+                        + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS '30-min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) /30, 1))/count(paraprofessionalSessionID) as 'Avg. Session/Visit', "
+                        + "SUM(walkout) as 'Walkouts', "
+                        + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart)) as 'Total Wait Time', "
+                        + "SUM(TIMESTAMPDIFF(MINUTE , timeAndDateEntered, sessionStart))/COUNT(paraprofessionalSessionID) as 'Avg. Wait Time' "
+                        + "FROM ParaprofessionalSession ps "
+                        + "join Course c on ps.courseID=c.courseID "
+                        + "join Subject s on c.subjectID=s.subjectID "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
+                        + "group by abbrevName");
 
                 String[][] categoryData = DatabaseHelper.getDataFromRegularQuery(
-                    "select c.name, count(paraprofessionalSessionID) as '# of Sessions'"
-                    + " from ParaprofessionalSession ps"
-                    + " join Course course on course.courseID=ps.courseID"
-                    + " join Subject s on course.subjectID=s.subjectID"
-                    + " join Category c on s.categoryID=c.categoryID "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                    + " group by c.name");
+                        "select c.name, count(paraprofessionalSessionID) as '# of Sessions'"
+                        + " from ParaprofessionalSession ps"
+                        + " join Course course on course.courseID=ps.courseID"
+                        + " join Subject s on course.subjectID=s.subjectID"
+                        + " join Category c on s.categoryID=c.categoryID "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
+                        + " group by c.name");
 
                 String[][] otherValues = DatabaseHelper.getDataFromRegularQuery(
-                    "SELECT "
-                    + "SUM(walkout) as 'Walkouts', "
-                    + "COUNT(paraprofessionalID) as 'Total Students', "
-                    + "Sum(IF( TIMESTAMPDIFF("
-                    + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
-                    + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS 'Total Sessions' "+ "FROM ParaprofessionalSession "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                );
+                        "SELECT "
+                        + "SUM(walkout) as 'Walkouts', "
+                        + "COUNT(paraprofessionalID) as 'Total Students', "
+                        + "Sum(IF( TIMESTAMPDIFF("
+                        + "MINUTE , sessionStart, sessionEnd ) >30, TIMESTAMPDIFF( "
+                        + "MINUTE , sessionStart, sessionEnd ) /30, 1)) AS 'Total Sessions' " + "FROM ParaprofessionalSession "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'");
 
                 String[][] studentMinutes = DatabaseHelper.getDataFromRegularQuery(
-                    "SELECT "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) < 10"
-                + " and TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) > 0, 1, 0))"
-                + " AS '<10 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 10"
-                + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) < 25, 1, 0))"
-                + " AS '10-24 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 25"
-                + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 35, 1, 0))"
-                + " AS '25-35 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 35"
-                + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 60, 1, 0))"
-                + " AS '36-60 Min. Sessions', "
-                + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 60"
-                + ", 1, 0))"
-                + " AS '>60 Min. Sessions' "
-                + "FROM ParaprofessionalSession ps "
-                    + "where "
-                    + "timeAndDateEntered "
-                    + "between "
-                    + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'"
-                );
+                        "SELECT "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) < 10"
+                        + " and TIMESTAMPDIFF(MINUTE, sessionStart, sessionEnd ) > 0, 1, 0))"
+                        + " AS '<10 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 10"
+                        + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) < 25, 1, 0))"
+                        + " AS '10-24 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) >= 25"
+                        + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 35, 1, 0))"
+                        + " AS '25-35 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 35"
+                        + " and TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) <= 60, 1, 0))"
+                        + " AS '36-60 Min. Sessions', "
+                        + "Sum(IF( TIMESTAMPDIFF(MINUTE , sessionStart, sessionEnd ) > 60"
+                        + ", 1, 0))"
+                        + " AS '>60 Min. Sessions' "
+                        + "FROM ParaprofessionalSession ps "
+                        + "where "
+                        + "timeAndDateEntered "
+                        + "between "
+                        + "'" + beginDate.toString() + "' and '" + endDate.toString() + "'");
 
                 DatabaseHelper.close();
                 displayCharts(data, categoryData, otherValues, studentMinutes);
@@ -3427,7 +3438,7 @@ public final class AdminView extends javax.swing.JFrame
             e.printStackTrace();
         }
     }
-    
+
     /**
      *
      * @param date - date to subtract from
@@ -3438,12 +3449,12 @@ public final class AdminView extends javax.swing.JFrame
     {
         int x = -days;
         Calendar cal = GregorianCalendar.getInstance();
-        cal.add( Calendar.DAY_OF_YEAR, x);
+        cal.add(Calendar.DAY_OF_YEAR, x);
         Date dateBefore = cal.getTime();
 
         return dateBefore;
     }
-    
+
     private void generalReportLoadButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_generalReportLoadButtonActionPerformed
     {//GEN-HEADEREND:event_generalReportLoadButtonActionPerformed
         try
@@ -3469,30 +3480,26 @@ public final class AdminView extends javax.swing.JFrame
 
         } catch (Exception e)
         {
-            
         }
     }//GEN-LAST:event_generalReportLoadButtonActionPerformed
 
     private void jPanel3MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseMoved
-        
-      //  timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
-      //  System.out.println("Set back to: "+timeout);
-        
+        //  timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        //  System.out.println("Set back to: "+timeout);
     }//GEN-LAST:event_jPanel3MouseMoved
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        
 //timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_formMouseMoved
 
     private void sessionsScrollPaneMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sessionsScrollPaneMouseMoved
         // TODO add your handling code here:
-       // timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        // timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_sessionsScrollPaneMouseMoved
 
     private void jScrollPane1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseMoved
         // TODO add your handling code here:
-       // timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
+        // timeoutTime = System.currentTimeMillis() + (logoutSeconds*1000);
     }//GEN-LAST:event_jScrollPane1MouseMoved
 
     private void agendaPanelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agendaPanelMouseMoved
@@ -3541,15 +3548,15 @@ public final class AdminView extends javax.swing.JFrame
     }//GEN-LAST:event_jPanel2MouseMoved
 
     private void dayRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayRadioActionPerformed
-        
-        
+
+
         try
         {
             Date d = new Date();
-            
-             Timestamp beginDate = new Timestamp(d.getTime());
+
+            Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
-          
+
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -3557,25 +3564,25 @@ public final class AdminView extends javax.swing.JFrame
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 1);
             endDate = new Timestamp(myDate.getTime());
-            
-           loadChartsWithDates(endDate, beginDate);
+
+            loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
         {
             e.printStackTrace();
         }
-        
-        
+
+
     }//GEN-LAST:event_dayRadioActionPerformed
 
     private void monthRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthRadioActionPerformed
         try
         {
             Date d = new Date();
-            
-             Timestamp beginDate = new Timestamp(d.getTime());
+
+            Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
-          
+
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -3583,8 +3590,8 @@ public final class AdminView extends javax.swing.JFrame
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 30);
             endDate = new Timestamp(myDate.getTime());
-            
-          loadChartsWithDates(endDate, beginDate);
+
+            loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
         {
@@ -3596,10 +3603,10 @@ public final class AdminView extends javax.swing.JFrame
         try
         {
             Date d = new Date();
-            
+
             Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
-          
+
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -3607,7 +3614,7 @@ public final class AdminView extends javax.swing.JFrame
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 365);
             endDate = new Timestamp(myDate.getTime());
-            
+
             loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
@@ -3624,10 +3631,10 @@ public final class AdminView extends javax.swing.JFrame
         try
         {
             Date d = new Date();
-            
+
             Timestamp beginDate = new Timestamp(d.getTime());
             Timestamp endDate;
-          
+
 
             String sourceDate = beginDate.toString();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -3635,7 +3642,7 @@ public final class AdminView extends javax.swing.JFrame
             beginDate = new Timestamp(myDate.getTime());
             myDate = subDays(myDate, 7);
             endDate = new Timestamp(myDate.getTime());
-            
+
             loadChartsWithDates(endDate, beginDate);
 
         } catch (Exception e)
@@ -3698,103 +3705,91 @@ public final class AdminView extends javax.swing.JFrame
 
         if (clientRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Client.ClientTable.CLIENTID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Client.ClientTable.getTable());
             }
-        }
-        else if (sessionsRadio.isSelected())
+        } else if (sessionsRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALSESSIONID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), ParaprofessionalSession.ParaSessTable.getTable());
             }
-        }
-        else if (paraprofessionalRadio.isSelected())
+        } else if (paraprofessionalRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Paraprofessional.ParaTable.PARAPROFESSIONALID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Paraprofessional.ParaTable.getTable());
             }
-        }
-        else if (userRadio.isSelected())
+        } else if (userRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(User.UserTable.USERNAME.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), User.UserTable.getTable());
             }
-        }
-        else if (courseRadio.isSelected())
+        } else if (courseRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Course.CourseTable.COURSEID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Course.CourseTable.getTable());
             }
-        }
-        else if (teacherRadio.isSelected())
+        } else if (teacherRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Teacher.TeacherTable.TEACHERID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Teacher.TeacherTable.getTable());
             }
-        }
-        else if (subjectRadio.isSelected())
+        } else if (subjectRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Subject.SubjectTable.SUBJECTID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Subject.SubjectTable.getTable());
             }
-        }
-        else if (agendaRadio.isSelected())
+        } else if (agendaRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Agenda.AgendaTable.AGENDAID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Agenda.AgendaTable.getTable());
             }
-        }
-        else if (agendaCategoryRadio.isSelected())
+        } else if (agendaCategoryRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(AgendaCategory.AgendaCategoryTable.AGENDACATEGORYID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), AgendaCategory.AgendaCategoryTable.getTable());
             }
-        }
-        else if (categoryRadio.isSelected())
+        } else if (categoryRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Category.CategoryTable.CATEGORYID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Category.CategoryTable.getTable());
             }
-        }
-        else if (locationRadio.isSelected())
+        } else if (locationRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Location.LocationTable.LOCATIONID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Location.LocationTable.getTable());
             }
-        }
-        else if (roleRadio.isSelected())
+        } else if (roleRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int index = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(Role.RoleTable.ROLEID.getDisplayName());
                 DatabaseHelper.delete(searchsearchTable.getValueAt(rows[i], index).toString(), Role.RoleTable.getTable());
             }
-        }
-        else if (paraprofessionalCategoryRadio.isSelected())
+        } else if (paraprofessionalCategoryRadio.isSelected())
         {
-            for(int i=0; i<rows.length; i++)
+            for (int i = 0; i < rows.length; i++)
             {
                 int id1 = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(ParaprofessionalCategory.ParaCatTable.PARAPROFESSIONALID.getDisplayName());
                 int id2 = searchsearchTable.getTableHeader().getColumnModel().getColumnIndex(ParaprofessionalCategory.ParaCatTable.CATEGORYID.getDisplayName());
@@ -3811,10 +3806,11 @@ public final class AdminView extends javax.swing.JFrame
         try
         {
             boolean downloaded = download(searchsearchTable);
-            if(downloaded)
+            if (downloaded)
+            {
                 JOptionPane.showMessageDialog(null, "Download was successful");
-        }
-        catch(Exception e)
+            }
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Download was unsuccessful");
         }
@@ -3827,91 +3823,79 @@ public final class AdminView extends javax.swing.JFrame
     private void searchsearchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchsearchButtonActionPerformed
 
         String selectQuery = Client.ClientTable.getSelectQuery(false);
-        ArrayList<String> columns= Client.ClientTable.getMainTableColumns();
+        ArrayList<String> columns = Client.ClientTable.getMainTableColumns();
         String table = "Client";
         if (clientRadio.isSelected())
         {
             columns = Client.ClientTable.getTableColumnsWithoutIDs();
-            table=Client.ClientTable.getTable();
+            table = Client.ClientTable.getTable();
             selectQuery = Client.ClientTable.getSelectQuery(false);
-        }
-        else if (sessionsRadio.isSelected())
+        } else if (sessionsRadio.isSelected())
         {
             columns = ParaprofessionalSession.ParaSessTable.getTableColumnsWithoutIDs();
-            table=ParaprofessionalSession.ParaSessTable.getTable();
+            table = ParaprofessionalSession.ParaSessTable.getTable();
             selectQuery = ParaprofessionalSession.ParaSessTable.getSelectQuery(false);
-        }
-        else if (paraprofessionalRadio.isSelected())
+        } else if (paraprofessionalRadio.isSelected())
         {
             columns = Paraprofessional.ParaTable.getTableColumnsWithoutIDs();
-            table=Paraprofessional.ParaTable.getTable();
+            table = Paraprofessional.ParaTable.getTable();
             selectQuery = Paraprofessional.ParaTable.getSelectQuery(false);
-        }
-        else if (userRadio.isSelected())
+        } else if (userRadio.isSelected())
         {
             columns = User.UserTable.getTableColumnsWithoutIDs();
-            table=User.UserTable.getTable();
+            table = User.UserTable.getTable();
             selectQuery = User.UserTable.getSelectQuery(false);
-        }
-        else if (courseRadio.isSelected())
+        } else if (courseRadio.isSelected())
         {
             columns = Course.CourseTable.getTableColumnsWithoutIDs();
-            table=Course.CourseTable.getTable();
+            table = Course.CourseTable.getTable();
             selectQuery = Course.CourseTable.getSelectQuery(false);
-        }
-        else if (teacherRadio.isSelected())
+        } else if (teacherRadio.isSelected())
         {
             columns = Teacher.TeacherTable.getTableColumnsWithoutIDs();
-            table=Teacher.TeacherTable.getTable();
+            table = Teacher.TeacherTable.getTable();
             selectQuery = Teacher.TeacherTable.getSelectQuery(false);
-        }
-        else if (subjectRadio.isSelected())
+        } else if (subjectRadio.isSelected())
         {
             columns = Subject.SubjectTable.getTableColumnsWithoutIDs();
-            table=Subject.SubjectTable.getTable();
+            table = Subject.SubjectTable.getTable();
             selectQuery = Subject.SubjectTable.getSelectQuery(false);
-        }
-        else if (agendaRadio.isSelected())
+        } else if (agendaRadio.isSelected())
         {
             columns = Agenda.AgendaTable.getTableColumnsWithoutIDs();
-            table=Agenda.AgendaTable.getTable();
+            table = Agenda.AgendaTable.getTable();
             selectQuery = Agenda.AgendaTable.getSelectQuery(false);
-        }
-        else if (agendaCategoryRadio.isSelected())
+        } else if (agendaCategoryRadio.isSelected())
         {
             columns = AgendaCategory.AgendaCategoryTable.getTableColumnsWithoutIDs();
-            table=AgendaCategory.AgendaCategoryTable.getTable();
+            table = AgendaCategory.AgendaCategoryTable.getTable();
             selectQuery = AgendaCategory.AgendaCategoryTable.getSelectQuery(false);
-        }
-        else if (categoryRadio.isSelected())
+        } else if (categoryRadio.isSelected())
         {
             columns = Category.CategoryTable.getTableColumnsWithoutIDs();
-            table=Category.CategoryTable.getTable();
+            table = Category.CategoryTable.getTable();
             selectQuery = Category.CategoryTable.getSelectQuery(false);
-        }
-        else if (locationRadio.isSelected())
+        } else if (locationRadio.isSelected())
         {
             columns = Location.LocationTable.getTableColumnsWithoutIDs();
-            table=Location.LocationTable.getTable();
+            table = Location.LocationTable.getTable();
             selectQuery = Location.LocationTable.getSelectQuery(false);
-        }
-        else if (roleRadio.isSelected())
+        } else if (roleRadio.isSelected())
         {
             columns = Role.RoleTable.getTableColumnsWithoutIDs();
-            table= Role.RoleTable.getTable();
+            table = Role.RoleTable.getTable();
             selectQuery = Role.RoleTable.getSelectQuery(false);
-        }
-        else if (paraprofessionalCategoryRadio.isSelected())
+        } else if (paraprofessionalCategoryRadio.isSelected())
         {
             columns = ParaprofessionalCategory.ParaCatTable.getTableColumnsWithoutIDs();
-            table= ParaprofessionalCategory.ParaCatTable.getTable();
+            table = ParaprofessionalCategory.ParaCatTable.getTable();
             selectQuery = ParaprofessionalCategory.ParaCatTable.getSelectQuery(false);
         }
 
         String fullQuery = null;
 
         fullQuery = restrictHelper.createQuery(table, selectQuery);
-        
+
         DatabaseHelper.open();
 
         String[][] data = DatabaseHelper.fillTableWithQuery(fullQuery);
@@ -3923,7 +3907,7 @@ public final class AdminView extends javax.swing.JFrame
         searchsearchTable.setModel(dtm);
         autoResizeColWidth(searchsearchTable);
 
-        for(int i=0; i<searchsearchTable.getColumnCount(); i++)
+        for (int i = 0; i < searchsearchTable.getColumnCount(); i++)
         {
             searchsearchTable.getColumnModel().getColumn(i).setCellEditor(makeEditSearchCellEditor());
         }
@@ -3965,28 +3949,31 @@ public final class AdminView extends javax.swing.JFrame
 
         if (userFirst.length() > 0)
         {
-            restrictions.add("'"+userFirst+"'");
+            restrictions.add("'" + userFirst + "'");
             displayNames.add(User.UserTable.FNAME.getDisplayName());
         }
         if (userLast.length() > 0)
         {
-            restrictions.add("'"+userLast+"'");
+            restrictions.add("'" + userLast + "'");
             displayNames.add(User.UserTable.LNAME.getDisplayName());
         }
         if (username.length() > 0)
         {
-            restrictions.add("'"+username+"'");
+            restrictions.add("'" + username + "'");
             displayNames.add(User.UserTable.USERNAME.getDisplayName());
         }
 
         String agendaCategory = ((JTextComponent) searchagendacategoryCombo.getEditor().getEditorComponent()).getText();
         if (agendaCategory.length() > 0)
         {
-            restrictions.add("'"+agendaCategory+"'");
-            if(agendaCategoryRadio.isSelected())
-            displayNames.add(AgendaCategory.AgendaCategoryTable.TYPE.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
-        else if(agendaRadio.isSelected())
-        displayNames.add(Agenda.AgendaTable.AGENDACATEGORYTYPE.getDisplayName());
+            restrictions.add("'" + agendaCategory + "'");
+            if (agendaCategoryRadio.isSelected())
+            {
+                displayNames.add(AgendaCategory.AgendaCategoryTable.TYPE.getDisplayName());//ComboBoxesIndexes.TEACHERL.getDisplayName());
+            } else if (agendaRadio.isSelected())
+            {
+                displayNames.add(Agenda.AgendaTable.AGENDACATEGORYTYPE.getDisplayName());
+            }
         }
 
         String agendaNotes = ((JTextComponent) searchagendanotesCombo.getEditor().getEditorComponent()).getText();
@@ -3994,35 +3981,41 @@ public final class AdminView extends javax.swing.JFrame
 
         if (agendaNotes.length() > 0)
         {
-            restrictions.add("'"+agendaNotes+"'");
+            restrictions.add("'" + agendaNotes + "'");
             displayNames.add(Agenda.AgendaTable.NOTES.getDisplayName());
         }
         if (agendaDate.length() > 0 && !agendaDate.contains("yyyy"))
         {
-            restrictions.add("'"+agendaDate+"'");
+            restrictions.add("'" + agendaDate + "'");
             displayNames.add(Agenda.AgendaTable.DATE.getDisplayName());
         }
 
-        String role =((JTextComponent) searchroleCombo.getEditor().getEditorComponent()).getText();
+        String role = ((JTextComponent) searchroleCombo.getEditor().getEditorComponent()).getText();
 
         if (role.length() > 0)
         {
-            restrictions.add("'"+role+"'");
-            if(roleRadio.isSelected())
-            displayNames.add(Role.RoleTable.TYPE.getDisplayName());
-        else if(userRadio.isSelected())
-        displayNames.add(User.UserTable.ROLETYPE.getDisplayName());
+            restrictions.add("'" + role + "'");
+            if (roleRadio.isSelected())
+            {
+                displayNames.add(Role.RoleTable.TYPE.getDisplayName());
+            } else if (userRadio.isSelected())
+            {
+                displayNames.add(User.UserTable.ROLETYPE.getDisplayName());
+            }
         }
 
         String location = ((JTextComponent) searchlocationCombo.getEditor().getEditorComponent()).getText();
         if (location.length() > 0)
         {
-            restrictions.add("'"+location+"'");
-            if(locationRadio.isSelected())
+            restrictions.add("'" + location + "'");
+            if (locationRadio.isSelected())
+            {
                 displayNames.add(Location.LocationTable.NAME.getDisplayName());
-            else if(sessionsRadio.isSelected())
+            } else if (sessionsRadio.isSelected())
+            {
                 displayNames.add(ParaprofessionalSession.ParaSessTable.LOCATIONNAME.getDisplayName());
-      
+            }
+
         }
 
         String sessStart = searchsessionstartField.getText();
@@ -4035,12 +4028,10 @@ public final class AdminView extends javax.swing.JFrame
             try
             {
                 sessStart = sdfMySQLTimestamp.format(sdfTimestamp.parse(sessStart));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+sessStart+"'");
+            restrictions.add("'" + sessStart + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.SESSIONSTART.getDisplayName());
         }
         if (sessEnd.length() > 0 && !sessEnd.contains("yyyy"))
@@ -4048,17 +4039,15 @@ public final class AdminView extends javax.swing.JFrame
             try
             {
                 sessEnd = sdfMySQLTimestamp.format(sdfTimestamp.parse(sessEnd));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+sessEnd+"'");
+            restrictions.add("'" + sessEnd + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.SESSIONEND.getDisplayName());
         }
         if (sessNotes.length() > 0)
         {
-            restrictions.add("'"+sessStart+"'");
+            restrictions.add("'" + sessStart + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.NOTES.getDisplayName());
         }
         if (enteredDate.length() > 0 && !enteredDate.contains("yyyy"))
@@ -4066,12 +4055,10 @@ public final class AdminView extends javax.swing.JFrame
             try
             {
                 enteredDate = sdfMySQLTimestamp.format(sdfTimestamp.parse(enteredDate));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+enteredDate+"'");
+            restrictions.add("'" + enteredDate + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.TIMEANDDATEENTERED.getDisplayName());
         }
 
@@ -4122,178 +4109,231 @@ public final class AdminView extends javax.swing.JFrame
 
         if (teacherFirst.length() > 0)
         {
-            restrictions.add("'"+teacherFirst+"'");
-            if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.TEACHERFNAME.getDisplayName());
-        else if(teacherRadio.isSelected())
-        displayNames.add(Teacher.TeacherTable.FNAME.getDisplayName());
-        else if(sessionsRadio.isSelected())
-        displayNames.add(ParaprofessionalSession.ParaSessTable.TEACHERFNAME.getDisplayName());
+            restrictions.add("'" + teacherFirst + "'");
+            if (courseRadio.isSelected())
+            {
+                displayNames.add(Course.CourseTable.TEACHERFNAME.getDisplayName());
+            } else if (teacherRadio.isSelected())
+            {
+                displayNames.add(Teacher.TeacherTable.FNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.TEACHERFNAME.getDisplayName());
+            }
         }
         if (teacherLast.length() > 0)
         {
-            restrictions.add("'"+teacherLast+"'");
-            if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.TEACHERLNAME.getDisplayName());
-        else if(teacherRadio.isSelected())
-        displayNames.add(Teacher.TeacherTable.LNAME.getDisplayName());
-        else if(sessionsRadio.isSelected())
-        displayNames.add(ParaprofessionalSession.ParaSessTable.TEACHERLNAME.getDisplayName());
+            restrictions.add("'" + teacherLast + "'");
+            if (courseRadio.isSelected())
+            {
+                displayNames.add(Course.CourseTable.TEACHERLNAME.getDisplayName());
+            } else if (teacherRadio.isSelected())
+            {
+                displayNames.add(Teacher.TeacherTable.LNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.TEACHERLNAME.getDisplayName());
+            }
         }
         if (subject.length() > 0)
         {
-            restrictions.add("'"+subject+"'");
-            if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.SUBJECTABBREVNAME.getDisplayName());
-        else if(subjectRadio.isSelected())
-        displayNames.add(Subject.SubjectTable.ABBREVNAME.getDisplayName());
-        else if(sessionsRadio.isSelected())
-        displayNames.add(ParaprofessionalSession.ParaSessTable.SUBJECTABBREVNAME.getDisplayName());
+            restrictions.add("'" + subject + "'");
+            if (courseRadio.isSelected())
+            {
+                displayNames.add(Course.CourseTable.SUBJECTABBREVNAME.getDisplayName());
+            } else if (subjectRadio.isSelected())
+            {
+                displayNames.add(Subject.SubjectTable.ABBREVNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.SUBJECTABBREVNAME.getDisplayName());
+            }
         }
         if (level.length() > 0)
         {
             restrictions.add(level);
             displayNames.add(Course.CourseTable.LEVEL.getDisplayName());
-        if(courseRadio.isSelected())
-        displayNames.add(Course.CourseTable.LEVEL.getDisplayName());
-        else if(sessionsRadio.isSelected())
-        displayNames.add(ParaprofessionalSession.ParaSessTable.COURSELEVEL.getDisplayName());
+            if (courseRadio.isSelected())
+            {
+                displayNames.add(Course.CourseTable.LEVEL.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.COURSELEVEL.getDisplayName());
+            }
         }
         if (category.length() > 0)
         {
-            restrictions.add("'"+category+"'");
-            if(courseRadio.isSelected())
-            displayNames.add(Course.CourseTable.SUBJECTCATEGORYNAME.getDisplayName());
-            else if(subjectRadio.isSelected())
-            displayNames.add(Subject.SubjectTable.CATEGORYNAME.getDisplayName());
-            else if(categoryRadio.isSelected())
-            displayNames.add(Category.CategoryTable.NAME.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.NAME.getDisplayName());
-            else if(sessionsRadio.isSelected())
+            restrictions.add("'" + category + "'");
+            if (courseRadio.isSelected())
+            {
+                displayNames.add(Course.CourseTable.SUBJECTCATEGORYNAME.getDisplayName());
+            } else if (subjectRadio.isSelected())
+            {
+                displayNames.add(Subject.SubjectTable.CATEGORYNAME.getDisplayName());
+            } else if (categoryRadio.isSelected())
+            {
+                displayNames.add(Category.CategoryTable.NAME.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.NAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
                 displayNames.add(ParaprofessionalSession.ParaSessTable.SUBJECTCATEGORYNAME.getDisplayName());
+            }
         }
         if (fname.length() > 0)
         {
-            restrictions.add("'"+fname+"'");
-            if(clientRadio.isSelected())
-            displayNames.add(Client.ClientTable.FNAME.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTFNAME.getDisplayName());
+            restrictions.add("'" + fname + "'");
+            if (clientRadio.isSelected())
+            {
+                displayNames.add(Client.ClientTable.FNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTFNAME.getDisplayName());
+            }
         }
         if (lname.length() > 0)
         {
-            restrictions.add("'"+lname+"'");
-            if(clientRadio.isSelected())
-            displayNames.add(Client.ClientTable.LNAME.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTLNAME.getDisplayName());
+            restrictions.add("'" + lname + "'");
+            if (clientRadio.isSelected())
+            {
+                displayNames.add(Client.ClientTable.LNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTLNAME.getDisplayName());
+            }
         }
         if (phone.length() > 0)
         {
-            restrictions.add("'"+phone+"'");
-            if(clientRadio.isSelected())
-            displayNames.add(Client.ClientTable.PHONE.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTPHONE.getDisplayName());
+            restrictions.add("'" + phone + "'");
+            if (clientRadio.isSelected())
+            {
+                displayNames.add(Client.ClientTable.PHONE.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTPHONE.getDisplayName());
+            }
         }
         if (email.length() > 0)
         {
-            restrictions.add("'"+email+"'");
-            if(clientRadio.isSelected())
-            displayNames.add(Client.ClientTable.EMAIL.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTEMAIL.getDisplayName());
+            restrictions.add("'" + email + "'");
+            if (clientRadio.isSelected())
+            {
+                displayNames.add(Client.ClientTable.EMAIL.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.CLIENTEMAIL.getDisplayName());
+            }
         }
         if (paraFirst.length() > 0)
         {
-            restrictions.add("'"+paraFirst+"'");
-            if(paraprofessionalRadio.isSelected())
-            displayNames.add(Paraprofessional.ParaTable.FNAME.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALFNAME.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.FNAME.getDisplayName());
+            restrictions.add("'" + paraFirst + "'");
+            if (paraprofessionalRadio.isSelected())
+            {
+                displayNames.add(Paraprofessional.ParaTable.FNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALFNAME.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.FNAME.getDisplayName());
+            }
         }
         if (paraLast.length() > 0)
         {
-            restrictions.add("'"+paraLast+"'");
-            if(paraprofessionalRadio.isSelected())
-            displayNames.add(Paraprofessional.ParaTable.LNAME.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALLNAME.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.LNAME.getDisplayName());
+            restrictions.add("'" + paraLast + "'");
+            if (paraprofessionalRadio.isSelected())
+            {
+                displayNames.add(Paraprofessional.ParaTable.LNAME.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALLNAME.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.LNAME.getDisplayName());
+            }
         }
         if (paraRole.length() > 0)
         {
-            restrictions.add("'"+paraRole+"'");
-            if(paraprofessionalRadio.isSelected())
-            displayNames.add(Paraprofessional.ParaTable.ROLETYPE.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.ROLETYPE.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALROLETYPE.getDisplayName());
+            restrictions.add("'" + paraRole + "'");
+            if (paraprofessionalRadio.isSelected())
+            {
+                displayNames.add(Paraprofessional.ParaTable.ROLETYPE.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.ROLETYPE.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALROLETYPE.getDisplayName());
+            }
         }
-        if (paraHireDate.length() > 0&& !paraHireDate.contains("yyyy"))
+        if (paraHireDate.length() > 0 && !paraHireDate.contains("yyyy"))
         {
             try
             {
                 paraHireDate = sdfMySQLDate.format(sdfDate.parse(paraHireDate));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+paraHireDate+"'");
-            if(paraprofessionalRadio.isSelected())
-            displayNames.add(Paraprofessional.ParaTable.HIREDATE.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALHIREDATE.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.HIREDATE.getDisplayName());
+            restrictions.add("'" + paraHireDate + "'");
+            if (paraprofessionalRadio.isSelected())
+            {
+                displayNames.add(Paraprofessional.ParaTable.HIREDATE.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALHIREDATE.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.HIREDATE.getDisplayName());
+            }
         }
-        if (paraTerminationDate.length() > 0&& !paraTerminationDate.contains("yyyy"))
+        if (paraTerminationDate.length() > 0 && !paraTerminationDate.contains("yyyy"))
         {
             try
             {
                 paraTerminationDate = sdfMySQLDate.format(sdfDate.parse(paraTerminationDate));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+paraTerminationDate+"'");
-            if(paraprofessionalRadio.isSelected())
-            displayNames.add(Paraprofessional.ParaTable.TERMINATIONDATE.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALTERMINATIONDATE.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.TERMINATIONDATE.getDisplayName());
+            restrictions.add("'" + paraTerminationDate + "'");
+            if (paraprofessionalRadio.isSelected())
+            {
+                displayNames.add(Paraprofessional.ParaTable.TERMINATIONDATE.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALTERMINATIONDATE.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.TERMINATIONDATE.getDisplayName());
+            }
         }
         if (paraIsClockedIn.length() > 0 && !paraIsClockedIn.equalsIgnoreCase("Either"))
         {
             restrictions.add(paraIsClockedIn);
-            if(paraprofessionalRadio.isSelected())
-            displayNames.add(Paraprofessional.ParaTable.ISCLOCKEDIN.getDisplayName());
-            else if(sessionsRadio.isSelected())
-            displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALISCLOCKEDIN.getDisplayName());
-            else if(paraprofessionalCategoryRadio.isSelected())
-            displayNames.add(ParaprofessionalCategory.ParaCatTable.ISCLOCKEDIN.getDisplayName());
+            if (paraprofessionalRadio.isSelected())
+            {
+                displayNames.add(Paraprofessional.ParaTable.ISCLOCKEDIN.getDisplayName());
+            } else if (sessionsRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALISCLOCKEDIN.getDisplayName());
+            } else if (paraprofessionalCategoryRadio.isSelected())
+            {
+                displayNames.add(ParaprofessionalCategory.ParaCatTable.ISCLOCKEDIN.getDisplayName());
+            }
         }
         if (creatorFirst.length() > 0)
         {
-            restrictions.add("'"+creatorFirst+"'");
+            restrictions.add("'" + creatorFirst + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.CREATORFNAME.getDisplayName());
         }
         if (creatorLast.length() > 0)
         {
-            restrictions.add("'"+creatorLast+"'");
+            restrictions.add("'" + creatorLast + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.CREATORLNAME.getDisplayName());
         }
         if (creatorRole.length() > 0)
         {
-            restrictions.add("'"+paraRole+"'");
+            restrictions.add("'" + paraRole + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.CREATORROLETYPE.getDisplayName());
         }
         if (creatorHireDate.length() > 0 && !creatorHireDate.contains("yyyy"))
@@ -4301,12 +4341,10 @@ public final class AdminView extends javax.swing.JFrame
             try
             {
                 creatorHireDate = sdfMySQLDate.format(sdfDate.parse(creatorHireDate));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+creatorHireDate+"'");
+            restrictions.add("'" + creatorHireDate + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.CREATORHIREDATE.getDisplayName());
         }
         if (creatorTerminationDate.length() > 0 && !creatorTerminationDate.contains("yyyy"))
@@ -4314,12 +4352,10 @@ public final class AdminView extends javax.swing.JFrame
             try
             {
                 creatorTerminationDate = sdfMySQLDate.format(sdfDate.parse(creatorTerminationDate));
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-
             }
-            restrictions.add("'"+creatorTerminationDate+"'");
+            restrictions.add("'" + creatorTerminationDate + "'");
             displayNames.add(ParaprofessionalSession.ParaSessTable.CREATORTERMINATIONDATE.getDisplayName());
         }
         if (creatorIsClockedIn.length() > 0 && !creatorIsClockedIn.equalsIgnoreCase("Either"))
@@ -4346,7 +4382,7 @@ public final class AdminView extends javax.swing.JFrame
     }//GEN-LAST:event_searchresetrestrictionButtonActionPerformed
 
     private void searchclearrestrictionsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchclearrestrictionsButtonActionPerformed
-        
+
         dlm.clear();
         dlm.addElement("Search for all records");
     }//GEN-LAST:event_searchclearrestrictionsButtonActionPerformed
@@ -4447,13 +4483,13 @@ public final class AdminView extends javax.swing.JFrame
 
             dlm.clear();
             /*
-            String[] restrictions = new String[3];
-            restrictions[0]="Course is any";
-            restrictions[1]="Course# is any";
-            restrictions[2]="Teacher is any";
+             String[] restrictions = new String[3];
+             restrictions[0]="Course is any";
+             restrictions[1]="Course# is any";
+             restrictions[2]="Teacher is any";
 
-            for(int i=0; i<restrictions.length; i++)
-            dlm.addElement(restrictions[i]);*/
+             for(int i=0; i<restrictions.length; i++)
+             dlm.addElement(restrictions[i]);*/
 
             // restrictHelper.setRestrictions(restrictions);
 
@@ -4490,83 +4526,71 @@ public final class AdminView extends javax.swing.JFrame
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if(clientRadio.isSelected())
+        if (clientRadio.isSelected())
         {
             NewClientObject ndo = new NewClientObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (sessionsRadio.isSelected())
+        } else if (sessionsRadio.isSelected())
         {
             tabsPane.setSelectedIndex(0);
-        }
-        else if (paraprofessionalRadio.isSelected())
+        } else if (paraprofessionalRadio.isSelected())
         {
             NewParaprofessionalObject ndo = new NewParaprofessionalObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (userRadio.isSelected())
+        } else if (userRadio.isSelected())
         {
             NewUserObject ndo = new NewUserObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (courseRadio.isSelected())
+        } else if (courseRadio.isSelected())
         {
             NewCourseObject ndo = new NewCourseObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (teacherRadio.isSelected())
+        } else if (teacherRadio.isSelected())
         {
             NewTeacherObject ndo = new NewTeacherObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (subjectRadio.isSelected())
+        } else if (subjectRadio.isSelected())
         {
             NewSubjectObject ndo = new NewSubjectObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (agendaRadio.isSelected())
+        } else if (agendaRadio.isSelected())
         {
             NewAgendaObject ndo = new NewAgendaObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (agendaCategoryRadio.isSelected())
+        } else if (agendaCategoryRadio.isSelected())
         {
             NewAgendaCategoryObject ndo = new NewAgendaCategoryObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (categoryRadio.isSelected())
+        } else if (categoryRadio.isSelected())
         {
             NewCategoryObject ndo = new NewCategoryObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (locationRadio.isSelected())
+        } else if (locationRadio.isSelected())
         {
             NewLocationObject ndo = new NewLocationObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (roleRadio.isSelected())
+        } else if (roleRadio.isSelected())
         {
             NewRoleObject ndo = new NewRoleObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
-        }
-        else if (paraprofessionalCategoryRadio.isSelected())
+        } else if (paraprofessionalCategoryRadio.isSelected())
         {
             NewParaprofessionalCategoryObject ndo = new NewParaprofessionalCategoryObject(new Frame(), true);
             ndo.setLocationRelativeTo(null);
             ndo.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void roleRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleRadioActionPerformed
@@ -4589,7 +4613,7 @@ public final class AdminView extends javax.swing.JFrame
             searchcreatorPanel.setVisible(false);
 
             dlm.clear();
-  
+
             dlm.addElement("Search for all records");
         }
 
@@ -4614,7 +4638,7 @@ public final class AdminView extends javax.swing.JFrame
             searchcategoryPanel.setVisible(false);
             searchcreatorPanel.setVisible(false);
             dlm.clear();
-            
+
             dlm.addElement("Search for all records");
         }
     }//GEN-LAST:event_locationRadioActionPerformed
@@ -4771,33 +4795,33 @@ public final class AdminView extends javax.swing.JFrame
 
     private void importTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importTermButtonActionPerformed
 
-        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to import term: "+termCodeCombo.getSelectedItem().toString());
-        
-        if(option == JOptionPane.OK_OPTION)
+        int option = JOptionPane.showConfirmDialog(null, "Are you sure you want to import term: " + termCodeCombo.getSelectedItem().toString());
+
+        if (option == JOptionPane.OK_OPTION)
         {
             try
             {
-                (new Thread(){
-                public void run(){
+                (new Thread()
+                {
+                    public void run()
+                    {
 
-                    try
-                    {
-                        String term = termCodeCombo.getSelectedItem().toString();
-                        RetrieveNewTerm.updateCourses(term.substring(term.indexOf("(")+1, term.indexOf(")")));
+                        try
+                        {
+                            String term = termCodeCombo.getSelectedItem().toString();
+                            RetrieveNewTerm.updateCourses(term.substring(term.indexOf("(") + 1, term.indexOf(")")));
+                        } catch (Exception ex)
+                        {
+                            JOptionPane.showMessageDialog(null, "Could not load the term for term code: " + termCodeCombo.getSelectedItem().toString());
+                        }
                     }
-                    catch(Exception ex)
-                    {
-                        JOptionPane.showMessageDialog(null, "Could not load the term for term code: "+termCodeCombo.getSelectedItem().toString());
-                    }
-                }
                 }).start();
-            }
-            catch(Exception e)
+            } catch (Exception e)
             {
-                JOptionPane.showMessageDialog(null, "Could not load the term for term code: "+termCodeCombo.getSelectedItem().toString());
+                JOptionPane.showMessageDialog(null, "Could not load the term for term code: " + termCodeCombo.getSelectedItem().toString());
             }
         }
-        
+
     }//GEN-LAST:event_importTermButtonActionPerformed
 
     private void close()
@@ -4816,6 +4840,7 @@ public final class AdminView extends javax.swing.JFrame
         gcCheck.setSelected(false);
         walkoutCheck.setSelected(false);
     }
+
     private boolean getParaprofessionalSession(boolean isUpdating)
     {
         try
@@ -4825,7 +4850,7 @@ public final class AdminView extends javax.swing.JFrame
             boolean paraprofessionalPanelCheck = true;
             boolean creatorPanelCheck = true;
             boolean locationPanelCheck = true;
-            
+
             courseCombo.setBorder(null);
             teacherCombo.setBorder(null);
             levelCombo.setBorder(null);
@@ -4840,107 +4865,110 @@ public final class AdminView extends javax.swing.JFrame
             courseInfoPanel.repaint();
             paraprofessionalInfoPanel.repaint();
 
-            String course = ((JTextComponent)courseCombo.getEditor().getEditorComponent()).getText();
-            if(course.length() <= 0)
+            String course = ((JTextComponent) courseCombo.getEditor().getEditorComponent()).getText();
+            if (course.length() <= 0)
             {
-                courseCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                courseCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
             }
-             String tname = ((JTextComponent)teacherCombo.getEditor().getEditorComponent()).getText();
-            if(tname.length() <= 0)
+            String tname = ((JTextComponent) teacherCombo.getEditor().getEditorComponent()).getText();
+            if (tname.length() <= 0)
             {
-                teacherCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                teacherCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
             }
-            
-                
-            
-            String level = ((JTextComponent)levelCombo.getEditor().getEditorComponent()).getText();
+
+
+
+            String level = ((JTextComponent) levelCombo.getEditor().getEditorComponent()).getText();
             Integer intLevel = null;
             try
             {
                 intLevel = Integer.parseInt(level);
-                
-            }
-            catch(Exception z)
+
+            } catch (Exception z)
             {
-                levelCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                levelCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
             }
-            
-            String pName = ((JTextComponent)paraprofessionalCombo.getEditor().getEditorComponent()).getText();
-            if(pName.length() <= 0)
+
+            String pName = ((JTextComponent) paraprofessionalCombo.getEditor().getEditorComponent()).getText();
+            if (pName.length() <= 0)
             {
-                paraprofessionalCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                paraprofessionalCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 paraprofessionalPanelCheck = false;
             }
-            
-            String cName = ((JTextComponent)creatorCombo.getEditor().getEditorComponent()).getText();
-            if(cName.length() <= 0)
+
+            String cName = ((JTextComponent) creatorCombo.getEditor().getEditorComponent()).getText();
+            if (cName.length() <= 0)
             {
-                creatorCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                creatorCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 creatorPanelCheck = false;
             }
-            
-            String clientFName = ((JTextComponent)fnameCombo.getEditor().getEditorComponent()).getText();
-            if(clientFName.length() <= 0)
+
+            String clientFName = ((JTextComponent) fnameCombo.getEditor().getEditorComponent()).getText();
+            if (clientFName.length() <= 0)
             {
-                fnameCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                fnameCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 clientPanelCheck = false;
             }
-            String clientLName = ((JTextComponent)lnameCombo.getEditor().getEditorComponent()).getText();
-            if(clientLName.length() <= 0)
+            String clientLName = ((JTextComponent) lnameCombo.getEditor().getEditorComponent()).getText();
+            if (clientLName.length() <= 0)
             {
-                lnameCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                lnameCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 clientPanelCheck = false;
             }
 
-            
+
             boolean GC = gcCheck.isSelected();
             String notes = notesField.getText().toString();
-            
-            String location = ((JTextComponent)locationCombo.getEditor().getEditorComponent()).getText();
-            if(location.length() <= 0)
+
+            String location = ((JTextComponent) locationCombo.getEditor().getEditorComponent()).getText();
+            if (location.length() <= 0)
             {
-                locationCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                locationCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 locationPanelCheck = false;
             }
-            
-            
+
+
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm aa", Locale.ENGLISH);
             Timestamp sessionStart = null;
             Timestamp sessionEnd = null;
             boolean hasSessionStart = true;
-            
-            if(sessionstartField.getText().trim().length() > 0 && !sessionstartField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
+
+            if (sessionstartField.getText().trim().length() > 0 && !sessionstartField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
             {
-                hasSessionStart= Validate.validateTimestamp(sessionstartField.getText().trim());
- 
-                if(hasSessionStart)
-                    sessionStart = new Timestamp(sdf.parse(sessionstartField.getText().trim()).getTime());
-                else
+                hasSessionStart = Validate.validateTimestamp(sessionstartField.getText().trim());
+
+                if (hasSessionStart)
                 {
-                    sessionstartField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                    sessionStart = new Timestamp(sdf.parse(sessionstartField.getText().trim()).getTime());
+                } else
+                {
+                    sessionstartField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
             }
-         
+
             boolean hasSessionEnd = true;
-            if(sessionendField.getText().trim().length() > 0 && !sessionendField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
+            if (sessionendField.getText().trim().length() > 0 && !sessionendField.getText().trim().equals("mm/dd/yyyy hh:mm aa"))
             {
                 hasSessionEnd = Validate.validateTimestamp(sessionendField.getText().trim());
-                if(!hasSessionEnd)
+                if (!hasSessionEnd)
                 {
-                    sessionendField.setBorder(new MatteBorder(3,3,3,3,Color.red));
-                    
-                }    
-                else
+                    sessionendField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
+
+                } else
+                {
                     sessionEnd = new Timestamp(sdf.parse(sessionendField.getText().trim()).getTime());
+                }
             }
-            
-            if((!hasSessionStart || !hasSessionEnd) || (!hasSessionStart && hasSessionEnd))
+
+            if ((!hasSessionStart || !hasSessionEnd) || (!hasSessionStart && hasSessionEnd))
+            {
                 throw new ParseException("parse exception with timestamp", 0);
-                
- 
+            }
+
+
             boolean walkout = walkoutCheck.isSelected();
 
             String abbrevNameString = Subject.SubjectTable.ABBREVNAME.getWithAlias();
@@ -4953,82 +4981,87 @@ public final class AdminView extends javax.swing.JFrame
             String levelString = Course.CourseTable.LEVEL.getWithAlias();
             String clientFNameString = Client.ClientTable.FNAME.getWithAlias();
             String clientLNameString = Client.ClientTable.LNAME.getWithAlias();
-            
+
             DatabaseHelper.open();
 
-            ArrayList<Subject> subjects =(ArrayList<Subject>) Subject.selectAllSubjects("where "+abbrevNameString+"='"+course+"'", DatabaseHelper.getConnection());
-            
-            ArrayList<Teacher> teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("where concat(concat("+teachFNameString+",' '),"+teachLNameString+")='"+tname.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Subject> subjects = (ArrayList<Subject>) Subject.selectAllSubjects("where " + abbrevNameString + "='" + course + "'", DatabaseHelper.getConnection());
+
+            ArrayList<Teacher> teachers = (ArrayList<Teacher>) Teacher.selectAllTeacher("where concat(concat(" + teachFNameString + ",' ')," + teachLNameString + ")='" + tname.trim() + "'", DatabaseHelper.getConnection());
             ArrayList<Course> courses = null;
             try
             {
-                String query = "where "+subjectIDString+"="+subjects.get(0).getSubjectID()+" and "+teachIDString+"="+teachers.get(0).getTeacherID() + " and "+levelString+"="+intLevel.intValue();
+                String query = "where " + subjectIDString + "=" + subjects.get(0).getSubjectID() + " and " + teachIDString + "=" + teachers.get(0).getTeacherID() + " and " + levelString + "=" + intLevel.intValue();
                 System.out.println(query);
-                courses = (ArrayList<Course>)Course.selectAllCourse(query, DatabaseHelper.getConnection());
-                
-            }
-            catch(Exception z)
+                courses = (ArrayList<Course>) Course.selectAllCourse(query, DatabaseHelper.getConnection());
+
+            } catch (Exception z)
             {
                 z.printStackTrace();
                 courses = new ArrayList<Course>();
             }
-            ArrayList<Paraprofessional> paraprofessionals = (ArrayList<Paraprofessional>)Paraprofessional.selectAllParaprofessional("where concat(concat("+paraFNameString+",' '),"+paraLNameString+")='"+pName.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Paraprofessional> paraprofessionals = (ArrayList<Paraprofessional>) Paraprofessional.selectAllParaprofessional("where concat(concat(" + paraFNameString + ",' ')," + paraLNameString + ")='" + pName.trim() + "'", DatabaseHelper.getConnection());
 
-            ArrayList<Paraprofessional> creators = (ArrayList<Paraprofessional>)Paraprofessional.selectAllParaprofessional("where concat(concat("+paraFNameString+",' '),"+paraLNameString+")='"+cName.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Paraprofessional> creators = (ArrayList<Paraprofessional>) Paraprofessional.selectAllParaprofessional("where concat(concat(" + paraFNameString + ",' ')," + paraLNameString + ")='" + cName.trim() + "'", DatabaseHelper.getConnection());
 
-            ArrayList<Client> clients = (ArrayList<Client>)Client.selectAllClients("where "+clientFNameString+"='"+clientFName.trim()+"' and "+clientLNameString+"='"+clientLName.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Client> clients = (ArrayList<Client>) Client.selectAllClients("where " + clientFNameString + "='" + clientFName.trim() + "' and " + clientLNameString + "='" + clientLName.trim() + "'", DatabaseHelper.getConnection());
 
-            ArrayList<Location> locations = (ArrayList<Location>)Location.selectAllLocation("where "+Location.LocationTable.NAME.getWithAlias()+"='"+location.trim()+"'", DatabaseHelper.getConnection());
+            ArrayList<Location> locations = (ArrayList<Location>) Location.selectAllLocation("where " + Location.LocationTable.NAME.getWithAlias() + "='" + location.trim() + "'", DatabaseHelper.getConnection());
 
             courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
             studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
 
             paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
-            
-               
-            if(subjects.size() <= 0 && coursePanelCheck)
+
+
+            if (subjects.size() <= 0 && coursePanelCheck)
             {
                 courseInfoPanel.setBackground(Color.red);
             }
-            if(teachers.size() <= 0 && coursePanelCheck)
+            if (teachers.size() <= 0 && coursePanelCheck)
             {
                 courseInfoPanel.setBackground(Color.red);
             }
-            if(courses.size() <= 0 && coursePanelCheck)
+            if (courses.size() <= 0 && coursePanelCheck)
             {
                 courseInfoPanel.setBackground(Color.red);
             }
-            if(paraprofessionals.size() <= 0 && paraprofessionalPanelCheck)
+            if (paraprofessionals.size() <= 0 && paraprofessionalPanelCheck)
             {
                 paraprofessionalInfoPanel.setBackground(Color.red);
             }
-            if(creators.size() <= 0 && creatorPanelCheck)
+            if (creators.size() <= 0 && creatorPanelCheck)
             {
-                creatorCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                creatorCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            if(clients.size() <= 0 && clientPanelCheck)
+            if (clients.size() <= 0 && clientPanelCheck)
             {
                 studentInfoPanel.setBackground(Color.red);
             }
-            if(locations.size() <= 0 && locationPanelCheck)
+            if (locations.size() <= 0 && locationPanelCheck)
             {
-                locationCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                locationCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
             Timestamp now = new Timestamp((new Date()).getTime());
 
             String sessionStartString;
-            if(sessionStart != null)
-                sessionStartString = "='"+sessionStart+"'";
-            else
+            if (sessionStart != null)
+            {
+                sessionStartString = "='" + sessionStart + "'";
+            } else
+            {
                 sessionStartString = " is null";
-            
+            }
+
             String sessionEndString;
-            if(sessionEnd != null)
-                sessionEndString = "='"+sessionEnd+"'";
-            else
+            if (sessionEnd != null)
+            {
+                sessionEndString = "='" + sessionEnd + "'";
+            } else
+            {
                 sessionEndString = " is null";
-            
+            }
+
             ParaprofessionalSession ps = new ParaprofessionalSession(-1, paraprofessionals.get(0), clients.get(0), courses.get(0), locations.get(0), creators.get(0), now, sessionStart, sessionEnd, GC, notes, walkout);
             String paraIDString = ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALID.getWithAlias();
             String courseIDString = ParaprofessionalSession.ParaSessTable.COURSEID.getWithAlias();
@@ -5041,46 +5074,49 @@ public final class AdminView extends javax.swing.JFrame
             String walkoutString = ParaprofessionalSession.ParaSessTable.WALKOUT.getWithAlias();
             String notesString = ParaprofessionalSession.ParaSessTable.NOTES.getWithAlias();
             String clientIDString = ParaprofessionalSession.ParaSessTable.CLIENTID.getWithAlias();
-            if(!isUpdating)
+            if (!isUpdating)
             {
                 DatabaseHelper.insert(ParaprofessionalSession.getValues(ps), ParaprofessionalSession.ParaSessTable.getTable());
 
-                
-                String query =  "where "+paraIDString+"="+paraprofessionals.get(0).getParaprofessionalID()+" and "+clientIDString+"="+clients.get(0).getClientID()+" and "+courseIDString+"="+courses.get(0).getCourseID()+" and "+locationIDString+"="+locations.get(0).getLocationID()+" and "+creatorIDString+"="+creators.get(0).getParaprofessionalID()+" and "+enteredString+"='"+now.toString()+"' and "+sessStartString+""+sessionStartString+" and "+sessEndString+""+sessionEndString+" and "+gcString+"="+GC+" and "+notesString+"='"+notes+"' and "+walkoutString+"="+walkout;
+
+                String query = "where " + paraIDString + "=" + paraprofessionals.get(0).getParaprofessionalID() + " and " + clientIDString + "=" + clients.get(0).getClientID() + " and " + courseIDString + "=" + courses.get(0).getCourseID() + " and " + locationIDString + "=" + locations.get(0).getLocationID() + " and " + creatorIDString + "=" + creators.get(0).getParaprofessionalID() + " and " + enteredString + "='" + now.toString() + "' and " + sessStartString + "" + sessionStartString + " and " + sessEndString + "" + sessionEndString + " and " + gcString + "=" + GC + " and " + notesString + "='" + notes + "' and " + walkoutString + "=" + walkout;
                 ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(query, DatabaseHelper.getConnection()); // (ArrayList<ParaprofessionalSession>)HibernateTest.select(query);
 
                 ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(0));
-            }
-            else
+            } else
             {
                 ps.setParaprofessionalSessionID(sessionID);
                 sessionID = -1;
-                    
+
                 DatabaseHelper.update(ParaprofessionalSession.getValues(ps), ParaprofessionalSession.ParaSessTable.getTable());
 
-                String query =  "where "+clientIDString+"="+clients.get(0).getClientID()+" and "+courseIDString+"="+courses.get(0).getCourseID()+" and "+locationIDString+"="+locations.get(0).getLocationID()+" and "+creatorIDString+"="+creators.get(0).getParaprofessionalID()+" and "+enteredString+"='"+now.toString()+"' and "+sessStartString+""+sessionStartString+" and "+sessEndString+""+sessionEndString+" and "+gcString+"="+GC+" and "+notesString+"='"+notes+"' and "+walkoutString+"="+walkout;
+                String query = "where " + clientIDString + "=" + clients.get(0).getClientID() + " and " + courseIDString + "=" + courses.get(0).getCourseID() + " and " + locationIDString + "=" + locations.get(0).getLocationID() + " and " + creatorIDString + "=" + creators.get(0).getParaprofessionalID() + " and " + enteredString + "='" + now.toString() + "' and " + sessStartString + "" + sessionStartString + " and " + sessEndString + "" + sessionEndString + " and " + gcString + "=" + GC + " and " + notesString + "='" + notes + "' and " + walkoutString + "=" + walkout;
 
-                ArrayList<ParaprofessionalSession> sessions = (ArrayList<ParaprofessionalSession>)ParaprofessionalSession.selectAllParaprofessionalSession(query,DatabaseHelper.getConnection());
+                ArrayList<ParaprofessionalSession> sessions = (ArrayList<ParaprofessionalSession>) ParaprofessionalSession.selectAllParaprofessionalSession(query, DatabaseHelper.getConnection());
             }
 
             sessionsTable.repaint();
-            
-            
-            Thread thread = new Thread(){
-                public void run(){
-                     int colorOfGreen = 160;
 
-                    while(colorOfGreen < 255)
+
+            Thread thread = new Thread()
+            {
+                public void run()
+                {
+                    int colorOfGreen = 160;
+
+                    while (colorOfGreen < 255)
                     {
-                        courseInfoPanel.setBackground(new Color( 0,colorOfGreen,0));
-                        studentInfoPanel.setBackground(new Color(0,colorOfGreen,0));
-                        paraprofessionalInfoPanel.setBackground(new Color(0,colorOfGreen,0));
+                        courseInfoPanel.setBackground(new Color(0, colorOfGreen, 0));
+                        studentInfoPanel.setBackground(new Color(0, colorOfGreen, 0));
+                        paraprofessionalInfoPanel.setBackground(new Color(0, colorOfGreen, 0));
                         colorOfGreen += 2;
-                        try {
+                        try
+                        {
                             this.sleep(13);
-                        } catch (InterruptedException ex) {
+                        } catch (InterruptedException ex)
+                        {
                         }
-                    }  
+                    }
                     courseInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     studentInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
                     paraprofessionalInfoPanel.setBackground(sessionsAndAgendaPanel.getBackground());
@@ -5090,53 +5126,51 @@ public final class AdminView extends javax.swing.JFrame
             };
 
             thread.start();
-            
+
             return true;
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             e.printStackTrace();
             return false;
-        } 
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
-        
+
     }
-    
+
     private void clearSearchForm()
     {
         clearSearchComboBoxes();
         searchsessionstartField.setText("mm/dd/yyyy hh:mm aa");
         searchsessionendField.setText("mm/dd/yyyy hh:mm aa");
-  
+
         searchparaprofessionalclockedinCombo.setSelectedIndex(0);
         searchagendadateField.setText("");
-        
-         searchnotesField.setText("");
-         searchentereddateField.setText("mm/dd/yyyy hh:mm aa");
-                 searchcreatorhireField.setText("mm/dd/yyyy");
-        
+
+        searchnotesField.setText("");
+        searchentereddateField.setText("mm/dd/yyyy hh:mm aa");
+        searchcreatorhireField.setText("mm/dd/yyyy");
+
 
         searchcreatorterminationField.setText("mm/dd/yyyy");
-    searchparaprofessionalhireField.setText("mm/dd/yyyy");
-        
-      
-         searchparaprofessionalterminationField.setText("mm/dd/yyyy");
-         searchgcCombo.setSelectedIndex(0);
-       searchwalkoutCombo.setSelectedIndex(0);
-         
-       
+        searchparaprofessionalhireField.setText("mm/dd/yyyy");
+
+
+        searchparaprofessionalterminationField.setText("mm/dd/yyyy");
+        searchgcCombo.setSelectedIndex(0);
+        searchwalkoutCombo.setSelectedIndex(0);
+
+
     }
-    
+
     /**
      * Updates the search tab comboboxes
      */
     public void updateBoxes()
     {
         JComboBox[] boxes = new JComboBox[22];
-       
+
         boxes[0] = searchclientfirstCombo;
         boxes[1] = searchclientlastCombo;
         boxes[2] = searchclientphoneCombo;
@@ -5146,7 +5180,7 @@ public final class AdminView extends javax.swing.JFrame
         boxes[6] = searchteacherfirstCombo;
         boxes[7] = searchteacherlastCombo;
         boxes[8] = searchsubjectcategoryCombo;
-        
+
         boxes[9] = searchuserfirstCombo;
         boxes[10] = searchuserlastCombo;
         boxes[11] = searchusernameCombo;
@@ -5160,8 +5194,8 @@ public final class AdminView extends javax.swing.JFrame
         boxes[19] = searchcreatorfirstCombo;
         boxes[20] = searchcreatorlastCombo;
         boxes[21] = searchcreatorroleCombo;
-      
-    
+
+
         ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
         cultimateList.add(Data.getClientsfirst());
         cultimateList.add(Data.getClientslast());
@@ -5172,7 +5206,7 @@ public final class AdminView extends javax.swing.JFrame
         cultimateList.add(Data.getTeacherfirstlist());
         cultimateList.add(Data.getTeacherlastlist());
         cultimateList.add(Data.getCategorieslist());
-        
+
         cultimateList.add(Data.getUserfirstlist());
         cultimateList.add(Data.getUserlastlist());
         cultimateList.add(Data.getUsernamelist());
@@ -5186,16 +5220,19 @@ public final class AdminView extends javax.swing.JFrame
         cultimateList.add(Data.getParafirstlist());
         cultimateList.add(Data.getParalastlist());
         cultimateList.add(Data.getRolelist());
-  
+
         uac.noMore();
         uac = null;
         uac = new UltimateAutoComplete(cultimateList, boxes);
         clearSearchComboBoxes();
     }
-    
+
     /**
-     * Creates the cell editor to edit search result data on search tab on double click
-     * @return the cell editor for the search tab table to create dialog to edit on double click
+     * Creates the cell editor to edit search result data on search tab on
+     * double click
+     *
+     * @return the cell editor for the search tab table to create dialog to edit
+     * on double click
      */
     public DefaultCellEditor makeEditSearchCellEditor()
     {
@@ -5203,73 +5240,66 @@ public final class AdminView extends javax.swing.JFrame
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                        boolean isSelected, int row, int column) 
+                    boolean isSelected, int row, int column)
             {
                 SimpleDateFormat sdfFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 SimpleDateFormat sdfTo = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
-                
-                
-                
+
+
+
                 if (clientRadio.isSelected())
                 {
                     int clientID = -1;
-                    String clientEmail = "", clientFirst ="", clientLast = "", clientPhone="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    String clientEmail = "", clientFirst = "", clientLast = "", clientPhone = "";
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.CLIENTID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.CLIENTID.getDisplayName()))
                         {
                             try
                             {
                                 clientID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.EMAIL.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.EMAIL.getDisplayName()))
                         {
                             clientEmail = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.FNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.FNAME.getDisplayName()))
                         {
-                            clientFirst  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.LNAME.getDisplayName()))
+                            clientFirst = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.LNAME.getDisplayName()))
                         {
                             clientLast = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.PHONE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Client.ClientTable.PHONE.getDisplayName()))
                         {
                             clientPhone = table.getValueAt(row, i).toString();
                         }
                     }
-                    
+
                     NewClientObject nco = new NewClientObject(new Frame(), true, clientFirst, clientLast, clientPhone, clientEmail, clientID);
                     nco.setLocationRelativeTo(null);
                     nco.setVisible(true);
-                    
+
                     DatabaseHelper.open();
                     Data.refreshClient();
                     updateBoxes();
-                }
-                else if (sessionsRadio.isSelected())
+                } else if (sessionsRadio.isSelected())
                 {
-                   
+
                     sessionID = Integer.parseInt(table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALSESSIONID.getDisplayName())).toString());
 
                     String teacherFirst = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.TEACHERFNAME.getDisplayName())).toString();
                     String teacherLast = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.TEACHERLNAME.getDisplayName())).toString();
-                    
+
                     String paraFirst = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALFNAME.getDisplayName())).toString();
                     String paraLast = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.PARAPROFESSIONALLNAME.getDisplayName())).toString();
 
                     String creatorFirst = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.CREATORFNAME.getDisplayName())).toString();
                     String creatorLast = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.CREATORLNAME.getDisplayName())).toString();
 
-                    
-                    uaacCourse.setComboValue(true, teacherFirst+" "+teacherLast, ComboBoxesIndexes.TEACHER.getBoxIndex());
-                    
+
+                    uaacCourse.setComboValue(true, teacherFirst + " " + teacherLast, ComboBoxesIndexes.TEACHER.getBoxIndex());
+
                     uaacCourse.setComboValue(true, table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.COURSELEVEL.getDisplayName())).toString(), ComboBoxesIndexes.LEVEL.getBoxIndex());
                     uaacCourse.setComboValue(true, table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.SUBJECTABBREVNAME.getDisplayName())).toString(), ComboBoxesIndexes.COURSE.getBoxIndex());
                     uaacClient.setComboValue(true, table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.CLIENTEMAIL.getDisplayName())).toString(), ComboBoxesIndexes.CEMAIL.getBoxIndex());
@@ -5277,7 +5307,7 @@ public final class AdminView extends javax.swing.JFrame
                     uaacClient.setComboValue(true, table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.CLIENTLNAME.getDisplayName())).toString(), ComboBoxesIndexes.CLNAME.getBoxIndex());
                     uaacClient.setComboValue(true, table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.CLIENTFNAME.getDisplayName())).toString(), ComboBoxesIndexes.CFNAME.getBoxIndex());
                     //uac.setComboValue(table.getValueAt(row, SessionTableModel.Columns.CATEGORY.getColumnIndex()).toString(), ComboBoxesIndexes.CATEGORY.getBoxIndex());
-                    uacSessions.setComboValue(paraFirst+" "+paraLast, ComboBoxesIndexes.PARAPROFESSIONAL.getBoxIndex());
+                    uacSessions.setComboValue(paraFirst + " " + paraLast, ComboBoxesIndexes.PARAPROFESSIONAL.getBoxIndex());
                     uacSessions.setComboValue(table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.LOCATIONNAME.getDisplayName())).toString(), ComboBoxesIndexes.LOCATION.getBoxIndex());
                     uacSessions.setComboValue(creatorFirst + " " + creatorLast, ComboBoxesIndexes.CREATOR.getBoxIndex());
 
@@ -5289,21 +5319,27 @@ public final class AdminView extends javax.swing.JFrame
 
                     String start = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.SESSIONSTART.getDisplayName())).toString();
                     String end = table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.SESSIONEND.getDisplayName())).toString();
-                    
+
                     boolean hasSessionStart = (!start.equals("") && Validate.validateTimestamp(sdf.format(new Date((Timestamp.valueOf(start)).getTime()))) && !sdf.format(new Date((Timestamp.valueOf(start)).getTime())).equals("12/31/9999 12:00 PM"));
-                    boolean hasSessionEnd = (!end.equals("") && Validate.validateTimestamp(sdf.format(new Date((Timestamp.valueOf(end)).getTime())))  && !sdf.format(new Date((Timestamp.valueOf(end)).getTime())).equals("12/31/9999 12:00 PM"));
+                    boolean hasSessionEnd = (!end.equals("") && Validate.validateTimestamp(sdf.format(new Date((Timestamp.valueOf(end)).getTime()))) && !sdf.format(new Date((Timestamp.valueOf(end)).getTime())).equals("12/31/9999 12:00 PM"));
 
-                    
 
-                    if(hasSessionStart)
+
+                    if (hasSessionStart)
+                    {
                         sessionstartField.setText(sdf.format(new Date((Timestamp.valueOf(start)).getTime())));
-                    else
+                    } else
+                    {
                         sessionstartField.setText("mm/dd/yyyy hh:mm aa");
+                    }
 
-                    if(hasSessionEnd)
+                    if (hasSessionEnd)
+                    {
                         sessionendField.setText(sdf.format(new Date((Timestamp.valueOf(end)).getTime())));
-                    else
+                    } else
+                    {
                         sessionendField.setText("mm/dd/yyyy hh:mm aa");
+                    }
 
                     walkoutCheck.setSelected(Boolean.valueOf(table.getValueAt(row, table.getColumnModel().getColumnIndex(ParaprofessionalSession.ParaSessTable.WALKOUT.getDisplayName())).toString()));
 
@@ -5312,452 +5348,387 @@ public final class AdminView extends javax.swing.JFrame
                     tabsPane.setSelectedIndex(0);
                     return null;
 
-        
-      
-                 
-                }
-                else if (paraprofessionalRadio.isSelected())
+
+
+
+                } else if (paraprofessionalRadio.isSelected())
                 {
                     int paraID = -1;
-                    String fname = "", lname ="", hireDate = "", clockedIn="", role="", terminationDate="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    String fname = "", lname = "", hireDate = "", clockedIn = "", role = "", terminationDate = "";
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.PARAPROFESSIONALID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.PARAPROFESSIONALID.getDisplayName()))
                         {
                             try
                             {
                                 paraID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.FNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.FNAME.getDisplayName()))
                         {
                             fname = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.LNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.LNAME.getDisplayName()))
                         {
                             lname = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.HIREDATE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.HIREDATE.getDisplayName()))
                         {
                             hireDate = table.getValueAt(row, i).toString();
                             try
                             {
                                 hireDate = sdfTo.format(sdfFrom.parse(hireDate));
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
                                 hireDate = "";
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.ISCLOCKEDIN.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.ISCLOCKEDIN.getDisplayName()))
                         {
                             clockedIn = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.ROLETYPE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.ROLETYPE.getDisplayName()))
                         {
                             role = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.TERMINATIONDATE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Paraprofessional.ParaTable.TERMINATIONDATE.getDisplayName()))
                         {
                             terminationDate = table.getValueAt(row, i).toString();
                             try
                             {
                                 terminationDate = sdfTo.format(sdfFrom.parse(terminationDate));
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
                                 terminationDate = "";
                             }
                         }
                     }
-                    
+
                     NewParaprofessionalObject npo = new NewParaprofessionalObject(new Frame(), true, role, fname, lname, clockedIn, hireDate, terminationDate, paraID);
                     npo.setLocationRelativeTo(null);
                     npo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshParaprofessional();
                     updateBoxes();
-                }
-                else if (userRadio.isSelected())
+                } else if (userRadio.isSelected())
                 {
-                    String username = "", password ="", fname = "", lname="", role="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    String username = "", password = "", fname = "", lname = "", role = "";
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.PASSWORD.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.PASSWORD.getDisplayName()))
                         {
                             password = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.FNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.FNAME.getDisplayName()))
                         {
-                            fname  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.LNAME.getDisplayName()))
+                            fname = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.LNAME.getDisplayName()))
                         {
                             lname = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.ROLETYPE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.ROLETYPE.getDisplayName()))
                         {
                             role = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.USERNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(User.UserTable.USERNAME.getDisplayName()))
                         {
                             username = table.getValueAt(row, i).toString();
                         }
                     }
-                    
+
                     NewUserObject nuo = new NewUserObject(new Frame(), true, username, password, lname, fname, role);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshUser();
                     updateBoxes();
-                }
-                else if (courseRadio.isSelected())
+                } else if (courseRadio.isSelected())
                 {
                     int courseID = -1;
-                    String teacherFirst = "", teacherLast = "", subject ="", level = "", teacher ="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    String teacherFirst = "", teacherLast = "", subject = "", level = "", teacher = "";
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.COURSEID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.COURSEID.getDisplayName()))
                         {
                             try
                             {
                                 courseID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.TEACHERFNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.TEACHERFNAME.getDisplayName()))
                         {
-                            teacherFirst  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.TEACHERLNAME.getDisplayName()))
+                            teacherFirst = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.TEACHERLNAME.getDisplayName()))
                         {
-                            teacherLast  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.SUBJECTABBREVNAME.getDisplayName()))
+                            teacherLast = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.SUBJECTABBREVNAME.getDisplayName()))
                         {
                             subject = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.LEVEL.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Course.CourseTable.LEVEL.getDisplayName()))
                         {
                             level = table.getValueAt(row, i).toString();
                         }
                     }
-                    
-                    teacher = teacherFirst + " "+teacherLast;
+
+                    teacher = teacherFirst + " " + teacherLast;
                     NewCourseObject nuo = new NewCourseObject(new Frame(), true, teacher, subject, level, courseID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshCourse();
                     updateBoxes();
-                }
-                else if (teacherRadio.isSelected())
+                } else if (teacherRadio.isSelected())
                 {
                     int teacherID = -1;
                     String teacherFirst = "", teacherLast = "";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Teacher.TeacherTable.TEACHERID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Teacher.TeacherTable.TEACHERID.getDisplayName()))
                         {
                             try
                             {
                                 teacherID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Teacher.TeacherTable.FNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Teacher.TeacherTable.FNAME.getDisplayName()))
                         {
-                            teacherFirst  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Teacher.TeacherTable.LNAME.getDisplayName()))
+                            teacherFirst = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Teacher.TeacherTable.LNAME.getDisplayName()))
                         {
-                            teacherLast  = table.getValueAt(row, i).toString();
+                            teacherLast = table.getValueAt(row, i).toString();
                         }
                     }
-                    
+
                     NewTeacherObject nuo = new NewTeacherObject(new Frame(), true, teacherFirst, teacherLast, teacherID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshTeacher();
                     updateBoxes();
-                }
-                else if (subjectRadio.isSelected())
+                } else if (subjectRadio.isSelected())
                 {
                     int subjectID = -1;
                     String name = "", category = "";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Subject.SubjectTable.SUBJECTID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Subject.SubjectTable.SUBJECTID.getDisplayName()))
                         {
                             try
                             {
                                 subjectID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Subject.SubjectTable.ABBREVNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Subject.SubjectTable.ABBREVNAME.getDisplayName()))
                         {
-                            name  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Subject.SubjectTable.CATEGORYNAME.getDisplayName()))
+                            name = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Subject.SubjectTable.CATEGORYNAME.getDisplayName()))
                         {
-                            category  = table.getValueAt(row, i).toString();
+                            category = table.getValueAt(row, i).toString();
                         }
                     }
-                    
+
                     NewSubjectObject nuo = new NewSubjectObject(new Frame(), true, name, category, subjectID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshSubject();
                     updateBoxes();
-                }
-                else if (agendaRadio.isSelected())
+                } else if (agendaRadio.isSelected())
                 {
                     int agendaID = -1;
-                    String notes = "", category = "", date ="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    String notes = "", category = "", date = "";
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.AGENDAID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.AGENDAID.getDisplayName()))
                         {
                             try
                             {
                                 agendaID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.NOTES.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.NOTES.getDisplayName()))
                         {
-                            notes  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.AGENDACATEGORYTYPE.getDisplayName()))
+                            notes = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.AGENDACATEGORYTYPE.getDisplayName()))
                         {
-                            category  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.DATE.getDisplayName()))
+                            category = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Agenda.AgendaTable.DATE.getDisplayName()))
                         {
-                            date  = table.getValueAt(row, i).toString();
+                            date = table.getValueAt(row, i).toString();
                             try
                             {
                                 date = sdfTo.format(sdfFrom.parse(date));
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
                                 date = "";
                             }
                         }
                     }
-                    
+
                     NewAgendaObject nuo = new NewAgendaObject(new Frame(), true, category, date, notes, agendaID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshAgenda();
                     updateBoxes();
-                }
-                else if (agendaCategoryRadio.isSelected())
+                } else if (agendaCategoryRadio.isSelected())
                 {
-                     int agendaCategoryID = -1;
+                    int agendaCategoryID = -1;
                     String category = "";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(AgendaCategory.AgendaCategoryTable.AGENDACATEGORYID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(AgendaCategory.AgendaCategoryTable.AGENDACATEGORYID.getDisplayName()))
                         {
                             try
                             {
                                 agendaCategoryID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(AgendaCategory.AgendaCategoryTable.TYPE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(AgendaCategory.AgendaCategoryTable.TYPE.getDisplayName()))
                         {
-                            category  = table.getValueAt(row, i).toString();
+                            category = table.getValueAt(row, i).toString();
                         }
-                        
+
                     }
-                    
-                    NewAgendaCategoryObject nuo = new NewAgendaCategoryObject(new Frame(), true, category,  agendaCategoryID);
+
+                    NewAgendaCategoryObject nuo = new NewAgendaCategoryObject(new Frame(), true, category, agendaCategoryID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshAgendaCategory();
                     updateBoxes();
-                }
-                else if (categoryRadio.isSelected())
+                } else if (categoryRadio.isSelected())
                 {
-                     int categoryID = -1;
+                    int categoryID = -1;
                     String category = "";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Category.CategoryTable.CATEGORYID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Category.CategoryTable.CATEGORYID.getDisplayName()))
                         {
                             try
                             {
                                 categoryID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Category.CategoryTable.NAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Category.CategoryTable.NAME.getDisplayName()))
                         {
-                            category  = table.getValueAt(row, i).toString();
+                            category = table.getValueAt(row, i).toString();
                         }
-                        
+
                     }
-                    
-                    NewCategoryObject nuo = new NewCategoryObject(new Frame(), true, category,  categoryID);
+
+                    NewCategoryObject nuo = new NewCategoryObject(new Frame(), true, category, categoryID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshCategory();
                     updateBoxes();
-                }
-                else if (locationRadio.isSelected())
+                } else if (locationRadio.isSelected())
                 {
                     int locationID = -1;
                     String location = "";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Location.LocationTable.LOCATIONID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Location.LocationTable.LOCATIONID.getDisplayName()))
                         {
                             try
                             {
                                 locationID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Location.LocationTable.NAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Location.LocationTable.NAME.getDisplayName()))
                         {
-                            location  = table.getValueAt(row, i).toString();
+                            location = table.getValueAt(row, i).toString();
                         }
-                        
+
                     }
-                    
-                    NewLocationObject nuo = new NewLocationObject(new Frame(), true, location,  locationID);
+
+                    NewLocationObject nuo = new NewLocationObject(new Frame(), true, location, locationID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshLocation();
                     updateBoxes();
-                }
-                else if (roleRadio.isSelected())
+                } else if (roleRadio.isSelected())
                 {
                     int roleID = -1;
                     String role = "";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Role.RoleTable.ROLEID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Role.RoleTable.ROLEID.getDisplayName()))
                         {
                             try
                             {
                                 roleID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-                                
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Role.RoleTable.TYPE.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(Role.RoleTable.TYPE.getDisplayName()))
                         {
-                            role  = table.getValueAt(row, i).toString();
+                            role = table.getValueAt(row, i).toString();
                         }
-                        
+
                     }
-                    
-                    NewRoleObject nuo = new NewRoleObject(new Frame(), true, role,  roleID);
+
+                    NewRoleObject nuo = new NewRoleObject(new Frame(), true, role, roleID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
                     DatabaseHelper.open();
                     Data.refreshRole();
                     updateBoxes();
-                }   
-                else if (paraprofessionalCategoryRadio.isSelected())
+                } else if (paraprofessionalCategoryRadio.isSelected())
                 {
                     int categoryID = -1, paraprofessionalID = -1;
-                    String paraFirst = "", paraLast ="", category="";
-                    for(int i=0; i<table.getTableHeader().getColumnModel().getColumnCount(); i++)
+                    String paraFirst = "", paraLast = "", category = "";
+                    for (int i = 0; i < table.getTableHeader().getColumnModel().getColumnCount(); i++)
                     {
-                        if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.CATEGORYID.getDisplayName()))
+                        if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.CATEGORYID.getDisplayName()))
                         {
                             try
                             {
                                 categoryID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.PARAPROFESSIONALID.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.PARAPROFESSIONALID.getDisplayName()))
                         {
                             try
                             {
                                 paraprofessionalID = Integer.parseInt(table.getValueAt(row, i).toString());
-                            }
-                            catch(Exception e)
+                            } catch (Exception e)
                             {
-
                             }
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.FNAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.FNAME.getDisplayName()))
                         {
-                            paraFirst  = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.LNAME.getDisplayName()))
+                            paraFirst = table.getValueAt(row, i).toString();
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.LNAME.getDisplayName()))
                         {
                             paraLast = table.getValueAt(row, i).toString();
-                        }
-                        else if(table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.NAME.getDisplayName()))
+                        } else if (table.getTableHeader().getColumnModel().getColumn(i).getHeaderValue().toString().equals(ParaprofessionalCategory.ParaCatTable.NAME.getDisplayName()))
                         {
-                            category  = table.getValueAt(row, i).toString();
+                            category = table.getValueAt(row, i).toString();
                         }
                     }
 
-                    NewParaprofessionalCategoryObject nuo = new NewParaprofessionalCategoryObject(new Frame(), true, paraFirst+" "+paraLast,  category, categoryID, paraprofessionalID);
+                    NewParaprofessionalCategoryObject nuo = new NewParaprofessionalCategoryObject(new Frame(), true, paraFirst + " " + paraLast, category, categoryID, paraprofessionalID);
                     nuo.setLocationRelativeTo(null);
                     nuo.setVisible(true);
 
-                }   
+                }
 
-                
+
                 DatabaseHelper.close();
-                
+
                 return null;
             }
-         
         };
-        
+
         return dce;
     }
-    
-     /**
+
+    /**
      * Resize the width of a table to fit data
+     *
      * @param table - the table to resize
      * @return the table resized
      */
@@ -5766,48 +5737,51 @@ public final class AdminView extends javax.swing.JFrame
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         //table.setModel(model);
 
-    int margin = 1;
+        int margin = 1;
 
-    for (int i = 0; i < table.getColumnCount(); i++) {
-        int                     vColIndex = i;
-        DefaultTableColumnModel colModel  = (DefaultTableColumnModel) table.getColumnModel();
-        TableColumn             col       = colModel.getColumn(vColIndex);
-        int                     width     = 0;
+        for (int i = 0; i < table.getColumnCount(); i++)
+        {
+            int vColIndex = i;
+            DefaultTableColumnModel colModel = (DefaultTableColumnModel) table.getColumnModel();
+            TableColumn col = colModel.getColumn(vColIndex);
+            int width = 0;
 
-        // Get width of column header
-        TableCellRenderer renderer = col.getHeaderRenderer();
+            // Get width of column header
+            TableCellRenderer renderer = col.getHeaderRenderer();
 
-        if (renderer == null) {
-            renderer = table.getTableHeader().getDefaultRenderer();
+            if (renderer == null)
+            {
+                renderer = table.getTableHeader().getDefaultRenderer();
+            }
+
+            Component comp = renderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0, 0);
+
+            width = comp.getPreferredSize().width;
+
+            // Get maximum width of column data
+            for (int r = 0; r < table.getRowCount(); r++)
+            {
+                renderer = table.getCellRenderer(r, vColIndex);
+                System.out.println("COL: " + vColIndex + " and ROW: " + r + "   " + renderer.toString());
+                comp = renderer.getTableCellRendererComponent(table, table.getValueAt(r, vColIndex), false, false,
+                        r, vColIndex);
+                width = Math.max(width, comp.getPreferredSize().width);
+            }
+
+            // Add margin
+            width += 2 * margin;
+
+            // Set the width
+            col.setPreferredWidth(width);
         }
 
-        Component comp = renderer.getTableCellRendererComponent(table, col.getHeaderValue(), false, false, 0, 0);
+        ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(
+                SwingConstants.LEFT);
 
-        width = comp.getPreferredSize().width;
+        table.setAutoCreateRowSorter(true);
+        //table.getTableHeader().setReorderingAllowed(false);
 
-        // Get maximum width of column data
-        for (int r = 0; r < table.getRowCount(); r++) {
-            renderer = table.getCellRenderer(r, vColIndex);
-            System.out.println("COL: "+vColIndex+" and ROW: "+r+"   "+renderer.toString());
-            comp     = renderer.getTableCellRendererComponent(table, table.getValueAt(r, vColIndex), false, false,
-                    r, vColIndex);
-            width = Math.max(width, comp.getPreferredSize().width);
-        }
-
-        // Add margin
-        width += 2 * margin;
-
-        // Set the width
-        col.setPreferredWidth(width);
-    }
-
-    ((DefaultTableCellRenderer) table.getTableHeader().getDefaultRenderer()).setHorizontalAlignment(
-        SwingConstants.LEFT);
-
-     table.setAutoCreateRowSorter(true);
-    //table.getTableHeader().setReorderingAllowed(false);
-
-    return table;
+        return table;
     }
 
     /**
@@ -5815,7 +5789,7 @@ public final class AdminView extends javax.swing.JFrame
      */
     public void setUpSearchTab()
     {
- 
+
         searchList.setModel(dlm);
 
         searchclientPanel.setVisible(true);
@@ -5846,7 +5820,7 @@ public final class AdminView extends javax.swing.JFrame
         boxes[6] = searchteacherfirstCombo;
         boxes[7] = searchteacherlastCombo;
         boxes[8] = searchsubjectcategoryCombo;
-        
+
         boxes[9] = searchuserfirstCombo;
         boxes[10] = searchuserlastCombo;
         boxes[11] = searchusernameCombo;
@@ -5860,8 +5834,8 @@ public final class AdminView extends javax.swing.JFrame
         boxes[19] = searchcreatorfirstCombo;
         boxes[20] = searchcreatorlastCombo;
         boxes[21] = searchcreatorroleCombo;
-      
-    
+
+
         ArrayList<ArrayList<String>> cultimateList = new ArrayList<ArrayList<String>>();
         cultimateList.add(Data.getClientsfirst());
         cultimateList.add(Data.getClientslast());
@@ -5872,7 +5846,7 @@ public final class AdminView extends javax.swing.JFrame
         cultimateList.add(Data.getTeacherfirstlist());
         cultimateList.add(Data.getTeacherlastlist());
         cultimateList.add(Data.getCategorieslist());
-        
+
         cultimateList.add(Data.getUserfirstlist());
         cultimateList.add(Data.getUserlastlist());
         cultimateList.add(Data.getUsernamelist());
@@ -5886,7 +5860,7 @@ public final class AdminView extends javax.swing.JFrame
         cultimateList.add(Data.getParafirstlist());
         cultimateList.add(Data.getParalastlist());
         cultimateList.add(Data.getRolelist());
-  
+
         uac = new UltimateAutoComplete(cultimateList, boxes);
 
         clientRadio.setSelected(true);
@@ -5895,9 +5869,10 @@ public final class AdminView extends javax.swing.JFrame
         dlm.addElement("Search for all records");
         restrictHelper = new RestrictionListModel(dlm);
     }
-    
+
     /**
      * Download table data to an excel (CSV) file
+     *
      * @param table - the table to download data from
      * @throws IOException
      */
@@ -5906,37 +5881,37 @@ public final class AdminView extends javax.swing.JFrame
         JFileChooser jfc = new JFileChooser();
         int result = jfc.showSaveDialog(this);
         if (result == JFileChooser.CANCEL_OPTION)
+        {
             return false;
+        }
         File file = jfc.getSelectedFile();
-        
-        try 
-        {   
-            BufferedWriter writer = new BufferedWriter
-            (new FileWriter(file.getAbsoluteFile()+".csv"));
+
+        try
+        {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file.getAbsoluteFile() + ".csv"));
 
             String cols = "";
-            for(int i=0; i<table.getColumnCount()-1; i++)
+            for (int i = 0; i < table.getColumnCount() - 1; i++)
             {
-                cols+=table.getColumnModel().getColumn(i).getHeaderValue() +",";
+                cols += table.getColumnModel().getColumn(i).getHeaderValue() + ",";
             }
-            cols+=table.getColumnModel().getColumn(table.getColumnCount()-1).getHeaderValue();
+            cols += table.getColumnModel().getColumn(table.getColumnCount() - 1).getHeaderValue();
 
             writer.write(cols);
             writer.newLine();
 
-            for(int i=0; i<table.getRowCount(); i++)
+            for (int i = 0; i < table.getRowCount(); i++)
             {
                 String line = "";
-                for(int j=0; j<table.getColumnCount(); j++)
+                for (int j = 0; j < table.getColumnCount(); j++)
                 {
                     String value = table.getValueAt(i, j).toString();
-                    if(j == table.getColumnCount()-1)
+                    if (j == table.getColumnCount() - 1)
                     {
                         line += value;
-                    }
-                    else
+                    } else
                     {
-                        line += value+",";
+                        line += value + ",";
                     }
                 }
                 writer.write(line);
@@ -5944,11 +5919,11 @@ public final class AdminView extends javax.swing.JFrame
             }
             writer.close();
             return true;
- 
-        } catch (FileNotFoundException e) {
-           
-        } catch (IOException e) {
-            
+
+        } catch (FileNotFoundException e)
+        {
+        } catch (IOException e)
+        {
         }
         return false;
     }

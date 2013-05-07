@@ -16,113 +16,125 @@ import tutoring.helper.DatabaseHelper;
  *
  * @author team Ubuntu
  */
-public class NewTeacherObject extends javax.swing.JDialog {
+public class NewTeacherObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewTeacherObject
      */
-   private int teacherID = -1;
+    private int teacherID = -1;
+
     /**
      * Create a teacher object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewTeacherObject(java.awt.Frame parent, boolean modal) {
+    public NewTeacherObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
 
         this.setResizable(false);
-  
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a teacher object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param lname - last name of the teacher to modify
      * @param fname - first name of the teacher to modify
      * @param TeacherID - ID of the teacher to modify
      */
-    public NewTeacherObject(java.awt.Frame parent, boolean modal, String lname, String fname, int TeacherID) {
+    public NewTeacherObject(java.awt.Frame parent, boolean modal, String lname, String fname, int TeacherID)
+    {
         super(parent, modal);
         initComponents();
-      
+
         this.setResizable(false);
 
         editButton.setVisible(true);
-        
+
         fnameField.setText(fname);
         lnameField.setText(lname);
-                
-        this.teacherID=TeacherID;
+
+        this.teacherID = TeacherID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         lnameField.setBorder(null);
         fnameField.setBorder(null);
-      
-        
+
+
         String lname = lnameField.getText().trim();
         String fname = fnameField.getText().trim();
-       
+
         try
         {
             boolean goodFirst = true;
-            if(fname.length() < 1)
+            if (fname.length() < 1)
             {
                 goodFirst = false;
-                fnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                fnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodLast = true;
-            if(lname.length() < 1)
+            if (lname.length() < 1)
             {
                 goodLast = false;
-                lnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                lnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
-            
-            if(goodLast && goodFirst)
+
+
+            if (goodLast && goodFirst)
             {
-                
+
                 Teacher t = new Teacher(teacherID, lname, fname);
 
                 DatabaseHelper.open();
                 boolean inserted;
-                
-                if(!update)
-                    inserted = DatabaseHelper.insert(Teacher.getValues(t), Teacher.TeacherTable.getTable());
-                else
-                    inserted = DatabaseHelper.update(Teacher.getValues(t), Teacher.TeacherTable.getTable());
 
-                if(inserted)
+                if (!update)
+                {
+                    inserted = DatabaseHelper.insert(Teacher.getValues(t), Teacher.TeacherTable.getTable());
+                } else
+                {
+                    inserted = DatabaseHelper.update(Teacher.getValues(t), Teacher.TeacherTable.getTable());
+                }
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The teacher was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The teacher was NOT created! Please try again!");
+                }
                 close();
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The teacher was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
-            DatabaseHelper.close(); 
+            DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -256,37 +268,49 @@ public class NewTeacherObject extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 NewTeacherObject dialog = new NewTeacherObject(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing(java.awt.event.WindowEvent e)
+                    {
                         System.exit(0);
                     }
                 });

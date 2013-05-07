@@ -5,7 +5,6 @@ import java.util.Date;
 import java.util.HashMap;
 import javax.swing.table.AbstractTableModel;
 import tutoring.entity.Agenda;
-import tutoring.entity.ParaprofessionalSession;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,14 +14,15 @@ import tutoring.entity.ParaprofessionalSession;
  *
  * @author team Ubuntu
  */
-public class AgendaTableModel extends AbstractTableModel {
+public class AgendaTableModel extends AbstractTableModel
+{
 
-    
     /**
      * Columns of the Agenda table
      */
     public enum Columns
     {
+
         /**
          * Agenda ID column
          */
@@ -34,32 +34,34 @@ public class AgendaTableModel extends AbstractTableModel {
         /**
          * Description column
          */
-        NOTES(2,"Description", String.class),
+        NOTES(2, "Description", String.class),
         /**
          * Agenda category type column
          */
         TYPE(3, "Type", String.class);
-       
-
         private int columnIndex;
         private String displayName;
         private Class<?> columnClass;
         private static HashMap<Integer, Class<?>> classMap = new HashMap<Integer, Class<?>>();
-        
-	private Columns(int i, String displayName, Class<?> columnClass) {
-		columnIndex = i;
-                this.displayName = displayName;
-                this.columnClass = columnClass;
-	}
-        
-        static {
-            for (Columns v : Columns.values()) {
-            classMap.put(v.columnIndex, v.columnClass);
+
+        private Columns(int i, String displayName, Class<?> columnClass)
+        {
+            columnIndex = i;
+            this.displayName = displayName;
+            this.columnClass = columnClass;
+        }
+
+        static
+        {
+            for (Columns v : Columns.values())
+            {
+                classMap.put(v.columnIndex, v.columnClass);
             }
         }
-        
+
         /**
          * Get column class based on the column index
+         *
          * @param columnIndex - index of the column to retrieve the class
          * @return class of column
          */
@@ -67,7 +69,7 @@ public class AgendaTableModel extends AbstractTableModel {
         {
             return classMap.get(columnIndex);
         }
-        
+
         /**
          *
          * @return column class
@@ -76,49 +78,50 @@ public class AgendaTableModel extends AbstractTableModel {
         {
             return columnClass;
         }
-        
-	/**
+
+        /**
          *
          * @return column index
          */
-        public int getColumnIndex() {
-		return columnIndex;
-	}
-        
+        public int getColumnIndex()
+        {
+            return columnIndex;
+        }
+
         /**
          *
          * @return display name
          */
-        public String getDisplayName() {
-		return displayName;
-	}
- 
+        public String getDisplayName()
+        {
+            return displayName;
+        }
     }
-     
     private String[] columnNames;
     private ArrayList<Agenda> agendaItems = new ArrayList();
 
     /**
      * Create a model for the agenda table
      */
-    public AgendaTableModel(){
-        columnNames=generateColumns();
-        
+    public AgendaTableModel()
+    {
+        columnNames = generateColumns();
+
     }
-    
+
     private String[] generateColumns()
     {
         Columns[] c = Columns.class.getEnumConstants();
         String[] columnNames = new String[c.length];
-        for(int i=0; i<c.length; i++)
+        for (int i = 0; i < c.length; i++)
         {
             columnNames[c[i].getColumnIndex()] = c[i].getDisplayName();
-            
+
         }
-        
+
         return columnNames;
     }
-    
+
     /**
      * Deletes all rows in the table
      */
@@ -127,19 +130,19 @@ public class AgendaTableModel extends AbstractTableModel {
         agendaItems.removeAll(agendaItems);
         fireTableDataChanged();
     }
-    
+
     /*
-    public void addRow(String fname, String lname, Subject subject, int level, Teacher teacher, String notes, Paraprofessional tutor, boolean future, boolean gc)
-    {
-        Timestamp ts = new Timestamp(System.currentTimeMillis());
-        System.out.println(ts.toString());
-        ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
-        tutorSessions.add(tutorSession);
-        fireTableDataChanged();
-    }*/
-    
+     public void addRow(String fname, String lname, Subject subject, int level, Teacher teacher, String notes, Paraprofessional tutor, boolean future, boolean gc)
+     {
+     Timestamp ts = new Timestamp(System.currentTimeMillis());
+     System.out.println(ts.toString());
+     ParaprofessionalSession tutorSession = new ParaprofessionalSession(tutorSessions.size(),fname, lname, tutor, subject, teacher, level, ts, ts, null,future, gc, notes);
+     tutorSessions.add(tutorSession);
+     fireTableDataChanged();
+     }*/
     /**
      * Add row to table
+     *
      * @param a - agenda object to add to the table
      */
     public void addRow(Agenda a)
@@ -147,53 +150,62 @@ public class AgendaTableModel extends AbstractTableModel {
         agendaItems.add(a);
         fireTableDataChanged();
     }
-    
+
     /**
      * Deletes indexes of rows
+     *
      * @param r - array of indexes of the rows to delete in the table
      */
     public void deleteRows(int[] r)
     {
         DatabaseHelper.open();
-        for(int i=0; i<r.length; i++)
-            DatabaseHelper.delete(agendaItems.get(r[i]).getAgendaID()+"", Agenda.AgendaTable.getTable());
+        for (int i = 0; i < r.length; i++)
+        {
+            DatabaseHelper.delete(agendaItems.get(r[i]).getAgendaID() + "", Agenda.AgendaTable.getTable());
+        }
         DatabaseHelper.close();
         ArrayList<Agenda> a = new ArrayList<Agenda>();
-        for(int i=0; i< r.length; i++)
+        for (int i = 0; i < r.length; i++)
+        {
             a.add(agendaItems.get(r[i]));
-        
+        }
+
         agendaItems.removeAll(a);
-        
+
         fireTableDataChanged();
     }
-
 
     @Override
     public boolean isCellEditable(int i, int j)
     {
         return true;
     }
-    
+
     @Override
-    public String getColumnName(int columnIndex){
-         return columnNames[columnIndex];
+    public String getColumnName(int columnIndex)
+    {
+        return columnNames[columnIndex];
     }
 
-    @Override     
-    public int getRowCount() {
+    @Override
+    public int getRowCount()
+    {
         return agendaItems.size();
     }
 
-    @Override        
-    public int getColumnCount() {
-        return columnNames.length; 
+    @Override
+    public int getColumnCount()
+    {
+        return columnNames.length;
     }
 
     @Override
-    public Object getValueAt(int rowIndex, int columnIndex) {
+    public Object getValueAt(int rowIndex, int columnIndex)
+    {
         Agenda a = agendaItems.get(rowIndex);
-        switch (columnIndex) {
-            case 0: 
+        switch (columnIndex)
+        {
+            case 0:
                 return a.getAgendaID();
             case 1:
                 return a.getDate();
@@ -201,19 +213,15 @@ public class AgendaTableModel extends AbstractTableModel {
                 return a.getNotes();
             case 3:
                 return a.getAgendaCategoryID().getType();
-            
-           }
-           return null;
-   }
 
-   @Override
-   public Class<?> getColumnClass(int columnIndex){
+        }
+        return null;
+    }
 
-       return Columns.getColumnClass(columnIndex);
-      }
-   
-   
-      
- }
-      
-   
+    @Override
+    public Class<?> getColumnClass(int columnIndex)
+    {
+
+        return Columns.getColumnClass(columnIndex);
+    }
+}

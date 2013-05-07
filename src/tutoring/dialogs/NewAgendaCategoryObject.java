@@ -6,114 +6,120 @@ package tutoring.dialogs;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
-import tutoring.entity.Agenda;
 import tutoring.entity.AgendaCategory;
-import tutoring.entity.Category;
 import tutoring.helper.DatabaseHelper;
 
 /**
  *
  * @author team Ubuntu
  */
-public class NewAgendaCategoryObject extends javax.swing.JDialog {
+public class NewAgendaCategoryObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewAgendaCategoryObject
      */
     private int agendaCategoryID = -1;
+
     /**
      * Create an agenda category object from the database in this dialog
+     *
      * @param parent - frame parent
      * @param modal - is a modal
      */
-    public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal) {
+    public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
-      
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit an agenda category object from the database in this dialog
+     *
      * @param parent - frame parent
      * @param modal - is a model
      * @param category - the category of the agenda to modify
      * @param agendaCategoryID - the ID of the category to modify
      */
-    public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal, String category, int agendaCategoryID) {
+    public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal, String category, int agendaCategoryID)
+    {
         super(parent, modal);
         initComponents();
-        
+
         categoryField.setText(category);
         editButton.setVisible(true);
-        this.agendaCategoryID=agendaCategoryID;
+        this.agendaCategoryID = agendaCategoryID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         categoryField.setBorder(null);
-        
-       
+
+
         String category = categoryField.getText().trim();
-        
+
         try
         {
             boolean goodCategory = true;
-            if(category.length() < 1)
+            if (category.length() < 1)
             {
                 goodCategory = false;
-                categoryField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                categoryField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
-            
-            
-            if(goodCategory)
+
+
+
+            if (goodCategory)
             {
-                
+
                 AgendaCategory c = new AgendaCategory(agendaCategoryID, category);
                 DatabaseHelper.open();
-                
+
                 boolean inserted;
-                if(!update)
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(AgendaCategory.getValues(c), AgendaCategory.AgendaCategoryTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(AgendaCategory.getValues(c), AgendaCategory.AgendaCategoryTable.getTable());
-                
-                if(inserted)
+                }
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The agenda category was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The agenda category was NOT created! Please try again!");
-                
+                }
+
                 close();
             }
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The agenda category was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -229,8 +235,6 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog {
 
         validate(false);
     }//GEN-LAST:event_submitbuttonActionPerformed
-
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JTextField categoryField;

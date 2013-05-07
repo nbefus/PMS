@@ -16,29 +16,34 @@ import tutoring.helper.*;
  *
  * @author team Ubuntu
  */
-public class NewClientObject extends javax.swing.JDialog {
+public class NewClientObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewDatabaseObject
      */
     private boolean inserted = false;
     private int clientID = -1;
+
     /**
      * Create a client object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewClientObject(java.awt.Frame parent, boolean modal) {
+    public NewClientObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
         this.setResizable(false);
-        
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a client in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param fname - first name of the client to modify
@@ -47,27 +52,29 @@ public class NewClientObject extends javax.swing.JDialog {
      * @param email - email of the client to modify
      * @param clientID - ID of the client to modify
      */
-    public NewClientObject(java.awt.Frame parent, boolean modal, String fname, String lname, String phone, String email, int clientID) {
+    public NewClientObject(java.awt.Frame parent, boolean modal, String fname, String lname, String phone, String email, int clientID)
+    {
         super(parent, modal);
         initComponents();
-        
+
         fnameField.setText(fname);
         lnameField.setText(lname);
-        
+
         phoneField.setText(phone);
         emailField.setText(email);
         editButton.setVisible(true);
-        this.clientID=clientID;
+        this.clientID = clientID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     /**
      *
      * @return
@@ -76,7 +83,7 @@ public class NewClientObject extends javax.swing.JDialog {
     {
         return inserted;
     }
-    
+
     /**
      *
      * @param update
@@ -89,83 +96,99 @@ public class NewClientObject extends javax.swing.JDialog {
             lnameField.setBorder(null);
             phoneField.setBorder(null);
             emailField.setBorder(null);
-            
+
             String fname = fnameField.getText().trim();
             String lname = lnameField.getText().trim();
             String phone = phoneField.getText().trim();
             String email = emailField.getText().trim();
 
-            if(fname.length() < 1)
+            if (fname.length() < 1)
             {
-                fnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                fnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
-            if(lname.length() < 1)
+            if (lname.length() < 1)
             {
-                lnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                lnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
             boolean goodPhone = true;
-            
-            if(phone.length() > 1)
+
+            if (phone.length() > 1)
             {
-                for(int i=0; i<phone.length(); i++)
-                    if(!(phone.charAt(i) == '-' || Character.isDigit(phone.charAt(i))))
+                for (int i = 0; i < phone.length(); i++)
+                {
+                    if (!(phone.charAt(i) == '-' || Character.isDigit(phone.charAt(i))))
+                    {
                         goodPhone = false;
-                
+                    }
+                }
+
                 String checkSlashes = phone.replaceAll("-", "");
-                
-                if(phone.length()-checkSlashes.length() != 2)
+
+                if (phone.length() - checkSlashes.length() != 2)
+                {
                     goodPhone = false;
-                
-                if(!goodPhone)
-                    phoneField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                }
+
+                if (!goodPhone)
+                {
+                    phoneField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
+                }
             }
-   
+
             boolean goodEmail = true;
-            
-            
-            if(email.length() > 0)
+
+
+            if (email.length() > 0)
             {
                 int atSign = email.indexOf("@");
                 int dot = email.indexOf(".");
-                
-                if(dot == -1 || atSign == -1)
-                        goodEmail = false;
-                
-                if(!goodEmail)
-                    emailField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+
+                if (dot == -1 || atSign == -1)
+                {
+                    goodEmail = false;
+                }
+
+                if (!goodEmail)
+                {
+                    emailField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
+                }
             }
-            
-            if(lname.length() > 0 && fname.length() > 0 && goodPhone && goodEmail)
+
+            if (lname.length() > 0 && fname.length() > 0 && goodPhone && goodEmail)
             {
                 Client c = new Client(clientID, fname, lname, phone, email);
                 DatabaseHelper.open();
-                
-                if(!update)
-                    inserted = DatabaseHelper.insert(Client.getValues(c), Client.ClientTable.getTable());
-                else
-                    inserted = DatabaseHelper.update(Client.getValues(c), Client.ClientTable.getTable());
 
-                
+                if (!update)
+                {
+                    inserted = DatabaseHelper.insert(Client.getValues(c), Client.ClientTable.getTable());
+                } else
+                {
+                    inserted = DatabaseHelper.update(Client.getValues(c), Client.ClientTable.getTable());
+                }
+
+
                 //HibernateTest.create(c);
-                if(inserted)
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "Student created successfully!\n\nWait a couple seconds before searching a student again for the dropdown boxes to update");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "Not created successfully");
+                }
                 close();
             }
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Not created successfully");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -331,7 +354,7 @@ public class NewClientObject extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
-        
+
         validate(false);
 
     }//GEN-LAST:event_createButtonActionPerformed
@@ -344,37 +367,49 @@ public class NewClientObject extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 NewClientObject dialog = new NewClientObject(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                dialog.addWindowListener(new java.awt.event.WindowAdapter()
+                {
                     @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
+                    public void windowClosing(java.awt.event.WindowEvent e)
+                    {
                         System.exit(0);
                     }
                 });
