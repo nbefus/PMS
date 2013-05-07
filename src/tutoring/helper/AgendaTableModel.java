@@ -59,6 +59,7 @@ public class AgendaTableModel extends AbstractTableModel
          * Get column class based on the column index
          *
          * @param columnIndex - index of the column to retrieve the class
+         *
          * @return class of column
          */
         public static Class<?> getColumnClass(int columnIndex)

@@ -77,7 +77,7 @@ public class AgendaTableHelper
      * Set up the renderers and editors of the table for an agenda table
      *
      * @param dce - default cell editor for columns which are double click
-     * sensitive to edit
+     *            sensitive to edit
      */
     public void setTableRendersAndEditors(DefaultCellEditor dce)
     {

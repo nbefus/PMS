@@ -15,6 +15,7 @@ public class Validate
      * Validate timestamp
      *
      * @param t - timestamp to validate
+     *
      * @return whether was a valid timestamp
      */
     public static boolean validateTimestamp(String t)
@@ -67,7 +68,8 @@ public class Validate
             {
                 throw new Exception();
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
 
             return false;

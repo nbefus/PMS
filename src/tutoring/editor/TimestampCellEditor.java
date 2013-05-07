@@ -50,7 +50,7 @@ public class TimestampCellEditor extends DefaultCellEditor
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
-            boolean isSelected, int row, int column)
+                                                 boolean isSelected, int row, int column)
     {
 
         if (value == null)
@@ -60,7 +60,8 @@ public class TimestampCellEditor extends DefaultCellEditor
             table.setValueAt("CURRENT", row, column);
             stopCellEditing();
             return null;
-        } else if (((Timestamp) value).equals(Timestamp.valueOf("9999-12-31 12:00:00")))
+        }
+        else if (((Timestamp) value).equals(Timestamp.valueOf("9999-12-31 12:00:00")))
         {
             System.out.println("HEREEEEEE");
             jf.setText("9999-12-31 12:00:00");
@@ -78,7 +79,8 @@ public class TimestampCellEditor extends DefaultCellEditor
             t = new Timestamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH).parse(value.toString()).getTime());
             Date d = new Date(t.getTime());
             sd = new SimpleDateFormat("MM/dd/yyyy hh:mm aa").format(d);
-        } catch (Exception ex)
+        }
+        catch (Exception ex)
         {
         }
 
@@ -100,7 +102,8 @@ public class TimestampCellEditor extends DefaultCellEditor
                 return super.stopCellEditing();
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             jf.setBorder(red);
             return false;

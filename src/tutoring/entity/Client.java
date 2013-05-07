@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Client
 {
+
     /**
      * Client table information
      */
@@ -162,7 +163,8 @@ public class Client
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -183,6 +185,7 @@ public class Client
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -207,6 +210,7 @@ public class Client
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -227,10 +231,10 @@ public class Client
      * Create a client object
      *
      * @param clientID - ID of the client object for the database
-     * @param fName - first name of the client object for the database
-     * @param lName - last name of the client object for the database
-     * @param email - email of the client object for the database
-     * @param phone - phone of the client object for the database
+     * @param fName    - first name of the client object for the database
+     * @param lName    - last name of the client object for the database
+     * @param email    - email of the client object for the database
+     * @param phone    - phone of the client object for the database
      */
     public Client(int clientID, String fName, String lName, String email, String phone)
     {
@@ -245,6 +249,7 @@ public class Client
      * Converts client object to object array of values
      *
      * @param c - client item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Client c)
@@ -262,8 +267,9 @@ public class Client
      * Create a select statement for the client table and return client objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of client items that the query returns
      */
     public static ArrayList<Client> selectAllClients(String addedSQLToSelect, Connection connect)
@@ -291,10 +297,12 @@ public class Client
                 return clients;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -308,7 +316,8 @@ public class Client
                     statement.close();
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return clients;

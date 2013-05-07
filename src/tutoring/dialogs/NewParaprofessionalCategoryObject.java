@@ -57,12 +57,12 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog
     /**
      * Edit a paraprofessional category object in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param paraprofessional - the paraprofessional first and last name to
-     * modify
-     * @param category - category name of the category to modify
-     * @param categoryID - category ID of the category to modify
+     * @param parent             - parent frame
+     * @param modal              - is a modal
+     * @param paraprofessional   - the paraprofessional first and last name to
+     *                           modify
+     * @param category           - category name of the category to modify
+     * @param categoryID         - category ID of the category to modify
      * @param paraprofessionalID - ID of the paraprofessional to modify
      */
     public NewParaprofessionalCategoryObject(java.awt.Frame parent, boolean modal, String paraprofessional, String category, int categoryID, int paraprofessionalID)
@@ -142,7 +142,8 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(ParaprofessionalCategory.getValues(pc), ParaprofessionalCategory.ParaCatTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.updateParaCat(ParaprofessionalCategory.getValues(pc), oldValues, ParaprofessionalCategory.ParaCatTable.getTable());
                 }
@@ -150,7 +151,8 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The paraprofessioanl category was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The paraprofessional category was NOT created! Please try again!");
                 }
@@ -159,10 +161,12 @@ public class NewParaprofessionalCategoryObject extends javax.swing.JDialog
 
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The paraprofessional category was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

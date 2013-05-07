@@ -47,13 +47,15 @@ public class TimestampCellRenderer extends DefaultTableCellRenderer
                         setForeground(t.getSelectionForeground());
                         setBackground(Color.green);
                         setBorder(new MatteBorder(3, 3, 3, 3, Color.black));
-                    } else
+                    }
+                    else
                     {
                         setForeground(t.getForeground());
                         setBackground(Color.green);
                         setBorder(new MatteBorder(3, 3, 3, 3, Color.black));
                     }
-                } else if (c == Columns.STOP.getColumnIndex())
+                }
+                else if (c == Columns.STOP.getColumnIndex())
                 {
                     this.setText("");
                     if (isSelected)
@@ -63,45 +65,52 @@ public class TimestampCellRenderer extends DefaultTableCellRenderer
                             setForeground(t.getSelectionForeground());
                             setBackground(Color.lightGray);
                             setBorder(new MatteBorder(3, 3, 3, 3, Color.black));
-                        } else
+                        }
+                        else
                         {
                             setForeground(t.getSelectionForeground());
                             setBackground(Color.red);
                             setBorder(new MatteBorder(3, 3, 3, 3, Color.black));
                         }
-                    } else
+                    }
+                    else
                     {
                         if (((Timestamp) t.getValueAt(r, c - 1)).equals(Timestamp.valueOf("9999-12-31 12:00:00")))
                         {
                             setForeground(t.getSelectionForeground());
                             setBackground(Color.lightGray);
                             setBorder(new MatteBorder(3, 3, 3, 3, Color.black));
-                        } else
+                        }
+                        else
                         {
                             setForeground(t.getSelectionForeground());
                             setBackground(Color.red);
                             setBorder(new MatteBorder(3, 3, 3, 3, Color.black));
                         }
                     }
-                } else
+                }
+                else
                 {
                     if (isSelected)
                     {
                         setForeground(t.getSelectionForeground());
                         setBackground(t.getSelectionBackground());
-                    } else
+                    }
+                    else
                     {
                         setForeground(t.getForeground());
                         setBackground(t.getBackground());
                     }
                 }
-            } else
+            }
+            else
             {
                 String date;
                 if (!isFutureSession)
                 {
                     date = new SimpleDateFormat("hh:mm aa").format((Date) o);
-                } else
+                }
+                else
                 {
                     date = new SimpleDateFormat("MM/dd/yyyy hh:mm aa").format((Date) o);
                 }
@@ -112,19 +121,22 @@ public class TimestampCellRenderer extends DefaultTableCellRenderer
                 {
                     setForeground(t.getSelectionForeground());
                     setBackground(t.getSelectionBackground());
-                } else
+                }
+                else
                 {
                     setForeground(t.getForeground());
                     setBackground(t.getBackground());
                 }
             }
-        } else
+        }
+        else
         {
             if (!isFutureSession)
             {
                 this.setText("STOP");
                 setBackground(Color.red);
-            } else
+            }
+            else
             {
                 this.setText("Start");
                 setBackground(Color.green);

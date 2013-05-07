@@ -25,8 +25,9 @@ public class RestrictionListModel
     /**
      * Create MySQL query from restrictions
      *
-     * @param table - table for the query
+     * @param table       - table for the query
      * @param selectQuery - select part of the query
+     *
      * @return full MySQL query for restrictions
      */
     public String createQuery(String table, String selectQuery)
@@ -49,7 +50,7 @@ public class RestrictionListModel
      * Sets a new restriction for a database search
      *
      * @param restrictions - restrictions for search to add
-     * @param displayName - display name of each restriction
+     * @param displayName  - display name of each restriction
      */
     public void setListElement(ArrayList<String> restrictions, ArrayList<String> displayName)
     {
@@ -71,7 +72,8 @@ public class RestrictionListModel
             }
 
             dlm.addElement(restriction);
-        } else if (restrictions.size() > 0)
+        }
+        else if (restrictions.size() > 0)
         {
             restriction = displayName.get(0) + "=" + restrictions.get(0) + "";
             dlm.addElement(restriction);
@@ -110,11 +112,13 @@ public class RestrictionListModel
             if (or)
             {
                 query = "(" + query + ") OR";
-            } else
+            }
+            else
             {
                 query = "(" + query + ")";
             }
-        } else
+        }
+        else
         {
             String[] expression = value.split("=");
 

@@ -33,7 +33,7 @@ public class NewCourseObject extends javax.swing.JDialog
      * Create a course object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewCourseObject(java.awt.Frame parent, boolean modal)
     {
@@ -63,11 +63,11 @@ public class NewCourseObject extends javax.swing.JDialog
     /**
      * Edit a course object in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param teacher - teacher of the course to modify
-     * @param subject - subject of the course to modify
-     * @param level - level of the course to modify
+     * @param parent   - parent frame
+     * @param modal    - is a modal
+     * @param teacher  - teacher of the course to modify
+     * @param subject  - subject of the course to modify
+     * @param level    - level of the course to modify
      * @param courseID - ID of the course to modify
      */
     public NewCourseObject(java.awt.Frame parent, boolean modal, String teacher, String subject, String level, int courseID)
@@ -128,12 +128,14 @@ public class NewCourseObject extends javax.swing.JDialog
                 try
                 {
                     lev = Integer.parseInt(level);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     goodLevel = false;
                     levelField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
-            } else
+            }
+            else
             {
                 goodLevel = false;
                 levelField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
@@ -170,7 +172,8 @@ public class NewCourseObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Course.getValues(c), Course.CourseTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Course.getValues(c), Course.CourseTable.getTable());
                 }
@@ -178,7 +181,8 @@ public class NewCourseObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The course item was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The course item was NOT created! Please try again!");
                 }
@@ -188,10 +192,12 @@ public class NewCourseObject extends javax.swing.JDialog
             }
 
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The course item was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

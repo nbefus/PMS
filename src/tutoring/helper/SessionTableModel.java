@@ -124,6 +124,7 @@ public class SessionTableModel extends AbstractTableModel
          * Get the class of the column
          *
          * @param columnIndex - column index
+         *
          * @return class of column in columnIndex
          */
         public static Class<?> getColumnClass(int columnIndex)
@@ -167,7 +168,7 @@ public class SessionTableModel extends AbstractTableModel
     /**
      * Create session table model
      *
-     * @param isFutureSession - if table model is for appointment table
+     * @param isFutureSession        - if table model is for appointment table
      * @param todaySessionTableModel - today sessions table model to update
      */
     public SessionTableModel(boolean isFutureSession, TodaySessionTableModel todaySessionTableModel)
@@ -181,7 +182,7 @@ public class SessionTableModel extends AbstractTableModel
     /**
      * Create session table model
      *
-     * @param isFutureSession - if this is for appointments table
+     * @param isFutureSession     - if this is for appointments table
      * @param currentSessionModel - current sessions table model to update
      */
     public SessionTableModel(boolean isFutureSession, SessionTableModel currentSessionModel)
@@ -204,7 +205,8 @@ public class SessionTableModel extends AbstractTableModel
             if (columnNames[c[i].getColumnIndex()].equals(Columns.START.getDisplayName()) && isFutureSession)
             {
                 columnNames[c[i].getColumnIndex()] = "Appointment";
-            } else if (columnNames[c[i].getColumnIndex()].equals(Columns.STOP.getDisplayName()) && isFutureSession)
+            }
+            else if (columnNames[c[i].getColumnIndex()].equals(Columns.STOP.getDisplayName()) && isFutureSession)
             {
                 columnNames[c[i].getColumnIndex()] = "Start";
             }
@@ -262,6 +264,7 @@ public class SessionTableModel extends AbstractTableModel
      *
      * @param one - object one
      * @param two - object two
+     *
      * @return whether both objects are equal
      */
     public boolean areEqual(Object one, Object two)
@@ -275,26 +278,31 @@ public class SessionTableModel extends AbstractTableModel
                 {
                     return true;
                 }
-            } catch (ParseException ex)
+            }
+            catch (ParseException ex)
             {
                 return false;
             }
             return false;
-        } else if (one instanceof Boolean && two instanceof Boolean)
+        }
+        else if (one instanceof Boolean && two instanceof Boolean)
         {
             if ((Boolean) one && (Boolean) two)
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
-        } else
+        }
+        else
         {
             if (one.toString().equals(two.toString()))
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -329,7 +337,8 @@ public class SessionTableModel extends AbstractTableModel
                 }
             }
 
-        } else
+        }
+        else
         {
             ParaprofessionalSession ts = tutorSessions.get(r);
             if (c == Columns.START.getColumnIndex() && !isFutureSession)
@@ -338,7 +347,8 @@ public class SessionTableModel extends AbstractTableModel
                 DatabaseHelper.open();
                 DatabaseHelper.update(ParaprofessionalSession.getValues(ts), ParaprofessionalSession.ParaSessTable.getTable());
                 DatabaseHelper.close();
-            } else if (c == Columns.STOP.getColumnIndex() && isFutureSession)
+            }
+            else if (c == Columns.STOP.getColumnIndex() && isFutureSession)
             {
                 ts.setSessionStart(new Timestamp((new Date()).getTime()));
 
@@ -348,7 +358,8 @@ public class SessionTableModel extends AbstractTableModel
                 currentSessionModel.addRow(ts);
                 tutorSessions.remove(ts);
 
-            } else if (c == Columns.STOP.getColumnIndex() && !isFutureSession)
+            }
+            else if (c == Columns.STOP.getColumnIndex() && !isFutureSession)
             {
                 ts.setSessionEnd(new Timestamp((new Date()).getTime()));
                 DatabaseHelper.open();
@@ -426,7 +437,8 @@ public class SessionTableModel extends AbstractTableModel
                 if (ts.getSessionStart() != null)
                 {
                     return ts.getSessionStart();
-                } else
+                }
+                else
                 {
                     return Timestamp.valueOf("9999-12-31 12:00:00");
                 }
@@ -434,7 +446,8 @@ public class SessionTableModel extends AbstractTableModel
                 if (ts.getSessionStart() != null)
                 {
                     return ts.getSessionEnd();
-                } else
+                }
+                else
                 {
                     return Timestamp.valueOf("9999-12-31 12:00:00");
                 }
@@ -442,13 +455,16 @@ public class SessionTableModel extends AbstractTableModel
                 if (ts.getSessionStart() != null && ts.getSessionEnd() == null && !isFutureSession)
                 {
                     return minutesOf(new Date(ts.getSessionStart().getTime()), new Date());
-                } else if (ts.getSessionStart() != null && ts.getSessionEnd() != null && !isFutureSession)
+                }
+                else if (ts.getSessionStart() != null && ts.getSessionEnd() != null && !isFutureSession)
                 {
                     return minutesOf(new Date(ts.getSessionStart().getTime()), new Date(ts.getSessionEnd().getTime()));
-                } else if (ts.getSessionStart() != null && ts.getSessionEnd() == null && isFutureSession)
+                }
+                else if (ts.getSessionStart() != null && ts.getSessionEnd() == null && isFutureSession)
                 {
                     return minutesOf(new Date(), new Date(ts.getSessionStart().getTime()));
-                } else
+                }
+                else
                 {
                     return 0;
                 }
@@ -470,6 +486,7 @@ public class SessionTableModel extends AbstractTableModel
      *
      * @param eDate - first date
      * @param lDate - second date
+     *
      * @return difference in minutes
      */
     public int minutesOf(Date eDate, Date lDate)

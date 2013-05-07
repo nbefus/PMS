@@ -160,7 +160,8 @@ public class Subject
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -181,6 +182,7 @@ public class Subject
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -205,6 +207,7 @@ public class Subject
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -233,10 +236,10 @@ public class Subject
     /**
      * Create a subject object
      *
-     * @param subjectID - ID of the subject object for the database
+     * @param subjectID  - ID of the subject object for the database
      * @param abbrevName - abbreviated name of the subject object for the
-     * database
-     * @param category - category of the subject object for the database
+     *                   database
+     * @param category   - category of the subject object for the database
      */
     public Subject(int subjectID, String abbrevName, Category category)
     {
@@ -249,6 +252,7 @@ public class Subject
      * Converts subject object to object array of values
      *
      * @param s - subject item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Subject s)
@@ -265,8 +269,9 @@ public class Subject
      * objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of subject items that the query returns
      */
     public static ArrayList<Subject> selectAllSubjects(String addedSQLToSelect, Connection connect)
@@ -294,10 +299,12 @@ public class Subject
                 return subjects;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -311,7 +318,8 @@ public class Subject
                     statement.close();
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return subjects;

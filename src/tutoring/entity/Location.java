@@ -152,7 +152,8 @@ public class Location
          * Gets database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name fro
+         *                    name fro
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -173,6 +174,7 @@ public class Location
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -197,6 +199,7 @@ public class Location
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -215,7 +218,7 @@ public class Location
     /**
      * Create a Location object
      *
-     * @param locationID - ID of the location object for database
+     * @param locationID   - ID of the location object for database
      * @param locationName - name of the location object for the database
      */
     public Location(int locationID, String locationName)
@@ -228,6 +231,7 @@ public class Location
      * Converts location object to object array of values
      *
      * @param l - location item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Location l)
@@ -243,8 +247,9 @@ public class Location
      * objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of location items that the query returns
      */
     public static ArrayList<Location> selectAllLocation(String addedSQLToSelect, Connection connect)
@@ -272,10 +277,12 @@ public class Location
                 return locations;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -288,7 +295,8 @@ public class Location
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return locations;

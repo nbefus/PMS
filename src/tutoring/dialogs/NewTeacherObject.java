@@ -24,7 +24,7 @@ public class NewTeacherObject extends javax.swing.JDialog
      * Create a teacher object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewTeacherObject(java.awt.Frame parent, boolean modal)
     {
@@ -40,10 +40,10 @@ public class NewTeacherObject extends javax.swing.JDialog
     /**
      * Edit a teacher object in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param lname - last name of the teacher to modify
-     * @param fname - first name of the teacher to modify
+     * @param parent    - parent frame
+     * @param modal     - is a modal
+     * @param lname     - last name of the teacher to modify
+     * @param fname     - first name of the teacher to modify
      * @param TeacherID - ID of the teacher to modify
      */
     public NewTeacherObject(java.awt.Frame parent, boolean modal, String lname, String fname, int TeacherID)
@@ -107,7 +107,8 @@ public class NewTeacherObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Teacher.getValues(t), Teacher.TeacherTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Teacher.getValues(t), Teacher.TeacherTable.getTable());
                 }
@@ -115,17 +116,20 @@ public class NewTeacherObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The teacher was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The teacher was NOT created! Please try again!");
                 }
                 close();
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The teacher was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }
@@ -266,10 +270,14 @@ public class NewTeacherObject extends javax.swing.JDialog
      */
     public static void main(String args[])
     {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try
         {
@@ -281,22 +289,28 @@ public class NewTeacherObject extends javax.swing.JDialog
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
+        }
+        catch (ClassNotFoundException ex)
         {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
+        }
+        catch (InstantiationException ex)
         {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
+        }
+        catch (IllegalAccessException ex)
         {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
             java.util.logging.Logger.getLogger(NewTeacherObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /*
+         * Create and display the dialog
+         */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
             public void run()

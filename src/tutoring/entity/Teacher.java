@@ -155,7 +155,8 @@ public class Teacher
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -176,6 +177,7 @@ public class Teacher
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -200,6 +202,7 @@ public class Teacher
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -218,7 +221,7 @@ public class Teacher
     /**
      * Create a teacher object
      *
-     * @param id - ID of the teacher object for the database
+     * @param id    - ID of the teacher object for the database
      * @param lName - last name of the teacher object for the database
      * @param fName - first name of the teacher object for the database
      */
@@ -233,6 +236,7 @@ public class Teacher
      * Converts teacher object to object array of values
      *
      * @param t - teacher item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Teacher t)
@@ -249,8 +253,9 @@ public class Teacher
      * objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of teacher items that the query returns
      */
     public static ArrayList<Teacher> selectAllTeacher(String addedSQLToSelect, Connection connect)
@@ -277,10 +282,12 @@ public class Teacher
                 return teachers;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -293,7 +300,8 @@ public class Teacher
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return teachers;
@@ -361,7 +369,8 @@ public class Teacher
         {
             System.out.println("TEACHER EXISTS FINALLY: " + this.fName + " " + this.lName);
             return true;
-        } else
+        }
+        else
         {
             return false;
         }

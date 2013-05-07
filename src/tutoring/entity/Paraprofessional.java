@@ -179,7 +179,8 @@ public class Paraprofessional
          * Get database name based on the display name of the columns
          *
          * @param DisplayName - display name of the columns to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -200,6 +201,7 @@ public class Paraprofessional
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -224,6 +226,7 @@ public class Paraprofessional
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -256,16 +259,19 @@ public class Paraprofessional
      * Create a paraprofessional object
      *
      * @param paraprofessionalID - ID of the paraprofessional object for the
-     * database
-     * @param role - role of the paraprofessional object for the database
-     * @param lName - last name of the paraprofessional object for the database
-     * @param fName - first name of the paraprofessional object for the database
-     * @param hireDate - hire date of the paraprofessional object for the
-     * database
-     * @param terminationDate - termination date of the paraprofessional object
-     * for the database
-     * @param isClockedIn - clocked in status of the paraprofessional object for
-     * the database
+     *                           database
+     * @param role               - role of the paraprofessional object for the
+     *                           database
+     * @param lName              - last name of the paraprofessional object for
+     *                           the database
+     * @param fName              - first name of the paraprofessional object for
+     *                           the database
+     * @param hireDate           - hire date of the paraprofessional object for
+     *                           the database
+     * @param terminationDate    - termination date of the paraprofessional
+     *                           object for the database
+     * @param isClockedIn        - clocked in status of the paraprofessional
+     *                           object for the database
      */
     public Paraprofessional(int paraprofessionalID, Role role, String lName, String fName, Date hireDate, Date terminationDate, boolean isClockedIn)
     {
@@ -282,6 +288,7 @@ public class Paraprofessional
      * Converts paraprofessional object to object array of values
      *
      * @param p - paraprofessional item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Paraprofessional p)
@@ -304,8 +311,9 @@ public class Paraprofessional
      * paraprofessional objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of paraprofessional items that the query returns
      */
     public static ArrayList<Paraprofessional> selectAllParaprofessional(String addedSQLToSelect, Connection connect)
@@ -333,10 +341,12 @@ public class Paraprofessional
                 return paraprofessionals;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -349,7 +359,8 @@ public class Paraprofessional
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return paraprofessionals;

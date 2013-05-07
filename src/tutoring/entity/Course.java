@@ -183,7 +183,8 @@ public class Course
          * Get database name based on the display name of the columns
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -204,6 +205,7 @@ public class Course
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -228,6 +230,7 @@ public class Course
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -276,10 +279,10 @@ public class Course
     /**
      * Create course object
      *
-     * @param course - course ID of the course object for the database
+     * @param course  - course ID of the course object for the database
      * @param teacher - teacher object of the course object for the database
      * @param subject - subject object of the course object for the database
-     * @param level - level of the course object for the database
+     * @param level   - level of the course object for the database
      */
     public Course(int course, Teacher teacher, Subject subject, int level)
     {
@@ -293,6 +296,7 @@ public class Course
      * Converts course object to object array of values
      *
      * @param c - course item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Course c)
@@ -309,8 +313,9 @@ public class Course
      * Create a select statement for the course table and return course objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of course items that the query returns
      */
     public static ArrayList<Course> selectAllCourse(String addedSQLToSelect, Connection connect)
@@ -337,10 +342,12 @@ public class Course
                 return courses;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -354,7 +361,8 @@ public class Course
                     statement.close();
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return courses;
@@ -433,7 +441,8 @@ public class Course
         if (c instanceof Course && this.level == ((Course) c).getLevel() && this.subjectID.equals(((Course) c).getSubjectID()) && this.teacherID.equals(((Course) c).getTeacherID()))
         {
             return true;
-        } else
+        }
+        else
         {
             return false;
         }

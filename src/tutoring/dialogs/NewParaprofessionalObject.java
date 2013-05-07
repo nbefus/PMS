@@ -33,7 +33,7 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
      * Create a paraprofessional object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewParaprofessionalObject(java.awt.Frame parent, boolean modal)
     {
@@ -56,15 +56,16 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
     /**
      * Edit a paraprofessional object in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param role - role of the paraprofessional to modify
-     * @param fname - first name of the paraprofessional to modify
-     * @param lname - last name of the paraprofessional to modify
-     * @param clockedIn - clocked in field of the paraprofessional to modify
-     * @param hireDate - hire date of the paraprofessional to modify
-     * @param terminationDate - termination date of the paraprofessional to
-     * modify
+     * @param parent             - parent frame
+     * @param modal              - is a modal
+     * @param role               - role of the paraprofessional to modify
+     * @param fname              - first name of the paraprofessional to modify
+     * @param lname              - last name of the paraprofessional to modify
+     * @param clockedIn          - clocked in field of the paraprofessional to
+     *                           modify
+     * @param hireDate           - hire date of the paraprofessional to modify
+     * @param terminationDate    - termination date of the paraprofessional to
+     *                           modify
      * @param paraprofessionalID - ID of the paraprofessional to modify
      */
     public NewParaprofessionalObject(java.awt.Frame parent, boolean modal, String role, String fname, String lname, String clockedIn, String hireDate, String terminationDate, int paraprofessionalID)
@@ -85,7 +86,8 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
         if (clockedIn.equalsIgnoreCase("true"))
         {
             clockedInCombo.setSelectedIndex(0);
-        } else
+        }
+        else
         {
             clockedInCombo.setSelectedIndex(1);
         }
@@ -152,7 +154,8 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     sdf.setLenient(false);
                     hire = sdf.parse(hireDate);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     goodHire = false;
                     hireField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
@@ -167,7 +170,8 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     sdf.setLenient(false);
                     term = sdf.parse(terminationDate);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     goodTermination = false;
                     terminationField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
@@ -186,20 +190,21 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
             }
 
             String categoryString = "";
-            /*String[] categoryArray = categories.split(",");
-            
-             for(int i=0; i<categoryArray.length; i++)
-             categoryString += "'"+categoryArray[i]+"', ";
-             categoryString = categoryString.substring(0,categoryString.length()-2);
-            
-             boolean goodCategory = true;
-             ArrayList<Subject> validCategories = (ArrayList<Subject>)Subject.selectAllSubjects("where "+Category.CategoryTable.NAME.getWithAlias()+" in ("+categoryString+")", DatabaseHelper.getConnection());
-            
-             if(validCategories.size() != categoryArray.length)
-             {
-             goodCategory = false;
-             categoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
-             }  
+            /*
+             * String[] categoryArray = categories.split(",");
+             *
+             * for(int i=0; i<categoryArray.length; i++) categoryString +=
+             * "'"+categoryArray[i]+"', "; categoryString =
+             * categoryString.substring(0,categoryString.length()-2);
+             *
+             * boolean goodCategory = true; ArrayList<Subject> validCategories =
+             * (ArrayList<Subject>)Subject.selectAllSubjects("where
+             * "+Category.CategoryTable.NAME.getWithAlias()+" in
+             * ("+categoryString+")", DatabaseHelper.getConnection());
+             *
+             * if(validCategories.size() != categoryArray.length) { goodCategory
+             * = false; categoryCombo.setBorder(new
+             * MatteBorder(3,3,3,3,Color.red)); }
              */
             if (goodLast && goodFirst && goodHire && goodTermination && goodRole)
             {
@@ -211,7 +216,8 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Paraprofessional.getValues(p), Paraprofessional.ParaTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Paraprofessional.getValues(p), Paraprofessional.ParaTable.getTable());
                 }
@@ -220,7 +226,8 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The paraprofessioanl was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The paraprofessional was NOT created! Please try again!");
                 }
@@ -229,10 +236,12 @@ public class NewParaprofessionalObject extends javax.swing.JDialog
 
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The paraprofessional was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

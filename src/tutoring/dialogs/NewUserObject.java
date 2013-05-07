@@ -26,7 +26,7 @@ public class NewUserObject extends javax.swing.JDialog
      * Creates new form NewUserObject to create a user object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewUserObject(java.awt.Frame parent, boolean modal)
     {
@@ -51,13 +51,13 @@ public class NewUserObject extends javax.swing.JDialog
     /**
      * Edit a user object in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
+     * @param parent   - parent frame
+     * @param modal    - is a modal
      * @param username - username of the user object to modify
      * @param password - password of the user object to modify
-     * @param lname - last name of the user object to modify
-     * @param fname - first name of the user object to modify
-     * @param role - role of the user object to modify
+     * @param lname    - last name of the user object to modify
+     * @param fname    - first name of the user object to modify
+     * @param role     - role of the user object to modify
      */
     public NewUserObject(java.awt.Frame parent, boolean modal, String username, String password, String lname, String fname, String role)
     {
@@ -158,7 +158,8 @@ public class NewUserObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(User.getValues(u), User.UserTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(User.getValues(u), User.UserTable.getTable());
                 }
@@ -166,16 +167,19 @@ public class NewUserObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The user was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The user was NOT created! Please try again!");
                 }
                 close();
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The user was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

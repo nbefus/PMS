@@ -151,7 +151,8 @@ public class Role
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -172,6 +173,7 @@ public class Role
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -196,6 +198,7 @@ public class Role
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -214,7 +217,7 @@ public class Role
     /**
      * Create a role object
      *
-     * @param roleID - ID of the role object for the database
+     * @param roleID   - ID of the role object for the database
      * @param roleType - trye of the role object for the database
      */
     public Role(int roleID, String roleType)
@@ -227,6 +230,7 @@ public class Role
      * Converts role object to object array of values
      *
      * @param r - role item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Role r)
@@ -241,8 +245,9 @@ public class Role
      * Create a select statement for the role table and return role objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of role items that the query returns
      */
     public static ArrayList<Role> selectAllRoles(String addedSQLToSelect, Connection connect)
@@ -268,10 +273,12 @@ public class Role
                 return roles;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -284,7 +291,8 @@ public class Role
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return roles;

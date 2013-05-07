@@ -187,7 +187,8 @@ public class ParaprofessionalCategory implements Serializable
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -208,6 +209,7 @@ public class ParaprofessionalCategory implements Serializable
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -232,6 +234,7 @@ public class ParaprofessionalCategory implements Serializable
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -281,9 +284,9 @@ public class ParaprofessionalCategory implements Serializable
      * Create a paraprofessional category object
      *
      * @param paraprofessional - paraprofessional of the paraprofessional
-     * category object for the database
-     * @param category - category of the paraprofessional category object for
-     * the database
+     *                         category object for the database
+     * @param category         - category of the paraprofessional category
+     *                         object for the database
      */
     public ParaprofessionalCategory(Paraprofessional paraprofessional, Category category)
     {
@@ -295,6 +298,7 @@ public class ParaprofessionalCategory implements Serializable
      * Converts paraprofessional category object to object array of values
      *
      * @param pc - Paraprofessional category item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(ParaprofessionalCategory pc)
@@ -310,8 +314,9 @@ public class ParaprofessionalCategory implements Serializable
      * return paraprofessional category objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of paraprofessional category items that the query returns
      */
     public static ArrayList<ParaprofessionalCategory> selectAllParaprofessional(String addedSQLToSelect, Connection connect)
@@ -341,10 +346,12 @@ public class ParaprofessionalCategory implements Serializable
                 return paraCats;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -357,7 +364,8 @@ public class ParaprofessionalCategory implements Serializable
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return paraCats;

@@ -34,10 +34,11 @@ public class SessionTableHelper
     /**
      * Create a new session table helper to help manage session tables
      *
-     * @param table - session table to manage
-     * @param isFutureSession - if session table is future session table
+     * @param table                    - session table to manage
+     * @param isFutureSession          - if session table is future session
+     *                                 table
      * @param currentSessionTableModel - current sessions table model
-     * @param todaySessionTableModel - today's sessions table model
+     * @param todaySessionTableModel   - today's sessions table model
      */
     public SessionTableHelper(JTable table, boolean isFutureSession, SessionTableModel currentSessionTableModel, TodaySessionTableModel todaySessionTableModel)
     {
@@ -46,7 +47,8 @@ public class SessionTableHelper
         if (!isFutureSession)
         {
             table.setModel(new SessionTableModel(isFutureSession, todaySessionTableModel));
-        } else
+        }
+        else
         {
             table.setModel(new SessionTableModel(isFutureSession, currentSessionTableModel));
         }

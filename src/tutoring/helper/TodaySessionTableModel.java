@@ -123,6 +123,7 @@ public class TodaySessionTableModel extends AbstractTableModel
          * Get the column class from column index
          *
          * @param columnIndex - column index of column class to get
+         *
          * @return column class of columnIndex
          */
         public static Class<?> getColumnClass(int columnIndex)
@@ -240,6 +241,7 @@ public class TodaySessionTableModel extends AbstractTableModel
      *
      * @param one - first object
      * @param two - second object
+     *
      * @return whether they are equal
      */
     public boolean areEqual(Object one, Object two)
@@ -254,27 +256,32 @@ public class TodaySessionTableModel extends AbstractTableModel
                 {
                     return true;
                 }
-            } catch (ParseException ex)
+            }
+            catch (ParseException ex)
             {
                 return false;
             }
 
             return false;
-        } else if (one instanceof Boolean && two instanceof Boolean)
+        }
+        else if (one instanceof Boolean && two instanceof Boolean)
         {
             if ((Boolean) one && (Boolean) two)
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
-        } else
+        }
+        else
         {
             if (one.toString().equals(two.toString()))
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }
@@ -339,7 +346,8 @@ public class TodaySessionTableModel extends AbstractTableModel
                 if (ts.getSessionStart() != null)
                 {
                     return ts.getSessionStart();
-                } else
+                }
+                else
                 {
                     return Timestamp.valueOf("9999-12-31 12:00:00");
                 }
@@ -347,7 +355,8 @@ public class TodaySessionTableModel extends AbstractTableModel
                 if (ts.getSessionStart() != null)
                 {
                     return ts.getSessionEnd();
-                } else
+                }
+                else
                 {
                     return Timestamp.valueOf("9999-12-31 12:00:00");
                 }
@@ -355,10 +364,12 @@ public class TodaySessionTableModel extends AbstractTableModel
                 if (ts.getSessionStart() != null && ts.getSessionEnd() == null)
                 {
                     return minutesOf(new Date(ts.getSessionStart().getTime()), new Date());
-                } else if (ts.getSessionStart() != null && ts.getSessionEnd() != null)
+                }
+                else if (ts.getSessionStart() != null && ts.getSessionEnd() != null)
                 {
                     return minutesOf(new Date(ts.getSessionStart().getTime()), new Date(ts.getSessionEnd().getTime()));
-                } else
+                }
+                else
                 {
                     return 0;
                 }
@@ -380,6 +391,7 @@ public class TodaySessionTableModel extends AbstractTableModel
      *
      * @param eDate - first Date
      * @param lDate - second Date
+     *
      * @return difference in minutes
      */
     public int minutesOf(Date eDate, Date lDate)

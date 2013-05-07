@@ -74,7 +74,8 @@ public class Login
         {
             loginStatus = true;
             return loginStatus;
-        } else
+        }
+        else
         {
             loginStatus = false;
             return loginStatus;
@@ -146,15 +147,18 @@ public class Login
         {
             loginFeedback = "Username and passwords match.";
             return loginFeedback;
-        } else if ((usernameStatus == false) && (passwordStatus == true))
+        }
+        else if ((usernameStatus == false) && (passwordStatus == true))
         {
             loginFeedback = "The username that you entered was not found.";
             return loginFeedback;
-        } else if (passwordStatus == false && (usernameStatus == true))
+        }
+        else if (passwordStatus == false && (usernameStatus == true))
         {
             loginFeedback = "The password that you entered is invalid.";
             return loginFeedback;
-        } else if (loginStatus == false)
+        }
+        else if (loginStatus == false)
         {
             loginFeedback = "Please recheck your typing and try again. Remember, your password is case sensitive.";
             return loginFeedback;

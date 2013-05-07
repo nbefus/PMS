@@ -9,7 +9,6 @@ import tutoring.entity.*;
  *
  * @author Team Ubuntu
  */
-
 public class Data
 {
 
@@ -266,13 +265,14 @@ public class Data
     /**
      * Sets up a list for auto auto complete
      *
-     * @param query - MySQL query
-     * @param index - Column index of the query to put data into array
+     * @param query     - MySQL query
+     * @param index     - Column index of the query to put data into array
      * @param separator - Character separator to separate object column data
      * @param singleton - array list of the data you want to store data from the
-     * index column
+     *                  index column
+     *
      * @return ArrayList containing all data in MySQL statement separated by the
-     * separator character
+     *         separator character
      */
     public static ArrayList<String> setUpList(String query, int index, char separator, ArrayList<String> singleton)
     {
@@ -307,6 +307,7 @@ public class Data
      * Selects data from a regular MySQL query
      *
      * @param query - query to run
+     *
      * @return - array list of the data returned from the query
      */
     public static ArrayList<String> regularSQL(String query)
@@ -328,7 +329,8 @@ public class Data
                 if (i == row.length - 1)
                 {
                     line += row[i].toString();
-                } else
+                }
+                else
                 {
                     line += row[i].toString() + " ";
                 }
@@ -342,8 +344,9 @@ public class Data
     /**
      * Creates all combination of categories
      *
-     * @param n - number of categories
+     * @param n  - number of categories
      * @param ps - category array
+     *
      * @return array list of the different combinations
      */
     public static ArrayList<String> createMultiCat(int n, ArrayList<String> ps)
@@ -373,7 +376,8 @@ public class Data
             if (s.equals(" "))
             {
                 tmp.add(categorieslist.get(n - 1));
-            } else
+            }
+            else
             {
                 tmp.add(s + ", " + categorieslist.get(n - 1));
             }

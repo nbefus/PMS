@@ -51,7 +51,7 @@ public final class SIAView extends javax.swing.JFrame
 
     /**
      * Updates tables every minute
-     * 
+     *
      */
     public class MinuteUpdater extends TimerTask
     {
@@ -64,7 +64,7 @@ public final class SIAView extends javax.swing.JFrame
          * Updates tables every minute
          *
          * @param current - current sessions table model to update
-         * @param future - future sessions table model to update
+         * @param future  - future sessions table model to update
          */
         public MinuteUpdater(SessionTableModel current, SessionTableModel future)
         {
@@ -119,7 +119,7 @@ public final class SIAView extends javax.swing.JFrame
         cboxes2[0] = courseCombo;
         cboxes2[1] = levelCombo;
         cboxes2[2] = teacherCombo;
-        
+
         ArrayList<ArrayList<String>> cultimateList2 = new ArrayList<ArrayList<String>>();
 
         cultimateList2.add(Data.getSubjectslist());
@@ -241,8 +241,9 @@ public final class SIAView extends javax.swing.JFrame
          * Get database name based on display name of column
          *
          * @param DisplayName - display name of column
+         *
          * @return the database name of the combo-box using the display name as
-         * input
+         *         input
          */
         public String getDatabaseName(String DisplayName)
         {
@@ -561,7 +562,7 @@ public final class SIAView extends javax.swing.JFrame
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                    boolean isSelected, int row, int column)
+                                                         boolean isSelected, int row, int column)
             {
                 sessionID = ((Integer) table.getValueAt(row, SessionTableModel.Columns.ID.getColumnIndex())).intValue();
 
@@ -589,7 +590,8 @@ public final class SIAView extends javax.swing.JFrame
                 if (hasSessionStart)
                 {
                     sessionstartField.setText(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.START.getColumnIndex())).getTime())));
-                } else
+                }
+                else
                 {
                     sessionstartField.setText("mm/dd/yyyy hh:mm aa");
                 }
@@ -597,7 +599,8 @@ public final class SIAView extends javax.swing.JFrame
                 if (hasSessionEnd)
                 {
                     sessionendField.setText(sdf.format(new Date(((Timestamp) table.getValueAt(row, SessionTableModel.Columns.STOP.getColumnIndex())).getTime())));
-                } else
+                }
+                else
                 {
                     sessionendField.setText("mm/dd/yyyy hh:mm aa");
                 }
@@ -626,7 +629,7 @@ public final class SIAView extends javax.swing.JFrame
         {
             @Override
             public Component getTableCellEditorComponent(JTable table, Object value,
-                    boolean isSelected, int row, int column)
+                                                         boolean isSelected, int row, int column)
             {
                 SimpleDateFormat sdfFrom = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 SimpleDateFormat sdfTo = new SimpleDateFormat("MM/dd/yyyy", Locale.ENGLISH);
@@ -635,7 +638,8 @@ public final class SIAView extends javax.swing.JFrame
                 try
                 {
                     date = sdfTo.format(sdfFrom.parse(table.getValueAt(row, AgendaTableModel.Columns.DATE.getColumnIndex()).toString()));
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                 }
                 String notes = table.getValueAt(row, AgendaTableModel.Columns.NOTES.getColumnIndex()).toString();
@@ -932,18 +936,14 @@ public final class SIAView extends javax.swing.JFrame
                 0.0f, 0.0f, start,
                 0.0f, 0.0f, end);
         /*
-         final GradientPaint gp1 = new GradientPaint(
-         0.0f, 0.0f, Color.green, 
-         0.0f, 0.0f, Color.lightGray
-         );
-         final GradientPaint gp2 = new GradientPaint(
-         0.0f, 0.0f, Color.red, 
-         0.0f, 0.0f, Color.lightGray
-         );*/
+         * final GradientPaint gp1 = new GradientPaint( 0.0f, 0.0f, Color.green,
+         * 0.0f, 0.0f, Color.lightGray ); final GradientPaint gp2 = new
+         * GradientPaint( 0.0f, 0.0f, Color.red, 0.0f, 0.0f, Color.lightGray );
+         */
         renderer.setSeriesPaint(0, gp0);
         /*
-         renderer.setSeriesPaint(1, gp1);
-         renderer.setSeriesPaint(2, gp2);*/
+         * renderer.setSeriesPaint(1, gp1); renderer.setSeriesPaint(2, gp2);
+         */
 
         final CategoryAxis domainAxis = plot.getDomainAxis();
         domainAxis.setCategoryLabelPositions(
@@ -2316,7 +2316,8 @@ public final class SIAView extends javax.swing.JFrame
 
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -2327,6 +2328,7 @@ public final class SIAView extends javax.swing.JFrame
      *
      * @param date - date to subtract from
      * @param days - x amount of days to subtract
+     *
      * @return the resulting date
      */
     public static Date subDays(Date date, int days)
@@ -2361,7 +2363,8 @@ public final class SIAView extends javax.swing.JFrame
 
             loadChartsWithDates(beginDate, endDate);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -2449,7 +2452,8 @@ public final class SIAView extends javax.swing.JFrame
 
             loadChartsWithDates(endDate, beginDate);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -2472,7 +2476,8 @@ public final class SIAView extends javax.swing.JFrame
 
             loadChartsWithDates(endDate, beginDate);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -2496,7 +2501,8 @@ public final class SIAView extends javax.swing.JFrame
 
             loadChartsWithDates(endDate, beginDate);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -2523,7 +2529,8 @@ public final class SIAView extends javax.swing.JFrame
 
             loadChartsWithDates(endDate, beginDate);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
         }
@@ -2609,7 +2616,8 @@ public final class SIAView extends javax.swing.JFrame
             {
                 intLevel = Integer.parseInt(level);
 
-            } catch (Exception z)
+            }
+            catch (Exception z)
             {
                 levelCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 coursePanelCheck = false;
@@ -2666,7 +2674,8 @@ public final class SIAView extends javax.swing.JFrame
                 if (hasSessionStart)
                 {
                     sessionStart = new Timestamp(sdf.parse(sessionstartField.getText().trim()).getTime());
-                } else
+                }
+                else
                 {
                     sessionstartField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
@@ -2680,7 +2689,8 @@ public final class SIAView extends javax.swing.JFrame
                 {
                     sessionendField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
 
-                } else
+                }
+                else
                 {
                     sessionEnd = new Timestamp(sdf.parse(sessionendField.getText().trim()).getTime());
                 }
@@ -2716,7 +2726,8 @@ public final class SIAView extends javax.swing.JFrame
                 String query = "where " + subjectIDString + "=" + subjects.get(0).getSubjectID() + " and " + teachIDString + "=" + teachers.get(0).getTeacherID() + " and " + levelString + "=" + intLevel.intValue();
                 courses = (ArrayList<Course>) Course.selectAllCourse(query, DatabaseHelper.getConnection());
 
-            } catch (Exception z)
+            }
+            catch (Exception z)
             {
                 z.printStackTrace();
                 courses = new ArrayList<Course>();
@@ -2768,7 +2779,8 @@ public final class SIAView extends javax.swing.JFrame
             if (sessionStart != null)
             {
                 sessionStartString = "='" + sessionStart + "'";
-            } else
+            }
+            else
             {
                 sessionStartString = " is null";
             }
@@ -2777,7 +2789,8 @@ public final class SIAView extends javax.swing.JFrame
             if (sessionEnd != null)
             {
                 sessionEndString = "='" + sessionEnd + "'";
-            } else
+            }
+            else
             {
                 sessionEndString = " is null";
             }
@@ -2802,7 +2815,8 @@ public final class SIAView extends javax.swing.JFrame
                 ArrayList<ParaprofessionalSession> sessions = ParaprofessionalSession.selectAllParaprofessionalSession(query, DatabaseHelper.getConnection()); // (ArrayList<ParaprofessionalSession>)HibernateTest.select(query);
 
                 ((SessionTableModel) sessionsTable.getModel()).addRow(sessions.get(0));
-            } else
+            }
+            else
             {
                 ps.setParaprofessionalSessionID(sessionID);
                 sessionID = -1;
@@ -2834,7 +2848,8 @@ public final class SIAView extends javax.swing.JFrame
                         try
                         {
                             this.sleep(13);
-                        } catch (InterruptedException ex)
+                        }
+                        catch (InterruptedException ex)
                         {
                         }
                     }
@@ -2850,11 +2865,13 @@ public final class SIAView extends javax.swing.JFrame
             thread.start();
 
             return true;
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             e.printStackTrace();
             return false;
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }
@@ -2885,16 +2902,20 @@ public final class SIAView extends javax.swing.JFrame
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
+        }
+        catch (ClassNotFoundException ex)
         {
             java.util.logging.Logger.getLogger(SIAView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
+        }
+        catch (InstantiationException ex)
         {
             java.util.logging.Logger.getLogger(SIAView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
+        }
+        catch (IllegalAccessException ex)
         {
             java.util.logging.Logger.getLogger(SIAView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
             java.util.logging.Logger.getLogger(SIAView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }

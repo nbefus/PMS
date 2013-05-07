@@ -31,7 +31,7 @@ public class NewSubjectObject extends javax.swing.JDialog
      * Create a new subject object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewSubjectObject(java.awt.Frame parent, boolean modal)
     {
@@ -127,7 +127,8 @@ public class NewSubjectObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Subject.getValues(s), Subject.SubjectTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Subject.getValues(s), Subject.SubjectTable.getTable());
                 }
@@ -135,7 +136,8 @@ public class NewSubjectObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The subject was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The subject was NOT created! Please try again!");
                 }
@@ -143,10 +145,12 @@ public class NewSubjectObject extends javax.swing.JDialog
 
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The subject was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

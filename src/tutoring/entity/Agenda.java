@@ -166,6 +166,7 @@ public class Agenda
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -186,6 +187,7 @@ public class Agenda
          * Get column name from the display name of a column
          *
          * @param DisplayName - display name of the column
+         *
          * @return the column name
          */
         public static String getColumnName(String DisplayName)
@@ -215,6 +217,7 @@ public class Agenda
          * Get the columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -239,6 +242,7 @@ public class Agenda
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -259,11 +263,11 @@ public class Agenda
     /**
      * Create an agenda object
      *
-     * @param agendaID - ID of the agenda object for the database
-     * @param date - Date of the agenda object for the database
-     * @param notes - Notes of the agenda object for the database
+     * @param agendaID         - ID of the agenda object for the database
+     * @param date             - Date of the agenda object for the database
+     * @param notes            - Notes of the agenda object for the database
      * @param agendaCategoryID - Agenda category ID of the agenda object for the
-     * database
+     *                         database
      */
     public Agenda(int agendaID, Date date, String notes, AgendaCategory agendaCategoryID)
     {
@@ -277,6 +281,7 @@ public class Agenda
      * Converts Agenda object to object array of values
      *
      * @param a - Agenda item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Agenda a)
@@ -293,8 +298,9 @@ public class Agenda
      * Create a select statement for the agenda table and return agenda objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of agenda items that the query returns
      */
     public static ArrayList<Agenda> selectAllAgenda(String addedSQLToSelect, Connection connect)
@@ -324,10 +330,12 @@ public class Agenda
                 return agendas;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -341,7 +349,8 @@ public class Agenda
                     statement.close();
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return agendas;

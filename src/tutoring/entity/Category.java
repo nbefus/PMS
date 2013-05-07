@@ -151,7 +151,8 @@ public class Category
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -172,6 +173,7 @@ public class Category
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -196,6 +198,7 @@ public class Category
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -215,7 +218,7 @@ public class Category
      * Create a category object
      *
      * @param categoryID - ID of the category object for the database
-     * @param name - name of the category object for the database
+     * @param name       - name of the category object for the database
      */
     public Category(int categoryID, String name)
     {
@@ -227,6 +230,7 @@ public class Category
      * Converts category object to object array of values
      *
      * @param c - Category item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(Category c)
@@ -242,8 +246,9 @@ public class Category
      * objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of category items that the query returns
      */
     public static ArrayList<Category> selectAllCategory(String addedSQLToSelect, Connection connect)
@@ -270,10 +275,12 @@ public class Category
                 return categories;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -287,7 +294,8 @@ public class Category
                     statement.close();
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return categories;

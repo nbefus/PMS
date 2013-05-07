@@ -411,6 +411,7 @@ public class ParaprofessionalSession
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -432,6 +433,7 @@ public class ParaprofessionalSession
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -459,7 +461,8 @@ public class ParaprofessionalSession
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -494,29 +497,34 @@ public class ParaprofessionalSession
      * Create a paraprofessional session object
      *
      * @param paraprofessionalSessionID - ID of the paraprofessional session
-     * object for the database
-     * @param paraprofessionalID - paraprofessional of the paraprofessional
-     * session object for the database
-     * @param client - client of the paraprofessional session object for the
-     * database
-     * @param course - course of the paraprofessional session object for the
-     * database
-     * @param location - location of the paraprofessional session object for the
-     * database
-     * @param paraprofessionalCreator - creator paraprofessional of the
-     * paraprofessional session object for the database
-     * @param timeAndDateEntered - entered date and time of the paraprofessional
-     * session object for the database
-     * @param sessionStart - start time of the paraprofessional session object
-     * for the database
-     * @param sessionEnd - end time of the paraprofessional session object for
-     * the database
-     * @param grammarCheck - whether session was a grammar check of the
-     * paraprofessional session object for the database
-     * @param notes - description of the paraprofessional session object for the
-     * database
-     * @param walkout - whether session was a walkout of the paraprofessional
-     * session object for the database
+     *                                  object for the database
+     * @param paraprofessionalID        - paraprofessional of the
+     *                                  paraprofessional session object for the
+     *                                  database
+     * @param client                    - client of the paraprofessional session
+     *                                  object for the database
+     * @param course                    - course of the paraprofessional session
+     *                                  object for the database
+     * @param location                  - location of the paraprofessional
+     *                                  session object for the database
+     * @param paraprofessionalCreator   - creator paraprofessional of the
+     *                                  paraprofessional session object for the
+     *                                  database
+     * @param timeAndDateEntered        - entered date and time of the
+     *                                  paraprofessional session object for the
+     *                                  database
+     * @param sessionStart              - start time of the paraprofessional
+     *                                  session object for the database
+     * @param sessionEnd                - end time of the paraprofessional
+     *                                  session object for the database
+     * @param grammarCheck              - whether session was a grammar check of
+     *                                  the paraprofessional session object for
+     *                                  the database
+     * @param notes                     - description of the paraprofessional
+     *                                  session object for the database
+     * @param walkout                   - whether session was a walkout of the
+     *                                  paraprofessional session object for the
+     *                                  database
      */
     public ParaprofessionalSession(int paraprofessionalSessionID, Paraprofessional paraprofessionalID, Client client, Course course, Location location, Paraprofessional paraprofessionalCreator, Timestamp timeAndDateEntered, Timestamp sessionStart, Timestamp sessionEnd, boolean grammarCheck, String notes, boolean walkout)
     {
@@ -539,6 +547,7 @@ public class ParaprofessionalSession
      * Converts paraprofessional session object to object array of values
      *
      * @param ps - paraprofessional session object to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(ParaprofessionalSession ps)
@@ -565,8 +574,9 @@ public class ParaprofessionalSession
      * return paraprofessional session objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of paraprofessional session items that the query returns
      */
     public static ArrayList<ParaprofessionalSession> selectAllParaprofessionalSession(String addedSQLToSelect, Connection connect)
@@ -603,10 +613,12 @@ public class ParaprofessionalSession
                 return paraprofessionalSessions;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -619,7 +631,8 @@ public class ParaprofessionalSession
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return paraprofessionalSessions;
@@ -691,15 +704,13 @@ public class ParaprofessionalSession
     }
 
     /*
-    
-     public Term getTermID() {
-     return termID;
+     *
+     * public Term getTermID() { return termID; }
+     *
+     *
+     * public void setTermID(Term termID) { this.termID = termID;
      }
-
-   
-     public void setTermID(Term termID) {
-     this.termID = termID;
-     }*/
+     */
     /**
      * @return the location
      */
@@ -812,12 +823,15 @@ public class ParaprofessionalSession
         this.notes = notes;
     }
     /*
-    
-     @Override
-     public String toString()
-     {
-     return paraprofessionalSessionID + " " + paraprofessionalID.toString() + " " + clientID.toString() + " " + locationID.toString() + " " + paraprofessionalCreatorID.toString() + " " + timeAndDateEntered.toString() + " " + sessionStart.toGMTString() + " " + sessionEnd.toGMTString() + " " + grammarCheck + " " + notes + " " + walkout;
-     }*/
+     *
+     * @Override public String toString() { return paraprofessionalSessionID + "
+     * " + paraprofessionalID.toString() + " " + clientID.toString() + " " +
+     * locationID.toString() + " " + paraprofessionalCreatorID.toString() + " "
+     * + timeAndDateEntered.toString() + " " + sessionStart.toGMTString() + " "
+     * + sessionEnd.toGMTString() + " " + grammarCheck + " " + notes + " " +
+     * walkout;
+     }
+     */
 
     /**
      *

@@ -15,7 +15,7 @@ import tutoring.helper.*;
 
 /**
  *
- * @author Team Ubuntu 
+ * @author Team Ubuntu
  */
 public class NewAgendaObject extends javax.swing.JDialog
 {
@@ -29,7 +29,7 @@ public class NewAgendaObject extends javax.swing.JDialog
      * Create an agenda object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a model
+     * @param modal  - is a model
      */
     public NewAgendaObject(java.awt.Frame parent, boolean modal)
     {
@@ -53,12 +53,12 @@ public class NewAgendaObject extends javax.swing.JDialog
     /**
      * Edit an agenda object from the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param select - the category selected to modify
-     * @param date - date of the agenda to modify
+     * @param parent      - parent frame
+     * @param modal       - is a modal
+     * @param select      - the category selected to modify
+     * @param date        - date of the agenda to modify
      * @param description - description of the agenda to modify
-     * @param agendaID - ID of the agenda to modify
+     * @param agendaID    - ID of the agenda to modify
      */
     public NewAgendaObject(java.awt.Frame parent, boolean modal, String select, String date, String description, int agendaID)
     {
@@ -109,7 +109,8 @@ public class NewAgendaObject extends javax.swing.JDialog
                     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     sdf.setLenient(false);
                     d = sdf.parse(date);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     goodDate = false;
                     dateField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
@@ -143,7 +144,8 @@ public class NewAgendaObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Agenda.getValues(a), Agenda.AgendaTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Agenda.getValues(a), Agenda.AgendaTable.getTable());
                 }
@@ -151,7 +153,8 @@ public class NewAgendaObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The agenda item was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The agenda item was NOT created! Please try again!");
                 }
@@ -160,10 +163,12 @@ public class NewAgendaObject extends javax.swing.JDialog
 
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The agenda item was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }
@@ -310,7 +315,6 @@ public class NewAgendaObject extends javax.swing.JDialog
 
     private void submitbuttonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_submitbuttonActionPerformed
     {//GEN-HEADEREND:event_submitbuttonActionPerformed
-
         validate(false);
     }//GEN-LAST:event_submitbuttonActionPerformed
 
@@ -320,10 +324,7 @@ public class NewAgendaObject extends javax.swing.JDialog
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-
-
         validate(true);
-
     }//GEN-LAST:event_editButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox agendaCategoryCombo;

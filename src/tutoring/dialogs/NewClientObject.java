@@ -25,7 +25,7 @@ public class NewClientObject extends javax.swing.JDialog
      * Create a client object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewClientObject(java.awt.Frame parent, boolean modal)
     {
@@ -40,12 +40,12 @@ public class NewClientObject extends javax.swing.JDialog
     /**
      * Edit a client in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param fname - first name of the client to modify
-     * @param lname - last name of the client to modify
-     * @param phone - phone of the client to modify
-     * @param email - email of the client to modify
+     * @param parent   - parent frame
+     * @param modal    - is a modal
+     * @param fname    - first name of the client to modify
+     * @param lname    - last name of the client to modify
+     * @param phone    - phone of the client to modify
+     * @param email    - email of the client to modify
      * @param clientID - ID of the client to modify
      */
     public NewClientObject(java.awt.Frame parent, boolean modal, String fname, String lname, String phone, String email, int clientID)
@@ -160,7 +160,8 @@ public class NewClientObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Client.getValues(c), Client.ClientTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Client.getValues(c), Client.ClientTable.getTable());
                 }
@@ -170,16 +171,19 @@ public class NewClientObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "Student created successfully!\n\nWait a couple seconds before searching a student again for the dropdown boxes to update");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "Not created successfully");
                 }
                 close();
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Not created successfully");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }
@@ -365,10 +369,14 @@ public class NewClientObject extends javax.swing.JDialog
      */
     public static void main(String args[])
     {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try
         {
@@ -380,22 +388,28 @@ public class NewClientObject extends javax.swing.JDialog
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
+        }
+        catch (ClassNotFoundException ex)
         {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
+        }
+        catch (InstantiationException ex)
         {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
+        }
+        catch (IllegalAccessException ex)
         {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        }
+        catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
             java.util.logging.Logger.getLogger(NewClientObject.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /*
+         * Create and display the dialog
+         */
         java.awt.EventQueue.invokeLater(new Runnable()
         {
             @Override

@@ -68,8 +68,7 @@ public class RetrieveNewTerm
     }
 
     /*
-     * Get all the term codes
-     * @return list of term codes
+     * Get all the term codes @return list of term codes
      */
     public static ArrayList<String> getTermCodes() throws Exception
     {
@@ -154,6 +153,7 @@ public class RetrieveNewTerm
      * Update course table with new information from term
      *
      * @param termCodes - code of term to import
+     *
      * @throws Exception
      */
     public static void updateCourses(String termCode) throws Exception
@@ -230,7 +230,8 @@ public class RetrieveNewTerm
                         String[] values = value.split(" ");
                         abbrev = values[0].trim();
                         level = Integer.parseInt(values[1].trim());
-                    } else if (count % 5 == 4)
+                    }
+                    else if (count % 5 == 4)
                     {
                         String[] values = value.split(" ");
                         fname = values[0].trim();
@@ -258,13 +259,15 @@ public class RetrieveNewTerm
             if (newsubjects.size() > 0 || newteachers.size() > 0 || newcourses.size() > 0)
             {
                 JOptionPane.showMessageDialog(null, "Term successfully imported");
-            } else
+            }
+            else
             {
                 JOptionPane.showMessageDialog(null, "Term courses/teachers/subjects are already in database");
             }
 
 
-        } else
+        }
+        else
         {
             JOptionPane.showMessageDialog(null, "The term code entered is not valid! Or the web address has changed");
         }
@@ -292,13 +295,15 @@ public class RetrieveNewTerm
 
                     t.setTeacherID(autoIncValTeach);
                     firstTeacher = false;
-                } else
+                }
+                else
                 {
                     newteachers.add(t);
                 }
 
                 teachers.add(t);
-            } else
+            }
+            else
             {
                 t.setTeacherID(teachers.get(hasTeacher).getTeacherID());
                 autoIncValTeach--;
@@ -314,13 +319,15 @@ public class RetrieveNewTerm
                     autoIncValSub = ((Subject) (Subject.selectAllSubjects("where " + Subject.SubjectTable.ABBREVNAME.getWithAlias() + "='" + abbrev + "'", DatabaseHelper.getConnection())).get(0)).getSubjectID();
                     s.setSubjectID(autoIncValSub);
                     firstSubject = false;
-                } else
+                }
+                else
                 {
                     newsubjects.add(s);
                 }
 
                 subjects.add(s);
-            } else
+            }
+            else
             {
                 s.setSubjectID(subjects.get(hasSubject).getSubjectID());
                 autoIncValSub--;
@@ -335,13 +342,15 @@ public class RetrieveNewTerm
 
                 course.setCourseID(autoIncValCourse);
                 firstCourse = false;
-            } else
+            }
+            else
             {
                 newcourses.add(course);
             }
 
             courses.add(course);
-        } else
+        }
+        else
         {
             course.setCourseID(courses.get(hasCourse).getCourseID());
             autoIncValSub--;

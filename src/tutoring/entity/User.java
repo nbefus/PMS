@@ -168,7 +168,8 @@ public class User
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -189,6 +190,7 @@ public class User
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -213,6 +215,7 @@ public class User
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -242,9 +245,9 @@ public class User
      * Create a user object
      *
      * @param userName - username of the user object for the database
-     * @param roleID - role of the user object for the database
-     * @param lName - last name of the user object for the database
-     * @param fName - first name of the user object for the database
+     * @param roleID   - role of the user object for the database
+     * @param lName    - last name of the user object for the database
+     * @param fName    - first name of the user object for the database
      * @param password - password of the user object for the database
      */
     public User(String userName, Role roleID, String lName, String fName, String password)
@@ -260,6 +263,7 @@ public class User
      * Converts user object to object array of values
      *
      * @param u - user item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(User u)
@@ -278,8 +282,9 @@ public class User
      * Create a select statement for the user table and return user objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of user items that the query returns
      */
     public static ArrayList<User> selectAllUser(String addedSQLToSelect, Connection connect)
@@ -306,10 +311,12 @@ public class User
                 return users;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -322,7 +329,8 @@ public class User
                 {
                     statement.close();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return users;

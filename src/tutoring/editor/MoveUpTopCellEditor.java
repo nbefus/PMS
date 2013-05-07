@@ -29,7 +29,7 @@ public class MoveUpTopCellEditor extends DefaultCellEditor
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value,
-            boolean isSelected, int row, int column)
+                                                 boolean isSelected, int row, int column)
     {
         return null;
     }

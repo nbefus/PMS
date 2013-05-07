@@ -24,7 +24,7 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog
      * Create an agenda category object from the database in this dialog
      *
      * @param parent - frame parent
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal)
     {
@@ -40,9 +40,9 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog
     /**
      * Edit an agenda category object from the database in this dialog
      *
-     * @param parent - frame parent
-     * @param modal - is a model
-     * @param category - the category of the agenda to modify
+     * @param parent           - frame parent
+     * @param modal            - is a model
+     * @param category         - the category of the agenda to modify
      * @param agendaCategoryID - the ID of the category to modify
      */
     public NewAgendaCategoryObject(java.awt.Frame parent, boolean modal, String category, int agendaCategoryID)
@@ -92,7 +92,8 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(AgendaCategory.getValues(c), AgendaCategory.AgendaCategoryTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(AgendaCategory.getValues(c), AgendaCategory.AgendaCategoryTable.getTable());
                 }
@@ -100,17 +101,20 @@ public class NewAgendaCategoryObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The agenda category was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The agenda category was NOT created! Please try again!");
                 }
 
                 close();
             }
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The agenda category was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

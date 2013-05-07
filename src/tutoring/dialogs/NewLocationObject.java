@@ -24,7 +24,7 @@ public class NewLocationObject extends javax.swing.JDialog
      * Create a location object in the database
      *
      * @param parent - parent frame
-     * @param modal - is a modal
+     * @param modal  - is a modal
      */
     public NewLocationObject(java.awt.Frame parent, boolean modal)
     {
@@ -40,9 +40,9 @@ public class NewLocationObject extends javax.swing.JDialog
     /**
      * Edit a location object in the database
      *
-     * @param parent - parent frame
-     * @param modal - is a modal
-     * @param location - location name of the location to modify
+     * @param parent     - parent frame
+     * @param modal      - is a modal
+     * @param location   - location name of the location to modify
      * @param locationID - ID of the location to modify
      */
     public NewLocationObject(java.awt.Frame parent, boolean modal, String location, int locationID)
@@ -89,7 +89,8 @@ public class NewLocationObject extends javax.swing.JDialog
                 if (!update)
                 {
                     inserted = DatabaseHelper.insert(Location.getValues(l), Location.LocationTable.getTable());
-                } else
+                }
+                else
                 {
                     inserted = DatabaseHelper.update(Location.getValues(l), Location.LocationTable.getTable());
                 }
@@ -97,7 +98,8 @@ public class NewLocationObject extends javax.swing.JDialog
                 if (inserted)
                 {
                     JOptionPane.showMessageDialog(null, "The location was successfully written to the database!");
-                } else
+                }
+                else
                 {
                     JOptionPane.showMessageDialog(null, "The location was NOT created! Please try again!");
                 }
@@ -105,10 +107,12 @@ public class NewLocationObject extends javax.swing.JDialog
 
             }
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The location was NOT created! Please try again!");
-        } finally
+        }
+        finally
         {
             DatabaseHelper.close();
         }

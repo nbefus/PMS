@@ -151,7 +151,8 @@ public class AgendaCategory
          * Get database name based on the display name of the column
          *
          * @param DisplayName - display name of the column to retrieve database
-         * name for
+         *                    name for
+         *
          * @return database name of the column
          */
         public static String getDatabaseName(String DisplayName)
@@ -172,6 +173,7 @@ public class AgendaCategory
          * Get columns part of a MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return column string for a select statement to the table
          */
         public static String getSelectColumns(boolean selectIDs)
@@ -196,6 +198,7 @@ public class AgendaCategory
          * Get the MySQL select statement
          *
          * @param selectIDs - include ID columns in the select statement
+         *
          * @return MySQL select string
          */
         public static String getSelectQuery(boolean selectIDs)
@@ -215,8 +218,9 @@ public class AgendaCategory
      * Create an agenda category object
      *
      * @param agendaCateogoryID - ID of the agenda category object for the
-     * database
-     * @param type - type of the agenda category object for the database
+     *                          database
+     * @param type              - type of the agenda category object for the
+     *                          database
      */
     public AgendaCategory(int agendaCateogoryID, String type)
     {
@@ -228,6 +232,7 @@ public class AgendaCategory
      * Converts agenda category object to object array of values
      *
      * @param c - Agenda category item to put into value array
+     *
      * @return object array of fields
      */
     public static Object[] getValues(AgendaCategory c)
@@ -243,8 +248,9 @@ public class AgendaCategory
      * category objects
      *
      * @param addedSQLToSelect - any clause after the select statement to add to
-     * the query
-     * @param connect - connection to the database
+     *                         the query
+     * @param connect          - connection to the database
+     *
      * @return list of agenda category items that the query returns
      */
     public static ArrayList<AgendaCategory> selectAllAgendaCategory(String addedSQLToSelect, Connection connect)
@@ -272,10 +278,12 @@ public class AgendaCategory
                 return cateogories;
             }
 
-        } catch (SQLException ex)
+        }
+        catch (SQLException ex)
         {
             ex.printStackTrace();
-        } finally
+        }
+        finally
         {
             try
             {
@@ -289,7 +297,8 @@ public class AgendaCategory
                     statement.close();
                 }
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
             }
             return cateogories;

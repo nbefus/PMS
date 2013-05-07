@@ -41,12 +41,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     /**
      * Create a new auto-auto complete object
      *
-     * @param keywords - array list of array list for list of auto-complete words
-     * that go into the combo-boxes
-     * @param boxes - combo-boxes array of auto-auto complete
+     * @param keywords  - array list of array list for list of auto-complete
+     *                  words that go into the combo-boxes
+     * @param boxes     - combo-boxes array of auto-auto complete
      * @param reference - array list of array list for lists that contain all
-     * data from all combo-boxes in the order that they are in the specified
-     * combo-box
+     *                  data from all combo-boxes in the order that they are in
+     *                  the specified combo-box
      */
     public UltimateAutoAutoComplete(ArrayList<ArrayList<String>> keywords, JComboBox[] boxes, ArrayList<ArrayList<String>> reference)// ArrayList<Client> clientsFirst, ArrayList<Client> clientsLast, ArrayList<Client> clientsPhone, ArrayList<Client> clientsEmail ) {
     {
@@ -114,9 +114,9 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
     /**
      * Update combo-box list
      *
-     * @param activeBoxIndex - the index of the box that is being changed
+     * @param activeBoxIndex    - the index of the box that is being changed
      * @param updatedOtherBoxes - whether the other boxes should be update based
-     * on the current
+     *                          on the current
      */
     public void updateList(int activeBoxIndex, boolean updatedOtherBoxes)
     {
@@ -126,7 +126,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
         if (text.length() > lastSize[activeBoxIndex])
         {
             moreChars = true;
-        } else
+        }
+        else
         {
             moreChars = false;
         }
@@ -159,7 +160,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
 
             }
 
-        } else
+        }
+        else
         {
             if (moreChars)
             {
@@ -174,7 +176,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                         matches.get(activeBoxIndex).remove(((String) values[i]));
                     }
                 }
-            } else
+            }
+            else
             {
                 for (int i = 0; i < keywords.get(activeBoxIndex).size(); i++)
                 {
@@ -206,7 +209,7 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
      * Set active box values based on index
      *
      * @param activeBoxIndex - index of active box
-     * @param value - value of the active box
+     * @param value          - value of the active box
      */
     public void setActiveValues(int activeBoxIndex, String value)
     {
@@ -216,7 +219,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
             activeBoxIndexes.add(activeBoxIndex);
 
             activeBoxValues.add(value);
-        } else
+        }
+        else
         {
             int index = activeBoxIndexes.indexOf(activeBoxIndex);
 
@@ -262,7 +266,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                     if (i != boxes.length - 1)
                     {
                         stringToFind = keywords.get(i + 1).get(indexesOfValue.get(indexesOfValue.size() - 1));//.getlName();
-                    } else
+                    }
+                    else
                     {
                         stringToFind = keywords.get(0).get(indexesOfValue.get(indexesOfValue.size() - 1));
                     }
@@ -313,7 +318,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                                     }
                                 }
                             }
-                        } else
+                        }
+                        else
                         {
                             moreResults = false;
                         }
@@ -384,7 +390,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                     boxes[activeBoxIndex].hidePopup();
                 }
 
-            } else
+            }
+            else
             {
                 if (!isUpdating[activeBoxIndex])
                 {
@@ -396,7 +403,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
             {
                 isUpdating[activeBoxIndex] = false;
                 boxes[activeBoxIndex].hidePopup();
-            } else if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            }
+            else if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             {
                 String selected = boxes[activeBoxIndex].getSelectedItem().toString();
 
@@ -410,7 +418,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                 isUpdating[activeBoxIndex] = false;
 
                 boxes[activeBoxIndex].hidePopup();
-            } else if (evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT && evt.getKeyCode() != KeyEvent.VK_RIGHT)
+            }
+            else if (evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT && evt.getKeyCode() != KeyEvent.VK_RIGHT)
             {
                 isUpdating[activeBoxIndex] = false;
             }
@@ -418,7 +427,8 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
             if (boxes[activeBoxIndex].getSelectedIndex() == 0)
             {
                 zeroIndexSel[activeBoxIndex] = true;
-            } else
+            }
+            else
             {
                 zeroIndexSel[activeBoxIndex] = false;
             }
@@ -506,10 +516,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
 
 
             scroller.getViewport().getView().addMouseListener(ma);
-        } catch (NoSuchFieldException e)
+        }
+        catch (NoSuchFieldException e)
         {
             e.printStackTrace();
-        } catch (IllegalAccessException e)
+        }
+        catch (IllegalAccessException e)
         {
             e.printStackTrace();
         }
@@ -528,10 +540,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
             JScrollPane scroller = (JScrollPane) scrollerInBasicComboPopup.get(popup);
 
             scroller.getViewport().getView().removeMouseListener(ma);
-        } catch (NoSuchFieldException e)
+        }
+        catch (NoSuchFieldException e)
         {
             e.printStackTrace();
-        } catch (IllegalAccessException e)
+        }
+        catch (IllegalAccessException e)
         {
             e.printStackTrace();
         }
@@ -571,10 +585,12 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
                             activeBoxIndex = i;
                         }
 
-                    } catch (NoSuchFieldException es)
+                    }
+                    catch (NoSuchFieldException es)
                     {
                         es.printStackTrace();
-                    } catch (IllegalAccessException es)
+                    }
+                    catch (IllegalAccessException es)
                     {
                         es.printStackTrace();
                     }
@@ -603,8 +619,9 @@ public class UltimateAutoAutoComplete implements KeyListener, ActionListener, Mo
      * Set combo-box value
      *
      * @param useSpaceForEmpty - if value is empty what to put instead of empty
-     * @param value - value to set
-     * @param indexOfBox - index of the box in the combo-box array to update
+     * @param value            - value to set
+     * @param indexOfBox       - index of the box in the combo-box array to
+     *                         update
      */
     public void setComboValue(boolean useSpaceForEmpty, String value, int indexOfBox)
     {
