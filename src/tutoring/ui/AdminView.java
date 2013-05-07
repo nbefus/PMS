@@ -292,8 +292,6 @@ public final class AdminView extends javax.swing.JFrame
     {
         initComponents();
         
-       
-        
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         sessionsTable.getTableHeader().setReorderingAllowed(false);
         appointmentsTable.getTableHeader().setReorderingAllowed(false);
@@ -317,7 +315,6 @@ public final class AdminView extends javax.swing.JFrame
        
         tableHelper.increaseRowHeight(12);
        
-      //  DatabaseHelper.open();
         
         (new Thread(){
             public void run(){
