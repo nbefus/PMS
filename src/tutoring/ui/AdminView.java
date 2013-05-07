@@ -286,9 +286,7 @@ public final class AdminView extends javax.swing.JFrame
     public AdminView()
     {
         initComponents();
-
-
-
+        
         this.setExtendedState(this.getExtendedState() | this.MAXIMIZED_BOTH);
         sessionsTable.getTableHeader().setReorderingAllowed(false);
         appointmentsTable.getTableHeader().setReorderingAllowed(false);
