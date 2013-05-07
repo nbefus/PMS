@@ -10,18 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.text.JTextComponent;
-import tutoring.entity.Category;
-import tutoring.entity.Course;
 import tutoring.entity.Paraprofessional;
 import tutoring.entity.Role;
-import tutoring.entity.Subject;
-import tutoring.entity.Teacher;
 import tutoring.helper.Data;
 import tutoring.helper.DatabaseHelper;
 import tutoring.helper.UltimateAutoComplete;
@@ -30,33 +25,41 @@ import tutoring.helper.UltimateAutoComplete;
  *
  * @author Nathaniel
  */
-public class NewParaprofessionalObject extends javax.swing.JDialog {
+public class NewParaprofessionalObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewParaprofessionalObject
      */
     private int paraprofessionalID = -1;
+
     /**
      * Create a paraprofessional object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewParaprofessionalObject(java.awt.Frame parent, boolean modal) {
+    public NewParaprofessionalObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
 
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
-       
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    roleCombo
+                });
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a paraprofessional object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param role - role of the paraprofessional to modify
@@ -64,42 +67,51 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
      * @param lname - last name of the paraprofessional to modify
      * @param clockedIn - clocked in field of the paraprofessional to modify
      * @param hireDate - hire date of the paraprofessional to modify
-     * @param terminationDate - termination date of the paraprofessional to modify
+     * @param terminationDate - termination date of the paraprofessional to
+     * modify
      * @param paraprofessionalID - ID of the paraprofessional to modify
      */
-    public NewParaprofessionalObject(java.awt.Frame parent, boolean modal, String role,String fname, String lname, String clockedIn, String hireDate, String terminationDate, int paraprofessionalID) {
+    public NewParaprofessionalObject(java.awt.Frame parent, boolean modal, String role, String fname, String lname, String clockedIn, String hireDate, String terminationDate, int paraprofessionalID)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
 
-         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
+        ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    roleCombo
+                });
 
         uac.setComboValue(role, 0);
-        if(clockedIn.equalsIgnoreCase("true"))
-           clockedInCombo.setSelectedIndex(0);
-        else
+        if (clockedIn.equalsIgnoreCase("true"))
+        {
+            clockedInCombo.setSelectedIndex(0);
+        } else
+        {
             clockedInCombo.setSelectedIndex(1);
+        }
         editButton.setVisible(true);
-        
+
         fnameField.setText(fname);
         lnameField.setText(lname);
         hireField.setText(hireDate);
         terminationField.setText(terminationDate);
-               
-        this.paraprofessionalID=paraprofessionalID;
+
+        this.paraprofessionalID = paraprofessionalID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         lnameField.setBorder(null);
@@ -108,7 +120,7 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
         terminationField.setBorder(null);
         roleCombo.setBorder(null);
         //categoryCombo.setBorder(null);
-        
+
         String lname = lnameField.getText().trim();
         String fname = fnameField.getText().trim();
         String hireDate = hireField.getText().trim();
@@ -116,117 +128,120 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
         String role = ((JTextComponent) roleCombo.getEditor().getEditorComponent()).getText();
         //String categories = ((JTextComponent) categoryCombo.getEditor().getEditorComponent()).getText();
         String clockedIn = clockedInCombo.getSelectedItem().toString();
-        
+
         Date hire = null;
         Date term = null;
-        
+
         try
         {
             boolean goodFirst = true;
-            if(fname.length() < 1)
+            if (fname.length() < 1)
             {
                 goodFirst = false;
-                fnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                fnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodLast = true;
-            if(lname.length() < 1)
+            if (lname.length() < 1)
             {
                 goodLast = false;
-                lnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                lnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodHire = true;
-            if(hireDate.length() > 0)
+            if (hireDate.length() > 0)
             {
                 try
                 {
-                    SimpleDateFormat sdf  = new SimpleDateFormat("MM/dd/yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     sdf.setLenient(false);
                     hire = sdf.parse(hireDate);
-                }
-                catch(Exception e)
+                } catch (Exception e)
                 {
                     goodHire = false;
-                    hireField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                    hireField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
-            } 
-            
+            }
+
             boolean goodTermination = true;
-            if(terminationDate.length() > 0 && !terminationDate.contains("yyyy"))
+            if (terminationDate.length() > 0 && !terminationDate.contains("yyyy"))
             {
                 try
                 {
-                    SimpleDateFormat sdf  = new SimpleDateFormat("MM/dd/yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     sdf.setLenient(false);
                     term = sdf.parse(terminationDate);
-                }
-                catch(Exception e)
+                } catch (Exception e)
                 {
                     goodTermination = false;
-                    terminationField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                    terminationField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
-            } 
-            
+            }
+
             boolean goodRole = true;
-            
+
             DatabaseHelper.open();
-            ArrayList<Role> validRole = (ArrayList<Role>)Role.selectAllRoles("where "+Role.RoleTable.TYPE.getWithAlias()+"='"+role+"'", DatabaseHelper.getConnection());
-            
-            if(validRole.size() != 1)
+            ArrayList<Role> validRole = (ArrayList<Role>) Role.selectAllRoles("where " + Role.RoleTable.TYPE.getWithAlias() + "='" + role + "'", DatabaseHelper.getConnection());
+
+            if (validRole.size() != 1)
             {
                 goodRole = false;
-                roleCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                roleCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             String categoryString = "";
             /*String[] categoryArray = categories.split(",");
             
-            for(int i=0; i<categoryArray.length; i++)
-                categoryString += "'"+categoryArray[i]+"', ";
-            categoryString = categoryString.substring(0,categoryString.length()-2);
+             for(int i=0; i<categoryArray.length; i++)
+             categoryString += "'"+categoryArray[i]+"', ";
+             categoryString = categoryString.substring(0,categoryString.length()-2);
             
-            boolean goodCategory = true;
-            ArrayList<Subject> validCategories = (ArrayList<Subject>)Subject.selectAllSubjects("where "+Category.CategoryTable.NAME.getWithAlias()+" in ("+categoryString+")", DatabaseHelper.getConnection());
+             boolean goodCategory = true;
+             ArrayList<Subject> validCategories = (ArrayList<Subject>)Subject.selectAllSubjects("where "+Category.CategoryTable.NAME.getWithAlias()+" in ("+categoryString+")", DatabaseHelper.getConnection());
             
-            if(validCategories.size() != categoryArray.length)
+             if(validCategories.size() != categoryArray.length)
+             {
+             goodCategory = false;
+             categoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+             }  
+             */
+            if (goodLast && goodFirst && goodHire && goodTermination && goodRole)
             {
-                goodCategory = false;
-                categoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
-            }  
-            */
-            if(goodLast && goodFirst && goodHire && goodTermination  && goodRole)
-            {
-                
+
                 Paraprofessional p = new Paraprofessional(paraprofessionalID, validRole.get(0), lname, fname, hire, term, Boolean.parseBoolean(clockedIn));
 
                 boolean inserted;
-                
-                if(!update)
+
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(Paraprofessional.getValues(p), Paraprofessional.ParaTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(Paraprofessional.getValues(p), Paraprofessional.ParaTable.getTable());
+                }
                 //Reload data and table
-                
-                if(inserted)
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The paraprofessioanl was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The paraprofessional was NOT created! Please try again!");
-                
+                }
+
                 close();
-                
+
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The paraprofessional was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -418,7 +433,6 @@ public class NewParaprofessionalObject extends javax.swing.JDialog {
     private void hireFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hireFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_hireFieldActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel categoryLabel3;

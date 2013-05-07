@@ -1,7 +1,5 @@
 package tutoring.helper;
 
-
-
 import java.util.ArrayList;
 import tutoring.entity.*;
 
@@ -24,6 +22,7 @@ public class Login
 
     /**
      * Create a new login
+     *
      * @param username - username to login
      * @param password - password to login
      */
@@ -43,10 +42,10 @@ public class Login
     public Login()
     {
     }
-    
+
     /*
-    * @param username - set username
-    */
+     * @param username - set username
+     */
     public void setUsername(String username)
     {
         this.username = username;
@@ -63,6 +62,7 @@ public class Login
 
     /**
      * Attempt to login
+     *
      * @return whether login was successful
      */
     public final boolean login()

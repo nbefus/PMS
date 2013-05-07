@@ -11,10 +11,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
-import javax.swing.JList;
 import javax.swing.JTextField;
 import javax.swing.MutableComboBoxModel;
 import javax.swing.text.JTextComponent;
@@ -25,38 +23,41 @@ import javax.swing.text.JTextComponent;
  */
 public class UltimateAutoComplete implements KeyListener, ActionListener, MouseListener
 {
+
     private ArrayList<ArrayList<String>> keywords;
     private JComboBox[] boxes;
     private boolean[] isUpdating;
     private boolean[] zeroIndexSel;
     private boolean[] firstClick;
     private int[] lastSize;
-
     ArrayList<ArrayList<String>> matches = new ArrayList<ArrayList<String>>();
 
     /**
      * Create a new auto complete manager for a set of comboboxes
-     * @param keywords - array list of array list for list of autocomplete words that go into the comboboxes
+     *
+     * @param keywords - array list of array list for list of autocomplete words
+     * that go into the comboboxes
      * @param boxes - comboboxes array of auto-auto complete
      */
-    public UltimateAutoComplete(ArrayList<ArrayList<String>>keywords, JComboBox[] boxes) {
+    public UltimateAutoComplete(ArrayList<ArrayList<String>> keywords, JComboBox[] boxes)
+    {
         this.keywords = keywords;
         this.boxes = boxes;
 
- 
+
         isUpdating = new boolean[boxes.length];
         zeroIndexSel = new boolean[boxes.length];
         firstClick = new boolean[boxes.length];
         lastSize = new int[boxes.length];
-                
-        for(int i=0; i<boxes.length; i++)
+
+        for (int i = 0; i < boxes.length; i++)
         {
-            isUpdating[i]=false;
-            zeroIndexSel[i]=false;
-            firstClick[i]=true;
-            lastSize[i]=0;
+            isUpdating[i] = false;
+            zeroIndexSel[i] = false;
+            firstClick[i] = true;
+            lastSize[i] = 0;
             boxes[i].setEditable(true);
-            
+
 
             matches.add(new ArrayList<String>());
             boxes[i].getEditor().getEditorComponent().addKeyListener(this);
@@ -65,36 +66,37 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
 
             boxes[i].setMaximumRowCount(5);
             updatelist(i);
-            ((JTextComponent)boxes[i].getEditor().getEditorComponent()).setText("");
+            ((JTextComponent) boxes[i].getEditor().getEditorComponent()).setText("");
         }
-    } 
-    
+    }
+
     /**
      * Remove all listeners and try to remove all auto-auto complete setup
      */
     public void noMore()
     {
-        for(int i=0; i<boxes.length; i++)
+        for (int i = 0; i < boxes.length; i++)
         {
-            MutableComboBoxModel mcbm = (MutableComboBoxModel)boxes[i].getModel();
+            MutableComboBoxModel mcbm = (MutableComboBoxModel) boxes[i].getModel();
 
-             for ( int j = 0; j <= mcbm.getSize(); j++ ) {
-            Object element = mcbm.getElementAt(0);
-            mcbm.removeElement( element );
-        }
-             ((DefaultComboBoxModel)boxes[i].getModel()).removeAllElements();
-             System.out.println(mcbm.getSize());
-            
+            for (int j = 0; j <= mcbm.getSize(); j++)
+            {
+                Object element = mcbm.getElementAt(0);
+                mcbm.removeElement(element);
+            }
+            ((DefaultComboBoxModel) boxes[i].getModel()).removeAllElements();
+            System.out.println(mcbm.getSize());
+
             boxes[i].getEditor().getEditorComponent().removeKeyListener(this);
             boxes[i].getEditor().getEditorComponent().removeMouseListener(this);
 
             boxes[i].removeActionListener(this);
-            ((JTextComponent)boxes[i].getEditor().getEditorComponent()).setText("");
+            ((JTextComponent) boxes[i].getEditor().getEditorComponent()).setText("");
 
         }
         matches = null;
     }
-    
+
     /**
      *
      * @return comboboxes length
@@ -103,83 +105,86 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     {
         return boxes.length;
     }
-    
-    
-     /**
+
+    /**
      * Update combobox list
+     *
      * @param activeBoxIndex - the index of the box that is being changed
      */
     public void updatelist(int activeBoxIndex)
     {
         boolean moreChars;
-        
-        
-        String text = ((JTextComponent)boxes[activeBoxIndex].getEditor().getEditorComponent()).getText();
-        if(text.length() > lastSize[activeBoxIndex])
+
+
+        String text = ((JTextComponent) boxes[activeBoxIndex].getEditor().getEditorComponent()).getText();
+        if (text.length() > lastSize[activeBoxIndex])
+        {
             moreChars = true;
-        else
+        } else
+        {
             moreChars = false;
+        }
         lastSize[activeBoxIndex] = text.length();
         //mcbm.
-        MutableComboBoxModel mcbm = (MutableComboBoxModel)boxes[activeBoxIndex].getModel();
-       
-            if(moreChars)
-            {
-                int max = matches.get(activeBoxIndex).size();
-                Object[] values = matches.get(activeBoxIndex).toArray();
-                
-                for(int i=0; i<max; i++)
-                {
-                    if(!((String)values[i]).toUpperCase().contains(text.toUpperCase()))
-                    {
-                        mcbm.removeElement(((String)values[i]));
-                        matches.get(activeBoxIndex).remove(((String)values[i]));
-                    }   
-                }
-            }
-            else
-            {
-                for(int i=0; i<keywords.get(activeBoxIndex).size(); i++)
-                {
-                    if(!matches.get(activeBoxIndex).contains(keywords.get(activeBoxIndex).get(i)) && keywords.get(activeBoxIndex).get(i).toUpperCase().contains(text.toUpperCase()))
-                    {
-                        mcbm.addElement(keywords.get(activeBoxIndex).get(i));
+        MutableComboBoxModel mcbm = (MutableComboBoxModel) boxes[activeBoxIndex].getModel();
 
-                        matches.get(activeBoxIndex).add(keywords.get(activeBoxIndex).get(i));
-                    }
-            
+        if (moreChars)
+        {
+            int max = matches.get(activeBoxIndex).size();
+            Object[] values = matches.get(activeBoxIndex).toArray();
+
+            for (int i = 0; i < max; i++)
+            {
+                if (!((String) values[i]).toUpperCase().contains(text.toUpperCase()))
+                {
+                    mcbm.removeElement(((String) values[i]));
+                    matches.get(activeBoxIndex).remove(((String) values[i]));
                 }
             }
-           
-        if(!firstClick[activeBoxIndex] && mcbm.getSize()>0)
+        } else
+        {
+            for (int i = 0; i < keywords.get(activeBoxIndex).size(); i++)
+            {
+                if (!matches.get(activeBoxIndex).contains(keywords.get(activeBoxIndex).get(i)) && keywords.get(activeBoxIndex).get(i).toUpperCase().contains(text.toUpperCase()))
+                {
+                    mcbm.addElement(keywords.get(activeBoxIndex).get(i));
+
+                    matches.get(activeBoxIndex).add(keywords.get(activeBoxIndex).get(i));
+                }
+
+            }
+        }
+
+        if (!firstClick[activeBoxIndex] && mcbm.getSize() > 0)
+        {
             boxes[activeBoxIndex].setSelectedIndex(0);
+        }
     }
 
-
     @Override
-    public void keyReleased(KeyEvent evt) 
+    public void keyReleased(KeyEvent evt)
     {
         int activeBoxIndex = -1;
-        
-        for(int i=0; i<boxes.length; i++)
+
+        for (int i = 0; i < boxes.length; i++)
         {
-            if(boxes[i].getEditor().getEditorComponent() == evt.getSource())
+            if (boxes[i].getEditor().getEditorComponent() == evt.getSource())
             {
                 activeBoxIndex = i;
             }
         }
-        if(activeBoxIndex != -1)
+        if (activeBoxIndex != -1)
         {
-            int cursorPos = ((JTextField)boxes[activeBoxIndex].getEditor().getEditorComponent()).getCaretPosition();
+            int cursorPos = ((JTextField) boxes[activeBoxIndex].getEditor().getEditorComponent()).getCaretPosition();
 
-            if(firstClick[activeBoxIndex] && evt.getKeyCode() != KeyEvent.VK_TAB && evt.getKeyCode() != KeyEvent.VK_SHIFT)
+            if (firstClick[activeBoxIndex] && evt.getKeyCode() != KeyEvent.VK_TAB && evt.getKeyCode() != KeyEvent.VK_SHIFT)
             {
-                firstClick[activeBoxIndex]=false;
+                firstClick[activeBoxIndex] = false;
 
-                ((JTextComponent)boxes[activeBoxIndex].getEditor().getEditorComponent()).setText((""+evt.getKeyChar()).trim());
+                ((JTextComponent) boxes[activeBoxIndex].getEditor().getEditorComponent()).setText(("" + evt.getKeyChar()).trim());
             }
 
-            String text = ((JTextComponent)boxes[activeBoxIndex].getEditor().getEditorComponent()).getText();
+            String text = ((JTextComponent) boxes[activeBoxIndex].getEditor().getEditorComponent()).getText();
 
             if (evt.getKeyCode() == KeyEvent.VK_DOWN)
             {
@@ -188,26 +193,27 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
 
                 boxes[activeBoxIndex].setPopupVisible(true);
             }
-            if(!isUpdating[activeBoxIndex] && evt.getKeyCode() != KeyEvent.VK_LEFT && evt.getKeyCode() != KeyEvent.VK_RIGHT)
+            if (!isUpdating[activeBoxIndex] && evt.getKeyCode() != KeyEvent.VK_LEFT && evt.getKeyCode() != KeyEvent.VK_RIGHT)
             {
                 boxes[activeBoxIndex].hidePopup();
                 updatelist(activeBoxIndex);
                 boxes[activeBoxIndex].showPopup();
-                ((JTextComponent)boxes[activeBoxIndex].getEditor().getEditorComponent()).setText(text);
-                 if(((JTextField)boxes[activeBoxIndex].getEditor().getEditorComponent()).getText().length() >= cursorPos)
-                    ((JTextField)boxes[activeBoxIndex].getEditor().getEditorComponent()).setCaretPosition(cursorPos);
+                ((JTextComponent) boxes[activeBoxIndex].getEditor().getEditorComponent()).setText(text);
+                if (((JTextField) boxes[activeBoxIndex].getEditor().getEditorComponent()).getText().length() >= cursorPos)
+                {
+                    ((JTextField) boxes[activeBoxIndex].getEditor().getEditorComponent()).setCaretPosition(cursorPos);
+                }
 
                 int size = boxes[activeBoxIndex].getModel().getSize();
 
-                if(size == 0)
+                if (size == 0)
                 {
                     boxes[activeBoxIndex].hidePopup();
                 }
 
-            }
-            else
+            } else
             {
-                if(!isUpdating[activeBoxIndex])
+                if (!isUpdating[activeBoxIndex])
                 {
                     boxes[activeBoxIndex].hidePopup();
                 }
@@ -215,31 +221,29 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
 
             if (evt.getKeyCode() == KeyEvent.VK_UP && zeroIndexSel[activeBoxIndex])
             {
-                isUpdating[activeBoxIndex]=false;
+                isUpdating[activeBoxIndex] = false;
                 boxes[activeBoxIndex].hidePopup();
-            }
-            else if (evt.getKeyCode() == KeyEvent.VK_ENTER)
+            } else if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             {
                 String selected = boxes[activeBoxIndex].getSelectedItem().toString();
                 updatelist(activeBoxIndex);
-                if(boxes[activeBoxIndex].getSelectedIndex() >= 0)
-                    ((JTextComponent)boxes[activeBoxIndex].getEditor().getEditorComponent()).setText(selected);
+                if (boxes[activeBoxIndex].getSelectedIndex() >= 0)
+                {
+                    ((JTextComponent) boxes[activeBoxIndex].getEditor().getEditorComponent()).setText(selected);
+                }
 
-                isUpdating[activeBoxIndex]=false;
+                isUpdating[activeBoxIndex] = false;
 
                 boxes[activeBoxIndex].hidePopup();
-            }
-
-            else if(evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT && evt.getKeyCode() != KeyEvent.VK_RIGHT)
+            } else if (evt.getKeyCode() != KeyEvent.VK_UP && evt.getKeyCode() != KeyEvent.VK_DOWN && evt.getKeyCode() != KeyEvent.VK_LEFT && evt.getKeyCode() != KeyEvent.VK_RIGHT)
             {
-                isUpdating[activeBoxIndex]=false;
+                isUpdating[activeBoxIndex] = false;
             }
 
-            if(boxes[activeBoxIndex].getSelectedIndex() == 0)
+            if (boxes[activeBoxIndex].getSelectedIndex() == 0)
             {
                 zeroIndexSel[activeBoxIndex] = true;
-            }
-            else
+            } else
             {
                 zeroIndexSel[activeBoxIndex] = false;
             }
@@ -247,22 +251,29 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     }
 
     @Override
-    public void keyTyped(KeyEvent ke) {}
+    public void keyTyped(KeyEvent ke)
+    {
+    }
 
     @Override
-    public void keyPressed(KeyEvent ke) {}
+    public void keyPressed(KeyEvent ke)
+    {
+    }
 
     @Override
-    public void actionPerformed(ActionEvent ae) {
+    public void actionPerformed(ActionEvent ae)
+    {
         int activeBoxIndex = -1;
-        for(int i=0; i<boxes.length; i++)
+        for (int i = 0; i < boxes.length; i++)
         {
-            if(boxes[i] == ae.getSource())
+            if (boxes[i] == ae.getSource())
+            {
                 activeBoxIndex = i;
+            }
         }
-        if(activeBoxIndex != -1)
+        if (activeBoxIndex != -1)
         {
-            if(ae.getModifiers() == ActionEvent.MOUSE_EVENT_MASK)
+            if (ae.getModifiers() == ActionEvent.MOUSE_EVENT_MASK)
             {
                 updatelist(activeBoxIndex);
             }
@@ -270,48 +281,54 @@ public class UltimateAutoComplete implements KeyListener, ActionListener, MouseL
     }
 
     @Override
-    public void mouseClicked(MouseEvent me) {
-        
+    public void mouseClicked(MouseEvent me)
+    {
+
         int activeBoxIndex = -1;
-        for(int i=0; i<boxes.length; i++)
+        for (int i = 0; i < boxes.length; i++)
         {
-            if(boxes[i].getEditor().getEditorComponent() == me.getSource())
+            if (boxes[i].getEditor().getEditorComponent() == me.getSource())
+            {
                 activeBoxIndex = i;
+            }
         }
-        if(activeBoxIndex != -1)
+        if (activeBoxIndex != -1)
         {
             boxes[activeBoxIndex].setPopupVisible(true);
         }
     }
 
     @Override
-    public void mousePressed(MouseEvent me) {
+    public void mousePressed(MouseEvent me)
+    {
     }
 
     @Override
-    public void mouseReleased(MouseEvent me) {
+    public void mouseReleased(MouseEvent me)
+    {
     }
 
     @Override
-    public void mouseEntered(MouseEvent me) {
+    public void mouseEntered(MouseEvent me)
+    {
     }
 
     @Override
-    public void mouseExited(MouseEvent me) {
+    public void mouseExited(MouseEvent me)
+    {
     }
 
-    
-    
     /**
      * Set combobox value
+     *
      * @param value - value to set
      * @param indexOfBox - index of the box in the combobox array to update
      */
     public void setComboValue(String value, int indexOfBox)
     {
-        ((JTextComponent)boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);
-         updatelist(indexOfBox);
-        ((JTextComponent)boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);
+        ((JTextComponent) boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);
+        updatelist(indexOfBox);
+        ((JTextComponent) boxes[indexOfBox].getEditor().getEditorComponent()).setText(value);
 
         firstClick[indexOfBox] = true;
     }

@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -22,34 +21,42 @@ import tutoring.helper.*;
  *
  * @author dabeefinator
  */
-public class NewAgendaObject extends javax.swing.JDialog {
+public class NewAgendaObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewDatabaseObject
      */
     private int agendaID = -1;
+
     /**
      * Create an agenda object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a model
      */
-    public NewAgendaObject(java.awt.Frame parent, boolean modal) {
+    public NewAgendaObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
         ArrayList<String> category = new ArrayList<String>(new HashSet<String>(Data.getAgendacategorylist()));
-        
+
         this.setResizable(false);
-                
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(category);
-        new UltimateAutoComplete(uacList, new JComboBox[]{agendaCategoryCombo});
-        
+        new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    agendaCategoryCombo
+                });
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit an agenda object from the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param select - the category selected to modify
@@ -57,107 +64,115 @@ public class NewAgendaObject extends javax.swing.JDialog {
      * @param description - description of the agenda to modify
      * @param agendaID - ID of the agenda to modify
      */
-    public NewAgendaObject(java.awt.Frame parent, boolean modal, String select, String date, String description, int agendaID) {
+    public NewAgendaObject(java.awt.Frame parent, boolean modal, String select, String date, String description, int agendaID)
+    {
         super(parent, modal);
         initComponents();
         ArrayList<String> category = new ArrayList<String>(new HashSet<String>(Data.getAgendacategorylist()));
-                
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(category);
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{agendaCategoryCombo});
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    agendaCategoryCombo
+                });
         uac.setComboValue(select, 0);
         dateField.setText(date);
         noteTextArea.setText(description);
         editButton.setVisible(true);
-        this.agendaID=agendaID;
+        this.agendaID = agendaID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         dateField.setBorder(null);
         agendaCategoryCombo.setBorder(null);
         noteTextArea.setBorder(null);
-        
+
         String date = dateField.getText().trim();
         String category = agendaCategoryCombo.getSelectedItem().toString();
         String notes = noteTextArea.getText().trim();
-        
+
         Date d = null;
         try
         {
             boolean goodDate = true;
-            if(date.length() > 0)
+            if (date.length() > 0)
             {
                 try
                 {
-                    SimpleDateFormat sdf  = new SimpleDateFormat("MM/dd/yyyy");
+                    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
                     sdf.setLenient(false);
                     d = sdf.parse(date);
-                }
-                catch(Exception e)
+                } catch (Exception e)
                 {
                     goodDate = false;
-                    dateField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                    dateField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
                 }
             }
-            
+
             boolean goodCategory = true;
             DatabaseHelper.open();
-            ArrayList<AgendaCategory> cat = (ArrayList<AgendaCategory>)AgendaCategory.selectAllAgendaCategory("where "+AgendaCategory.AgendaCategoryTable.TYPE.getWithAlias()+"='"+category+"'", DatabaseHelper.getConnection());
-            
-            if(cat.size() != 1)
+            ArrayList<AgendaCategory> cat = (ArrayList<AgendaCategory>) AgendaCategory.selectAllAgendaCategory("where " + AgendaCategory.AgendaCategoryTable.TYPE.getWithAlias() + "='" + category + "'", DatabaseHelper.getConnection());
+
+            if (cat.size() != 1)
             {
                 goodCategory = false;
-                agendaCategoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                agendaCategoryCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodNotes = true;
-            if(notes.length() < 1)
+            if (notes.length() < 1)
             {
                 goodNotes = false;
-                noteTextArea.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                noteTextArea.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
-            
-            if(goodCategory && goodDate && goodNotes)
+
+
+            if (goodCategory && goodDate && goodNotes)
             {
-                
+
                 Agenda a = new Agenda(agendaID, d, notes, cat.get(0));
 
                 boolean inserted;
-                if(!update)
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(Agenda.getValues(a), Agenda.AgendaTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(Agenda.getValues(a), Agenda.AgendaTable.getTable());
-                
-                if(inserted)
+                }
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The agenda item was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The agenda item was NOT created! Please try again!");
-                
+                }
+
                 close();
-                
+
             }
 
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The agenda item was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -309,13 +324,11 @@ public class NewAgendaObject extends javax.swing.JDialog {
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        
-        
-        validate(true);
-        
-    }//GEN-LAST:event_editButtonActionPerformed
 
-    
+
+        validate(true);
+
+    }//GEN-LAST:event_editButtonActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox agendaCategoryCombo;
     private javax.swing.JLabel agendaCategoryLabel;

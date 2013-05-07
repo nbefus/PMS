@@ -12,15 +12,9 @@ package tutoring.renderer;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JTable;
-import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -29,24 +23,21 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class FontCellRenderer extends DefaultTableCellRenderer
 {
+
     /**
      * Create font cell renderer to change the font in a table
      */
     public FontCellRenderer()
     {
-        
     }
-    
+
     @Override
     public Component getTableCellRendererComponent(JTable t, Object o, boolean isSelected, boolean hasFocus, int r, int c)
     {
         super.getTableCellRendererComponent(t, o, isSelected, hasFocus, r, c);
-       
+
         this.setFont(new Font("Arial", Font.PLAIN, 11));
 
         return this;
     }
-    
-    
-    
 }

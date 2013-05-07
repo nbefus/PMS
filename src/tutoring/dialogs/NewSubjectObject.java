@@ -6,18 +6,13 @@ package tutoring.dialogs;
 
 import java.awt.Color;
 import java.awt.Window;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashSet;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.text.JTextComponent;
-import tutoring.entity.Agenda;
-import tutoring.entity.AgendaCategory;
 import tutoring.entity.Category;
 import tutoring.entity.Subject;
 import tutoring.helper.Data;
@@ -28,117 +23,134 @@ import tutoring.helper.UltimateAutoComplete;
  *
  * @author Nathaniel
  */
-public class NewSubjectObject extends javax.swing.JDialog {
+public class NewSubjectObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewSubjectObject
      */
-   private int subjectID = -1;
+    private int subjectID = -1;
+
     /**
      * Create a new subject object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewSubjectObject(java.awt.Frame parent, boolean modal) {
+    public NewSubjectObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
-        
+
         this.setResizable(false);
 
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{categoryCombo});
-       
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    categoryCombo
+                });
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a subject object in the database
+     *
      * @param parent
      * @param modal
      * @param subject
      * @param category
      * @param subjectID
      */
-    public NewSubjectObject(java.awt.Frame parent, boolean modal, String subject, String category, int subjectID) {
+    public NewSubjectObject(java.awt.Frame parent, boolean modal, String subject, String category, int subjectID)
+    {
         super(parent, modal);
         initComponents();
 
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getCategorieslist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{categoryCombo});
-       
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    categoryCombo
+                });
+
         uac.setComboValue(category, 0);
-        
+
         subjectField.setText(subject);
         editButton.setVisible(true);
-        this.subjectID=subjectID;
+        this.subjectID = subjectID;
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         categoryCombo.setBorder(null);
         subjectField.setBorder(null);
-        
+
         String category = ((JTextComponent) categoryCombo.getEditor().getEditorComponent()).getText();
         String subject = subjectField.getText().trim();
-        
+
         try
         {
             boolean goodCategory = true;
             DatabaseHelper.open();
-            ArrayList<Category> cat = (ArrayList<Category>)Category.selectAllCategory("where "+Category.CategoryTable.NAME.getWithAlias()+"='"+category+"'", DatabaseHelper.getConnection());
-            
-            if(cat.size() != 1)
+            ArrayList<Category> cat = (ArrayList<Category>) Category.selectAllCategory("where " + Category.CategoryTable.NAME.getWithAlias() + "='" + category + "'", DatabaseHelper.getConnection());
+
+            if (cat.size() != 1)
             {
                 goodCategory = false;
-                categoryCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
-            }
-            
-            boolean goodSubject = true;
-            if(subject.length() < 1)
-            {
-                goodSubject = false;
-                subjectField.setBorder(new MatteBorder(3,3,3,3,Color.red));
-            }
-            
-            
-            if(goodCategory && goodSubject)
-            {
-                
-                Subject s = new Subject(subjectID, subject, cat.get(0));
-                DatabaseHelper.open();
-                
-                boolean inserted;
-                
-                if(!update)
-                    inserted = DatabaseHelper.insert(Subject.getValues(s), Subject.SubjectTable.getTable());
-                else
-                    inserted = DatabaseHelper.update(Subject.getValues(s), Subject.SubjectTable.getTable());
-                
-                if(inserted)
-                    JOptionPane.showMessageDialog(null, "The subject was successfully written to the database!");
-                else
-                    JOptionPane.showMessageDialog(null, "The subject was NOT created! Please try again!");
-                close();
-                
+                categoryCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
 
-        }
-        catch(Exception e)
+            boolean goodSubject = true;
+            if (subject.length() < 1)
+            {
+                goodSubject = false;
+                subjectField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
+            }
+
+
+            if (goodCategory && goodSubject)
+            {
+
+                Subject s = new Subject(subjectID, subject, cat.get(0));
+                DatabaseHelper.open();
+
+                boolean inserted;
+
+                if (!update)
+                {
+                    inserted = DatabaseHelper.insert(Subject.getValues(s), Subject.SubjectTable.getTable());
+                } else
+                {
+                    inserted = DatabaseHelper.update(Subject.getValues(s), Subject.SubjectTable.getTable());
+                }
+
+                if (inserted)
+                {
+                    JOptionPane.showMessageDialog(null, "The subject was successfully written to the database!");
+                } else
+                {
+                    JOptionPane.showMessageDialog(null, "The subject was NOT created! Please try again!");
+                }
+                close();
+
+            }
+
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The subject was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
@@ -270,7 +282,6 @@ public class NewSubjectObject extends javax.swing.JDialog {
 
         validate(false);
     }//GEN-LAST:event_submitbuttonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JComboBox categoryCombo;

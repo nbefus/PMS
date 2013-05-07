@@ -8,14 +8,12 @@ import java.awt.Color;
 import java.awt.Window;
 import java.util.ArrayList;
 import java.util.HashSet;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.border.MatteBorder;
 import javax.swing.text.JTextComponent;
 import tutoring.entity.Role;
-import tutoring.entity.Teacher;
 import tutoring.entity.User;
 import tutoring.helper.Data;
 import tutoring.helper.DatabaseHelper;
@@ -25,31 +23,38 @@ import tutoring.helper.UltimateAutoComplete;
  *
  * @author team Ubuntu
  */
-public class NewUserObject extends javax.swing.JDialog {
+public class NewUserObject extends javax.swing.JDialog
+{
 
     /**
      * Creates new form NewUserObject to create a user object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      */
-    public NewUserObject(java.awt.Frame parent, boolean modal) {
+    public NewUserObject(java.awt.Frame parent, boolean modal)
+    {
         super(parent, modal);
         initComponents();
 
         this.setResizable(false);
-               
+
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
-        
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    roleCombo
+                });
+
         this.setResizable(false);
-  
+
         editButton.setVisible(false);
-        
+
     }
-    
+
     /**
      * Edit a user object in the database
+     *
      * @param parent - parent frame
      * @param modal - is a modal
      * @param username - username of the user object to modify
@@ -58,114 +63,123 @@ public class NewUserObject extends javax.swing.JDialog {
      * @param fname - first name of the user object to modify
      * @param role - role of the user object to modify
      */
-    public NewUserObject(java.awt.Frame parent, boolean modal, String username, String password, String lname, String fname, String role) {
+    public NewUserObject(java.awt.Frame parent, boolean modal, String username, String password, String lname, String fname, String role)
+    {
         super(parent, modal);
         initComponents();
-      
+
         this.setResizable(false);
 
         ArrayList<ArrayList<String>> uacList = new ArrayList<ArrayList<String>>();
         uacList.add(new ArrayList<String>(new HashSet<String>(Data.getRolelist())));
-        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]{roleCombo});
-       
+        UltimateAutoComplete uac = new UltimateAutoComplete(uacList, new JComboBox[]
+                {
+                    roleCombo
+                });
+
         uac.setComboValue(role, 0);
-        
+
         fnameField.setText(fname);
         lnameField.setText(lname);
         usernameField.setText(username);
         passwordField.setText(password);
-        
+
         editButton.setVisible(true);
     }
-    
+
     private void close()
     {
         Window win = SwingUtilities.getWindowAncestor(this);
-        if (win != null) {
-           win.dispose();
+        if (win != null)
+        {
+            win.dispose();
         }
     }
-    
+
     private void validate(boolean update)
     {
         lnameField.setBorder(null);
         fnameField.setBorder(null);
         usernameField.setBorder(null);
         passwordField.setBorder(null);
-                roleCombo.setBorder(null);
+        roleCombo.setBorder(null);
         String role = ((JTextComponent) roleCombo.getEditor().getEditorComponent()).getText();
 
         String lname = lnameField.getText().trim();
         String fname = fnameField.getText().trim();
         String username = usernameField.getText().trim();
-        String password =  passwordField.getText().trim();
-       
+        String password = passwordField.getText().trim();
+
         try
         {
             boolean goodRole = true;
-            
+
             DatabaseHelper.open();
-            ArrayList<Role> validRole = (ArrayList<Role>)Role.selectAllRoles("where "+Role.RoleTable.TYPE.getWithAlias()+"='"+role+"'", DatabaseHelper.getConnection());
-            
-            if(validRole.size() != 1)
+            ArrayList<Role> validRole = (ArrayList<Role>) Role.selectAllRoles("where " + Role.RoleTable.TYPE.getWithAlias() + "='" + role + "'", DatabaseHelper.getConnection());
+
+            if (validRole.size() != 1)
             {
                 goodRole = false;
-                roleCombo.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                roleCombo.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodFirst = true;
-            if(fname.length() < 1)
+            if (fname.length() < 1)
             {
                 goodFirst = false;
-                fnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                fnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodLast = true;
-            if(lname.length() < 1)
+            if (lname.length() < 1)
             {
                 goodLast = false;
-                lnameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                lnameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodUsername = true;
-            if(username.length() < 1)
+            if (username.length() < 1)
             {
                 goodUsername = false;
-                usernameField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                usernameField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
+
             boolean goodPassword = true;
-            if(password.length() < 1)
+            if (password.length() < 1)
             {
                 goodPassword = false;
-                passwordField.setBorder(new MatteBorder(3,3,3,3,Color.red));
+                passwordField.setBorder(new MatteBorder(3, 3, 3, 3, Color.red));
             }
-            
-            if(goodLast && goodFirst && goodUsername && goodPassword && goodRole)
+
+            if (goodLast && goodFirst && goodUsername && goodPassword && goodRole)
             {
                 User u = new User(username, validRole.get(0), lname, fname, password);
 
                 DatabaseHelper.open();
-                
+
                 boolean inserted;
-                
-                if(!update)
+
+                if (!update)
+                {
                     inserted = DatabaseHelper.insert(User.getValues(u), User.UserTable.getTable());
-                else
+                } else
+                {
                     inserted = DatabaseHelper.update(User.getValues(u), User.UserTable.getTable());
-                
-                if(inserted)
+                }
+
+                if (inserted)
+                {
                     JOptionPane.showMessageDialog(null, "The user was successfully written to the database!");
-                else
+                } else
+                {
                     JOptionPane.showMessageDialog(null, "The user was NOT created! Please try again!");
+                }
                 close();
             }
-        }
-        catch(Exception e)
+        } catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "The user was NOT created! Please try again!");
-        }
-        finally
+        } finally
         {
             DatabaseHelper.close();
         }
@@ -330,7 +344,6 @@ public class NewUserObject extends javax.swing.JDialog {
 
         validate(false);
     }//GEN-LAST:event_submitbuttonActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel courseLabel1;
