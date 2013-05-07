@@ -4,8 +4,6 @@
  */
 package tutoring.ui;
 
-import tutoring.dialogs.NewClientObject;
-import tutoring.dialogs.NewAgendaObject;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Frame;
@@ -43,6 +41,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
+import tutoring.dialogs.NewAgendaObject;
+import tutoring.dialogs.NewClientObject;
 import tutoring.entity.*;
 import tutoring.helper.*;
 
@@ -67,7 +67,7 @@ public final class SIAView extends javax.swing.JFrame
          * Updates tables every minute
          *
          * @param current - current sessions table model to update
-         * @param future - future sesions table model to update
+         * @param future - future sessions table model to update
          */
         public MinuteUpdater(SessionTableModel current, SessionTableModel future)
         {
@@ -84,7 +84,7 @@ public final class SIAView extends javax.swing.JFrame
     }
 
     /**
-     * Update create sessions tab comboboxes from database to retrieve updated
+     * Update create sessions tab combo-boxes from database to retrieve updated
      * information
      */
     public void update()
@@ -164,49 +164,49 @@ public final class SIAView extends javax.swing.JFrame
     }
 
     /**
-     * Comboboxes map to autocomplete for changing and updating data
+     * Combo-boxes map to auto-complete for changing and updating data
      */
     public enum ComboBoxesIndexes
     {
 
         /**
-         * Client first name combobox
+         * Client first name combo-box
          */
         CFNAME(0, "First Name", "fname"),
         /**
-         * Client last name combobox
+         * Client last name combo-box
          */
         CLNAME(1, "Last Name", "lname"),
         /**
-         * Client phone combobox
+         * Client phone combo-box
          */
         CPHONE(2, "Phone", "phone"),
         /**
-         * Client email combobox
+         * Client email combo-box
          */
         CEMAIL(3, "Email", "email"),
         /**
-         * Client course combobox
+         * Client course combo-box
          */
         COURSE(0, "Course", "abbrevName"),
         /**
-         * Client creator combobox
+         * Client creator combo-box
          */
         CREATOR(0, "Creator", ""),
         /**
-         * Client level combobox
+         * Client level combo-box
          */
         LEVEL(1, "Level", "level"),
         /**
-         * Client location combobox
+         * Client location combo-box
          */
         LOCATION(1, "Location", "location"),
         /**
-         * Client tutor's combobox
+         * Client tutor's combo-box
          */
         PARAPROFESSIONAL(2, "Tutor", ""),
         /**
-         * Client teacher's combobox
+         * Client teacher's combo-box
          */
         TEACHER(2, "Teacher", "concat_ws(' ', t.fname, t.lname)");
         private int indexOfCombo;
@@ -222,7 +222,7 @@ public final class SIAView extends javax.swing.JFrame
 
         /**
          *
-         * @return the index of the combobox in the autocomplete set
+         * @return the index of the combo-box in the auto-complete set
          */
         public int getBoxIndex()
         {
@@ -231,7 +231,7 @@ public final class SIAView extends javax.swing.JFrame
 
         /**
          *
-         * @return the display name of the combobox
+         * @return the display name of the combo-box
          */
         public String getDisplayName()
         {
@@ -240,7 +240,7 @@ public final class SIAView extends javax.swing.JFrame
 
         /**
          *
-         * @return the database name of the name of the combobox
+         * @return the database name of the name of the combo-box
          */
         public String getDatabaseName()
         {
@@ -251,7 +251,7 @@ public final class SIAView extends javax.swing.JFrame
          * Get database name based on display name of column
          *
          * @param DisplayName - display name of column
-         * @return the database name of the combobox using the display name as
+         * @return the database name of the combo-box using the display name as
          * input
          */
         public String getDatabaseName(String DisplayName)
@@ -308,6 +308,7 @@ public final class SIAView extends javax.swing.JFrame
 
         (new Thread()
         {
+            @Override
             public void run()
             {
 
@@ -658,7 +659,7 @@ public final class SIAView extends javax.swing.JFrame
     }
 
     /**
-     * Clear create session tab comboboxes
+     * Clear create session tab combo-boxes
      */
     public void clearComboBoxes()
     {
