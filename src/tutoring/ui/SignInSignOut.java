@@ -38,8 +38,7 @@ public class SignInSignOut extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -70,23 +69,17 @@ public class SignInSignOut extends javax.swing.JFrame
 
         nameCombo.setEditable(false);
         nameCombo.setEnabled(true);
-        nameCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener()
-        {
-            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt)
-            {
-            }
-            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
-            {
+        nameCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
                 nameComboPopupMenuWillBecomeInvisible(evt);
             }
-            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
-            {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        nameCombo.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyPressed(java.awt.event.KeyEvent evt)
-            {
+        nameCombo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
                 nameComboKeyPressed(evt);
             }
         });
@@ -94,16 +87,13 @@ public class SignInSignOut extends javax.swing.JFrame
         signInAndOutButton.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         signInAndOutButton.setForeground(new java.awt.Color(0, 153, 0));
         signInAndOutButton.setText("Status");
-        signInAndOutButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        signInAndOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 signInAndOutButtonActionPerformed(evt);
             }
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tutoring/images/pmslogo.PNG"))); // NOI18N
 
         org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
